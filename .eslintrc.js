@@ -9,6 +9,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    jest: true,
   },
   extends: ['airbnb', 'prettier', 'prettier/react'],
   parser: '@typescript-eslint/parser',
@@ -44,7 +45,9 @@ module.exports = {
         next: ['const', 'let', 'var'],
       },
     ],
+    'import/extensions': 0,
     'import/imports-first': 2,
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/prefer-default-export': 2,
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
     'react/jsx-first-prop-new-line': [2, 'multiline'],
