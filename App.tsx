@@ -1,22 +1,12 @@
 import React from 'react';
+import { StyledView, StyledText } from './App.styles';
 
-import styled from 'styled-components/native';
-
-const StyledView = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  background-color: papayawhip;
-`;
-
-const StyledText = styled.Text`
-  color: palevioletred;
-`;
-
-export default function App() {
+const App = () => {
   return (
     <StyledView>
       <StyledText>Open up App.tsx to start working on your app!</StyledText>
     </StyledView>
   );
-}
+};
+
+export default App;
