@@ -32,7 +32,7 @@ module.exports = {
     'no-use-before-define': 0,
     'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': 2,
-    'arrow-body-style': [2, 'as-needed'],
+    'arrow-body-style': 0,
     'comma-dangle': [2, 'only-multiline'],
     'padding-line-between-statements': [
       'error',
@@ -44,6 +44,7 @@ module.exports = {
         next: ['const', 'let', 'var'],
       },
     ],
+    'import/extensions': 0,
     'import/imports-first': 2,
     'import/prefer-default-export': 2,
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
