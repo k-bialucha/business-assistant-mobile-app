@@ -33,7 +33,7 @@ module.exports = {
     'no-use-before-define': 0,
     'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': 2,
-    'arrow-body-style': [2, 'as-needed'],
+    'arrow-body-style': 0,
     'comma-dangle': [2, 'only-multiline'],
     'padding-line-between-statements': [
       'error',
