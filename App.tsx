@@ -1,13 +1,17 @@
 import React from 'react';
-import { StyledView, StyledText } from './App.styles';
+import { Provider } from 'react-redux';
 
-const App = () => {
+import configureStore from './redux/configureStore';
+
+import InitialScreen from './screens/InitialScreen';
+
+const store = configureStore();
+
+const App: React.FC<{}> = () => {
   return (
-    <StyledView>
-      <StyledText testID="welcome-text">
-        Open up App.tsx to start working on your app!
-      </StyledText>
-    </StyledView>
+    <Provider store={store}>
+      <InitialScreen />
+    </Provider>
   );
 };
 

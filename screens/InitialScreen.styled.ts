@@ -8,7 +8,9 @@ const StyledView = styled.View`
 `;
 
 const StyledText = styled.Text`
-  color: palevioletred;
+  color: cadetblue;
+  border: 2px solid sienna;
+  padding: 5px 22px;
 `;
 
 export { StyledView, StyledText };
