@@ -38,6 +38,7 @@
     "eslint-plugin-react-hooks": "^2.5.0",
     "jest-expo": "^36.0.1",
     "prettier": "^1.19.1",
+    "react-native-testing-library": "^1.12.0",
     "react-test-renderer": "^16.13.0",
     "typescript": "~3.6.3"
   }
