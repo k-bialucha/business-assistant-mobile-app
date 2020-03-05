@@ -4,7 +4,9 @@ import { StyledView, StyledText } from './App.styles';
 const App = () => {
   return (
     <StyledView>
-      <StyledText>Open up App.tsx to start working on your app!</StyledText>
+      <StyledText testID="welcome-text">
+        Open up App.tsx to start working on your app!
+      </StyledText>
     </StyledView>
   );
 };
