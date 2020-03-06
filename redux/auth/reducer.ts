@@ -1,10 +1,17 @@
-import { LOGIN, LOGOUT } from './types';
+import { LOGIN, LOGOUT, AuthActions } from './types';
 
-const initialState = {
+export interface AuthState {
+  token?: string;
+}
+
+const initialState: AuthState = {
   token: null,
 };
 
-const reducer = (state: { token: string } = initialState, action) => {
+function reducer(
+  state: AuthState = initialState,
+  action: AuthActions
+): AuthState {
   switch (action.type) {
     case LOGIN:
       return { token: action.payload };
@@ -15,6 +22,6 @@ const reducer = (state: { token: string } = initialState, action) => {
     default:
       return state;
   }
-};
+}
 
 export default reducer;

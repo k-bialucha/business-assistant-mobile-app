@@ -1,10 +1,14 @@
-import { LOGIN, LOGOUT } from './types';
+import { LOGIN, LOGOUT, LogoutAction, LoginAction } from './types';
 
-export const login = (token: string) => ({
-  payload: token,
-  type: LOGIN,
-});
+export function login(token: string): LoginAction {
+  return {
+    type: LOGIN,
+    payload: token,
+  };
+}
 
-export const logout = () => ({
-  type: LOGOUT,
-});
+export function logout(): LogoutAction {
+  return {
+    type: LOGOUT,
+  };
+}
