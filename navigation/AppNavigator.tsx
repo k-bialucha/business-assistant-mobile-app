@@ -1,18 +1,28 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Platform } from 'react-native';
+
+import Colors from '../theme/Colors';
 
 import DashboardScreen from '../screens/DashboardScreen';
-import SalesScreen from '../screens/SalesScreen';
-import CostsScreen from '../screens/CostsScreen';
-import CostsEntryScreen from '../screens/CostsEntryScreen';
+import SalesScreen, { SalesScreenNavOptions } from '../screens/SalesScreen';
 import SalesEntryScreen from '../screens/SalesEntryScreen';
+import CostsScreen, { CostsScreenNavOptions } from '../screens/CostsScreen';
+import CostsEntryScreen from '../screens/CostsEntryScreen';
+
+const defaultNavigationOptions = {
+  headerStyle: {
+    backgroundColor: Platform.OS === 'android' ? Colors.navyBlue : 'white',
+  },
+  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.navyBlue,
+};
 
 const DashboardStackNavigator = createStackNavigator();
 
 const DashboardNavigator = () => {
   return (
-    <DashboardStackNavigator.Navigator>
+    <DashboardStackNavigator.Navigator screenOptions={defaultNavigationOptions}>
       <DashboardStackNavigator.Screen
         name="Dashboard"
         component={DashboardScreen}
@@ -25,8 +35,12 @@ const SalesStackNavigator = createStackNavigator();
 
 const SalesNavigator = () => {
   return (
-    <SalesStackNavigator.Navigator>
-      <SalesStackNavigator.Screen name="SalesList" component={SalesScreen} />
+    <SalesStackNavigator.Navigator screenOptions={defaultNavigationOptions}>
+      <SalesStackNavigator.Screen
+        name="SalesList"
+        component={SalesScreen}
+        options={SalesScreenNavOptions}
+      />
       <SalesStackNavigator.Screen
         name="SalesEntry"
         component={SalesEntryScreen}
@@ -39,8 +53,12 @@ const CostsStackNavigator = createStackNavigator();
 
 const CostsNavigator = () => {
   return (
-    <CostsStackNavigator.Navigator>
-      <CostsStackNavigator.Screen name="CostsList" component={CostsScreen} />
+    <CostsStackNavigator.Navigator screenOptions={defaultNavigationOptions}>
+      <CostsStackNavigator.Screen
+        name="CostsList"
+        component={CostsScreen}
+        options={CostsScreenNavOptions}
+      />
       <CostsStackNavigator.Screen
         name="CostsEntry"
         component={CostsEntryScreen}
