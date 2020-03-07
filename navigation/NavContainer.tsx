@@ -7,7 +7,7 @@ import StartupScreen from '../screens/StartupScreen';
 
 const NavContainer = () => {
   // temporary mocked consts
-  const isAuth = false;
+  const isAuth = true;
   const didTryAutoLogin = true;
 
   return (
