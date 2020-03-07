@@ -48,7 +48,7 @@ module.exports = {
     'import/extensions': 0,
     'import/imports-first': 2,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
-    'import/prefer-default-export': 2,
+    'import/prefer-default-export': 1,
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
     'react/jsx-first-prop-new-line': [2, 'multiline'],
     'react/jsx-uses-vars': 2,
