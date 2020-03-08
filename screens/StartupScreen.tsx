@@ -3,15 +3,12 @@
  * set in redux didTryLogin to true
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ActivityIndicator } from 'react-native';
 
 import { StyledView } from './StartupScreen.style';
 
 const StartupScreen = () => {
-  // try log in when Components lodaded
-  useEffect(() => {}, []);
-
   return (
     <StyledView>
       <ActivityIndicator size="large" color="black" />
