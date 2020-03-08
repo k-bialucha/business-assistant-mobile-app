@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<App /> renders correctly 1`] = `
+exports[`<App /> matches the snapshot 1`] = `
 <View
   style={
     Array [
@@ -19,13 +19,176 @@ exports[`<App /> renders correctly 1`] = `
     style={
       Array [
         Object {
-          "color": "palevioletred",
+          "color": "cadetblue",
+          "fontSize": 24,
+          "marginVertical": 5,
+          "paddingBottom": 5,
+          "paddingLeft": 22,
+          "paddingRight": 22,
+          "paddingTop": 5,
         },
       ]
     }
-    testID="welcome-text"
+    success={null}
   >
-    Open up App.tsx to start working on your app!
+    State: 
+    Unauthenticated
   </Text>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "cadetblue",
+          "fontSize": 24,
+          "marginVertical": 5,
+          "paddingBottom": 5,
+          "paddingLeft": 22,
+          "paddingRight": 22,
+          "paddingTop": 5,
+        },
+      ]
+    }
+  >
+    Username: 
+    ?
+  </Text>
+  <View
+    style={
+      Array [
+        Object {
+          "borderBottomColor": "palevioletred",
+          "borderBottomWidth": 3,
+          "height": 30,
+          "marginVertical": 5,
+          "width": "60%",
+        },
+      ]
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      rejectResponderTermination={true}
+      style={
+        Array [
+          Object {
+            "fontSize": 20,
+            "height": "100%",
+            "textAlign": "center",
+            "width": "100%",
+          },
+        ]
+      }
+      underlineColorAndroid="transparent"
+      value=""
+    />
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+          "marginVertical": 10,
+          "width": "70%",
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityRole="button"
+      accessibilityStates={Array []}
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <Text
+          disabled={false}
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          Login
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityRole="button"
+      accessibilityStates={
+        Array [
+          "disabled",
+        ]
+      }
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {},
+            Object {},
+          ]
+        }
+      >
+        <Text
+          disabled={true}
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+              Object {
+                "color": "#cdcdcd",
+              },
+            ]
+          }
+        >
+          Logout
+        </Text>
+      </View>
+    </View>
+  </View>
 </View>
 `;

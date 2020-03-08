@@ -3,27 +3,20 @@ import renderer from 'react-test-renderer';
 import { render } from 'react-native-testing-library';
 
 import App from './App';
+import InitialScreen from './screens/InitialScreen';
 
 describe('<App />', () => {
-  it('has 1 child', () => {
-    const tree = renderer.create(<App />).toJSON();
-
-    expect(tree.children.length).toBe(1);
-  });
-
-  it('renders correctly', () => {
+  it('matches the snapshot', () => {
     const tree = renderer.create(<App />).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('contains welcome text', () => {
-    const { getByTestId } = render(<App />);
+  it('contains InitialScreen', () => {
+    const { queryByType } = render(<App />);
 
-    const element = getByTestId('welcome-text');
+    const element = queryByType(InitialScreen);
 
-    expect(element.props.children.includes('start working on your app')).toBe(
-      true
-    );
+    expect(element).toBeTruthy();
   });
 });

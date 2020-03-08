@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../redux/rootReducer';
 import { AuthState } from '../redux/auth/reducer';
+import { login, logout } from '../redux/auth';
 
 import {
   StyledView,
@@ -12,7 +13,6 @@ import {
   StyledInputContainer,
   StyledButtonsContainer,
 } from './InitialScreen.styled';
-import { login, logout } from '../redux/auth';
 
 const InitialScreen: React.FC<{}> = () => {
   const [username, setUsername] = useState<string>('');
