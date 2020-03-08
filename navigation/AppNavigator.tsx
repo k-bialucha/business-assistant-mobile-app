@@ -5,7 +5,6 @@ import { Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import Colors from '../theme/Colors';
-
 import DashboardScreen from '../screens/DashboardScreen';
 import SalesScreen, { SalesScreenNavOptions } from '../screens/SalesScreen';
 import SalesEntryScreen from '../screens/SalesEntryScreen';
@@ -90,32 +89,21 @@ const AppNavigator = () => {
       initialRouteName="Dashboard"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          let iconName;
+          const icons = {
+            Dashboard: Platform.OS === 'android' ? 'md-stats' : 'ios-stats',
+            Sales:
+              Platform.OS === 'android' ? 'md-trending-up' : 'ios-trending-up',
+            Costs:
+              Platform.OS === 'android'
+                ? 'md-trending-down'
+                : 'ios-trending-down',
+            Settings:
+              Platform.OS === 'android' ? 'md-settings' : 'ios-settings',
+          };
 
-          switch (route.name) {
-            case 'Dashboard':
-              iconName = Platform.OS === 'android' ? 'md-stats' : 'ios-stats';
-              break;
-            case 'Sales':
-              iconName =
-                Platform.OS === 'android'
-                  ? 'md-trending-up'
-                  : 'ios-trending-up';
-              break;
-            case 'Costs':
-              iconName =
-                Platform.OS === 'android'
-                  ? 'md-trending-down'
-                  : 'ios-trending-down';
-              break;
-            case 'Settings':
-              iconName =
-                Platform.OS === 'android' ? 'md-settings' : 'ios-settings';
-              break;
-            default:
-          }
-
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return (
+            <Ionicons name={icons[route.name]} size={size} color={color} />
+          );
         },
       })}
       tabBarOptions={{
