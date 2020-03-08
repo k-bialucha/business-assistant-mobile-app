@@ -52,6 +52,7 @@ module.exports = {
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
     'react/jsx-first-prop-new-line': [2, 'multiline'],
     'react/jsx-uses-vars': 2,
+    'react/jsx-props-no-spreading': 1,
     'react/prefer-stateless-function': [2, { ignorePureComponents: true }],
     'react/prop-types': 0,
     'react/state-in-constructor': [2, 'never'],
