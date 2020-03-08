@@ -1,12 +1,13 @@
 import { LOGIN, LOGOUT, AuthActions } from './types';
 
 export interface AuthState {
-  token?: string;
-  username?: string;
+  token: string;
+  username: string;
 }
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
   token: null,
+  username: null,
 };
 
 function reducer(
@@ -16,12 +17,12 @@ function reducer(
   switch (action.type) {
     case LOGIN:
       return {
-        token: action.payload === 'admin' ? 'hightly-secure-token' : null,
+        token: action.payload === 'admin' ? 'highly-secure-token' : null,
         username: action.payload,
       };
 
     case LOGOUT:
-      return { token: null };
+      return { token: null, username: null };
 
     default:
       return state;
