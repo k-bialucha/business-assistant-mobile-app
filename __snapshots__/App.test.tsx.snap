@@ -79,6 +79,7 @@ exports[`<App /> matches the snapshot 1`] = `
           },
         ]
       }
+      testID="username-input"
       underlineColorAndroid="transparent"
       value=""
     />
@@ -113,6 +114,7 @@ exports[`<App /> matches the snapshot 1`] = `
           "opacity": 1,
         }
       }
+      testID="login-button"
     >
       <View
         style={

@@ -29,10 +29,15 @@ const InitialScreen: React.FC<{}> = () => {
         Username: {authState.username ? authState.username : '?'}
       </StyledText>
       <StyledInputContainer>
-        <StyledInput value={username} onChangeText={setUsername} />
+        <StyledInput
+          testID="username-input"
+          value={username}
+          onChangeText={setUsername}
+        />
       </StyledInputContainer>
       <StyledButtonsContainer>
         <Button
+          testID="login-button"
           title="Login"
           disabled={!!authState.username}
           onPress={() => {
