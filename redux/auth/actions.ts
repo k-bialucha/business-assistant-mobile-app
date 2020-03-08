@@ -1,9 +1,9 @@
 import { LOGIN, LOGOUT, LogoutAction, LoginAction } from './types';
 
-export function login(token: string): LoginAction {
+export function login(username: string): LoginAction {
   return {
     type: LOGIN,
-    payload: token,
+    payload: username,
   };
 }
 

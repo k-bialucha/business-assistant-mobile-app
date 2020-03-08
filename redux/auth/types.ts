@@ -1,5 +1,6 @@
-export const LOGIN = 'LOGIN';
+export const DOMAIN_NAME = 'auth';
 
+export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
 export interface LoginAction {
