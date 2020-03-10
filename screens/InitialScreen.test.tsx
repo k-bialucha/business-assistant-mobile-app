@@ -1,27 +1,26 @@
 import React from 'react';
-import { fireEvent } from 'react-native-testing-library';
-
-import renderWithRedux from '../testingUtils/renderWithRedux';
+// import ShallowRenderer from 'react-test-renderer/shallow';
+import renderer from 'react-test-renderer';
 
 import InitialScreen from './InitialScreen';
 
+jest.mock('react-redux', () => {
+  return {
+    __esModule: true,
+    Provider: jest
+      .fn()
+      .mockImplementation(props => <div>{props.children}</div>),
+    useSelector: jest
+      .fn()
+      .mockReturnValue({ token: 'some-token', username: 'some-user' }),
+    useDispatch: jest.fn().mockImplementation(() => jest.fn()),
+  };
+});
+
 describe('<InitialScreen />', () => {
-  // it('matches the snapshot', () => {
-  //   useSelector.mockReturnValueOnce({ token: null, username: null });
-  //   const tree = renderer.create(<InitialScreen />).toJSON();
+  it('matches the snapshot', () => {
+    const tree = renderer.create(<InitialScreen />).toJSON();
 
-  //   expect(tree).toMatchSnapshot();
-  // });
-
-  it('allows to login', () => {
-    const { queryByTestId, store } = renderWithRedux(<InitialScreen />);
-
-    const usernameInput = queryByTestId('username-input');
-    const loginButton = queryByTestId('login-button');
-
-    fireEvent.changeText(usernameInput, 'admin');
-    fireEvent.press(loginButton);
-
-    expect(store.getState().auth.username).toBe('admin');
+    expect(tree).toMatchSnapshot();
   });
 });
