@@ -45,6 +45,7 @@ const InitialScreen: React.FC<{}> = () => {
           }}
         />
         <Button
+          testID="logout-button"
           title="Logout"
           disabled={!authState.username}
           onPress={() => {

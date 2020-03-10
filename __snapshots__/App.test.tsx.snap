@@ -162,6 +162,7 @@ exports[`<App /> matches the snapshot 1`] = `
           "opacity": 1,
         }
       }
+      testID="logout-button"
     >
       <View
         style={
