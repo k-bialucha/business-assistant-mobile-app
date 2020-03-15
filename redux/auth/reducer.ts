@@ -4,16 +4,19 @@ import {
   LOGIN_FAILURE,
   LOGOUT,
   AuthActions,
+  RequestStatus,
 } from './types';
 
 export interface AuthState {
   token: string;
   username: string;
+  requestStatus: RequestStatus;
 }
 
 export const initialState: AuthState = {
   token: null,
   username: null,
+  requestStatus: RequestStatus.UNAUTHENTICATED,
 };
 
 function reducer(
@@ -25,22 +28,25 @@ function reducer(
       return {
         token: null,
         username: action.payload.username,
+        requestStatus: RequestStatus.LOADING,
       };
 
     case LOGIN_SUCCESS:
       return {
         ...state,
         token: action.payload,
+        requestStatus: RequestStatus.SUCCESS,
       };
 
     case LOGIN_FAILURE:
       return {
         ...state,
         token: null,
+        requestStatus: RequestStatus.FAILURE,
       };
 
     case LOGOUT:
-      return { token: null, username: null };
+      return initialState;
 
     default:
       return state;

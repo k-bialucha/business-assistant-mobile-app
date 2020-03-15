@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { login, logout, LoginRequestStatus } from '../redux/auth';
 import { RootState } from '../redux/rootReducer';
-import { AuthState } from '../redux/auth/reducer';
-import { login, logout } from '../redux/auth';
 
 import {
   StyledView,
@@ -18,17 +17,27 @@ const InitialScreen: React.FC<{}> = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const authState: AuthState = useSelector((state: RootState) => state.auth);
+  const token: string = useSelector((state: RootState) => state.auth.token);
+  const requestedUsername: string = useSelector(
+    (state: RootState) => state.auth.username
+  );
+  const requestStatus: LoginRequestStatus = useSelector(
+    (state: RootState) => state.auth.requestStatus
+  );
+
   const dispatch = useDispatch();
 
   return (
     <StyledView>
-      <StyledText success={authState.token}>
-        State: {authState.token ? 'Authenticated' : 'Unauthenticated'}
+      <StyledText success={token}>
+        {'State: '}
+        {requestStatus === LoginRequestStatus.UNAUTHENTICATED &&
+          'unauthenticated'}
+        {requestStatus === LoginRequestStatus.LOADING && '...'}
+        {requestStatus === LoginRequestStatus.SUCCESS && 'SUCCESS!'}
+        {requestStatus === LoginRequestStatus.FAILURE && 'FAILURE!'}
       </StyledText>
-      <StyledText>
-        Username: {authState.username ? authState.username : '?'}
-      </StyledText>
+      <StyledText>Username: {requestedUsername || '?'}</StyledText>
       <StyledInputContainer>
         <StyledInput
           testID="username-input"
@@ -50,7 +59,7 @@ const InitialScreen: React.FC<{}> = () => {
         <Button
           testID="login-button"
           title="Login"
-          disabled={!!authState.token}
+          disabled={!!token}
           onPress={() => {
             dispatch(login(username, password));
           }}
@@ -58,7 +67,7 @@ const InitialScreen: React.FC<{}> = () => {
         <Button
           testID="logout-button"
           title="Logout"
-          disabled={!authState.token}
+          disabled={!token}
           onPress={() => {
             setUsername('');
             setPassword('');

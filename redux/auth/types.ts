@@ -33,3 +33,9 @@ export type AuthActions =
   | LoginFailureAction
   | LogoutAction;
 
+export enum RequestStatus {
+  UNAUTHENTICATED,
+  LOADING,
+  SUCCESS,
+  FAILURE,
+}
