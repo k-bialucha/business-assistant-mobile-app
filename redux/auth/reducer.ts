@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, AuthActions } from './types';
+import { LOGIN, LOGIN_SUCCESS, LOGOUT, AuthActions } from './types';
 
 export interface AuthState {
   token: string;
@@ -17,8 +17,14 @@ function reducer(
   switch (action.type) {
     case LOGIN:
       return {
-        token: action.payload === 'admin' ? 'highly-secure-token' : null,
+        token: null,
         username: action.payload,
+      };
+
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        token: action.payload,
       };
 
     case LOGOUT:
