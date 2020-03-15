@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent } from 'react-native-testing-library';
 
-import renderWithRedux from '../testingUtils/renderWithRedux';
+import renderWithRedux from '../utils/testing/renderWithRedux';
 
 import InitialScreen from './InitialScreen';
 

@@ -9,7 +9,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from 'react-native-testing-library';
 
-import configureStore from '../redux/configureStore';
+import configureStore from '../../redux/configureStore';
 
 function renderWithRedux(ui: JSX.Element) {
   const store = configureStore();
