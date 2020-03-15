@@ -1,4 +1,10 @@
-import { LOGIN, LOGIN_SUCCESS, LOGOUT, AuthActions } from './types';
+import {
+  LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT,
+  AuthActions,
+} from './types';
 
 export interface AuthState {
   token: string;
@@ -18,13 +24,19 @@ function reducer(
     case LOGIN:
       return {
         token: null,
-        username: action.payload,
+        username: action.payload.username,
       };
 
     case LOGIN_SUCCESS:
       return {
         ...state,
         token: action.payload,
+      };
+
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        token: null,
       };
 
     case LOGOUT:

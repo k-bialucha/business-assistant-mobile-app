@@ -1,19 +1,20 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import { delay, put, takeLatest } from 'redux-saga/effects';
 
-import { loginSuccess } from './actions';
-import { LOGIN } from './types';
+import { loginSuccess, loginFailure } from './actions';
+import { LOGIN, LoginAction } from './types';
 
-const delay = (timeout: number) =>
-  new Promise<void>(res => setTimeout(res, timeout));
-
-export function* loginSaga() {
+export function* loginSaga(action: LoginAction) {
   yield delay(1000);
 
-  const someToken: string = 'highly-secure-token';
+  if (action.payload.password.length >= 5) {
+    const someToken: string = 'highly-secure-token';
 
-  yield put(loginSuccess(someToken));
+    yield put(loginSuccess(someToken));
+  } else {
+    yield put(loginFailure('terrible mistake'));
+  }
 }
 
 export default function* watchSaga() {
-  yield takeEvery(LOGIN, loginSaga);
+  yield takeLatest(LOGIN, loginSaga);
 }

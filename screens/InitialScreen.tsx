@@ -16,6 +16,7 @@ import {
 
 const InitialScreen: React.FC<{}> = () => {
   const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const authState: AuthState = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
@@ -32,24 +33,35 @@ const InitialScreen: React.FC<{}> = () => {
         <StyledInput
           testID="username-input"
           value={username}
+          placeholder="username"
           onChangeText={setUsername}
+        />
+      </StyledInputContainer>
+      <StyledInputContainer>
+        <StyledInput
+          testID="password-input"
+          value={password}
+          placeholder="password"
+          onChangeText={setPassword}
+          secureTextEntry
         />
       </StyledInputContainer>
       <StyledButtonsContainer>
         <Button
           testID="login-button"
           title="Login"
-          disabled={!!authState.username}
+          disabled={!!authState.token}
           onPress={() => {
-            dispatch(login(username));
+            dispatch(login(username, password));
           }}
         />
         <Button
           testID="logout-button"
           title="Logout"
-          disabled={!authState.username}
+          disabled={!authState.token}
           onPress={() => {
             setUsername('');
+            setPassword('');
             dispatch(logout());
           }}
         />
