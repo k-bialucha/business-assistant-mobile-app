@@ -3,13 +3,14 @@ import { DOMAIN_NAME, LOGIN, LOGOUT } from './types';
 
 describe(`${DOMAIN_NAME}/actions`, () => {
   test('login action returns correct object', () => {
-    const someLogin: string = 'some-user';
+    const someUsername: string = 'some-username';
+    const somePassword: string = 'some-password';
 
-    const result = login(someLogin);
+    const result = login(someUsername, somePassword);
 
     const expected = {
       type: LOGIN,
-      payload: someLogin,
+      payload: { username: someUsername, password: somePassword },
     };
 
     expect(result).toEqual(expected);

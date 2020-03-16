@@ -32,7 +32,7 @@ exports[`<InitialScreen /> matches the snapshot 1`] = `
     success="some-token"
   >
     State: 
-    Authenticated
+    SUCCESS!
   </Text>
   <Text
     style={

@@ -1,29 +1,21 @@
 import reducer, { AuthState, initialState } from './reducer';
-import { DOMAIN_NAME, LOGIN, LOGOUT, LoginAction, LogoutAction } from './types';
+import {
+  DOMAIN_NAME,
+  LOGIN,
+  LOGOUT,
+  LoginAction,
+  LogoutAction,
+  RequestStatus,
+} from './types';
 
 describe(`${DOMAIN_NAME}/reducer`, () => {
-  it('handles login action for admin', () => {
-    const adminUsername: string = 'admin';
+  it('handles login action', () => {
+    const someUsername: string = 'some-username';
+    const somePassword: string = 'hard-pass';
+
     const action: LoginAction = {
       type: LOGIN,
-      payload: adminUsername,
-    };
-
-    const nextState: AuthState = reducer(initialState, action);
-
-    const expectedState: AuthState = {
-      token: 'highly-secure-token',
-      username: adminUsername,
-    };
-
-    expect(nextState).toEqual(expectedState);
-  });
-
-  it('handles login action for non-admin username', () => {
-    const someUsername: string = 'other-user';
-    const action: LoginAction = {
-      type: LOGIN,
-      payload: someUsername,
+      payload: { username: someUsername, password: somePassword },
     };
 
     const nextState: AuthState = reducer(initialState, action);
@@ -31,12 +23,13 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
     const expectedState: AuthState = {
       token: null,
       username: someUsername,
+      requestStatus: RequestStatus.LOADING,
     };
 
     expect(nextState).toEqual(expectedState);
   });
 
-  it('handles login action', () => {
+  it('handles logout action', () => {
     const action: LogoutAction = {
       type: LOGOUT,
     };
@@ -44,6 +37,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
     const previousState = {
       token: 'some-token',
       username: 'some-username',
+      requestStatus: RequestStatus.SUCCESS,
     };
 
     const nextState: AuthState = reducer(previousState, action);
@@ -51,6 +45,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
     const expectedState: AuthState = {
       token: null,
       username: null,
+      requestStatus: RequestStatus.UNAUTHENTICATED,
     };
 
     expect(nextState).toEqual(expectedState);
