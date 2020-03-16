@@ -1,5 +1,11 @@
-import { login, logout } from './actions';
-import { DOMAIN_NAME, LOGIN, LOGOUT } from './types';
+import { login, loginSuccess, loginFailure, logout } from './actions';
+import {
+  DOMAIN_NAME,
+  LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT,
+} from './types';
 
 describe(`${DOMAIN_NAME}/actions`, () => {
   test('login action returns correct object', () => {
@@ -11,6 +17,32 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     const expected = {
       type: LOGIN,
       payload: { username: someUsername, password: somePassword },
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('loginSuccess action returns correct object', () => {
+    const someToken: string = 'some-secure-token';
+
+    const result = loginSuccess(someToken);
+
+    const expected = {
+      type: LOGIN_SUCCESS,
+      payload: someToken,
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('loginFailure action returns correct object', () => {
+    const someMessage: string = 'something bad happened';
+
+    const result = loginFailure(someMessage);
+
+    const expected = {
+      type: LOGIN_FAILURE,
+      payload: someMessage,
     };
 
     expect(result).toEqual(expected);
