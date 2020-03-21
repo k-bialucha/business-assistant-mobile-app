@@ -1,0 +1,59 @@
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+import DashboardNavigator from './DashboardNavigator';
+import SalesNavigator from './SalesNavigator';
+import CostsNavigator from './CostsNavigator';
+import SettingsNavigator from './SettingsNavigator';
+
+import Colors from '../../theme/Colors';
+
+export type RootStackParamList = {
+  Dashboard: undefined;
+  Sales: undefined;
+  Costs: undefined;
+  Settings: undefined;
+};
+
+const AppTabNavigator = createBottomTabNavigator();
+
+const AppNavigator: React.FC<{}> = () => {
+  return (
+    <AppTabNavigator.Navigator
+      initialRouteName="Dashboard"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          const icons = {
+            Dashboard: Platform.OS === 'android' ? 'md-stats' : 'ios-stats',
+            Sales:
+              Platform.OS === 'android' ? 'md-trending-up' : 'ios-trending-up',
+            Costs:
+              Platform.OS === 'android'
+                ? 'md-trending-down'
+                : 'ios-trending-down',
+            Settings:
+              Platform.OS === 'android' ? 'md-settings' : 'ios-settings',
+          };
+
+          return (
+            <Ionicons name={icons[route.name]} size={size} color={color} />
+          );
+        },
+      })}
+      tabBarOptions={{
+        showLabel: false,
+        activeTintColor: Colors.navyBlue,
+        inactiveTintColor: Colors.silver,
+      }}
+    >
+      <AppTabNavigator.Screen name="Sales" component={SalesNavigator} />
+      <AppTabNavigator.Screen name="Dashboard" component={DashboardNavigator} />
+      <AppTabNavigator.Screen name="Costs" component={CostsNavigator} />
+      <AppTabNavigator.Screen name="Settings" component={SettingsNavigator} />
+    </AppTabNavigator.Navigator>
+  );
+};
+
+export default AppNavigator;
