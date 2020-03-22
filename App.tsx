@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { StyledView, StyledText } from './App.styles';
 
 const App = () => {

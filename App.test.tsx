@@ -1,7 +1,7 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import { render } from 'react-native-testing-library';
 import { shallow } from 'enzyme';
+import React from 'react';
+import { render } from 'react-native-testing-library';
+import renderer from 'react-test-renderer';
 
 import App from './App';
 
