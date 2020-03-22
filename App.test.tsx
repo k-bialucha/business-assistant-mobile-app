@@ -1,5 +1,6 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+
+import { shallow } from 'enzyme';
 import { render } from 'react-native-testing-library';
 import renderer from 'react-test-renderer';
 

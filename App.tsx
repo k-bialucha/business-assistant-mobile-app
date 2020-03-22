@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledView, StyledText } from './App.styles';
+import { StyledText, StyledView } from './App.styles';
 
 const App = () => {
   return (
