@@ -20,7 +20,7 @@ module.exports = {
     ecmaVersion: 6,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier', '@typescript-eslint'],
+  plugins: ['react', 'prettier', '@typescript-eslint', 'simple-import-sort'],
   settings: {
     'import/resolver': {
       node: {
@@ -48,22 +48,7 @@ module.exports = {
     'import/extensions': 0,
     'import/imports-first': 2,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
-    'import/order': [
-      'error',
-      {
-        alphabetize: {
-          order: 'asc',
-          caseInsensitive: true,
-        },
-        groups: [
-          ['builtin', 'external'],
-          'internal',
-          'parent',
-          ['sibling', 'index'],
-        ],
-        'newlines-between': 'always-and-inside-groups',
-      },
-    ],
+    'import/order': 0,
     'import/prefer-default-export': 2,
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
     'react/jsx-first-prop-new-line': [2, 'multiline'],
@@ -71,6 +56,19 @@ module.exports = {
     'react/prefer-stateless-function': [2, { ignorePureComponents: true }],
     'react/prop-types': 0,
     'react/state-in-constructor': [2, 'never'],
-    'max-len': 0,
+    'simple-import-sort/sort': [
+      2,
+      {
+        groups: [
+          ['^\\u0000'],
+          ['^react$', '^react-native$'],
+          ['^@?\\w'],
+          ['^[^.]'],
+          ['^\\..'],
+          ['^\\.'],
+        ],
+      },
+    ],
+    'sort-imports': 0,
   },
 };
