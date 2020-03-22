@@ -1,14 +1,15 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 
-import DashboardNavigator from './DashboardNavigator';
-import SalesNavigator from './SalesNavigator';
-import CostsNavigator from './CostsNavigator';
-import SettingsNavigator from './SettingsNavigator';
+import { Ionicons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Colors from '../../theme/Colors';
+
+import CostsNavigator from './CostsNavigator';
+import DashboardNavigator from './DashboardNavigator';
+import SalesNavigator from './SalesNavigator';
+import SettingsNavigator from './SettingsNavigator';
 
 export type RootStackParamList = {
   Dashboard: undefined;

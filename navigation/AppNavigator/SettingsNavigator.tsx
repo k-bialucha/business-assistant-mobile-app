@@ -1,14 +1,15 @@
 import React from 'react';
+
+import { RouteProp } from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
+
+import SettingsScreen from '../../screens/SettingsScreen';
 
 import { RootStackParamList } from '.';
 import defaultScreenOptions from './defaultScreenOptions';
-
-import SettingsScreen from '../../screens/SettingsScreen';
 
 const SettingsStackNavigator = createStackNavigator<RootStackParamList>();
 

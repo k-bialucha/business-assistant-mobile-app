@@ -1,15 +1,16 @@
 import React from 'react';
+
+import { RouteProp } from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
+
+import SalesEntryScreen from '../../screens/SalesEntryScreen';
+import SalesScreen, { SalesScreenNavOptions } from '../../screens/SalesScreen';
 
 import { RootStackParamList } from '.';
 import defaultScreenOptions from './defaultScreenOptions';
-
-import SalesScreen, { SalesScreenNavOptions } from '../../screens/SalesScreen';
-import SalesEntryScreen from '../../screens/SalesEntryScreen';
 
 const SalesStackNavigator = createStackNavigator();
 

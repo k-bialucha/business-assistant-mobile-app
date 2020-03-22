@@ -1,5 +1,6 @@
-import { StackNavigationOptions } from '@react-navigation/stack';
 import { Platform } from 'react-native';
+
+import { StackNavigationOptions } from '@react-navigation/stack';
 
 import Colors from '../../theme/Colors';
 
