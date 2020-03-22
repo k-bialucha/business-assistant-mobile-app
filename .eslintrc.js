@@ -48,6 +48,22 @@ module.exports = {
     'import/extensions': 0,
     'import/imports-first': 2,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/order': [
+      'error',
+      {
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+        groups: [
+          ['builtin', 'external'],
+          'internal',
+          'parent',
+          ['sibling', 'index'],
+        ],
+        'newlines-between': 'always-and-inside-groups',
+      },
+    ],
     'import/prefer-default-export': 2,
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
     'react/jsx-first-prop-new-line': [2, 'multiline'],
