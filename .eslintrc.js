@@ -20,7 +20,13 @@ module.exports = {
     ecmaVersion: 6,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier', '@typescript-eslint', 'simple-import-sort'],
+  plugins: [
+    'react',
+    'react-hooks',
+    'prettier',
+    '@typescript-eslint',
+    'simple-import-sort',
+  ],
   settings: {
     'import/resolver': {
       node: {
@@ -56,6 +62,8 @@ module.exports = {
     'react/prefer-stateless-function': [2, { ignorePureComponents: true }],
     'react/prop-types': 0,
     'react/state-in-constructor': [2, 'never'],
+    'react-hooks/rules-of-hooks': 2,
+    'react-hooks/exhaustive-deps': 1,
     'simple-import-sort/sort': [
       2,
       {
