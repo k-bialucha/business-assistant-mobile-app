@@ -9,9 +9,7 @@ import {
 
 import Colors from '../theme/Colors';
 
-const CustomHeaderButton: React.SFC<HeaderButtonProps> = (
-  props
-): JSX.Element => {
+const CustomHeaderButton: React.SFC<HeaderButtonProps> = props => {
   return (
     <HeaderButton
       {...props}
