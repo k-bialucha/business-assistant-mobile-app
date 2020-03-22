@@ -3,6 +3,8 @@ import { Platform } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 import Colors from '../../theme/Colors';
 
@@ -16,6 +18,11 @@ export type RootStackParamList = {
   Sales: undefined;
   Costs: undefined;
   Settings: undefined;
+};
+
+export type ScreenProps<RouteName extends keyof RootStackParamList> = {
+  navigation: StackNavigationProp<RootStackParamList, RouteName>;
+  route: RouteProp<RootStackParamList, RouteName>;
 };
 
 const AppTabNavigator = createBottomTabNavigator<RootStackParamList>();
