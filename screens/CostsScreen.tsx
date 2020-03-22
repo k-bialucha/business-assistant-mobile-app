@@ -1,11 +1,15 @@
 import React from 'react';
 import { Platform, Text, View } from 'react-native';
 
+import { StackNavigationOptions } from '@react-navigation/stack';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import HeaderButton from '../components/HeaderButton';
+import { NavigationData } from '../navigation/AppNavigator/CostsNavigator';
 
-const CostsScreen = () => {
+type Props = NavigationData<'CostsList'>;
+
+const CostsScreen: React.FC<Props> = () => {
   return (
     <View>
       <Text>Costs</Text>
@@ -13,7 +17,9 @@ const CostsScreen = () => {
   );
 };
 
-export const CostsScreenNavOptions = navData => {
+export const CostsScreenNavOptions = (
+  navData: NavigationData<'CostsList'>
+): StackNavigationOptions => {
   return {
     headerTitle: 'Costs',
     headerRight: () => (

@@ -20,11 +20,6 @@ export type RootStackParamList = {
   Settings: undefined;
 };
 
-export type ScreenProps<RouteName extends keyof RootStackParamList> = {
-  navigation: StackNavigationProp<RootStackParamList, RouteName>;
-  route: RouteProp<RootStackParamList, RouteName>;
-};
-
 const AppTabNavigator = createBottomTabNavigator<RootStackParamList>();
 
 const AppNavigator: React.FC<{}> = () => {
@@ -65,3 +60,14 @@ const AppNavigator: React.FC<{}> = () => {
 };
 
 export default AppNavigator;
+
+// export types so that nested components
+// can get navigation data
+export type AppNavigatorNavigationProp<
+  RouteName extends keyof RootStackParamList
+> = StackNavigationProp<RootStackParamList, RouteName>;
+
+export type NavigationData<RouteName extends keyof RootStackParamList> = {
+  navigation: AppNavigatorNavigationProp<RouteName>;
+  route: RouteProp<RootStackParamList, RouteName>;
+};

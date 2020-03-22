@@ -1,16 +1,28 @@
 import React from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
+import {
+  createStackNavigator,
+  StackNavigationProp,
+} from '@react-navigation/stack';
 
 import CostsEntryScreen from '../../screens/CostsEntryScreen';
 import CostsScreen, { CostsScreenNavOptions } from '../../screens/CostsScreen';
 
 import defaultScreenOptions from './defaultScreenOptions';
-import { ScreenProps } from './index';
+import {
+  AppNavigatorNavigationProp,
+  NavigationData as AppNavigatorNavigationData,
+} from './index';
 
-const CostsStackNavigator = createStackNavigator();
+type RootStackParamList = {
+  CostsList: undefined;
+  CostsEntry: undefined;
+};
 
-type Props = ScreenProps<'Costs'>;
+const CostsStackNavigator = createStackNavigator<RootStackParamList>();
+
+type Props = AppNavigatorNavigationData<'Costs'>;
 
 const CostsNavigator: React.FC<Props> = () => {
   return (
@@ -29,3 +41,15 @@ const CostsNavigator: React.FC<Props> = () => {
 };
 
 export default CostsNavigator;
+
+export type NavigationPropCombined<
+  RouteName extends keyof RootStackParamList
+> = CompositeNavigationProp<
+  AppNavigatorNavigationProp<'Costs'>,
+  StackNavigationProp<RootStackParamList, RouteName>
+>;
+
+export type NavigationData<RouteName extends keyof RootStackParamList> = {
+  navigation: NavigationPropCombined<RouteName>;
+  route: RouteProp<RootStackParamList, RouteName>;
+};
