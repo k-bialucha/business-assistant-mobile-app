@@ -15,12 +15,12 @@ import {
   NavigationData as AppNavigatorNavigationData,
 } from './index';
 
-type RootStackParamList = {
+type ParamList = {
   CostsList: undefined;
   CostsEntry: undefined;
 };
 
-const CostsStackNavigator = createStackNavigator<RootStackParamList>();
+const CostsStackNavigator = createStackNavigator<ParamList>();
 
 type Props = AppNavigatorNavigationData<'Costs'>;
 
@@ -42,14 +42,17 @@ const CostsNavigator: React.FC<Props> = () => {
 
 export default CostsNavigator;
 
+// combine navigation prop for nested navigators
+// (AppNavigator data + this StackNavigator data)
 export type NavigationPropCombined<
-  RouteName extends keyof RootStackParamList
+  RouteName extends keyof ParamList
 > = CompositeNavigationProp<
   AppNavigatorNavigationProp<'Costs'>,
-  StackNavigationProp<RootStackParamList, RouteName>
+  StackNavigationProp<ParamList, RouteName>
 >;
 
-export type NavigationData<RouteName extends keyof RootStackParamList> = {
+// export type so screens can get typing
+export type NavigationData<RouteName extends keyof ParamList> = {
   navigation: NavigationPropCombined<RouteName>;
-  route: RouteProp<RootStackParamList, RouteName>;
+  route: RouteProp<ParamList, RouteName>;
 };

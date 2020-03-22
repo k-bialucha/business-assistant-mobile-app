@@ -3,9 +3,9 @@ import { Text, View } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
 
-import { ScreenProps } from '../navigation/AuthNavigator';
+import { NavigationData } from '../navigation/AuthNavigator';
 
-type Props = ScreenProps<'Authorization'>;
+type Props = NavigationData<'Authorization'>;
 
 const AuthScreen: React.FC<Props> = () => {
   return (

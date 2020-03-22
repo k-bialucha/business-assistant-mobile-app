@@ -8,16 +8,11 @@ import {
 
 import AuthScreen from '../screens/AuthScreen';
 
-export type RootStackParamList = {
+export type ParamList = {
   Authorization: undefined;
 };
 
-const StackNavigator = createStackNavigator<RootStackParamList>();
-
-export type ScreenProps<RouteName extends keyof RootStackParamList> = {
-  navigation: StackNavigationProp<RootStackParamList, RouteName>;
-  route: RouteProp<RootStackParamList, RouteName>;
-};
+const StackNavigator = createStackNavigator<ParamList>();
 
 const AuthNavigator = () => {
   return (
@@ -28,3 +23,9 @@ const AuthNavigator = () => {
 };
 
 export default AuthNavigator;
+
+// export type so screens can get typing
+export type NavigationData<RouteName extends keyof ParamList> = {
+  navigation: StackNavigationProp<ParamList, RouteName>;
+  route: RouteProp<ParamList, RouteName>;
+};

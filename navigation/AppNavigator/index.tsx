@@ -13,14 +13,14 @@ import DashboardNavigator from './DashboardNavigator';
 import SalesNavigator from './SalesNavigator';
 import SettingsNavigator from './SettingsNavigator';
 
-export type RootStackParamList = {
+export type ParamList = {
   Dashboard: undefined;
   Sales: undefined;
   Costs: undefined;
   Settings: undefined;
 };
 
-const AppTabNavigator = createBottomTabNavigator<RootStackParamList>();
+const AppTabNavigator = createBottomTabNavigator<ParamList>();
 
 const AppNavigator: React.FC<{}> = () => {
   return (
@@ -64,10 +64,10 @@ export default AppNavigator;
 // export types so that nested components
 // can get navigation data
 export type AppNavigatorNavigationProp<
-  RouteName extends keyof RootStackParamList
-> = StackNavigationProp<RootStackParamList, RouteName>;
+  RouteName extends keyof ParamList
+> = StackNavigationProp<ParamList, RouteName>;
 
-export type NavigationData<RouteName extends keyof RootStackParamList> = {
+export type NavigationData<RouteName extends keyof ParamList> = {
   navigation: AppNavigatorNavigationProp<RouteName>;
-  route: RouteProp<RootStackParamList, RouteName>;
+  route: RouteProp<ParamList, RouteName>;
 };

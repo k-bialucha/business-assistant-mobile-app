@@ -9,14 +9,14 @@ import {
 import SalesEntryScreen from '../../screens/SalesEntryScreen';
 import SalesScreen, { SalesScreenNavOptions } from '../../screens/SalesScreen';
 
-import { RootStackParamList } from '.';
+import { ParamList } from '.';
 import defaultScreenOptions from './defaultScreenOptions';
 
 const SalesStackNavigator = createStackNavigator();
 
-type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Sales'>;
+type ScreenNavigationProp = StackNavigationProp<ParamList, 'Sales'>;
 
-type ScreenRouteProp = RouteProp<RootStackParamList, 'Sales'>;
+type ScreenRouteProp = RouteProp<ParamList, 'Sales'>;
 
 type SalesNavigationProps = React.FC<{
   navigation: ScreenNavigationProp;
