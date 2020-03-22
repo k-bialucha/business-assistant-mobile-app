@@ -18,7 +18,7 @@ export type RootStackParamList = {
   Settings: undefined;
 };
 
-const AppTabNavigator = createBottomTabNavigator();
+const AppTabNavigator = createBottomTabNavigator<RootStackParamList>();
 
 const AppNavigator: React.FC<{}> = () => {
   return (

@@ -1,10 +1,14 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const AuthScreen = () => {
+import { ScreenProps } from '../navigation/AuthNavigator';
+
+type Props = ScreenProps<'Authorization'>;
+
+const AuthScreen: React.FC<Props> = () => {
   return (
     <View>
-      <Text>Autorization</Text>
+      <Text>Authorization</Text>
     </View>
   );
 };
