@@ -1,15 +1,16 @@
 import React from 'react';
+
+import { RouteProp } from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
+
+import CostsEntryScreen from '../../screens/CostsEntryScreen';
+import CostsScreen, { CostsScreenNavOptions } from '../../screens/CostsScreen';
 
 import { RootStackParamList } from '.';
 import defaultScreenOptions from './defaultScreenOptions';
-
-import CostsScreen, { CostsScreenNavOptions } from '../../screens/CostsScreen';
-import CostsEntryScreen from '../../screens/CostsEntryScreen';
 
 const CostsStackNavigator = createStackNavigator();
 

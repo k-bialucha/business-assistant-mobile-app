@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
+
+import StartupScreen from '../screens/StartupScreen';
 
 import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
-import StartupScreen from '../screens/StartupScreen';
 
 const NavContainer = () => {
   // temporary mocked consts
