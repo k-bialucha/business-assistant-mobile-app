@@ -1,14 +1,20 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const AuthScreen = () => {
+import { StackNavigationOptions } from '@react-navigation/stack';
+
+import { NavigationData } from '../navigation/AuthNavigator';
+
+type Props = NavigationData<'Authorization'>;
+
+const AuthScreen: React.FC<Props> = () => {
   return (
     <View>
-      <Text>Autorization</Text>
+      <Text>Authorization</Text>
     </View>
   );
 };
 
-export const AuthScreenNavOptions = {};
+export const AuthScreenNavOptions: StackNavigationOptions = {};
 
 export default AuthScreen;

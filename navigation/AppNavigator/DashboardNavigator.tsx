@@ -8,16 +8,13 @@ import {
 
 import DashboardScreen from '../../screens/DashboardScreen';
 
-import { RootStackParamList } from '.';
+import { ParamList } from '.';
 import defaultScreenOptions from './defaultScreenOptions';
 
-const DashboardStackNavigator = createStackNavigator<RootStackParamList>();
+const DashboardStackNavigator = createStackNavigator<ParamList>();
 
-type ScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Dashboard'
->;
-type ScreenRouteProp = RouteProp<RootStackParamList, 'Dashboard'>;
+type ScreenNavigationProp = StackNavigationProp<ParamList, 'Dashboard'>;
+type ScreenRouteProp = RouteProp<ParamList, 'Dashboard'>;
 
 type DashboardNavigationProps = React.FC<{
   navigation: ScreenNavigationProp;

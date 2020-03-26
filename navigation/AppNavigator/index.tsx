@@ -3,6 +3,8 @@ import { Platform } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 import Colors from '../../theme/Colors';
 
@@ -11,14 +13,14 @@ import DashboardNavigator from './DashboardNavigator';
 import SalesNavigator from './SalesNavigator';
 import SettingsNavigator from './SettingsNavigator';
 
-export type RootStackParamList = {
+export type ParamList = {
   Dashboard: undefined;
   Sales: undefined;
   Costs: undefined;
   Settings: undefined;
 };
 
-const AppTabNavigator = createBottomTabNavigator();
+const AppTabNavigator = createBottomTabNavigator<ParamList>();
 
 const AppNavigator: React.FC<{}> = () => {
   return (
@@ -58,3 +60,14 @@ const AppNavigator: React.FC<{}> = () => {
 };
 
 export default AppNavigator;
+
+// export types so that nested components
+// can get navigation data
+export type AppNavigatorNavigationProp<
+  RouteName extends keyof ParamList
+> = StackNavigationProp<ParamList, RouteName>;
+
+export type NavigationData<RouteName extends keyof ParamList> = {
+  navigation: AppNavigatorNavigationProp<RouteName>;
+  route: RouteProp<ParamList, RouteName>;
+};

@@ -8,13 +8,13 @@ import {
 
 import SettingsScreen from '../../screens/SettingsScreen';
 
-import { RootStackParamList } from '.';
+import { ParamList } from '.';
 import defaultScreenOptions from './defaultScreenOptions';
 
-const SettingsStackNavigator = createStackNavigator<RootStackParamList>();
+const SettingsStackNavigator = createStackNavigator<ParamList>();
 
-type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Settings'>;
-type ScreenRouteProp = RouteProp<RootStackParamList, 'Settings'>;
+type ScreenNavigationProp = StackNavigationProp<ParamList, 'Settings'>;
+type ScreenRouteProp = RouteProp<ParamList, 'Settings'>;
 
 type SettingsNavigationProps = React.FC<{
   navigation: ScreenNavigationProp;
