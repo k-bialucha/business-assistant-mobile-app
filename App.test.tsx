@@ -1,6 +1,8 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+
+import { shallow } from 'enzyme';
 import { render } from 'react-native-testing-library';
+import renderer from 'react-test-renderer';
 
 import App from './App';
 
@@ -12,7 +14,7 @@ describe('<App />', () => {
   });
 
   it('renders correctly', () => {
-    const tree = renderer.create(<App />).toJSON();
+    const tree = shallow(<App />);
 
     expect(tree).toMatchSnapshot();
   });
