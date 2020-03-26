@@ -35,6 +35,8 @@ const SettingsNavigator: React.FC<Props> = () => {
 
 export default SettingsNavigator;
 
+// combine navigation prop for nested navigators
+// (AppNavigator data + this StackNavigator data)
 export type NavigationPropCombined<
   RouteName extends keyof ParamList
 > = CompositeNavigationProp<
@@ -42,6 +44,7 @@ export type NavigationPropCombined<
   StackNavigationProp<ParamList, RouteName>
 >;
 
+// export type so screens can get typing
 export type NavigationData<RouteName extends keyof ParamList> = {
   navigation: NavigationPropCombined<RouteName>;
   route: RouteProp<ParamList, RouteName>;
