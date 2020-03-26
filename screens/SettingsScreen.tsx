@@ -1,7 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const SettingsScreen = () => {
+import { NavigationData } from '../navigation/AppNavigator/SettingsNavigator';
+
+type Props = NavigationData<'Settings'>;
+
+const SettingsScreen: React.FC<Props> = () => {
   return (
     <View>
       <Text>Settings</Text>
