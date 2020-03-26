@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RouteProp } from '@react-navigation/native';
+import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationProp,
@@ -8,20 +8,21 @@ import {
 
 import SettingsScreen from '../../screens/SettingsScreen';
 
-import { ParamList } from '.';
 import defaultScreenOptions from './defaultScreenOptions';
+import {
+  AppNavigatorNavigationProp,
+  NavigationData as AppNavigatorNavigationData,
+} from './index';
+
+type ParamList = {
+  Settings: undefined;
+};
 
 const SettingsStackNavigator = createStackNavigator<ParamList>();
 
-type ScreenNavigationProp = StackNavigationProp<ParamList, 'Settings'>;
-type ScreenRouteProp = RouteProp<ParamList, 'Settings'>;
+type Props = AppNavigatorNavigationData<'Settings'>;
 
-type SettingsNavigationProps = React.FC<{
-  navigation: ScreenNavigationProp;
-  route: ScreenRouteProp;
-}>;
-
-const SettingsNavigator: SettingsNavigationProps = () => {
+const SettingsNavigator: React.FC<Props> = () => {
   return (
     <SettingsStackNavigator.Navigator screenOptions={defaultScreenOptions}>
       <SettingsStackNavigator.Screen
@@ -33,3 +34,15 @@ const SettingsNavigator: SettingsNavigationProps = () => {
 };
 
 export default SettingsNavigator;
+
+export type NavigationPropCombined<
+  RouteName extends keyof ParamList
+> = CompositeNavigationProp<
+  AppNavigatorNavigationProp<'Settings'>,
+  StackNavigationProp<ParamList, RouteName>
+>;
+
+export type NavigationData<RouteName extends keyof ParamList> = {
+  navigation: NavigationPropCombined<RouteName>;
+  route: RouteProp<ParamList, RouteName>;
+};

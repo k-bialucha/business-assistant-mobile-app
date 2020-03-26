@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RouteProp } from '@react-navigation/native';
+import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationProp,
@@ -9,21 +9,22 @@ import {
 import SalesEntryScreen from '../../screens/SalesEntryScreen';
 import SalesScreen, { SalesScreenNavOptions } from '../../screens/SalesScreen';
 
-import { ParamList } from '.';
 import defaultScreenOptions from './defaultScreenOptions';
+import {
+  AppNavigatorNavigationProp,
+  NavigationData as AppNavigatorNavigationData,
+} from './index';
 
-const SalesStackNavigator = createStackNavigator();
+type ParamList = {
+  SalesList: undefined;
+  SalesEntry: undefined;
+};
 
-type ScreenNavigationProp = StackNavigationProp<ParamList, 'Sales'>;
+const SalesStackNavigator = createStackNavigator<ParamList>();
 
-type ScreenRouteProp = RouteProp<ParamList, 'Sales'>;
+type Props = AppNavigatorNavigationData<'Sales'>;
 
-type SalesNavigationProps = React.FC<{
-  navigation: ScreenNavigationProp;
-  route: ScreenRouteProp;
-}>;
-
-const SalesNavigator: SalesNavigationProps = () => {
+const SalesNavigator: React.FC<Props> = () => {
   return (
     <SalesStackNavigator.Navigator screenOptions={defaultScreenOptions}>
       <SalesStackNavigator.Screen
@@ -40,3 +41,18 @@ const SalesNavigator: SalesNavigationProps = () => {
 };
 
 export default SalesNavigator;
+
+// combine navigation prop for nested navigators
+// (AppNavigator data + this StackNavigator data)
+export type NavigationPropCombined<
+  RouteName extends keyof ParamList
+> = CompositeNavigationProp<
+  AppNavigatorNavigationProp<'Sales'>,
+  StackNavigationProp<ParamList, RouteName>
+>;
+
+// export type so screens can get typing
+export type NavigationData<RouteName extends keyof ParamList> = {
+  navigation: NavigationPropCombined<RouteName>;
+  route: RouteProp<ParamList, RouteName>;
+};
