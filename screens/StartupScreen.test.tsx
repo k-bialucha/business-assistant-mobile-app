@@ -2,11 +2,11 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import App from './App';
+import StartupScreen from './StartupScreen';
 
-describe('<App />', () => {
+describe('<StartupScreen />', () => {
   it('matches the snapshot', () => {
-    const tree = shallow(<App />);
+    const tree = shallow(<StartupScreen />);
 
     expect(tree).toMatchSnapshot();
   });

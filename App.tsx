@@ -1,15 +1,9 @@
 import React from 'react';
 
-import { StyledText, StyledView } from './App.styles';
+import NavContainer from './navigation/NavContainer';
 
 const App = () => {
-  return (
-    <StyledView>
-      <StyledText testID="welcome-text">
-        Open up App.tsx to start working on your app!
-      </StyledText>
-    </StyledView>
-  );
+  return <NavContainer />;
 };
 
 export default App;
