@@ -2,12 +2,23 @@ import React from 'react';
 
 import { fireEvent } from 'react-native-testing-library';
 
+import { NavigationData } from '../navigation/AuthNavigator';
 import renderWithRedux from '../utils/testing/renderWithRedux';
 
-import InitialScreen from './InitialScreen';
+import AuthScreen from './AuthScreen';
 
-describe('<InitialScreen />', () => {
-  const { queryByTestId, store } = renderWithRedux(<InitialScreen />);
+type Props = NavigationData<'Authorization'>;
+
+const fakeProps: Props = {
+  route: { key: '1234', name: 'Authorization' },
+  // @ts-ignore
+  navigation: {},
+};
+
+describe('<AuthScreen />', () => {
+  const { queryByTestId, store } = renderWithRedux(
+    <AuthScreen {...fakeProps} />
+  );
 
   const usernameInput = queryByTestId('username-input');
   const loginButton = queryByTestId('login-button');

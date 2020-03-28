@@ -1,9 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AuthScreen /> matches the snapshot 1`] = `
-<View>
-  <Text>
-    Authorization
-  </Text>
-</View>
+<Styled(View)>
+  <Styled(Text)
+    success="some-token"
+  >
+    State: 
+    SUCCESS!
+  </Styled(Text)>
+  <Styled(Text)>
+    Username: 
+    some-user
+  </Styled(Text)>
+  <Styled(View)>
+    <Styled(TextInput)
+      onChangeText={[Function]}
+      placeholder="username"
+      testID="username-input"
+      value=""
+    />
+  </Styled(View)>
+  <Styled(View)>
+    <Styled(TextInput)
+      onChangeText={[Function]}
+      placeholder="password"
+      secureTextEntry={true}
+      testID="password-input"
+      value=""
+    />
+  </Styled(View)>
+  <Styled(View)>
+    <Button
+      disabled={true}
+      onPress={[Function]}
+      testID="login-button"
+      title="Login"
+    />
+    <Button
+      disabled={false}
+      onPress={[Function]}
+      testID="logout-button"
+      title="Logout"
+    />
+  </Styled(View)>
+</Styled(View)>
 `;
