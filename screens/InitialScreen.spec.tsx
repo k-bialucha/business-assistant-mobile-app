@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { fireEvent } from 'react-native-testing-library';
 
 import renderWithRedux from '../utils/testing/renderWithRedux';

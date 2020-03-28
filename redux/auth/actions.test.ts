@@ -1,9 +1,9 @@
-import { login, loginSuccess, loginFailure, logout } from './actions';
+import { login, loginFailure, loginSuccess, logout } from './actions';
 import {
   DOMAIN_NAME,
   LOGIN,
-  LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGIN_SUCCESS,
   LOGOUT,
 } from './types';
 

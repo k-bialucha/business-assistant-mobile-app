@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Button } from 'react-native';
+
 import { useDispatch, useSelector } from 'react-redux';
 
-import { login, logout, LoginRequestStatus } from '../redux/auth';
+import { login, LoginRequestStatus, logout } from '../redux/auth';
 import { RootState } from '../redux/rootReducer';
 
 import {
-  StyledView,
-  StyledText,
+  StyledButtonsContainer,
   StyledInput,
   StyledInputContainer,
-  StyledButtonsContainer,
+  StyledText,
+  StyledView,
 } from './InitialScreen.styled';
 
 const InitialScreen: React.FC<{}> = () => {

@@ -1,16 +1,16 @@
 import React from 'react';
+
 import { Provider } from 'react-redux';
 
+import NavContainer from './navigation/NavContainer';
 import configureStore from './redux/configureStore';
-
-import InitialScreen from './screens/InitialScreen';
 
 const store = configureStore();
 
 const App: React.FC<{}> = () => {
   return (
     <Provider store={store}>
-      <InitialScreen />
+      <NavContainer />
     </Provider>
   );
 };

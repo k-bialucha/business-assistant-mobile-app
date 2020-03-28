@@ -1,12 +1,12 @@
 import {
   LOGIN,
-  LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGIN_SUCCESS,
+  LoginAction,
+  LoginFailureAction,
+  LoginSuccessAction,
   LOGOUT,
   LogoutAction,
-  LoginSuccessAction,
-  LoginFailureAction,
-  LoginAction,
 } from './types';
 
 export function login(username: string, password: string): LoginAction {

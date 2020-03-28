@@ -1,6 +1,6 @@
 import { delay, put, takeLatest } from 'redux-saga/effects';
 
-import { loginSuccess, loginFailure } from './actions';
+import { loginFailure, loginSuccess } from './actions';
 import { LOGIN, LoginAction } from './types';
 
 export function* loginSaga(action: LoginAction) {

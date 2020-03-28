@@ -1,9 +1,9 @@
 import {
-  LOGIN,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT,
   AuthActions,
+  LOGIN,
+  LOGIN_FAILURE,
+  LOGIN_SUCCESS,
+  LOGOUT,
   RequestStatus,
 } from './types';
 

@@ -1,7 +1,7 @@
 import { delay, put } from 'redux-saga/effects';
 
 import { loginSaga } from './saga';
-import { DOMAIN_NAME, LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from './types';
+import { DOMAIN_NAME, LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS } from './types';
 
 describe(`${DOMAIN_NAME}/reducer`, () => {
   it('handles successful login', () => {

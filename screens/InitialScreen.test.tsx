@@ -1,10 +1,12 @@
 import React from 'react';
+
+import { useSelector } from 'react-redux';
 // import ShallowRenderer from 'react-test-renderer/shallow';
 import renderer from 'react-test-renderer';
-import { useSelector } from 'react-redux';
+
+import { LoginRequestStatus } from '../redux/auth';
 
 import InitialScreen from './InitialScreen';
-import { LoginRequestStatus } from '../redux/auth';
 
 jest.mock('react-redux', () => {
   return {

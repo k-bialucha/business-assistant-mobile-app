@@ -2,12 +2,12 @@ import reducer, { AuthState, initialState } from './reducer';
 import {
   DOMAIN_NAME,
   LOGIN,
-  LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT,
+  LOGIN_SUCCESS,
   LoginAction,
-  LoginSuccessAction,
   LoginFailureAction,
+  LoginSuccessAction,
+  LOGOUT,
   LogoutAction,
   RequestStatus,
 } from './types';

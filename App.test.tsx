@@ -1,21 +1,22 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+
+import { shallow } from 'enzyme';
 import { render } from 'react-native-testing-library';
 
 import App from './App';
-import InitialScreen from './screens/InitialScreen';
+import NavContainer from './navigation/NavContainer';
 
 describe('<App />', () => {
   it('matches the snapshot', () => {
-    const tree = renderer.create(<App />).toJSON();
+    const tree = shallow(<App />);
 
     expect(tree).toMatchSnapshot();
   });
 
-  it('contains InitialScreen', () => {
+  it('contains NavContainer', () => {
     const { queryByType } = render(<App />);
 
-    const element = queryByType(InitialScreen);
+    const element = queryByType(NavContainer);
 
     expect(element).toBeTruthy();
   });
