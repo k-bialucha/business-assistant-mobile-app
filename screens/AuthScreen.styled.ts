@@ -1,14 +1,16 @@
 import styled from 'styled-components/native';
 
+import Colors from '../theme/Colors';
+
 const StyledView = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: papayawhip;
+  background-color: white;
 `;
 
 const StyledText = styled.Text`
-  color: ${props => (props.success ? 'green' : 'cadetblue')};
+  color: ${props => (props.success ? 'green' : Colors.gray)};
   padding: 5px 22px;
   margin-vertical: 5px;
   font-size: 24px;
@@ -18,7 +20,7 @@ const StyledInputContainer = styled.View`
   width: 60%;
   height: 30px;
   border-bottom-width: 3px;
-  border-bottom-color: palevioletred;
+  border-bottom-color: ${Colors.silver};
   margin-vertical: 5px;
 `;
 

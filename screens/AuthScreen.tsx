@@ -30,11 +30,13 @@ const AuthScreen: React.FC<Props> = () => {
     (state: RootState) => state.auth.requestStatus
   );
 
+  const isAuthenticated: boolean = !!token;
+
   const dispatch = useDispatch();
 
   return (
     <StyledView>
-      <StyledText success={token}>
+      <StyledText success={isAuthenticated}>
         {'State: '}
         {requestStatus === LoginRequestStatus.UNAUTHENTICATED &&
           'unauthenticated'}
@@ -42,43 +44,52 @@ const AuthScreen: React.FC<Props> = () => {
         {requestStatus === LoginRequestStatus.SUCCESS && 'SUCCESS!'}
         {requestStatus === LoginRequestStatus.FAILURE && 'FAILURE!'}
       </StyledText>
-      <StyledText>Username: {requestedUsername || '?'}</StyledText>
-      <StyledInputContainer>
-        <StyledInput
-          testID="username-input"
-          value={username}
-          placeholder="username"
-          onChangeText={setUsername}
-        />
-      </StyledInputContainer>
-      <StyledInputContainer>
-        <StyledInput
-          testID="password-input"
-          value={password}
-          placeholder="password"
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-      </StyledInputContainer>
+      {isAuthenticated && (
+        <StyledText>Username: {requestedUsername || '?'}</StyledText>
+      )}
+      {!isAuthenticated && (
+        <>
+          <StyledInputContainer>
+            <StyledInput
+              testID="username-input"
+              value={username}
+              placeholder="username"
+              onChangeText={setUsername}
+            />
+          </StyledInputContainer>
+          <StyledInputContainer>
+            <StyledInput
+              testID="password-input"
+              value={password}
+              placeholder="password"
+              onChangeText={setPassword}
+              secureTextEntry
+            />
+          </StyledInputContainer>
+        </>
+      )}
       <StyledButtonsContainer>
-        <Button
-          testID="login-button"
-          title="Login"
-          disabled={!!token}
-          onPress={() => {
-            dispatch(login(username, password));
-          }}
-        />
-        <Button
-          testID="logout-button"
-          title="Logout"
-          disabled={!token}
-          onPress={() => {
-            setUsername('');
-            setPassword('');
-            dispatch(logout());
-          }}
-        />
+        {isAuthenticated ? (
+          <Button
+            testID="logout-button"
+            title="Logout"
+            disabled={!isAuthenticated}
+            onPress={() => {
+              setUsername('');
+              setPassword('');
+              dispatch(logout());
+            }}
+          />
+        ) : (
+          <Button
+            testID="login-button"
+            title="Login"
+            disabled={isAuthenticated}
+            onPress={() => {
+              dispatch(login(username, password));
+            }}
+          />
+        )}
       </StyledButtonsContainer>
     </StyledView>
   );
