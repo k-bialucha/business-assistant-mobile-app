@@ -1,6 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<AuthScreen /> matches the snapshot 1`] = `
+exports[`<AuthScreen /> matches the snapshot  in LOADING state 1`] = `
+<Styled(View)>
+  <Styled(Text)
+    success={false}
+    testID="status-message"
+  >
+    State: 
+    ...
+  </Styled(Text)>
+  <Styled(View)>
+    <Styled(TextInput)
+      onChangeText={[Function]}
+      placeholder="username"
+      testID="username-input"
+      value=""
+    />
+  </Styled(View)>
+  <Styled(View)>
+    <Styled(TextInput)
+      onChangeText={[Function]}
+      placeholder="password"
+      secureTextEntry={true}
+      testID="password-input"
+      value=""
+    />
+  </Styled(View)>
+  <Styled(View)>
+    <Button
+      disabled={false}
+      onPress={[Function]}
+      testID="login-button"
+      title="Login"
+    />
+  </Styled(View)>
+</Styled(View)>
+`;
+
+exports[`<AuthScreen /> matches the snapshot  in SUCCESS state 1`] = `
 <Styled(View)>
   <Styled(Text)
     success={true}
@@ -19,6 +56,80 @@ exports[`<AuthScreen /> matches the snapshot 1`] = `
       onPress={[Function]}
       testID="logout-button"
       title="Logout"
+    />
+  </Styled(View)>
+</Styled(View)>
+`;
+
+exports[`<AuthScreen /> matches the snapshot  in UNAUTHENTICATED state 1`] = `
+<Styled(View)>
+  <Styled(Text)
+    success={false}
+    testID="status-message"
+  >
+    State: 
+    unauthenticated
+  </Styled(Text)>
+  <Styled(View)>
+    <Styled(TextInput)
+      onChangeText={[Function]}
+      placeholder="username"
+      testID="username-input"
+      value=""
+    />
+  </Styled(View)>
+  <Styled(View)>
+    <Styled(TextInput)
+      onChangeText={[Function]}
+      placeholder="password"
+      secureTextEntry={true}
+      testID="password-input"
+      value=""
+    />
+  </Styled(View)>
+  <Styled(View)>
+    <Button
+      disabled={false}
+      onPress={[Function]}
+      testID="login-button"
+      title="Login"
+    />
+  </Styled(View)>
+</Styled(View)>
+`;
+
+exports[`<AuthScreen /> matches the snapshot in FAILURE state 1`] = `
+<Styled(View)>
+  <Styled(Text)
+    success={false}
+    testID="status-message"
+  >
+    State: 
+    FAILURE!
+  </Styled(Text)>
+  <Styled(View)>
+    <Styled(TextInput)
+      onChangeText={[Function]}
+      placeholder="username"
+      testID="username-input"
+      value=""
+    />
+  </Styled(View)>
+  <Styled(View)>
+    <Styled(TextInput)
+      onChangeText={[Function]}
+      placeholder="password"
+      secureTextEntry={true}
+      testID="password-input"
+      value=""
+    />
+  </Styled(View)>
+  <Styled(View)>
+    <Button
+      disabled={false}
+      onPress={[Function]}
+      testID="login-button"
+      title="Login"
     />
   </Styled(View)>
 </Styled(View)>
