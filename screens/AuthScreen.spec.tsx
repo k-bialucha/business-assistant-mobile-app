@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { fireEvent } from 'react-native-testing-library';
+import { ReactTestInstance } from 'react-test-renderer';
 
 import { NavigationData } from '../navigation/AuthNavigator';
 import renderWithRedux from '../utils/testing/renderWithRedux';
@@ -31,40 +32,49 @@ describe('<AuthScreen />', () => {
     <AuthScreen {...fakeProps} />
   );
 
+  let usernameInput: ReactTestInstance;
+  let passwordInput: ReactTestInstance;
+  let loginButton: ReactTestInstance;
+  let logoutButton: ReactTestInstance;
+
   it('allows to login', async () => {
-    const usernameInput = queryByTestId('username-input');
-    const passwordInput = queryByTestId('password-input');
-    const loginButton = queryByTestId('login-button');
+    usernameInput = queryByTestId('username-input');
+    passwordInput = queryByTestId('password-input');
+    loginButton = queryByTestId('login-button');
 
     fireEvent.changeText(usernameInput, 'admin');
     fireEvent.changeText(passwordInput, 'admin1');
 
     fireEvent.press(loginButton);
 
+    logoutButton = queryByTestId('logout-button');
+
+    expect(logoutButton).toBeDefined();
     expect(store.getState().auth.token).toBeDefined();
     expect(store.getState().auth.username).toBe('admin');
   });
 
   it('allows to logout', () => {
-    const logoutButton = queryByTestId('logout-button');
-
-    expect(store.getState().auth.username).toBe('admin');
-
     fireEvent.press(logoutButton);
 
+    logoutButton = queryByTestId('logout-button');
+    loginButton = queryByTestId('login-button');
+
     expect(store.getState().auth.username).toBe(null);
+    expect(logoutButton).toBeNull();
+    expect(loginButton).toBeDefined();
   });
 
   it('allows to login again', () => {
-    const usernameInput = queryByTestId('username-input');
-    const passwordInput = queryByTestId('password-input');
-    const loginButton = queryByTestId('login-button');
+    usernameInput = queryByTestId('username-input');
+    passwordInput = queryByTestId('password-input');
 
     fireEvent.changeText(usernameInput, 'different-user');
     fireEvent.changeText(passwordInput, 'admin123');
 
     fireEvent.press(loginButton);
 
+    expect(logoutButton).toBeDefined();
     expect(store.getState().auth.token).toBeDefined();
     expect(store.getState().auth.username).toBe('different-user');
   });
