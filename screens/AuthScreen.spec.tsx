@@ -1,3 +1,5 @@
+import '@testing-library/jest-native/extend-expect';
+
 import React from 'react';
 
 import { fireEvent } from 'react-native-testing-library';
@@ -49,7 +51,7 @@ describe('<AuthScreen />', () => {
 
     logoutButton = queryByTestId('logout-button');
 
-    expect(logoutButton).toBeDefined();
+    expect(logoutButton).not.toBeNull();
     expect(store.getState().auth.token).toBeDefined();
     expect(store.getState().auth.username).toBe('admin');
   });
@@ -62,7 +64,7 @@ describe('<AuthScreen />', () => {
 
     expect(store.getState().auth.username).toBe(null);
     expect(logoutButton).toBeNull();
-    expect(loginButton).toBeDefined();
+    expect(loginButton).not.toBeNull();
   });
 
   it('allows to login again', () => {
@@ -74,8 +76,18 @@ describe('<AuthScreen />', () => {
 
     fireEvent.press(loginButton);
 
-    expect(logoutButton).toBeDefined();
+    logoutButton = queryByTestId('logout-button');
+    loginButton = queryByTestId('login-button');
+
+    expect(logoutButton).not.toBeNull();
+    expect(loginButton).toBeNull();
     expect(store.getState().auth.token).toBeDefined();
     expect(store.getState().auth.username).toBe('different-user');
+  });
+
+  it('shows success info when logged in', () => {
+    const successSign = queryByTestId('status-message');
+
+    expect(successSign).toHaveTextContent('SUCCESS');
   });
 });

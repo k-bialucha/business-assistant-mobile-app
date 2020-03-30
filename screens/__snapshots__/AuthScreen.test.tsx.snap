@@ -4,6 +4,7 @@ exports[`<AuthScreen /> matches the snapshot 1`] = `
 <Styled(View)>
   <Styled(Text)
     success={true}
+    testID="status-message"
   >
     State: 
     SUCCESS!

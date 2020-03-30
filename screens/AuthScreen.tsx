@@ -36,7 +36,7 @@ const AuthScreen: React.FC<Props> = () => {
 
   return (
     <StyledView>
-      <StyledText success={isAuthenticated}>
+      <StyledText testID="status-message" success={isAuthenticated}>
         {'State: '}
         {requestStatus === LoginRequestStatus.UNAUTHENTICATED &&
           'unauthenticated'}
