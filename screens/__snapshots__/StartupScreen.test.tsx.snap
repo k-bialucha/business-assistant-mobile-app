@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StartupScreen /> matches the snapshot 1`] = `
+<Styled(View)>
+  <ActivityIndicator
+    animating={true}
+    color="black"
+    hidesWhenStopped={true}
+    size="large"
+  />
+</Styled(View)>
+`;
