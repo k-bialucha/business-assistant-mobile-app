@@ -1,4 +1,6 @@
 {
+  "name": "business-assistant-mobile-app",
+  "version": "0.0.1",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "android": "expo start --android",
