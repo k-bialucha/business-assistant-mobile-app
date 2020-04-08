@@ -10,12 +10,14 @@ import {
 export interface AuthState {
   token: string;
   username: string;
+  userId: string;
   requestStatus: RequestStatus;
 }
 
 export const initialState: AuthState = {
   token: null,
   username: null,
+  userId: null,
   requestStatus: RequestStatus.UNAUTHENTICATED,
 };
 
@@ -31,12 +33,16 @@ function reducer(
         requestStatus: RequestStatus.LOADING,
       };
 
-    case LOGIN_SUCCESS:
+    case LOGIN_SUCCESS: {
+      const { token, userId } = action.payload;
+
       return {
         ...state,
-        token: action.payload,
+        token,
+        userId,
         requestStatus: RequestStatus.SUCCESS,
       };
+    }
 
     case LOGIN_FAILURE:
       return {

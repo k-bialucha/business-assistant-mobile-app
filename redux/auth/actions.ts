@@ -16,10 +16,13 @@ export function login(username: string, password: string): LoginAction {
   };
 }
 
-export function loginSuccess(token: string): LoginSuccessAction {
+export function loginSuccess(
+  token: string,
+  userId: string
+): LoginSuccessAction {
   return {
     type: LOGIN_SUCCESS,
-    payload: token,
+    payload: { token, userId },
   };
 }
 

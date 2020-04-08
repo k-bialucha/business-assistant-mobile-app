@@ -1,17 +1,21 @@
 import { delay, put, takeLatest } from 'redux-saga/effects';
 
+import { loginUser } from '../../utils/apiCalls/authorization';
+
 import { loginFailure, loginSuccess } from './actions';
 import { LOGIN, LoginAction } from './types';
 
-export function* loginSaga(action: LoginAction) {
-  yield delay(1000);
+export function* loginSaga({ payload: { username, password } }: LoginAction) {
+  try {
+    yield delay(1000);
 
-  if (action.payload.password.length >= 5) {
-    const someToken: string = 'highly-secure-token';
+    const response = yield loginUser(username, password);
 
-    yield put(loginSuccess(someToken));
-  } else {
-    yield put(loginFailure('terrible mistake'));
+    const { idToken: token, localId: userId } = response;
+
+    yield put(loginSuccess(token, userId));
+  } catch (error) {
+    yield put(loginFailure(error));
   }
 }
 
