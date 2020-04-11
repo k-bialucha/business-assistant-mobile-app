@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button, TouchableWithoutFeedback, View } from 'react-native';
 
+import { StackNavigationOptions } from '@react-navigation/stack';
+
+import { NavigationData } from '../navigation/AuthNavigator';
 import Colors from '../theme/Colors';
 
 import {
@@ -13,7 +16,9 @@ import {
   StyledWideContainer,
 } from './AuthScreen.styled';
 
-const AuthScreen = ({ navigation }) => {
+type Props = NavigationData<'Authorization'>;
+
+const AuthScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <StyledContainer>
       <View>
@@ -54,5 +59,7 @@ const AuthScreen = ({ navigation }) => {
     </StyledContainer>
   );
 };
+
+export const AuthScreenNavOptions: StackNavigationOptions = {};
 
 export default AuthScreen;
