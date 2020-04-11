@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { NavigationData } from '../navigation/AuthNavigator';
