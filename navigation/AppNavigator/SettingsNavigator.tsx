@@ -6,7 +6,7 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 
-import AuthScreen from '../../screens/AuthScreen';
+import LoginScreen from '../../screens/LoginScreen';
 
 import defaultScreenOptions from './defaultScreenOptions';
 import {
@@ -25,7 +25,7 @@ type Props = AppNavigatorNavigationData<'Settings'>;
 const SettingsNavigator: React.FC<Props> = () => {
   return (
     <SettingsStackNavigator.Navigator screenOptions={defaultScreenOptions}>
-      <SettingsStackNavigator.Screen name="Settings" component={AuthScreen} />
+      <SettingsStackNavigator.Screen name="Settings" component={LoginScreen} />
     </SettingsStackNavigator.Navigator>
   );
 };

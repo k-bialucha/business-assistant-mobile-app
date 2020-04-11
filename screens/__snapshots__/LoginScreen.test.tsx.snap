@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<AuthScreen /> matches the snapshot  in LOADING state 1`] = `
+exports[`<LoginScreen /> matches the snapshot  in LOADING state 1`] = `
 <Styled(View)>
   <Styled(Text)
     success={false}
@@ -37,7 +37,7 @@ exports[`<AuthScreen /> matches the snapshot  in LOADING state 1`] = `
 </Styled(View)>
 `;
 
-exports[`<AuthScreen /> matches the snapshot  in SUCCESS state 1`] = `
+exports[`<LoginScreen /> matches the snapshot  in SUCCESS state 1`] = `
 <Styled(View)>
   <Styled(Text)
     success={true}
@@ -61,7 +61,7 @@ exports[`<AuthScreen /> matches the snapshot  in SUCCESS state 1`] = `
 </Styled(View)>
 `;
 
-exports[`<AuthScreen /> matches the snapshot  in UNAUTHENTICATED state 1`] = `
+exports[`<LoginScreen /> matches the snapshot  in UNAUTHENTICATED state 1`] = `
 <Styled(View)>
   <Styled(Text)
     success={false}
@@ -98,7 +98,7 @@ exports[`<AuthScreen /> matches the snapshot  in UNAUTHENTICATED state 1`] = `
 </Styled(View)>
 `;
 
-exports[`<AuthScreen /> matches the snapshot in FAILURE state 1`] = `
+exports[`<LoginScreen /> matches the snapshot in FAILURE state 1`] = `
 <Styled(View)>
   <Styled(Text)
     success={false}

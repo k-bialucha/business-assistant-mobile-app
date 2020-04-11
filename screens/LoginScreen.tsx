@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button } from 'react-native';
+import { Button, Text, View } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { NavigationData } from '../navigation/AuthNavigator';
@@ -14,11 +15,11 @@ import {
   StyledInputContainer,
   StyledText,
   StyledView,
-} from './AuthScreen.styled';
+} from './LoginScreen.styled';
 
 type Props = NavigationData<'Authorization'>;
 
-const AuthScreen: React.FC<Props> = () => {
+const LoginScreen: React.FC<Props> = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -95,6 +96,6 @@ const AuthScreen: React.FC<Props> = () => {
   );
 };
 
-export const AuthScreenNavOptions: StackNavigationOptions = {};
+export const LoginScreenNavOptions: StackNavigationOptions = {};
 
-export default AuthScreen;
+export default LoginScreen;

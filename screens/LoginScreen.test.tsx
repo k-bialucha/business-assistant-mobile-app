@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { NavigationData } from '../navigation/AuthNavigator';
 import { LoginRequestStatus } from '../redux/auth';
 
-import AuthScreen from './AuthScreen';
+import LoginScreen from './LoginScreen';
 
 type Props = NavigationData<'Authorization'>;
 
@@ -29,7 +29,7 @@ jest.mock('react-redux', () => {
   };
 });
 
-describe('<AuthScreen />', () => {
+describe('<LoginScreen />', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -41,7 +41,7 @@ describe('<AuthScreen />', () => {
       LoginRequestStatus.UNAUTHENTICATED
     );
 
-    const tree = shallow(<AuthScreen {...fakeProps} />);
+    const tree = shallow(<LoginScreen {...fakeProps} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -51,7 +51,7 @@ describe('<AuthScreen />', () => {
     (useSelector as jest.Mock).mockReturnValueOnce('some-user');
     (useSelector as jest.Mock).mockReturnValueOnce(LoginRequestStatus.LOADING);
 
-    const tree = shallow(<AuthScreen {...fakeProps} />);
+    const tree = shallow(<LoginScreen {...fakeProps} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -61,7 +61,7 @@ describe('<AuthScreen />', () => {
     (useSelector as jest.Mock).mockReturnValueOnce('some-user');
     (useSelector as jest.Mock).mockReturnValueOnce(LoginRequestStatus.SUCCESS);
 
-    const tree = shallow(<AuthScreen {...fakeProps} />);
+    const tree = shallow(<LoginScreen {...fakeProps} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -71,7 +71,7 @@ describe('<AuthScreen />', () => {
     (useSelector as jest.Mock).mockReturnValueOnce('some-user');
     (useSelector as jest.Mock).mockReturnValueOnce(LoginRequestStatus.FAILURE);
 
-    const tree = shallow(<AuthScreen {...fakeProps} />);
+    const tree = shallow(<LoginScreen {...fakeProps} />);
 
     expect(tree).toMatchSnapshot();
   });

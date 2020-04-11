@@ -8,7 +8,7 @@ import { ReactTestInstance } from 'react-test-renderer';
 import { NavigationData } from '../navigation/AuthNavigator';
 import renderWithRedux from '../utils/testing/renderWithRedux';
 
-import AuthScreen from './AuthScreen';
+import LoginScreen from './LoginScreen';
 
 type Props = NavigationData<'Authorization'>;
 
@@ -29,9 +29,9 @@ jest.mock('redux-saga/effects', () => {
   };
 });
 
-describe('<AuthScreen />', () => {
+describe('<LoginScreen />', () => {
   const { queryByTestId, store } = renderWithRedux(
-    <AuthScreen {...fakeProps} />
+    <LoginScreen {...fakeProps} />
   );
 
   let usernameInput: ReactTestInstance;
