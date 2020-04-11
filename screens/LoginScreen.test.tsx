@@ -8,10 +8,10 @@ import { LoginRequestStatus } from '../redux/auth';
 
 import LoginScreen from './LoginScreen';
 
-type Props = NavigationData<'Authorization'>;
+type Props = NavigationData<'Login'>;
 
 const fakeProps: Props = {
-  route: { key: '1234', name: 'Authorization' },
+  route: { key: '1234', name: 'Login' },
   // @ts-ignore
   navigation: {},
 };

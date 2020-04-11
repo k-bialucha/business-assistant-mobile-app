@@ -17,7 +17,7 @@ import {
   StyledView,
 } from './LoginScreen.styled';
 
-type Props = NavigationData<'Authorization'>;
+type Props = NavigationData<'Login'>;
 
 const LoginScreen: React.FC<Props> = () => {
   const [username, setUsername] = useState<string>('');
