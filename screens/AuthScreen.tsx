@@ -29,7 +29,7 @@ const AuthScreen: React.FC<Props> = ({ navigation }) => {
           <Button
             title="Create an account"
             color={Colors.gray}
-            onPress={() => alert('navigate to sing up screen')}
+            onPress={() => navigation.navigate('Signup')}
           />
         </StyledWideContainer>
         <StyledText>OR</StyledText>

@@ -8,10 +8,22 @@ import {
 
 import AuthScreen from '../screens/AuthScreen';
 import LoginScreen from '../screens/LoginScreen';
+import SignupScreen from '../screens/SignupScreen';
+import Colors from '../theme/Colors';
 
 export type ParamList = {
   Authorization: undefined;
   Login: undefined;
+  Signup: undefined;
+};
+
+const defaultAuthScreenNavOptions = {
+  headerStyle: {
+    backgroundColor: Colors.navyBlue,
+    borderBottomColor: 'rgba(255,255,255, 0.7)',
+    borderBottomWidth: 2,
+  },
+  headerTintColor: '#ffffff',
 };
 
 const StackNavigator = createStackNavigator<ParamList>();
@@ -24,7 +36,16 @@ const AuthNavigator = () => {
         component={AuthScreen}
         options={{ headerShown: false }}
       />
-      <StackNavigator.Screen name="Login" component={LoginScreen} />
+      <StackNavigator.Screen
+        name="Login"
+        component={LoginScreen}
+        options={defaultAuthScreenNavOptions}
+      />
+      <StackNavigator.Screen
+        name="Signup"
+        component={SignupScreen}
+        options={defaultAuthScreenNavOptions}
+      />
     </StackNavigator.Navigator>
   );
 };
