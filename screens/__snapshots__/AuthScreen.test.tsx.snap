@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthScreen /> matches the snaphot 1`] = `
+Object {
+  "output": <ForwardRef>
+    <View>
+      <ForwardRef>
+        Make your business easier.
+      </ForwardRef>
+    </View>
+    <ForwardRef>
+      <ForwardRef>
+        <Button
+          color="#5E6D8C"
+          onPress={[Function]}
+          title="Create an account"
+        />
+      </ForwardRef>
+      <ForwardRef>
+        OR
+      </ForwardRef>
+      <ForwardRef>
+        <Button
+          onPress={[Function]}
+          title="Continue with Facebook"
+        />
+      </ForwardRef>
+      <ForwardRef>
+        <Button
+          onPress={[Function]}
+          title="Continue with Google"
+        />
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef>
+      <ForwardRef>
+        Already have an account?
+         
+        <TouchableWithoutFeedback
+          onPress={[Function]}
+        >
+          <ForwardRef>
+            Log in
+          </ForwardRef>
+        </TouchableWithoutFeedback>
+      </ForwardRef>
+    </ForwardRef>
+  </ForwardRef>,
+}
+`;
