@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import { Button } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import TextField from '../components/form/TextField';
 import { NavigationData } from '../navigation/AuthNavigator';
-import { login, LoginRequestStatus, logout } from '../redux/auth';
-import { RootState } from '../redux/rootReducer';
+import { login } from '../redux/auth';
 
 import {
   StyledButtonsContainer,
-  StyledInput,
-  StyledInputContainer,
   StyledText,
   StyledView,
+  StyledWideContainer,
 } from './LoginScreen.styled';
 
 type Props = NavigationData<'Login'>;
@@ -22,74 +21,33 @@ const LoginScreen: React.FC<Props> = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const token: string = useSelector((state: RootState) => state.auth.token);
-  const requestedUsername: string = useSelector(
-    (state: RootState) => state.auth.username
-  );
-  const requestStatus: LoginRequestStatus = useSelector(
-    (state: RootState) => state.auth.requestStatus
-  );
-
-  const isAuthenticated: boolean = !!token;
-
   const dispatch = useDispatch();
 
   return (
     <StyledView>
-      <StyledText testID="status-message" success={isAuthenticated}>
-        {'State: '}
-        {requestStatus === LoginRequestStatus.UNAUTHENTICATED &&
-          'unauthenticated'}
-        {requestStatus === LoginRequestStatus.LOADING && '...'}
-        {requestStatus === LoginRequestStatus.SUCCESS && 'SUCCESS!'}
-        {requestStatus === LoginRequestStatus.FAILURE && 'FAILURE!'}
-      </StyledText>
-      {isAuthenticated && (
-        <StyledText>Username: {requestedUsername || '?'}</StyledText>
-      )}
-      {!isAuthenticated && (
-        <>
-          <StyledInputContainer>
-            <StyledInput
-              testID="username-input"
-              value={username}
-              placeholder="username"
-              onChangeText={setUsername}
-            />
-          </StyledInputContainer>
-          <StyledInputContainer>
-            <StyledInput
-              testID="password-input"
-              value={password}
-              placeholder="password"
-              onChangeText={setPassword}
-              secureTextEntry
-            />
-          </StyledInputContainer>
-        </>
-      )}
+      <StyledWideContainer>
+        <TextField
+          testID="username-input"
+          value={username}
+          placeholder="E-mail"
+          onChangeText={setUsername}
+        />
+        <TextField
+          testID="password-input"
+          value={password}
+          placeholder="Password"
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+      </StyledWideContainer>
       <StyledButtonsContainer>
-        {isAuthenticated ? (
-          <Button
-            testID="logout-button"
-            title="Logout"
-            disabled={!isAuthenticated}
-            onPress={() => {
-              setUsername('');
-              setPassword('');
-              dispatch(logout());
-            }}
-          />
-        ) : (
-          <Button
-            testID="login-button"
-            title="Login"
-            disabled={isAuthenticated}
-            onPress={() => {
-              dispatch(login(username, password));
-            }}
-          />
-        )}
+        <Button
+          testID="login-button"
+          title="Login"
+          onPress={() => {
+            dispatch(login(username, password));
+          }}
+        />
       </StyledButtonsContainer>
     </StyledView>
   );
