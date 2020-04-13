@@ -17,7 +17,10 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
     const putDescriptor = generator.next().value;
 
     expect(putDescriptor).toEqual(
-      put({ type: LOGIN_SUCCESS, payload: expect.any(String) })
+      put({
+        type: LOGIN_SUCCESS,
+        payload: { token: expect.any(String), userId: expect.any(String) },
+      })
     );
   });
 
