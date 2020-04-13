@@ -5,6 +5,9 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   RequestStatus,
+  SIGNUP,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
 } from './types';
 
 export interface AuthState {
@@ -28,8 +31,7 @@ function reducer(
   switch (action.type) {
     case LOGIN:
       return {
-        token: null,
-        username: action.payload.username,
+        ...state,
         requestStatus: RequestStatus.LOADING,
       };
 
@@ -53,6 +55,29 @@ function reducer(
 
     case LOGOUT:
       return initialState;
+    case SIGNUP:
+      return {
+        ...state,
+        requestStatus: RequestStatus.LOADING,
+      };
+
+    case SIGNUP_SUCCESS: {
+      const { token, userId } = action.payload;
+
+      return {
+        ...state,
+        token,
+        userId,
+        requestStatus: RequestStatus.SUCCESS,
+      };
+    }
+
+    case SIGNUP_FAILURE:
+      return {
+        ...state,
+        token: null,
+        requestStatus: RequestStatus.FAILURE,
+      };
 
     default:
       return state;
