@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignupScreen /> matches the snapshot 1`] = `
+Object {
+  "output": <ForwardRef>
+    <ForwardRef>
+      <TextField
+        onChangeText={[Function]}
+        placeholder="E-mail"
+        value=""
+      />
+      <TextField
+        onChangeText={[Function]}
+        placeholder="Phone (Optional)"
+        value=""
+      />
+      <TextField
+        onChangeText={[Function]}
+        placeholder="Password"
+        secureTextEntry={true}
+        value=""
+      />
+      <Button
+        onPress={[Function]}
+        title="Sign Up"
+      />
+    </ForwardRef>
+  </ForwardRef>,
+}
+`;

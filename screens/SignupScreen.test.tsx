@@ -14,7 +14,24 @@ const mockedProps: Props = {
   navigation: {},
 };
 
+jest.mock('react-redux', () => {
+  return {
+    __esModule: true,
+    Provider: jest
+      .fn()
+      .mockImplementation(props => <div>{props.children}</div>),
+    useSelector: jest
+      .fn()
+      .mockReturnValue({ token: 'some-token', username: 'some-user' }),
+    useDispatch: jest.fn().mockImplementation(() => jest.fn()),
+  };
+});
+
 describe('<SignupScreen />', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
   it('matches the snapshot', () => {
     const mockedComp = shallow(<SignupScreen {...mockedProps} />);
 

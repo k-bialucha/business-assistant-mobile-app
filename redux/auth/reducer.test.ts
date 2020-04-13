@@ -16,7 +16,6 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
   it('handles login action', () => {
     const someUsername: string = 'some-username';
     const somePassword: string = 'hard-pass';
-    const someUserId: string = 'user-id';
 
     const action: LoginAction = {
       type: LOGIN,
@@ -26,9 +25,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
     const nextState: AuthState = reducer(initialState, action);
 
     const expectedState: AuthState = {
-      token: null,
-      userId: someUserId,
-      username: someUsername,
+      ...initialState,
       requestStatus: RequestStatus.LOADING,
     };
 

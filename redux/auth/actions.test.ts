@@ -98,7 +98,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
     const expected: SignupSuccessAction = {
       type: SIGNUP_SUCCESS,
-      payload: { token: mockedUserId, userId: mockedUserId },
+      payload: { token: mockedToken, userId: mockedUserId },
     };
 
     expect(result).toEqual(expected);
