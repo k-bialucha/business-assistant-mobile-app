@@ -4,8 +4,8 @@ import {
   loginSuccess,
   logout,
   signup,
-  signupSuccess,
   signupFailure,
+  signupSuccess,
 } from './actions';
 import {
   DOMAIN_NAME,
@@ -14,11 +14,11 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   SIGNUP,
-  SignupAction,
-  SignupSuccessAction,
-  SIGNUP_SUCCESS,
-  SignupFailureAction,
   SIGNUP_FAILURE,
+  SIGNUP_SUCCESS,
+  SignupAction,
+  SignupFailureAction,
+  SignupSuccessAction,
 } from './types';
 
 describe(`${DOMAIN_NAME}/actions`, () => {
@@ -44,7 +44,10 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
     const expected = {
       type: LOGIN_SUCCESS,
-      payload: someToken,
+      payload: {
+        token: someToken,
+        userId: someUserId,
+      },
     };
 
     expect(result).toEqual(expected);
