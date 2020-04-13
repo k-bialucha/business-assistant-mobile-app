@@ -8,7 +8,7 @@ import { StyledView } from './Loader.styled';
 const Loader = () => {
   return (
     <StyledView>
-      <ActivityIndicator color={Colors.navyBlue} size="large" />
+      <ActivityIndicator color={Colors.gray} size="large" />
     </StyledView>
   );
 };
