@@ -1,10 +1,24 @@
-import { login, loginFailure, loginSuccess, logout } from './actions';
+import {
+  login,
+  loginFailure,
+  loginSuccess,
+  logout,
+  signup,
+  signupSuccess,
+  signupFailure,
+} from './actions';
 import {
   DOMAIN_NAME,
   LOGIN,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGOUT,
+  SIGNUP,
+  SignupAction,
+  SignupSuccessAction,
+  SIGNUP_SUCCESS,
+  SignupFailureAction,
+  SIGNUP_FAILURE,
 } from './types';
 
 describe(`${DOMAIN_NAME}/actions`, () => {
@@ -24,8 +38,9 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
   test('loginSuccess action returns correct object', () => {
     const someToken: string = 'some-secure-token';
+    const someUserId: string = 'some-user-id';
 
-    const result = loginSuccess(someToken);
+    const result = loginSuccess(someToken, someUserId);
 
     const expected = {
       type: LOGIN_SUCCESS,
@@ -56,5 +71,46 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     };
 
     expect(result).toEqual(expected);
+  });
+
+  test('signup action creator returns corrent object', () => {
+    const mockedEmail: string = 'mocked-email@email.com';
+    const mockedPassword: string = 'mocked-password';
+
+    const result = signup(mockedEmail, mockedPassword);
+
+    const expected: SignupAction = {
+      type: SIGNUP,
+      payload: { email: mockedEmail, password: mockedPassword },
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('signupSuccess action creator returns corrent object', () => {
+    const mockedToken: string = 'mocked-secure-token';
+    const mockedUserId: string = 'mocked-user-id';
+
+    const result = signupSuccess(mockedToken, mockedUserId);
+
+    const expected: SignupSuccessAction = {
+      type: SIGNUP_SUCCESS,
+      payload: { token: mockedUserId, userId: mockedUserId },
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('signupFailure action creator returns corrent object', () => {
+    const mockedMessage = 'mocked-message';
+
+    const result = signupFailure(mockedMessage);
+
+    const extected: SignupFailureAction = {
+      type: SIGNUP_FAILURE,
+      payload: mockedMessage,
+    };
+
+    expect(result).toEqual(extected);
   });
 });
