@@ -35,10 +35,10 @@ export interface LogoutAction {
 
 export interface SignupAction {
   type: typeof SIGNUP;
-  paylaod: {
+  payload: {
     email: string;
-    phone?: string;
     password: string;
+    phone?: string;
   };
 }
 
