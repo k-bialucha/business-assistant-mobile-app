@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from 'react-native';
 
+import { useDispatch } from 'react-redux';
+
 import TextField from '../components/form/TextField';
 import { NavigationData } from '../navigation/AuthNavigator';
+import { signup } from '../redux/auth/actions';
 
 import { StyledContainer, StyledWideContainer } from './SignupScreen.styled';
 
@@ -12,6 +15,8 @@ const SignupScreen: React.FC<Props> = () => {
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const dispatch = useDispatch();
 
   return (
     <StyledContainer>
@@ -32,6 +37,7 @@ const SignupScreen: React.FC<Props> = () => {
           title="Sign Up"
           onPress={() => {
             // signup(email, password)
+            dispatch(signup(email, password, phone));
           }}
         />
       </StyledWideContainer>
