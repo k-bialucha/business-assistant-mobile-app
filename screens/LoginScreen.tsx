@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
-import { Button } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
+import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 
 import TextField from '../components/form/TextField';
 import { NavigationData } from '../navigation/AuthNavigator';
 import { login } from '../redux/auth';
+import Colors from '../theme/Colors';
 
-import {
-  StyledButtonsContainer,
-  StyledText,
-  StyledView,
-  StyledWideContainer,
-} from './LoginScreen.styled';
+import { StyledView, StyledWideContainer } from './LoginScreen.styled';
 
 type Props = NavigationData<'Login'>;
 
@@ -39,16 +35,16 @@ const LoginScreen: React.FC<Props> = () => {
           onChangeText={setPassword}
           secureTextEntry
         />
-      </StyledWideContainer>
-      <StyledButtonsContainer>
         <Button
           testID="login-button"
           title="Login"
+          buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
+          titleStyle={{ color: Colors.gray }}
           onPress={() => {
             dispatch(login(username, password));
           }}
         />
-      </StyledButtonsContainer>
+      </StyledWideContainer>
     </StyledView>
   );
 };

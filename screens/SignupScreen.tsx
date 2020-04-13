@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Button } from 'react-native';
 
+import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 
 import TextField from '../components/form/TextField';
 import { NavigationData } from '../navigation/AuthNavigator';
 import { signup } from '../redux/auth/actions';
+import Colors from '../theme/Colors';
 
 import { StyledContainer, StyledWideContainer } from './SignupScreen.styled';
 
@@ -35,8 +36,9 @@ const SignupScreen: React.FC<Props> = () => {
         />
         <Button
           title="Sign Up"
+          buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
+          titleStyle={{ color: Colors.gray }}
           onPress={() => {
-            // signup(email, password)
             dispatch(signup(email, password, phone));
           }}
         />

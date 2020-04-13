@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, TouchableWithoutFeedback, View } from 'react-native';
+import { TouchableWithoutFeedback, View } from 'react-native';
 
+import { FontAwesome } from '@expo/vector-icons';
 import { StackNavigationOptions } from '@react-navigation/stack';
+import { Button } from 'react-native-elements';
 
 import { NavigationData } from '../navigation/AuthNavigator';
 import Colors from '../theme/Colors';
@@ -28,20 +30,35 @@ const AuthScreen: React.FC<Props> = ({ navigation }) => {
         <StyledWideContainer>
           <Button
             title="Create an account"
-            color={Colors.gray}
+            buttonStyle={{ backgroundColor: Colors.gray }}
             onPress={() => navigation.navigate('Signup')}
           />
         </StyledWideContainer>
-        <StyledText>OR</StyledText>
+        <View
+          style={{
+            marginVertical: 15,
+            backgroundColor: '#ffffff',
+            height: 1,
+            width: 50,
+          }}
+        />
         <StyledWideContainer>
           <Button
             title="Continue with Facebook"
+            type="outline"
+            buttonStyle={{ borderColor: Colors.silver }}
+            titleStyle={{ color: Colors.silver, marginLeft: 10 }}
+            icon={<FontAwesome name="facebook-f" size={18} color="white" />}
             onPress={() => alert('navigate to fb login')}
           />
         </StyledWideContainer>
         <StyledWideContainer>
           <Button
             title="Continue with Google"
+            type="outline"
+            buttonStyle={{ borderColor: Colors.silver }}
+            titleStyle={{ color: Colors.silver, marginLeft: 10 }}
+            icon={<FontAwesome name="google" size={18} color="white" />}
             onPress={() => alert('navigate to google login')}
           />
         </StyledWideContainer>
