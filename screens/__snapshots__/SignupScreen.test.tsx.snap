@@ -20,9 +20,20 @@ Object {
         secureTextEntry={true}
         value=""
       />
-      <Button
+      <ForwardRef(Themed.Button)
+        buttonStyle={
+          Object {
+            "backgroundColor": "#ffffff",
+            "marginTop": 15,
+          }
+        }
         onPress={[Function]}
         title="Sign Up"
+        titleStyle={
+          Object {
+            "color": "#5E6D8C",
+          }
+        }
       />
     </ForwardRef>
   </ForwardRef>,

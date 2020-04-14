@@ -1,135 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LoginScreen /> matches the snapshot  in LOADING state 1`] = `
+exports[`<LoginScreen /> matches the snapshot 1`] = `
 <Styled(View)>
-  <Styled(Text)
-    success={false}
-    testID="status-message"
-  >
-    State: 
-    ...
-  </Styled(Text)>
   <Styled(View)>
-    <Styled(TextInput)
+    <TextField
       onChangeText={[Function]}
-      placeholder="username"
+      placeholder="E-mail"
       testID="username-input"
       value=""
     />
-  </Styled(View)>
-  <Styled(View)>
-    <Styled(TextInput)
+    <TextField
       onChangeText={[Function]}
-      placeholder="password"
+      placeholder="Password"
       secureTextEntry={true}
       testID="password-input"
       value=""
     />
-  </Styled(View)>
-  <Styled(View)>
-    <Button
-      disabled={false}
+    <ForwardRef(Themed.Button)
+      buttonStyle={
+        Object {
+          "backgroundColor": "#ffffff",
+          "marginTop": 15,
+        }
+      }
       onPress={[Function]}
       testID="login-button"
       title="Login"
-    />
-  </Styled(View)>
-</Styled(View)>
-`;
-
-exports[`<LoginScreen /> matches the snapshot  in SUCCESS state 1`] = `
-<Styled(View)>
-  <Styled(Text)
-    success={true}
-    testID="status-message"
-  >
-    State: 
-    SUCCESS!
-  </Styled(Text)>
-  <Styled(Text)>
-    Username: 
-    some-user
-  </Styled(Text)>
-  <Styled(View)>
-    <Button
-      disabled={false}
-      onPress={[Function]}
-      testID="logout-button"
-      title="Logout"
-    />
-  </Styled(View)>
-</Styled(View)>
-`;
-
-exports[`<LoginScreen /> matches the snapshot  in UNAUTHENTICATED state 1`] = `
-<Styled(View)>
-  <Styled(Text)
-    success={false}
-    testID="status-message"
-  >
-    State: 
-    unauthenticated
-  </Styled(Text)>
-  <Styled(View)>
-    <Styled(TextInput)
-      onChangeText={[Function]}
-      placeholder="username"
-      testID="username-input"
-      value=""
-    />
-  </Styled(View)>
-  <Styled(View)>
-    <Styled(TextInput)
-      onChangeText={[Function]}
-      placeholder="password"
-      secureTextEntry={true}
-      testID="password-input"
-      value=""
-    />
-  </Styled(View)>
-  <Styled(View)>
-    <Button
-      disabled={false}
-      onPress={[Function]}
-      testID="login-button"
-      title="Login"
-    />
-  </Styled(View)>
-</Styled(View)>
-`;
-
-exports[`<LoginScreen /> matches the snapshot in FAILURE state 1`] = `
-<Styled(View)>
-  <Styled(Text)
-    success={false}
-    testID="status-message"
-  >
-    State: 
-    FAILURE!
-  </Styled(Text)>
-  <Styled(View)>
-    <Styled(TextInput)
-      onChangeText={[Function]}
-      placeholder="username"
-      testID="username-input"
-      value=""
-    />
-  </Styled(View)>
-  <Styled(View)>
-    <Styled(TextInput)
-      onChangeText={[Function]}
-      placeholder="password"
-      secureTextEntry={true}
-      testID="password-input"
-      value=""
-    />
-  </Styled(View)>
-  <Styled(View)>
-    <Button
-      disabled={false}
-      onPress={[Function]}
-      testID="login-button"
-      title="Login"
+      titleStyle={
+        Object {
+          "color": "#5E6D8C",
+        }
+      }
     />
   </Styled(View)>
 </Styled(View)>

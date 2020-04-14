@@ -10,25 +10,76 @@ Object {
     </View>
     <ForwardRef>
       <ForwardRef>
-        <Button
-          color="#5E6D8C"
+        <ForwardRef(Themed.Button)
+          buttonStyle={
+            Object {
+              "backgroundColor": "#5E6D8C",
+            }
+          }
           onPress={[Function]}
           title="Create an account"
         />
       </ForwardRef>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#ffffff",
+            "height": 1,
+            "marginVertical": 15,
+            "width": 50,
+          }
+        }
+      />
       <ForwardRef>
-        OR
-      </ForwardRef>
-      <ForwardRef>
-        <Button
+        <ForwardRef(Themed.Button)
+          buttonStyle={
+            Object {
+              "borderColor": "#D5DCF2",
+            }
+          }
+          icon={
+            <Icon
+              allowFontScaling={false}
+              color="white"
+              name="facebook-f"
+              size={18}
+            />
+          }
           onPress={[Function]}
           title="Continue with Facebook"
+          titleStyle={
+            Object {
+              "color": "#D5DCF2",
+              "marginLeft": 10,
+            }
+          }
+          type="outline"
         />
       </ForwardRef>
       <ForwardRef>
-        <Button
+        <ForwardRef(Themed.Button)
+          buttonStyle={
+            Object {
+              "borderColor": "#D5DCF2",
+            }
+          }
+          icon={
+            <Icon
+              allowFontScaling={false}
+              color="white"
+              name="google"
+              size={18}
+            />
+          }
           onPress={[Function]}
           title="Continue with Google"
+          titleStyle={
+            Object {
+              "color": "#D5DCF2",
+              "marginLeft": 10,
+            }
+          }
+          type="outline"
         />
       </ForwardRef>
     </ForwardRef>

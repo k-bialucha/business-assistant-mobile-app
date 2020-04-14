@@ -34,42 +34,12 @@ describe('<LoginScreen />', () => {
     jest.resetAllMocks();
   });
 
-  it('matches the snapshot  in UNAUTHENTICATED state', () => {
+  it('matches the snapshot', () => {
     (useSelector as jest.Mock).mockReturnValueOnce(null);
     (useSelector as jest.Mock).mockReturnValueOnce(null);
     (useSelector as jest.Mock).mockReturnValueOnce(
       LoginRequestStatus.UNAUTHENTICATED
     );
-
-    const tree = shallow(<LoginScreen {...fakeProps} />);
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('matches the snapshot  in LOADING state', () => {
-    (useSelector as jest.Mock).mockReturnValueOnce(null);
-    (useSelector as jest.Mock).mockReturnValueOnce('some-user');
-    (useSelector as jest.Mock).mockReturnValueOnce(LoginRequestStatus.LOADING);
-
-    const tree = shallow(<LoginScreen {...fakeProps} />);
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('matches the snapshot  in SUCCESS state', () => {
-    (useSelector as jest.Mock).mockReturnValueOnce('some-token');
-    (useSelector as jest.Mock).mockReturnValueOnce('some-user');
-    (useSelector as jest.Mock).mockReturnValueOnce(LoginRequestStatus.SUCCESS);
-
-    const tree = shallow(<LoginScreen {...fakeProps} />);
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('matches the snapshot in FAILURE state', () => {
-    (useSelector as jest.Mock).mockReturnValueOnce(null);
-    (useSelector as jest.Mock).mockReturnValueOnce('some-user');
-    (useSelector as jest.Mock).mockReturnValueOnce(LoginRequestStatus.FAILURE);
 
     const tree = shallow(<LoginScreen {...fakeProps} />);
 
