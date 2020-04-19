@@ -11,5 +11,8 @@ npm-debug.*
 web-build/
 web-report/
 
+# env file
+.env
+
 # macOS
 .DS_Store

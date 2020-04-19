@@ -6,6 +6,7 @@ import { fireEvent } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 
 import { NavigationData } from '../navigation/AuthNavigator';
+import { loginUser } from '../utils/apiCalls/authorization';
 import renderWithRedux from '../utils/testing/renderWithRedux';
 
 import LoginScreen from './LoginScreen';
@@ -18,6 +19,7 @@ const fakeProps: Props = {
   navigation: {},
 };
 
+jest.mock('../utils/apiCalls/authorization');
 jest.mock('redux-saga/effects', () => {
   const actualModule = jest.requireActual('redux-saga/effects');
 
@@ -29,34 +31,33 @@ jest.mock('redux-saga/effects', () => {
   };
 });
 
+const someApiResponse = { idToken: 'highly-secure-token', localId: '999abcd' };
+
 describe('<LoginScreen />', () => {
-  // (loginUser as jest.Mock).mockResolvedValue({
-  //   idToken: 'token-123',
-  //   localId: '12345',
-  // });
+  beforeEach(() => {
+    (loginUser as jest.Mock).mockResolvedValue(someApiResponse);
+  });
+
   const { queryByTestId, store } = renderWithRedux(
     <LoginScreen {...fakeProps} />
   );
 
-  let usernameInput: ReactTestInstance;
-  let passwordInput: ReactTestInstance;
-  let loginButton: ReactTestInstance;
-  // let logoutButton: ReactTestInstance;
+  const usernameInput: ReactTestInstance = queryByTestId('username-input');
+  const passwordInput: ReactTestInstance = queryByTestId('password-input');
+  const loginButton: ReactTestInstance = queryByTestId('login-button');
 
   it('allows to login', async () => {
-    usernameInput = queryByTestId('username-input');
-    passwordInput = queryByTestId('password-input');
-    loginButton = queryByTestId('login-button');
+    const someUsername = 'kamil.bialucha@gmail.com';
 
-    fireEvent.changeText(usernameInput, 'kamil.bialucha@gmail.com');
+    fireEvent.changeText(usernameInput, someUsername);
     fireEvent.changeText(passwordInput, 'mypass123');
 
     fireEvent.press(loginButton);
 
-    // logoutButton = queryByTestId('logout-button');
-
-    // expect(logoutButton).not.toBeNull();
-    expect(store.getState().auth.token).toBeDefined();
-    expect(store.getState().auth.username).toBe('admin');
+    process.nextTick(() => {
+      expect(store.getState().auth.username).toBe(someUsername);
+      expect(store.getState().auth.token).toEqual(someApiResponse.idToken);
+      expect(store.getState().auth.userId).toBe(someApiResponse.localId);
+    });
   });
 });

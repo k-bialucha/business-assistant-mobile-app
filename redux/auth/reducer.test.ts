@@ -26,6 +26,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
 
     const expectedState: AuthState = {
       ...initialState,
+      username: someUsername,
       requestStatus: RequestStatus.LOADING,
     };
 
