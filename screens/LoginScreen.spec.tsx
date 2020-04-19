@@ -2,11 +2,11 @@ import '@testing-library/jest-native/extend-expect';
 
 import React from 'react';
 
-import fetchMock from 'jest-fetch-mock';
 import { fireEvent } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 
 import { NavigationData } from '../navigation/AuthNavigator';
+import { loginUser } from '../utils/apiCalls/authorization';
 import renderWithRedux from '../utils/testing/renderWithRedux';
 
 import LoginScreen from './LoginScreen';
@@ -19,6 +19,7 @@ const fakeProps: Props = {
   navigation: {},
 };
 
+jest.mock('../utils/apiCalls/authorization');
 jest.mock('redux-saga/effects', () => {
   const actualModule = jest.requireActual('redux-saga/effects');
 
@@ -34,11 +35,7 @@ const someApiResponse = { idToken: 'highly-secure-token', localId: '999abcd' };
 
 describe('<LoginScreen />', () => {
   beforeEach(() => {
-    fetchMock.mockResponse(JSON.stringify(someApiResponse));
-  });
-
-  afterAll(() => {
-    fetchMock.resetMocks();
+    (loginUser as jest.Mock).mockResolvedValue(someApiResponse);
   });
 
   const { queryByTestId, store } = renderWithRedux(
@@ -58,9 +55,9 @@ describe('<LoginScreen />', () => {
     fireEvent.press(loginButton);
 
     process.nextTick(() => {
+      expect(store.getState().auth.username).toBe(someUsername);
       expect(store.getState().auth.token).toEqual(someApiResponse.idToken);
       expect(store.getState().auth.userId).toBe(someApiResponse.localId);
-      expect(store.getState().auth.username).toBe(someUsername);
     });
   });
 });
