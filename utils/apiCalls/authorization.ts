@@ -1,49 +1,48 @@
+import axios, { AxiosRequestConfig } from 'axios';
+
 const firebaseApiKey = 'AIzaSyC-9qBqevcFydL7LJExJooU3EcTqnABx1w';
 
+const firebaseAuth = axios.create({
+  baseURL: 'https://identitytoolkit.googleapis.com/v1/',
+  headers: { 'Content-Type': 'application/json' },
+});
+
 export const loginUser = (email, password) => {
-  return fetch(
-    `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseApiKey}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-        returnSecureToken: true,
-      }),
-    }
-  )
-    .then(data => data.json())
+  const data = {
+    email,
+    password,
+    returnSecureToken: true,
+  };
+  const config: AxiosRequestConfig = {
+    params: {
+      key: firebaseApiKey,
+    },
+  };
+
+  return firebaseAuth
+    .post(`/accounts:signInWithPassword`, data, config)
+    .then(response => response.data)
     .catch(error => {
-      // TODO: method which throw different error based on request status
       throw new Error(error);
     });
 };
 
 export const signupUser = (email: string, password: string, phone?: string) => {
-  return fetch(
-    `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${firebaseApiKey}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-        returnSecureToken: true,
-      }),
-    }
-  )
-    .then(data => {
-      console.log(`Save additional user data like phone ${phone} in db`);
+  const data = {
+    email,
+    password,
+    returnSecureToken: true,
+  };
+  const config: AxiosRequestConfig = {
+    params: {
+      key: firebaseApiKey,
+    },
+  };
 
-      return data.json();
-    })
+  return firebaseAuth
+    .post(`/accounts:signUp`, data, config)
+    .then(response => response.data)
     .catch(error => {
-      // TODO: method which throw different error based on request status
       throw new Error(error);
     });
 };
