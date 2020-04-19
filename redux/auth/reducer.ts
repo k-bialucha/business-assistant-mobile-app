@@ -6,8 +6,8 @@ import {
   LOGOUT,
   RequestStatus,
   SIGNUP,
-  SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
+  SIGNUP_SUCCESS,
 } from './types';
 
 export interface AuthState {
@@ -32,6 +32,7 @@ function reducer(
     case LOGIN:
       return {
         ...state,
+        username: action.payload.username,
         requestStatus: RequestStatus.LOADING,
       };
 
