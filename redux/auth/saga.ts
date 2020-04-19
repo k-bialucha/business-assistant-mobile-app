@@ -1,4 +1,4 @@
-import { delay, put, takeLatest } from 'redux-saga/effects';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
 import { loginUser, signupUser } from '../../utils/apiCalls/authorization';
 
@@ -14,13 +14,17 @@ export function* loginSaga({ payload: { username, password } }: LoginAction) {
   try {
     yield delay(1000);
 
-    const response = yield loginUser(username, password);
+    const response = yield call(loginUser, username, password);
 
     const { idToken: token, localId: userId } = response;
 
     yield put(loginSuccess(token, userId));
   } catch (error) {
-    yield put(loginFailure(error));
+    if (error instanceof Error) {
+      yield put(loginFailure(error.message));
+    } else {
+      yield put(loginFailure('Login Error'));
+    }
   }
 }
 
@@ -31,8 +35,6 @@ export function* signupSaga({
     yield delay(1000);
 
     const response = yield signupUser(email, password, phone);
-
-    console.log('response: ', response);
 
     const { idToken: token, localId: userId } = response;
 
