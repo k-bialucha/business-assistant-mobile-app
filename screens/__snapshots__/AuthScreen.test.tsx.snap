@@ -1,101 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AuthScreen /> matches the snaphot 1`] = `
-Object {
-  "output": <ForwardRef>
-    <View>
-      <ForwardRef>
-        Make your business easier.
-      </ForwardRef>
-    </View>
-    <ForwardRef>
-      <ForwardRef>
-        <ForwardRef(Themed.Button)
-          buttonStyle={
-            Object {
-              "backgroundColor": "#5E6D8C",
-            }
-          }
-          onPress={[Function]}
-          title="Create an account"
-        />
-      </ForwardRef>
-      <View
-        style={
+<Styled(View)>
+  <View>
+    <Styled(Text)>
+      Make your business easier.
+    </Styled(Text)>
+  </View>
+  <Styled(View)>
+    <Styled(View)>
+      <ForwardRef(Themed.Button)
+        buttonStyle={
           Object {
-            "backgroundColor": "#ffffff",
-            "height": 1,
-            "marginVertical": 15,
-            "width": 50,
+            "backgroundColor": "#5E6D8C",
           }
         }
+        onPress={[Function]}
+        title="Create an account"
       />
-      <ForwardRef>
-        <ForwardRef(Themed.Button)
-          buttonStyle={
-            Object {
-              "borderColor": "#D5DCF2",
-            }
+    </Styled(View)>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffff",
+          "height": 1,
+          "marginVertical": 15,
+          "width": 50,
+        }
+      }
+    />
+    <Styled(View)>
+      <ForwardRef(Themed.Button)
+        buttonStyle={
+          Object {
+            "borderColor": "#D5DCF2",
           }
-          icon={
-            <Icon
-              allowFontScaling={false}
-              color="white"
-              name="facebook-f"
-              size={18}
-            />
+        }
+        icon={
+          <Icon
+            allowFontScaling={false}
+            color="white"
+            name="facebook-f"
+            size={18}
+          />
+        }
+        onPress={[Function]}
+        title="Continue with Facebook"
+        titleStyle={
+          Object {
+            "color": "#D5DCF2",
+            "marginLeft": 10,
           }
-          onPress={[Function]}
-          title="Continue with Facebook"
-          titleStyle={
-            Object {
-              "color": "#D5DCF2",
-              "marginLeft": 10,
-            }
+        }
+        type="outline"
+      />
+    </Styled(View)>
+    <Styled(View)>
+      <ForwardRef(Themed.Button)
+        buttonStyle={
+          Object {
+            "borderColor": "#D5DCF2",
           }
-          type="outline"
-        />
-      </ForwardRef>
-      <ForwardRef>
-        <ForwardRef(Themed.Button)
-          buttonStyle={
-            Object {
-              "borderColor": "#D5DCF2",
-            }
+        }
+        icon={
+          <Icon
+            allowFontScaling={false}
+            color="white"
+            name="google"
+            size={18}
+          />
+        }
+        onPress={[Function]}
+        title="Continue with Google"
+        titleStyle={
+          Object {
+            "color": "#D5DCF2",
+            "marginLeft": 10,
           }
-          icon={
-            <Icon
-              allowFontScaling={false}
-              color="white"
-              name="google"
-              size={18}
-            />
-          }
-          onPress={[Function]}
-          title="Continue with Google"
-          titleStyle={
-            Object {
-              "color": "#D5DCF2",
-              "marginLeft": 10,
-            }
-          }
-          type="outline"
-        />
-      </ForwardRef>
-    </ForwardRef>
-    <ForwardRef>
-      <ForwardRef>
-        Already have an account?
-         
-        <TouchableWithoutFeedback
-          onPress={[Function]}
-        >
-          <ForwardRef>
-            Log in
-          </ForwardRef>
-        </TouchableWithoutFeedback>
-      </ForwardRef>
-    </ForwardRef>
-  </ForwardRef>,
-}
+        }
+        type="outline"
+      />
+    </Styled(View)>
+  </Styled(View)>
+  <Styled(View)>
+    <Styled(Text)>
+      Already have an account?
+       
+      <TouchableWithoutFeedback
+        onPress={[Function]}
+      >
+        <Styled(Text)>
+          Log in
+        </Styled(Text)>
+      </TouchableWithoutFeedback>
+    </Styled(Text)>
+  </Styled(View)>
+</Styled(View)>
 `;
