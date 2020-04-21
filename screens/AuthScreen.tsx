@@ -4,8 +4,10 @@ import { TouchableWithoutFeedback, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { Button } from 'react-native-elements';
+import { useDispatch } from 'react-redux';
 
 import { NavigationData } from '../navigation/AuthNavigator';
+import { loginWithFacebook } from '../redux/auth/actions';
 import Colors from '../theme/Colors';
 
 import {
@@ -21,6 +23,8 @@ import {
 type Props = NavigationData<'Authorization'>;
 
 const AuthScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   return (
     <StyledContainer>
       <View>
@@ -49,7 +53,9 @@ const AuthScreen: React.FC<Props> = ({ navigation }) => {
             buttonStyle={{ borderColor: Colors.silver }}
             titleStyle={{ color: Colors.silver, marginLeft: 10 }}
             icon={<FontAwesome name="facebook-f" size={18} color="white" />}
-            onPress={() => alert('navigate to fb login')}
+            onPress={() => {
+              dispatch(loginWithFacebook());
+            }}
           />
         </StyledWideContainer>
         <StyledWideContainer>
