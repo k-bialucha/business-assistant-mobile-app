@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { shallow } from 'react-native-testing-library';
+import { shallow } from 'enzyme';
 
 import { NavigationData } from '../navigation/AuthNavigator';
 

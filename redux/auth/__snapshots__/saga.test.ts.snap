@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`auth/saga handles successful login 1`] = `
+exports[`auth/saga loginSaga handles successful login 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
@@ -15,7 +15,7 @@ Object {
 }
 `;
 
-exports[`auth/saga handles successful login 2`] = `
+exports[`auth/saga loginSaga handles successful login 2`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
@@ -31,7 +31,7 @@ Object {
 }
 `;
 
-exports[`auth/saga handles unsuccessful login 1`] = `
+exports[`auth/saga loginSaga handles unsuccessful login 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
@@ -46,14 +46,78 @@ Object {
 }
 `;
 
-exports[`auth/saga handles unsuccessful login 2`] = `
+exports[`auth/saga loginSaga handles unsuccessful login 2`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
   "payload": Object {
     "args": Array [
       "some-username",
-      "pass",
+      "badpass",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga signupSaga handles successful signup 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      1000,
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga signupSaga handles successful signup 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "some-email@example.com",
+      "strong-password",
+      undefined,
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga signupSaga handles unsuccessful signup 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      1000,
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga signupSaga handles unsuccessful signup 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "some-email@example.com",
+      "badpass",
+      undefined,
     ],
     "context": null,
     "fn": [Function],

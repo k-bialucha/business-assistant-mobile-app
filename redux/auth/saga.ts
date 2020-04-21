@@ -34,13 +34,17 @@ export function* signupSaga({
   try {
     yield delay(1000);
 
-    const response = yield signupUser(email, password, phone);
+    const response = yield call(signupUser, email, password, phone);
 
     const { idToken: token, localId: userId } = response;
 
     yield put(signupSuccess(token, userId));
   } catch (error) {
-    yield put(signupFailure(error));
+    if (error instanceof Error) {
+      yield put(signupFailure(error.message));
+    } else {
+      yield put(signupFailure('Signup Error'));
+    }
   }
 }
 

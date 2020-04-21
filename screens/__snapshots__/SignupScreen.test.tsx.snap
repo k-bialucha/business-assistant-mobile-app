@@ -1,41 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SignupScreen /> matches the snapshot 1`] = `
-Object {
-  "output": <ForwardRef>
-    <ForwardRef>
-      <TextField
-        onChangeText={[Function]}
-        placeholder="E-mail"
-        value=""
-      />
-      <TextField
-        onChangeText={[Function]}
-        placeholder="Phone (Optional)"
-        value=""
-      />
-      <TextField
-        onChangeText={[Function]}
-        placeholder="Password"
-        secureTextEntry={true}
-        value=""
-      />
-      <ForwardRef(Themed.Button)
-        buttonStyle={
-          Object {
-            "backgroundColor": "#ffffff",
-            "marginTop": 15,
-          }
+<Styled(View)>
+  <Styled(View)>
+    <TextField
+      onChangeText={[Function]}
+      placeholder="E-mail"
+      value=""
+    />
+    <TextField
+      onChangeText={[Function]}
+      placeholder="Phone (Optional)"
+      value=""
+    />
+    <TextField
+      onChangeText={[Function]}
+      placeholder="Password"
+      secureTextEntry={true}
+      value=""
+    />
+    <ForwardRef(Themed.Button)
+      buttonStyle={
+        Object {
+          "backgroundColor": "#ffffff",
+          "marginTop": 15,
         }
-        onPress={[Function]}
-        title="Sign Up"
-        titleStyle={
-          Object {
-            "color": "#5E6D8C",
-          }
+      }
+      onPress={[Function]}
+      title="Sign Up"
+      titleStyle={
+        Object {
+          "color": "#5E6D8C",
         }
-      />
-    </ForwardRef>
-  </ForwardRef>,
-}
+      }
+    />
+  </Styled(View)>
+</Styled(View)>
 `;
