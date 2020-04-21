@@ -2,11 +2,15 @@ import {
   LOGIN,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
+  LOGIN_WITH_FACEBOOK,
   LoginAction,
   LoginFailureAction,
   LoginSuccessAction,
+  LoginWithFacebookAction,
   LOGOUT,
   LogoutAction,
+  SET_USER_DATA,
+  SetUserDataAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -70,5 +74,21 @@ export function signupFailure(message: string): SignupFailureAction {
   return {
     type: SIGNUP_FAILURE,
     payload: message,
+  };
+}
+
+export function loginWithFacebook(): LoginWithFacebookAction {
+  return {
+    type: LOGIN_WITH_FACEBOOK,
+  };
+}
+
+export function setUserData({ name, image }): SetUserDataAction {
+  return {
+    type: SET_USER_DATA,
+    payload: {
+      name,
+      image,
+    },
   };
 }

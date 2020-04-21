@@ -5,6 +5,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   RequestStatus,
+  SET_USER_DATA,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -14,6 +15,7 @@ export interface AuthState {
   token: string;
   username: string;
   userId: string;
+  userData: object;
   requestStatus: RequestStatus;
 }
 
@@ -21,6 +23,7 @@ export const initialState: AuthState = {
   token: null,
   username: null,
   userId: null,
+  userData: null,
   requestStatus: RequestStatus.UNAUTHENTICATED,
 };
 
@@ -79,6 +82,15 @@ function reducer(
         token: null,
         requestStatus: RequestStatus.FAILURE,
       };
+
+    case SET_USER_DATA: {
+      const { name, image } = action.payload;
+
+      return {
+        ...state,
+        userData: { name, image },
+      };
+    }
 
     default:
       return state;
