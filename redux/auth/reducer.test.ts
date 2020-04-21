@@ -10,6 +10,8 @@ import {
   LOGOUT,
   LogoutAction,
   RequestStatus,
+  SET_USER_DATA,
+  SetUserDataAction,
 } from './types';
 
 describe(`${DOMAIN_NAME}/reducer`, () => {
@@ -40,8 +42,8 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
 
     const previousState = {
       token: null,
-      userId: someUserId,
       username: someUsername,
+      userId: someUserId,
       requestStatus: RequestStatus.LOADING,
     };
 
@@ -109,6 +111,27 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userId: null,
       username: null,
       requestStatus: RequestStatus.UNAUTHENTICATED,
+    };
+
+    expect(nextState).toEqual(expectedState);
+  });
+
+  it('handles setUserData action', () => {
+    const previousState = {
+      ...initialState,
+      userData: null,
+    };
+
+    const action: SetUserDataAction = {
+      type: SET_USER_DATA,
+      payload: { name: 'mocked-name', image: 'url' },
+    };
+
+    const nextState: AuthState = reducer(previousState, action);
+
+    const expectedState: AuthState = {
+      ...initialState,
+      userData: { name: 'mocked-name', image: 'url' },
     };
 
     expect(nextState).toEqual(expectedState);

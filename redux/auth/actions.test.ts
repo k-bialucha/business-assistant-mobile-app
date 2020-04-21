@@ -2,7 +2,9 @@ import {
   login,
   loginFailure,
   loginSuccess,
+  loginWithFacebook,
   logout,
+  setUserData,
   signup,
   signupFailure,
   signupSuccess,
@@ -12,7 +14,11 @@ import {
   LOGIN,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
+  LOGIN_WITH_FACEBOOK,
+  LoginWithFacebookAction,
   LOGOUT,
+  SET_USER_DATA,
+  SetUserDataAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -112,6 +118,32 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     const extected: SignupFailureAction = {
       type: SIGNUP_FAILURE,
       payload: mockedMessage,
+    };
+
+    expect(result).toEqual(extected);
+  });
+
+  test('loginWithFacebook action returns correct object', () => {
+    const result = loginWithFacebook();
+
+    const expected: LoginWithFacebookAction = {
+      type: LOGIN_WITH_FACEBOOK,
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('setUserData action creator returns corrent object', () => {
+    const mockedData = {
+      name: 'name',
+      image: 'url',
+    };
+
+    const result = setUserData(mockedData);
+
+    const extected: SetUserDataAction = {
+      type: SET_USER_DATA,
+      payload: mockedData,
     };
 
     expect(result).toEqual(extected);
