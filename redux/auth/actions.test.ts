@@ -77,7 +77,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(expected);
   });
 
-  test('signup action creator returns corrent object', () => {
+  test('signup action creator returns correct object', () => {
     const mockedEmail: string = 'mocked-email@email.com';
     const mockedPassword: string = 'mocked-password';
 
@@ -91,7 +91,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(expected);
   });
 
-  test('signupSuccess action creator returns corrent object', () => {
+  test('signupSuccess action creator returns correct object', () => {
     const mockedToken: string = 'mocked-secure-token';
 
     const result = signupSuccess(mockedToken);
@@ -104,7 +104,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(expected);
   });
 
-  test('signupFailure action creator returns corrent object', () => {
+  test('signupFailure action creator returns correct object', () => {
     const mockedMessage = 'mocked-message';
 
     const result = signupFailure(mockedMessage);
@@ -117,7 +117,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(extected);
   });
 
-  test('setUserData action creator returns corrent object', () => {
+  test('setUserData action creator returns correct object', () => {
     const mockedData = {
       name: 'user-name',
       id: 'user-id',
