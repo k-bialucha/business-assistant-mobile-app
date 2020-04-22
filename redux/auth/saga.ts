@@ -5,20 +5,22 @@ import { loginUser, signupUser } from '../../utils/apiCalls/authorization';
 import {
   loginFailure,
   loginSuccess,
+  setUserData,
   signupFailure,
   signupSuccess,
 } from './actions';
 import { LOGIN, LoginAction, SIGNUP, SignupAction } from './types';
 
-export function* loginSaga({ payload: { username, password } }: LoginAction) {
+export function* loginSaga({ payload: { email, password } }: LoginAction) {
   try {
     yield delay(1000);
 
-    const response = yield call(loginUser, username, password);
+    const response = yield call(loginUser, email, password);
 
     const { idToken: token, localId: userId } = response;
 
-    yield put(loginSuccess(token, userId));
+    yield put(loginSuccess(token));
+    yield put(setUserData({ name: email, id: userId }));
   } catch (error) {
     if (error instanceof Error) {
       yield put(loginFailure(error.message));
@@ -38,7 +40,8 @@ export function* signupSaga({
 
     const { idToken: token, localId: userId } = response;
 
-    yield put(signupSuccess(token, userId));
+    yield put(signupSuccess(token));
+    yield put(setUserData({ name: email, id: userId }));
   } catch (error) {
     if (error instanceof Error) {
       yield put(signupFailure(error.message));

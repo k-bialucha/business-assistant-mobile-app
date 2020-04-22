@@ -7,6 +7,8 @@ import {
   LoginSuccessAction,
   LOGOUT,
   LogoutAction,
+  SET_USER_DATA,
+  SetUserDataAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -15,20 +17,17 @@ import {
   SignupSuccessAction,
 } from './types';
 
-export function login(username: string, password: string): LoginAction {
+export function login(email: string, password: string): LoginAction {
   return {
     type: LOGIN,
-    payload: { username, password },
+    payload: { email, password },
   };
 }
 
-export function loginSuccess(
-  token: string,
-  userId: string
-): LoginSuccessAction {
+export function loginSuccess(token: string): LoginSuccessAction {
   return {
     type: LOGIN_SUCCESS,
-    payload: { token, userId },
+    payload: { token },
   };
 }
 
@@ -56,13 +55,10 @@ export function signup(
   };
 }
 
-export function signupSuccess(
-  token: string,
-  userId: string
-): SignupSuccessAction {
+export function signupSuccess(token: string): SignupSuccessAction {
   return {
     type: SIGNUP_SUCCESS,
-    payload: { token, userId },
+    payload: { token },
   };
 }
 
@@ -70,5 +66,16 @@ export function signupFailure(message: string): SignupFailureAction {
   return {
     type: SIGNUP_FAILURE,
     payload: message,
+  };
+}
+
+export function setUserData(data): SetUserDataAction {
+  return {
+    type: SET_USER_DATA,
+    payload: {
+      name: data.name,
+      id: data.id,
+      image: data.image,
+    },
   };
 }
