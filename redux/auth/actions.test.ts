@@ -29,14 +29,14 @@ import {
 
 describe(`${DOMAIN_NAME}/actions`, () => {
   test('login action returns correct object', () => {
-    const someUsername: string = 'some-username';
+    const someEmail: string = 'some-email';
     const somePassword: string = 'some-password';
 
-    const result = login(someUsername, somePassword);
+    const result = login(someEmail, somePassword);
 
     const expected = {
       type: LOGIN,
-      payload: { username: someUsername, password: somePassword },
+      payload: { email: someEmail, password: somePassword },
     };
 
     expect(result).toEqual(expected);
@@ -44,15 +44,13 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
   test('loginSuccess action returns correct object', () => {
     const someToken: string = 'some-secure-token';
-    const someUserId: string = 'some-user-id';
 
-    const result = loginSuccess(someToken, someUserId);
+    const result = loginSuccess(someToken);
 
     const expected = {
       type: LOGIN_SUCCESS,
       payload: {
         token: someToken,
-        userId: someUserId,
       },
     };
 
@@ -82,7 +80,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(expected);
   });
 
-  test('signup action creator returns corrent object', () => {
+  test('signup action creator returns correct object', () => {
     const mockedEmail: string = 'mocked-email@email.com';
     const mockedPassword: string = 'mocked-password';
 
@@ -96,21 +94,20 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(expected);
   });
 
-  test('signupSuccess action creator returns corrent object', () => {
+  test('signupSuccess action creator returns correct object', () => {
     const mockedToken: string = 'mocked-secure-token';
-    const mockedUserId: string = 'mocked-user-id';
 
-    const result = signupSuccess(mockedToken, mockedUserId);
+    const result = signupSuccess(mockedToken);
 
     const expected: SignupSuccessAction = {
       type: SIGNUP_SUCCESS,
-      payload: { token: mockedToken, userId: mockedUserId },
+      payload: { token: mockedToken },
     };
 
     expect(result).toEqual(expected);
   });
 
-  test('signupFailure action creator returns corrent object', () => {
+  test('signupFailure action creator returns correct object', () => {
     const mockedMessage = 'mocked-message';
 
     const result = signupFailure(mockedMessage);
@@ -135,8 +132,9 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
   test('setUserData action creator returns corrent object', () => {
     const mockedData = {
-      name: 'name',
-      image: 'url',
+      name: 'user-name',
+      id: 'user-id',
+      image: 'user-image-url',
     };
 
     const result = setUserData(mockedData);

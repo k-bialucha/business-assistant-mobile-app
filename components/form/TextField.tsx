@@ -3,7 +3,7 @@ import { TextInputProps } from 'react-native';
 
 import { StyledContainer, StyledTextField } from './TextField.styled';
 
-const TextField: React.SFC<TextInputProps> = props => {
+const TextField: React.FC<TextInputProps> = props => {
   return (
     <StyledContainer>
       <StyledTextField

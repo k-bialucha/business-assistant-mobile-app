@@ -14,7 +14,7 @@ import { StyledView, StyledWideContainer } from './LoginScreen.styled';
 type Props = NavigationData<'Login'>;
 
 const LoginScreen: React.FC<Props> = () => {
-  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const dispatch = useDispatch();
@@ -23,10 +23,10 @@ const LoginScreen: React.FC<Props> = () => {
     <StyledView>
       <StyledWideContainer>
         <TextField
-          testID="username-input"
-          value={username}
+          testID="email-input"
+          value={email}
           placeholder="E-mail"
-          onChangeText={setUsername}
+          onChangeText={setEmail}
         />
         <TextField
           testID="password-input"
@@ -41,7 +41,7 @@ const LoginScreen: React.FC<Props> = () => {
           buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
           titleStyle={{ color: Colors.gray }}
           onPress={() => {
-            dispatch(login(username, password));
+            dispatch(login(email, password));
           }}
         />
       </StyledWideContainer>

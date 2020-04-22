@@ -16,19 +16,18 @@ import {
 
 describe(`${DOMAIN_NAME}/reducer`, () => {
   it('handles login action', () => {
-    const someUsername: string = 'some-username';
+    const someEmail: string = 'some-email';
     const somePassword: string = 'hard-pass';
 
     const action: LoginAction = {
       type: LOGIN,
-      payload: { username: someUsername, password: somePassword },
+      payload: { email: someEmail, password: somePassword },
     };
 
     const nextState: AuthState = reducer(initialState, action);
 
     const expectedState: AuthState = {
       ...initialState,
-      username: someUsername,
       requestStatus: RequestStatus.LOADING,
     };
 
@@ -36,28 +35,24 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
   });
 
   it('handles loginSuccess action', () => {
-    const someUsername: string = 'some-username';
     const someToken: string = 'some-token';
-    const someUserId: string = 'some-user-id';
 
     const previousState = {
+      ...initialState,
       token: null,
-      username: someUsername,
-      userId: someUserId,
       requestStatus: RequestStatus.LOADING,
     };
 
     const action: LoginSuccessAction = {
       type: LOGIN_SUCCESS,
-      payload: { token: someToken, userId: someUserId },
+      payload: { token: someToken },
     };
 
     const nextState: AuthState = reducer(previousState, action);
 
     const expectedState: AuthState = {
+      ...initialState,
       token: someToken,
-      userId: someUserId,
-      username: someUsername,
       requestStatus: RequestStatus.SUCCESS,
     };
 
@@ -65,13 +60,15 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
   });
 
   it('handles loginFailure action', () => {
-    const someUsername: string = 'some-username';
+    const someEmail: string = 'some-email';
     const someUserId: string = 'some-user-id';
+    const someUserImage: string = 'some-user-image-url';
 
     const previousState = {
       token: null,
+      username: someEmail,
       userId: someUserId,
-      username: someUsername,
+      userImage: someUserImage,
       requestStatus: RequestStatus.LOADING,
     };
 
@@ -84,8 +81,9 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
 
     const expectedState: AuthState = {
       token: null,
+      username: someEmail,
       userId: someUserId,
-      username: someUsername,
+      userImage: someUserImage,
       requestStatus: RequestStatus.FAILURE,
     };
 
@@ -95,8 +93,9 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
   it('handles logout action', () => {
     const previousState = {
       token: 'some-token',
+      username: 'some-email',
       userId: 'some-user-id',
-      username: 'some-username',
+      userImage: 'url',
       requestStatus: RequestStatus.SUCCESS,
     };
 
@@ -108,8 +107,9 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
 
     const expectedState: AuthState = {
       token: null,
-      userId: null,
       username: null,
+      userId: null,
+      userImage: null,
       requestStatus: RequestStatus.UNAUTHENTICATED,
     };
 
@@ -119,19 +119,27 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
   it('handles setUserData action', () => {
     const previousState = {
       ...initialState,
-      userData: null,
+      username: null,
+      userId: null,
+      userImage: null,
     };
 
     const action: SetUserDataAction = {
       type: SET_USER_DATA,
-      payload: { name: 'mocked-name', image: 'url' },
+      payload: {
+        name: 'mocked-name',
+        id: 'user-id',
+        image: 'url',
+      },
     };
 
     const nextState: AuthState = reducer(previousState, action);
 
     const expectedState: AuthState = {
       ...initialState,
-      userData: { name: 'mocked-name', image: 'url' },
+      username: 'mocked-name',
+      userId: 'user-id',
+      userImage: 'url',
     };
 
     expect(nextState).toEqual(expectedState);

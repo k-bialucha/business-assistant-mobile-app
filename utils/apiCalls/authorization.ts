@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-
-const firebaseApiKey = 'AIzaSyC-9qBqevcFydL7LJExJooU3EcTqnABx1w';
+import { FIREBASE_API_KEY } from 'react-native-dotenv';
 
 const firebaseAuth = axios.create({
   baseURL: 'https://identitytoolkit.googleapis.com/v1/',
@@ -15,16 +14,13 @@ export const loginUser = (email, password) => {
   };
   const config: AxiosRequestConfig = {
     params: {
-      key: firebaseApiKey,
+      key: FIREBASE_API_KEY,
     },
   };
 
   return firebaseAuth
     .post(`/accounts:signInWithPassword`, data, config)
-    .then(response => response.data)
-    .catch(error => {
-      throw new Error(error);
-    });
+    .then(response => response.data);
 };
 
 export const signupUser = (email: string, password: string, phone?: string) => {
@@ -35,14 +31,11 @@ export const signupUser = (email: string, password: string, phone?: string) => {
   };
   const config: AxiosRequestConfig = {
     params: {
-      key: firebaseApiKey,
+      key: FIREBASE_API_KEY,
     },
   };
 
   return firebaseAuth
     .post(`/accounts:signUp`, data, config)
-    .then(response => response.data)
-    .catch(error => {
-      throw new Error(error);
-    });
+    .then(response => response.data);
 };

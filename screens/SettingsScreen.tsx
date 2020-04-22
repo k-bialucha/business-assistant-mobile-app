@@ -15,6 +15,7 @@ const SettingsScreen: React.FC<Props> = () => {
 
   return (
     <StyledView>
+      {/* TODO: show user name/email and picture if existing */}
       <Button
         title="Log out"
         onPress={() => {

@@ -15,7 +15,7 @@ export interface AuthState {
   token: string;
   username: string;
   userId: string;
-  userData: object;
+  userImage: string;
   requestStatus: RequestStatus;
 }
 
@@ -23,7 +23,7 @@ export const initialState: AuthState = {
   token: null,
   username: null,
   userId: null,
-  userData: null,
+  userImage: null,
   requestStatus: RequestStatus.UNAUTHENTICATED,
 };
 
@@ -35,20 +35,15 @@ function reducer(
     case LOGIN:
       return {
         ...state,
-        username: action.payload.username,
         requestStatus: RequestStatus.LOADING,
       };
 
-    case LOGIN_SUCCESS: {
-      const { token, userId } = action.payload;
-
+    case LOGIN_SUCCESS:
       return {
         ...state,
-        token,
-        userId,
+        token: action.payload.token,
         requestStatus: RequestStatus.SUCCESS,
       };
-    }
 
     case LOGIN_FAILURE:
       return {
@@ -65,16 +60,12 @@ function reducer(
         requestStatus: RequestStatus.LOADING,
       };
 
-    case SIGNUP_SUCCESS: {
-      const { token, userId } = action.payload;
-
+    case SIGNUP_SUCCESS:
       return {
         ...state,
-        token,
-        userId,
+        token: action.payload.token,
         requestStatus: RequestStatus.SUCCESS,
       };
-    }
 
     case SIGNUP_FAILURE:
       return {
@@ -84,11 +75,13 @@ function reducer(
       };
 
     case SET_USER_DATA: {
-      const { name, image } = action.payload;
+      const { name, id, image } = action.payload;
 
       return {
         ...state,
-        userData: { name, image },
+        username: name,
+        userId: id,
+        userImage: image,
       };
     }
 
