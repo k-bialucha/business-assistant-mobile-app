@@ -130,7 +130,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(expected);
   });
 
-  test('setUserData action creator returns corrent object', () => {
+  test('setUserData action creator returns correct object', () => {
     const mockedData = {
       name: 'user-name',
       id: 'user-id',
