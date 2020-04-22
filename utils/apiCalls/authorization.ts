@@ -21,10 +21,7 @@ export const loginUser = (email, password) => {
 
   return firebaseAuth
     .post(`/accounts:signInWithPassword`, data, config)
-    .then(response => response.data)
-    .catch(error => {
-      throw new Error(error);
-    });
+    .then(response => response.data);
 };
 
 export const signupUser = (email: string, password: string, phone?: string) => {
@@ -41,8 +38,5 @@ export const signupUser = (email: string, password: string, phone?: string) => {
 
   return firebaseAuth
     .post(`/accounts:signUp`, data, config)
-    .then(response => response.data)
-    .catch(error => {
-      throw new Error(error);
-    });
+    .then(response => response.data);
 };
