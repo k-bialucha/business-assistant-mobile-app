@@ -1,5 +1,6 @@
 import * as Facebook from 'expo-facebook';
 import decode from 'jwt-decode';
+import { FACEBOOK_APP_ID } from 'react-native-dotenv';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
 import { loginUser, signupUser } from '../../utils/apiCalls/authorization';
@@ -62,10 +63,11 @@ export function* signupSaga({
 
 export function* loginWithFacebookSaga() {
   // TODO: move to .env file
-  const fbAppId = '651283208782846';
-  const fbAppName = 'Personal Business Assistance';
 
-  yield Facebook.initializeAsync(fbAppId, fbAppName);
+  yield Facebook.initializeAsync(
+    FACEBOOK_APP_ID,
+    'Personal Business Assistant'
+  );
   try {
     const { type, token } = yield Facebook.logInWithReadPermissionsAsync({
       permissions: ['public_profile', 'email'],
@@ -83,8 +85,8 @@ export function* loginWithFacebookSaga() {
       const jwtToken = yield user.getIdToken();
       const { user_id: userId, name, picture } = decode(jwtToken);
 
-      yield put(loginSuccess(token, userId));
-      yield put(setUserData({ name, image: picture }));
+      yield put(loginSuccess(token));
+      yield put(setUserData({ name, id: userId, image: picture }));
     } else if (type === 'cancel') {
       throw new Error('Login to facebook canceled');
     }
