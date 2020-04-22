@@ -1,13 +1,20 @@
 import * as firebase from 'firebase';
+import {
+  AUTH_DOMAIN,
+  DATABASE_URL,
+  FIREBASE_API_KEY,
+  MESSAGING_SENDER_ID,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+} from 'react-native-dotenv';
 
-// TODO: move to .env file
 const options = {
-  apiKey: 'AIzaSyC-9qBqevcFydL7LJExJooU3EcTqnABx1w',
-  authDomain: 'personal-business-assistance.firebaseapp.com',
-  databaseURL: 'https://personal-business-assistance.firebaseio.com',
-  projectId: 'personal-business-assistance',
-  storageBucket: 'gs://personal-business-assistance.appspot.com',
-  messagingSenderId: '1075933789993',
+  apiKey: FIREBASE_API_KEY,
+  authDomain: AUTH_DOMAIN,
+  databaseURL: DATABASE_URL,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
 };
 
 firebase.initializeApp(options);
