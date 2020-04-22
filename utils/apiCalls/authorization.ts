@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-
-const firebaseApiKey = 'AIzaSyC-9qBqevcFydL7LJExJooU3EcTqnABx1w';
+import { FIREBASE_API_KEY } from 'react-native-dotenv';
 
 const firebaseAuth = axios.create({
   baseURL: 'https://identitytoolkit.googleapis.com/v1/',
@@ -15,7 +14,7 @@ export const loginUser = (email, password) => {
   };
   const config: AxiosRequestConfig = {
     params: {
-      key: firebaseApiKey,
+      key: FIREBASE_API_KEY,
     },
   };
 
@@ -32,7 +31,7 @@ export const signupUser = (email: string, password: string, phone?: string) => {
   };
   const config: AxiosRequestConfig = {
     params: {
-      key: firebaseApiKey,
+      key: FIREBASE_API_KEY,
     },
   };
 
