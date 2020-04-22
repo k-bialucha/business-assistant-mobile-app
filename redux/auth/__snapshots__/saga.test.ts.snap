@@ -21,7 +21,7 @@ Object {
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "some-username",
+      "some-email",
       "strong-password",
     ],
     "context": null,
@@ -52,7 +52,7 @@ Object {
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "some-username",
+      "some-email",
       "badpass",
     ],
     "context": null,

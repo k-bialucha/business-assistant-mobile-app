@@ -42,20 +42,20 @@ describe('<LoginScreen />', () => {
     <LoginScreen {...fakeProps} />
   );
 
-  const usernameInput: ReactTestInstance = queryByTestId('username-input');
+  const emailInput: ReactTestInstance = queryByTestId('email-input');
   const passwordInput: ReactTestInstance = queryByTestId('password-input');
   const loginButton: ReactTestInstance = queryByTestId('login-button');
 
   it('allows to login', async () => {
-    const someUsername = 'kamil.bialucha@gmail.com';
+    const someEmail = 'kamil.bialucha@gmail.com';
 
-    fireEvent.changeText(usernameInput, someUsername);
+    fireEvent.changeText(emailInput, someEmail);
     fireEvent.changeText(passwordInput, 'mypass123');
 
     fireEvent.press(loginButton);
 
     process.nextTick(() => {
-      expect(store.getState().auth.username).toBe(someUsername);
+      expect(store.getState().auth.username).toBe(someEmail);
       expect(store.getState().auth.token).toEqual(someApiResponse.idToken);
       expect(store.getState().auth.userId).toBe(someApiResponse.localId);
     });

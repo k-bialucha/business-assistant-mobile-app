@@ -6,7 +6,7 @@ exports[`<LoginScreen /> matches the snapshot 1`] = `
     <TextField
       onChangeText={[Function]}
       placeholder="E-mail"
-      testID="username-input"
+      testID="email-input"
       value=""
     />
     <TextField

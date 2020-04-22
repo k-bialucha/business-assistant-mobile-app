@@ -20,7 +20,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       };
       const generator = loginSaga({
         type: LOGIN,
-        payload: { username: 'some-username', password: 'strong-password' },
+        payload: { email: 'some-email', password: 'strong-password' },
       });
 
       const delayDescriptor = generator.next().value;
@@ -32,9 +32,11 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       expect(putDescriptor).toEqual(
         put({
           type: LOGIN_SUCCESS,
-          payload: { token: expect.any(String), userId: expect.any(String) },
+          payload: { token: expect.any(String) },
         })
       );
+      // TODO: expect setUserData
+      generator.next();
       expect(generator.next().done).toBe(true);
     });
 
@@ -42,7 +44,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       const someError = new Error('Bad Credentials');
       const generator = loginSaga({
         type: LOGIN,
-        payload: { username: 'some-username', password: 'badpass' },
+        payload: { email: 'some-email', password: 'badpass' },
       });
 
       const delayDescriptor = generator.next().value;
@@ -81,9 +83,11 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       expect(putDescriptor).toEqual(
         put({
           type: SIGNUP_SUCCESS,
-          payload: { token: expect.any(String), userId: expect.any(String) },
+          payload: { token: expect.any(String) },
         })
       );
+      // TODO: expect setUserData
+      generator.next();
       expect(generator.next().done).toBe(true);
     });
 
