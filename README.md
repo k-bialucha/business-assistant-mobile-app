@@ -1,6 +1,6 @@
 # Business Assistant App
 
-A mobile app that _will_ allow to summarize monthly sales and expenses of a company. First goal is to support single person business for company based in Poland.
+A mobile app that _will_ allow to summarize monthly sales and expenses of a company. First goal is to support single person business for a company based in Poland.
 
 ## Requirements
 
@@ -8,7 +8,7 @@ A mobile app that _will_ allow to summarize monthly sales and expenses of a comp
 
 ## Running the app
 
-Before first launch - install dependencies:
+Before first launch - create `.env` file according to the instructions in [.env.example](.env.example) file and install dependencies:
 
 ```sh
 > npm install
