@@ -8,6 +8,14 @@ A mobile app that _will_ allow to summarize monthly sales and expenses of a comp
 
 ## Running the app
 
+Before first launch - install dependencies:
+
+```sh
+> npm install
+```
+
+Run the app:
+
 ```sh
 > npm start
 ```
