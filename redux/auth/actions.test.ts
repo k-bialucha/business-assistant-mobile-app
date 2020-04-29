@@ -28,7 +28,7 @@ import {
 } from './types';
 
 describe(`${DOMAIN_NAME}/actions`, () => {
-  test('login action returns correct object', () => {
+  test('login action creator returns correct object', () => {
     const someEmail: string = 'some-email';
     const somePassword: string = 'some-password';
 
@@ -42,7 +42,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(expected);
   });
 
-  test('loginSuccess action returns correct object', () => {
+  test('loginSuccess action creator returns correct object', () => {
     const someToken: string = 'some-secure-token';
 
     const result = loginSuccess(someToken);
@@ -57,7 +57,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(expected);
   });
 
-  test('loginFailure action returns correct object', () => {
+  test('loginFailure action creator returns correct object', () => {
     const someMessage: string = 'something bad happened';
 
     const result = loginFailure(someMessage);
@@ -70,7 +70,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(expected);
   });
 
-  test('logout action returns correct object', () => {
+  test('logout action creator returns correct object', () => {
     const result = logout();
 
     const expected = {
@@ -120,7 +120,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(extected);
   });
 
-  test('loginWithFacebook action returns correct object', () => {
+  test('loginWithFacebook action creator returns correct object', () => {
     const result = loginWithFacebook();
 
     const expected: LoginWithFacebookAction = {
