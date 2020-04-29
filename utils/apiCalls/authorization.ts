@@ -6,16 +6,17 @@ const firebaseAuth = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+const config: AxiosRequestConfig = {
+  params: {
+    key: FIREBASE_API_KEY,
+  },
+};
+
 export const loginUser = (email, password) => {
   const data = {
     email,
     password,
     returnSecureToken: true,
-  };
-  const config: AxiosRequestConfig = {
-    params: {
-      key: FIREBASE_API_KEY,
-    },
   };
 
   return firebaseAuth
@@ -28,11 +29,6 @@ export const signupUser = (email: string, password: string, phone?: string) => {
     email,
     password,
     returnSecureToken: true,
-  };
-  const config: AxiosRequestConfig = {
-    params: {
-      key: FIREBASE_API_KEY,
-    },
   };
 
   return firebaseAuth
