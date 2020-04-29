@@ -18,9 +18,11 @@ describe(`${DOMAIN_NAME}/saga`, () => {
         idToken: 'token-123',
         localId: '12345',
       };
+      const mockedEmail = 'some-email';
+
       const generator = loginSaga({
         type: LOGIN,
-        payload: { email: 'some-email', password: 'strong-password' },
+        payload: { email: mockedEmail, password: 'strong-password' },
       });
 
       const delayDescriptor = generator.next().value;
@@ -32,11 +34,16 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       expect(putDescriptor).toEqual(
         put({
           type: LOGIN_SUCCESS,
-          payload: { token: expect.any(String) },
+          payload: {
+            token: someApiResponse.idToken,
+            userData: {
+              id: someApiResponse.localId,
+              image: undefined,
+              name: mockedEmail,
+            },
+          },
         })
       );
-      // TODO: expect setUserData
-      generator.next();
       expect(generator.next().done).toBe(true);
     });
 
@@ -66,10 +73,11 @@ describe(`${DOMAIN_NAME}/saga`, () => {
         idToken: 'token-123',
         localId: '12345',
       };
+      const mockedEmail = 'some-email@example.com';
       const generator = signupSaga({
         type: SIGNUP,
         payload: {
-          email: 'some-email@example.com',
+          email: mockedEmail,
           password: 'strong-password',
         },
       });
@@ -83,11 +91,16 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       expect(putDescriptor).toEqual(
         put({
           type: SIGNUP_SUCCESS,
-          payload: { token: expect.any(String) },
+          payload: {
+            token: someApiResponse.idToken,
+            userData: {
+              id: someApiResponse.localId,
+              image: undefined,
+              name: mockedEmail,
+            },
+          },
         })
       );
-      // TODO: expect setUserData
-      generator.next();
       expect(generator.next().done).toBe(true);
     });
 

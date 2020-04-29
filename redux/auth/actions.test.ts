@@ -3,7 +3,6 @@ import {
   loginFailure,
   loginSuccess,
   logout,
-  setUserData,
   signup,
   signupFailure,
   signupSuccess,
@@ -14,8 +13,6 @@ import {
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGOUT,
-  SET_USER_DATA,
-  SetUserDataAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -41,13 +38,19 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
   test('loginSuccess action returns correct object', () => {
     const someToken: string = 'some-secure-token';
+    const mockedUserData = {
+      name: 'user-name',
+      id: 'user-id',
+      image: 'user-image-url',
+    };
 
-    const result = loginSuccess(someToken);
+    const result = loginSuccess(someToken, mockedUserData);
 
     const expected = {
       type: LOGIN_SUCCESS,
       payload: {
         token: someToken,
+        userData: mockedUserData,
       },
     };
 
@@ -93,12 +96,17 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
   test('signupSuccess action creator returns correct object', () => {
     const mockedToken: string = 'mocked-secure-token';
+    const mockedUserData = {
+      name: 'user-name',
+      id: 'user-id',
+      image: 'user-image-url',
+    };
 
-    const result = signupSuccess(mockedToken);
+    const result = signupSuccess(mockedToken, mockedUserData);
 
     const expected: SignupSuccessAction = {
       type: SIGNUP_SUCCESS,
-      payload: { token: mockedToken },
+      payload: { token: mockedToken, userData: mockedUserData },
     };
 
     expect(result).toEqual(expected);
@@ -117,6 +125,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     expect(result).toEqual(extected);
   });
 
+<<<<<<< Updated upstream
   test('setUserData action creator returns correct object', () => {
     const mockedData = {
       name: 'user-name',
@@ -132,5 +141,15 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     };
 
     expect(result).toEqual(extected);
+=======
+  test('loginWithFacebook action creator returns correct object', () => {
+    const result = loginWithFacebook();
+
+    const expected: LoginWithFacebookAction = {
+      type: LOGIN_WITH_FACEBOOK,
+    };
+
+    expect(result).toEqual(expected);
+>>>>>>> Stashed changes
   });
 });

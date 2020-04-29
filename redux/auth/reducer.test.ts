@@ -10,8 +10,6 @@ import {
   LOGOUT,
   LogoutAction,
   RequestStatus,
-  SET_USER_DATA,
-  SetUserDataAction,
 } from './types';
 
 describe(`${DOMAIN_NAME}/reducer`, () => {
@@ -36,6 +34,11 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
 
   it('handles loginSuccess action', () => {
     const someToken: string = 'some-token';
+    const mockedUserData = {
+      name: 'user-name',
+      id: 'user-id',
+      image: 'user-image-url',
+    };
 
     const previousState = {
       ...initialState,
@@ -45,7 +48,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
 
     const action: LoginSuccessAction = {
       type: LOGIN_SUCCESS,
-      payload: { token: someToken },
+      payload: { token: someToken, userData: mockedUserData },
     };
 
     const nextState: AuthState = reducer(previousState, action);
@@ -53,6 +56,9 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
     const expectedState: AuthState = {
       ...initialState,
       token: someToken,
+      username: mockedUserData.name,
+      userImage: mockedUserData.image,
+      userId: mockedUserData.id,
       requestStatus: RequestStatus.SUCCESS,
     };
 
@@ -111,35 +117,6 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userId: null,
       userImage: null,
       requestStatus: RequestStatus.UNAUTHENTICATED,
-    };
-
-    expect(nextState).toEqual(expectedState);
-  });
-
-  it('handles setUserData action', () => {
-    const previousState = {
-      ...initialState,
-      username: null,
-      userId: null,
-      userImage: null,
-    };
-
-    const action: SetUserDataAction = {
-      type: SET_USER_DATA,
-      payload: {
-        name: 'mocked-name',
-        id: 'user-id',
-        image: 'url',
-      },
-    };
-
-    const nextState: AuthState = reducer(previousState, action);
-
-    const expectedState: AuthState = {
-      ...initialState,
-      username: 'mocked-name',
-      userId: 'user-id',
-      userImage: 'url',
     };
 
     expect(nextState).toEqual(expectedState);
