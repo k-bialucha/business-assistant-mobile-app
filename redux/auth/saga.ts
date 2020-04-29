@@ -5,7 +5,6 @@ import { loginUser, signupUser } from '../../utils/apiCalls/authorization';
 import {
   loginFailure,
   loginSuccess,
-  setUserData,
   signupFailure,
   signupSuccess,
 } from './actions';
@@ -19,8 +18,7 @@ export function* loginSaga({ payload: { email, password } }: LoginAction) {
 
     const { idToken: token, localId: userId } = response;
 
-    yield put(loginSuccess(token));
-    yield put(setUserData({ name: email, id: userId }));
+    yield put(loginSuccess(token, { name: email, id: userId }));
   } catch (error) {
     if (error instanceof Error) {
       yield put(loginFailure(error.message));
@@ -40,8 +38,7 @@ export function* signupSaga({
 
     const { idToken: token, localId: userId } = response;
 
-    yield put(signupSuccess(token));
-    yield put(setUserData({ name: email, id: userId }));
+    yield put(signupSuccess(token, { name: email, id: userId }));
   } catch (error) {
     if (error instanceof Error) {
       yield put(signupFailure(error.message));
@@ -51,6 +48,46 @@ export function* signupSaga({
   }
 }
 
+<<<<<<< Updated upstream
+=======
+export function* loginWithFacebookSaga() {
+  // TODO: move to .env file
+
+  yield Facebook.initializeAsync(
+    FACEBOOK_APP_ID,
+    'Personal Business Assistant'
+  );
+  try {
+    const { type, token } = yield Facebook.logInWithReadPermissionsAsync({
+      permissions: ['public_profile', 'email'],
+    });
+
+    if (type === 'success') {
+      yield firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
+      const credential = yield firebase.auth.FacebookAuthProvider.credential(
+        token
+      );
+      const { user } = yield firebase.auth().signInWithCredential(credential);
+      const jwtToken = yield user.getIdToken();
+      const { user_id: userId, name, picture } = decode(jwtToken);
+
+      yield put(loginSuccess(token, { name, id: userId, image: picture }));
+    } else if (type === 'cancel') {
+      throw new Error('Login to facebook canceled');
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      yield put(loginFailure(error.message));
+    } else {
+      yield put(loginFailure('Login Error'));
+    }
+  }
+}
+
+>>>>>>> Stashed changes
 export default function* watchSaga() {
   yield takeLatest(LOGIN, loginSaga);
   yield takeLatest(SIGNUP, signupSaga);
