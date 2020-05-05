@@ -8,7 +8,6 @@ export const SIGNUP = 'SIGNUP';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK';
-export const SET_USER_DATA = 'SET_USER_DATA';
 
 export interface LoginAction {
   type: typeof LOGIN;
@@ -22,6 +21,11 @@ export interface LoginSuccessAction {
   type: typeof LOGIN_SUCCESS;
   payload: {
     token: string;
+    userData: {
+      name: string;
+      id: string;
+      image?: string;
+    };
   };
 }
 
@@ -47,6 +51,11 @@ export interface SignupSuccessAction {
   type: typeof SIGNUP_SUCCESS;
   payload: {
     token: string;
+    userData: {
+      name: string;
+      id: string;
+      image?: string;
+    };
   };
 }
 
@@ -59,15 +68,6 @@ export interface LoginWithFacebookAction {
   type: typeof LOGIN_WITH_FACEBOOK;
 }
 
-export interface SetUserDataAction {
-  type: typeof SET_USER_DATA;
-  payload: {
-    name: string;
-    id: string;
-    image?: string;
-  };
-}
-
 export type AuthActions =
   | LoginAction
   | LoginSuccessAction
@@ -76,8 +76,7 @@ export type AuthActions =
   | SignupAction
   | SignupSuccessAction
   | SignupFailureAction
-  | LoginWithFacebookAction
-  | SetUserDataAction;
+  | LoginWithFacebookAction;
 
 export enum RequestStatus {
   UNAUTHENTICATED,

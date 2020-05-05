@@ -5,7 +5,6 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   RequestStatus,
-  SET_USER_DATA,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -38,12 +37,21 @@ function reducer(
         requestStatus: RequestStatus.LOADING,
       };
 
-    case LOGIN_SUCCESS:
+    case LOGIN_SUCCESS: {
+      const {
+        token,
+        userData: { name, id, image },
+      } = action.payload;
+
       return {
         ...state,
-        token: action.payload.token,
+        token,
+        username: name,
+        userId: id,
+        userImage: image,
         requestStatus: RequestStatus.SUCCESS,
       };
+    }
 
     case LOGIN_FAILURE:
       return {
@@ -54,18 +62,28 @@ function reducer(
 
     case LOGOUT:
       return initialState;
+
     case SIGNUP:
       return {
         ...state,
         requestStatus: RequestStatus.LOADING,
       };
 
-    case SIGNUP_SUCCESS:
+    case SIGNUP_SUCCESS: {
+      const {
+        token,
+        userData: { name, id, image },
+      } = action.payload;
+
       return {
         ...state,
-        token: action.payload.token,
+        token,
+        username: name,
+        userId: id,
+        userImage: image,
         requestStatus: RequestStatus.SUCCESS,
       };
+    }
 
     case SIGNUP_FAILURE:
       return {
@@ -73,17 +91,6 @@ function reducer(
         token: null,
         requestStatus: RequestStatus.FAILURE,
       };
-
-    case SET_USER_DATA: {
-      const { name, id, image } = action.payload;
-
-      return {
-        ...state,
-        username: name,
-        userId: id,
-        userImage: image,
-      };
-    }
 
     default:
       return state;

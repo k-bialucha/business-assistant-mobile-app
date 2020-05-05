@@ -9,8 +9,6 @@ import {
   LoginWithFacebookAction,
   LOGOUT,
   LogoutAction,
-  SET_USER_DATA,
-  SetUserDataAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -26,10 +24,17 @@ export function login(email: string, password: string): LoginAction {
   };
 }
 
-export function loginSuccess(token: string): LoginSuccessAction {
+export function loginSuccess(token: string, userData): LoginSuccessAction {
   return {
     type: LOGIN_SUCCESS,
-    payload: { token },
+    payload: {
+      token,
+      userData: {
+        name: userData.name,
+        id: userData.id,
+        image: userData.image,
+      },
+    },
   };
 }
 
@@ -57,10 +62,17 @@ export function signup(
   };
 }
 
-export function signupSuccess(token: string): SignupSuccessAction {
+export function signupSuccess(token: string, userData): SignupSuccessAction {
   return {
     type: SIGNUP_SUCCESS,
-    payload: { token },
+    payload: {
+      token,
+      userData: {
+        name: userData.name,
+        id: userData.id,
+        image: userData.image,
+      },
+    },
   };
 }
 
@@ -74,16 +86,5 @@ export function signupFailure(message: string): SignupFailureAction {
 export function loginWithFacebook(): LoginWithFacebookAction {
   return {
     type: LOGIN_WITH_FACEBOOK,
-  };
-}
-
-export function setUserData(data): SetUserDataAction {
-  return {
-    type: SET_USER_DATA,
-    payload: {
-      name: data.name,
-      id: data.id,
-      image: data.image,
-    },
   };
 }
