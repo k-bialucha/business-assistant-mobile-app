@@ -7,11 +7,7 @@ export const LOGOUT = 'LOGOUT';
 export const SIGNUP = 'SIGNUP';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
-<<<<<<< Updated upstream
-export const SET_USER_DATA = 'SET_USER_DATA';
-=======
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK';
->>>>>>> Stashed changes
 
 export interface LoginAction {
   type: typeof LOGIN;
@@ -68,18 +64,8 @@ export interface SignupFailureAction {
   payload: string;
 }
 
-<<<<<<< Updated upstream
-export interface SetUserDataAction {
-  type: typeof SET_USER_DATA;
-  payload: {
-    name: string;
-    id: string;
-    image?: string;
-  };
-=======
 export interface LoginWithFacebookAction {
   type: typeof LOGIN_WITH_FACEBOOK;
->>>>>>> Stashed changes
 }
 
 export type AuthActions =
@@ -90,11 +76,7 @@ export type AuthActions =
   | SignupAction
   | SignupSuccessAction
   | SignupFailureAction
-<<<<<<< Updated upstream
-  | SetUserDataAction;
-=======
   | LoginWithFacebookAction;
->>>>>>> Stashed changes
 
 export enum RequestStatus {
   UNAUTHENTICATED,

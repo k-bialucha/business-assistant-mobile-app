@@ -2,9 +2,11 @@ import {
   LOGIN,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
+  LOGIN_WITH_FACEBOOK,
   LoginAction,
   LoginFailureAction,
   LoginSuccessAction,
+  LoginWithFacebookAction,
   LOGOUT,
   LogoutAction,
   SIGNUP,
@@ -81,19 +83,8 @@ export function signupFailure(message: string): SignupFailureAction {
   };
 }
 
-<<<<<<< Updated upstream
-export function setUserData(data): SetUserDataAction {
-  return {
-    type: SET_USER_DATA,
-    payload: {
-      name: data.name,
-      id: data.id,
-      image: data.image,
-    },
-=======
 export function loginWithFacebook(): LoginWithFacebookAction {
   return {
     type: LOGIN_WITH_FACEBOOK,
->>>>>>> Stashed changes
   };
 }

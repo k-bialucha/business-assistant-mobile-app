@@ -1,6 +1,10 @@
+import * as Facebook from 'expo-facebook';
+import decode from 'jwt-decode';
+import { FACEBOOK_APP_ID } from 'react-native-dotenv';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
 import { loginUser, signupUser } from '../../utils/apiCalls/authorization';
+import firebase from '../../utils/firebase';
 
 import {
   loginFailure,
@@ -8,7 +12,13 @@ import {
   signupFailure,
   signupSuccess,
 } from './actions';
-import { LOGIN, LoginAction, SIGNUP, SignupAction } from './types';
+import {
+  LOGIN,
+  LOGIN_WITH_FACEBOOK,
+  LoginAction,
+  SIGNUP,
+  SignupAction,
+} from './types';
 
 export function* loginSaga({ payload: { email, password } }: LoginAction) {
   try {
@@ -48,11 +58,7 @@ export function* signupSaga({
   }
 }
 
-<<<<<<< Updated upstream
-=======
 export function* loginWithFacebookSaga() {
-  // TODO: move to .env file
-
   yield Facebook.initializeAsync(
     FACEBOOK_APP_ID,
     'Personal Business Assistant'
@@ -87,8 +93,8 @@ export function* loginWithFacebookSaga() {
   }
 }
 
->>>>>>> Stashed changes
 export default function* watchSaga() {
   yield takeLatest(LOGIN, loginSaga);
   yield takeLatest(SIGNUP, signupSaga);
+  yield takeLatest(LOGIN_WITH_FACEBOOK, loginWithFacebookSaga);
 }
