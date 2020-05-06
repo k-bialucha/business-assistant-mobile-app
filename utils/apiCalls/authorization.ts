@@ -28,6 +28,7 @@ export const signupUser = (email: string, password: string, phone?: string) => {
   const data = {
     email,
     password,
+    phone,
     returnSecureToken: true,
   };
 
