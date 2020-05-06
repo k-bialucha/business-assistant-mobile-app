@@ -22,9 +22,6 @@ jest.mock('react-redux', () => {
     Provider: jest
       .fn()
       .mockImplementation(props => <div>{props.children}</div>),
-    useSelector: jest
-      .fn()
-      .mockReturnValue({ token: 'some-token', username: 'some-user' }),
     useDispatch: jest.fn().mockImplementation(() => jest.fn()),
   };
 });
@@ -35,12 +32,6 @@ describe('<LoginScreen />', () => {
   });
 
   it('matches the snapshot', () => {
-    (useSelector as jest.Mock).mockReturnValueOnce(null);
-    (useSelector as jest.Mock).mockReturnValueOnce(null);
-    (useSelector as jest.Mock).mockReturnValueOnce(
-      LoginRequestStatus.UNAUTHENTICATED
-    );
-
     const tree = shallow(<LoginScreen {...fakeProps} />);
 
     expect(tree).toMatchSnapshot();
