@@ -4,7 +4,6 @@ import Colors from '../theme/Colors';
 
 const StyledContainer = styled.View`
   flex: 1;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
