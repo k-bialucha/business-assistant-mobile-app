@@ -1,6 +1,7 @@
 import { put } from 'redux-saga/effects';
 
-import { loginSaga, signupSaga } from './saga';
+import { loginFailure, loginSuccess } from './actions';
+import { loginSaga, loginWithFacebookSaga, signupSaga } from './saga';
 import {
   DOMAIN_NAME,
   LOGIN,
@@ -120,6 +121,80 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       expect(putDescriptor).toEqual(
         put({ type: SIGNUP_FAILURE, payload: someError.message })
       );
+      expect(generator.next().done).toBe(true);
+    });
+  });
+
+  describe('loginWithFacebookSaga', () => {
+    it('handles successful signup through facebook', () => {
+      jest.mock('jwt-decode', () => {
+        return {
+          decode: jest.fn(),
+        };
+      });
+
+      const generator = loginWithFacebookSaga();
+
+      const facebookLoginResponse = {
+        token: 'mocked-token',
+        type: 'success',
+        user: 'user',
+      };
+
+      const initializeFacebookApp = generator.next().value;
+
+      expect(initializeFacebookApp).toMatchSnapshot();
+
+      const loginWithFacebook = generator.next().value;
+
+      expect(loginWithFacebook).toMatchSnapshot();
+
+      // get credential to firebase auth with fb token
+      const getCredentials = generator.next(facebookLoginResponse).value;
+
+      expect(getCredentials).toMatchSnapshot();
+
+      // sign in to firebase with received credentials
+      const signToFirebaseWithCredentials = generator.next({
+        user: 'user-object',
+      }).value;
+
+      expect(signToFirebaseWithCredentials).toMatchSnapshot();
+
+      // get jwt token of created user in firebase
+      const jwtToken = generator.next({
+        user: {
+          getIdToken: jest.fn(() => 'jwt-token'),
+        },
+      }).value;
+
+      expect(jwtToken).toMatchSnapshot();
+
+      // sample token copied from jwt home page
+      const token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
+      expect(generator.next(token).value).toEqual(
+        put(
+          loginSuccess('mocked-token', {
+            name: expect.any(String),
+          })
+        )
+      );
+
+      expect(generator.next().done).toBe(true);
+    });
+
+    it('handles canceled signup through facebook', () => {
+      const generator = loginWithFacebookSaga();
+
+      generator.next();
+      generator.next();
+
+      expect(generator.next({ type: 'cancel' }).value).toEqual(
+        put(loginFailure('Login to facebook canceled'))
+      );
+
       expect(generator.next().done).toBe(true);
     });
   });

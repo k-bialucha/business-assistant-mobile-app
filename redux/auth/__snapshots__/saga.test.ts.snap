@@ -62,6 +62,76 @@ Object {
 }
 `;
 
+exports[`auth/saga loginWithFacebookSaga handles successful signup through facebook 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "651283208782846",
+      "Personal Business Assistant",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga loginWithFacebookSaga handles successful signup through facebook 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      Object {
+        "permissions": Array [
+          "public_profile",
+          "email",
+        ],
+      },
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga loginWithFacebookSaga handles successful signup through facebook 3`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "mocked-token",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga loginWithFacebookSaga handles successful signup through facebook 4`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      Object {
+        "user": "user-object",
+      },
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga loginWithFacebookSaga handles successful signup through facebook 5`] = `"jwt-token"`;
+
 exports[`auth/saga signupSaga handles successful signup 1`] = `
 Object {
   "@@redux-saga/IO": true,

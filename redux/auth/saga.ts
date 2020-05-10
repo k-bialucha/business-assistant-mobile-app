@@ -4,7 +4,7 @@ import { FACEBOOK_APP_ID } from 'react-native-dotenv';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
 import { loginUser, signupUser } from '../../utils/apiCalls/authorization';
-import firebase from '../../utils/firebase';
+import firebase, { myFirebaseApp } from '../../utils/firebase';
 
 import {
   loginFailure,
@@ -59,24 +59,46 @@ export function* signupSaga({
 }
 
 export function* loginWithFacebookSaga() {
-  yield Facebook.initializeAsync(
+  yield call(
+    Facebook.initializeAsync,
     FACEBOOK_APP_ID,
     'Personal Business Assistant'
   );
   try {
-    const { type, token } = yield Facebook.logInWithReadPermissionsAsync({
+    const { type, token } = yield call(Facebook.logInWithReadPermissionsAsync, {
       permissions: ['public_profile', 'email'],
     });
 
     if (type === 'success') {
-      yield firebase
-        .auth()
-        .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      // https://stackoverflow.com/questions/53678410/jest-test-the-current-environment-does-not-support-the-specified-persistence-t
+      // look like without it login works the same, to delete?
 
-      const credential = yield firebase.auth.FacebookAuthProvider.credential(
+      // const persistence =
+      //   process.env.NODE_ENV === 'test'
+      //     ? firebase.auth.Auth.Persistence.NONE
+      //     : firebase.auth.Auth.Persistence.LOCAL;
+
+      // yield call(
+      //   [firebase.auth(), firebase.auth().setPersistence],
+      //   firebase.auth.Auth.Persistence.LOCAL
+      // );
+
+      const credential = yield call(
+        firebase.auth.FacebookAuthProvider.credential,
         token
       );
-      const { user } = yield firebase.auth().signInWithCredential(credential);
+
+      // way to call without redux-saga-firebase
+      // const { user } = yield call(
+      //   [firebase.auth(), firebase.auth().signInWithCredential],
+      //   credential
+      // );
+
+      const { user } = yield call(
+        myFirebaseApp.auth.signInWithCredential,
+        credential
+      );
+
       const jwtToken = yield user.getIdToken();
       const { user_id: userId, name, picture } = decode(jwtToken);
 
