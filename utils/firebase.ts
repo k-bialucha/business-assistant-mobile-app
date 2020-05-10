@@ -7,6 +7,7 @@ import {
   PROJECT_ID,
   STORAGE_BUCKET,
 } from 'react-native-dotenv';
+import ReduxSagaFirebase from 'redux-saga-firebase';
 
 const options = {
   apiKey: FIREBASE_API_KEY,
@@ -17,6 +18,8 @@ const options = {
   messagingSenderId: MESSAGING_SENDER_ID,
 };
 
-firebase.initializeApp(options);
+const app = firebase.initializeApp(options);
+
+export const myFirebaseApp = new ReduxSagaFirebase(app);
 
 export default firebase;
