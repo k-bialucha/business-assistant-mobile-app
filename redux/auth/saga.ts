@@ -99,7 +99,8 @@ export function* loginWithFacebookSaga() {
         credential
       );
 
-      const jwtToken = yield user.getIdToken();
+      const jwtToken = user.getIdToken();
+
       const { user_id: userId, name, picture } = decode(jwtToken);
 
       yield put(loginSuccess(token, { name, id: userId, image: picture }));
