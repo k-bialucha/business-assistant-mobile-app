@@ -68,7 +68,7 @@ Object {
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "651283208782846",
+      "facebook-app-id",
       "Personal Business Assistant",
     ],
     "context": null,

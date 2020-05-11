@@ -12,6 +12,8 @@ import {
   SIGNUP_SUCCESS,
 } from './types';
 
+jest.mock('react-native-dotenv');
+
 describe(`${DOMAIN_NAME}/saga`, () => {
   describe('loginSaga', () => {
     it('handles successful login', () => {

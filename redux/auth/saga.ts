@@ -1,6 +1,5 @@
 import * as Facebook from 'expo-facebook';
 import decode from 'jwt-decode';
-import { FACEBOOK_APP_ID } from 'react-native-dotenv';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
 import { loginUser, signupUser } from '../../utils/apiCalls/authorization';
@@ -19,6 +18,9 @@ import {
   SIGNUP,
   SignupAction,
 } from './types';
+
+// necessary to use require() for Jest to detect module mock
+const { FACEBOOK_APP_ID } = require('react-native-dotenv');
 
 export function* loginSaga({ payload: { email, password } }: LoginAction) {
   try {
