@@ -1,4 +1,6 @@
 import * as firebase from 'firebase';
+import ReduxSagaFirebase from 'redux-saga-firebase';
+
 import {
   AUTH_DOMAIN,
   DATABASE_URL,
@@ -6,8 +8,7 @@ import {
   MESSAGING_SENDER_ID,
   PROJECT_ID,
   STORAGE_BUCKET,
-} from 'react-native-dotenv';
-import ReduxSagaFirebase from 'redux-saga-firebase';
+} from '../env';
 
 const options = {
   apiKey: FIREBASE_API_KEY,

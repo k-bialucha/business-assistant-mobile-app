@@ -12,7 +12,7 @@ import {
   SIGNUP_SUCCESS,
 } from './types';
 
-jest.mock('react-native-dotenv');
+jest.mock('../../env');
 
 describe(`${DOMAIN_NAME}/saga`, () => {
   describe('loginSaga', () => {

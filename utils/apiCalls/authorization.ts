@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { FIREBASE_API_KEY } from 'react-native-dotenv';
+
+import { FIREBASE_API_KEY } from '../../env';
 
 const firebaseAuth = axios.create({
   baseURL: 'https://identitytoolkit.googleapis.com/v1/',

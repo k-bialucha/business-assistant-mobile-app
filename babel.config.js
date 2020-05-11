@@ -6,7 +6,6 @@ module.exports = api => {
       'babel-preset-expo',
       '@babel/preset-typescript',
       'module:metro-react-native-babel-preset',
-      'module:react-native-dotenv',
     ],
   };
 };
