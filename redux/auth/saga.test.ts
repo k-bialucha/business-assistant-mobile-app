@@ -12,6 +12,8 @@ import {
   SIGNUP_SUCCESS,
 } from './types';
 
+jest.mock('../../env');
+
 describe(`${DOMAIN_NAME}/saga`, () => {
   describe('loginSaga', () => {
     it('handles successful login', () => {
@@ -127,12 +129,6 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
   describe('loginWithFacebookSaga', () => {
     it('handles successful signup through facebook', () => {
-      jest.mock('jwt-decode', () => {
-        return {
-          decode: jest.fn(),
-        };
-      });
-
       const generator = loginWithFacebookSaga();
 
       const facebookLoginResponse = {
@@ -156,25 +152,24 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
       // sign in to firebase with received credentials
       const signToFirebaseWithCredentials = generator.next({
+        token: '',
+        type: '',
         user: 'user-object',
       }).value;
 
       expect(signToFirebaseWithCredentials).toMatchSnapshot();
 
       // get jwt token of created user in firebase
-      const jwtToken = generator.next({
-        user: {
-          getIdToken: jest.fn(() => 'jwt-token'),
-        },
-      }).value;
-
-      expect(jwtToken).toMatchSnapshot();
-
-      // sample token copied from jwt home page
       const token =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 
-      expect(generator.next(token).value).toEqual(
+      const putDescriptor = generator.next({
+        user: {
+          getIdToken: jest.fn(() => token),
+        },
+      }).value;
+
+      expect(putDescriptor).toEqual(
         put(
           loginSuccess('mocked-token', {
             name: expect.any(String),

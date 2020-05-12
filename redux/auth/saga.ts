@@ -1,8 +1,8 @@
 import * as Facebook from 'expo-facebook';
 import decode from 'jwt-decode';
-import { FACEBOOK_APP_ID } from 'react-native-dotenv';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
+import { FACEBOOK_APP_ID } from '../../env';
 import { loginUser, signupUser } from '../../utils/apiCalls/authorization';
 import firebase, { myFirebaseApp } from '../../utils/firebase';
 
@@ -64,6 +64,7 @@ export function* loginWithFacebookSaga() {
     FACEBOOK_APP_ID,
     'Personal Business Assistant'
   );
+
   try {
     const { type, token } = yield call(Facebook.logInWithReadPermissionsAsync, {
       permissions: ['public_profile', 'email'],
@@ -82,7 +83,6 @@ export function* loginWithFacebookSaga() {
       //   [firebase.auth(), firebase.auth().setPersistence],
       //   firebase.auth.Auth.Persistence.LOCAL
       // );
-
       const credential = yield call(
         firebase.auth.FacebookAuthProvider.credential,
         token
@@ -93,13 +93,13 @@ export function* loginWithFacebookSaga() {
       //   [firebase.auth(), firebase.auth().signInWithCredential],
       //   credential
       // );
-
       const { user } = yield call(
         myFirebaseApp.auth.signInWithCredential,
         credential
       );
 
       const jwtToken = yield user.getIdToken();
+
       const { user_id: userId, name, picture } = decode(jwtToken);
 
       yield put(loginSuccess(token, { name, id: userId, image: picture }));

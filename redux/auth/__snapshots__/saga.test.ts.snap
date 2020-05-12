@@ -68,7 +68,7 @@ Object {
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "651283208782846",
+      "facebook-app-id",
       "Personal Business Assistant",
     ],
     "context": null,
@@ -120,6 +120,8 @@ Object {
   "payload": Object {
     "args": Array [
       Object {
+        "token": "",
+        "type": "",
         "user": "user-object",
       },
     ],
@@ -129,8 +131,6 @@ Object {
   "type": "CALL",
 }
 `;
-
-exports[`auth/saga loginWithFacebookSaga handles successful signup through facebook 5`] = `"jwt-token"`;
 
 exports[`auth/saga signupSaga handles successful signup 1`] = `
 Object {
