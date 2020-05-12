@@ -4,12 +4,12 @@ import { shallow } from 'enzyme';
 
 import { NavigationData } from '../navigation/AuthNavigator';
 
-import AuthScreen from './AuthScreen';
+import SignupScreen from './SignupScreen';
 
-type Props = NavigationData<'Authorization'>;
+type Props = NavigationData<'Signup'>;
 
 const mockedProps: Props = {
-  route: { key: '1234', name: 'Authorization' },
+  route: { key: '1234', name: 'Signup' },
   // @ts-ignore
   navigation: {},
 };
@@ -20,13 +20,20 @@ jest.mock('react-redux', () => {
     Provider: jest
       .fn()
       .mockImplementation(props => <div>{props.children}</div>),
+    useSelector: jest
+      .fn()
+      .mockReturnValue({ token: 'some-token', username: 'some-user' }),
     useDispatch: jest.fn().mockImplementation(() => jest.fn()),
   };
 });
 
-describe('<AuthScreen />', () => {
-  it('matches the snaphot', () => {
-    const mockedComp = shallow(<AuthScreen {...mockedProps} />);
+describe('<SignupScreen />', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  it('matches the snapshot', () => {
+    const mockedComp = shallow(<SignupScreen {...mockedProps} />);
 
     expect(mockedComp).toMatchSnapshot();
   });

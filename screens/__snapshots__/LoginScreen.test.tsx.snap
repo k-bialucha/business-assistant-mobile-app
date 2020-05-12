@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginScreen /> matches the snapshot 1`] = `
+<Styled(View)>
+  <Styled(View)>
+    <TextField
+      onChangeText={[Function]}
+      placeholder="E-mail"
+      testID="email-input"
+      value=""
+    />
+    <TextField
+      onChangeText={[Function]}
+      placeholder="Password"
+      secureTextEntry={true}
+      testID="password-input"
+      value=""
+    />
+    <ForwardRef(Themed.Button)
+      buttonStyle={
+        Object {
+          "backgroundColor": "#ffffff",
+          "marginTop": 15,
+        }
+      }
+      onPress={[Function]}
+      testID="login-button"
+      title="Login"
+      titleStyle={
+        Object {
+          "color": "#5E6D8C",
+        }
+      }
+    />
+  </Styled(View)>
+</Styled(View)>
+`;

@@ -2,46 +2,51 @@ import styled from 'styled-components/native';
 
 import Colors from '../theme/Colors';
 
-const StyledView = styled.View`
+const StyledContainer = styled.View`
   flex: 1;
-  align-items: center;
   justify-content: center;
-  background-color: white;
+  align-items: center;
+  padding: 20px;
+  background-color: ${Colors.navyBlue};
 `;
 
-const StyledText = styled.Text`
-  color: ${props => (props.success ? 'green' : Colors.gray)};
-  padding: 5px 22px;
-  margin-vertical: 5px;
-  font-size: 24px;
-`;
-
-const StyledInputContainer = styled.View`
-  width: 60%;
-  height: 30px;
-  border-bottom-width: 3px;
-  border-bottom-color: ${Colors.silver};
-  margin-vertical: 5px;
-`;
-
-const StyledInput = styled.TextInput`
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 20px;
+const StyledLarge = styled.Text`
+  padding-vertical: 20px;
+  font-size: 42px;
+  font-weight: bold;
+  color: #ffffff;
 `;
 
 const StyledButtonsContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-around;
-  width: 70%;
-  margin-vertical: 10px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+const StyledWideContainer = styled.View`
+  width: 100%;
+  margin-vertical: 5px;
+`;
+
+const StyledLink = styled.Text`
+  color: ${Colors.silver};
+  font-weight: bold;
+`;
+
+const StyledText = styled.Text`
+  color: #ffffff;
+`;
+
+const StyledLoginTextContainer = styled.View`
+  padding-vertical: 20px;
 `;
 
 export {
-  StyledView,
-  StyledText,
-  StyledInput,
-  StyledInputContainer,
+  StyledLarge,
+  StyledContainer,
   StyledButtonsContainer,
+  StyledWideContainer,
+  StyledLink,
+  StyledText,
+  StyledLoginTextContainer,
 };

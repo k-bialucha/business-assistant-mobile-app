@@ -14,19 +14,18 @@ import {
 
 describe(`${DOMAIN_NAME}/reducer`, () => {
   it('handles login action', () => {
-    const someUsername: string = 'some-username';
+    const someEmail: string = 'some-email';
     const somePassword: string = 'hard-pass';
 
     const action: LoginAction = {
       type: LOGIN,
-      payload: { username: someUsername, password: somePassword },
+      payload: { email: someEmail, password: somePassword },
     };
 
     const nextState: AuthState = reducer(initialState, action);
 
     const expectedState: AuthState = {
-      token: null,
-      username: someUsername,
+      ...initialState,
       requestStatus: RequestStatus.LOADING,
     };
 
@@ -34,25 +33,32 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
   });
 
   it('handles loginSuccess action', () => {
-    const someUsername: string = 'some-username';
     const someToken: string = 'some-token';
+    const mockedUserData = {
+      name: 'user-name',
+      id: 'user-id',
+      image: 'user-image-url',
+    };
 
     const previousState = {
+      ...initialState,
       token: null,
-      username: someUsername,
       requestStatus: RequestStatus.LOADING,
     };
 
     const action: LoginSuccessAction = {
       type: LOGIN_SUCCESS,
-      payload: someToken,
+      payload: { token: someToken, userData: mockedUserData },
     };
 
     const nextState: AuthState = reducer(previousState, action);
 
     const expectedState: AuthState = {
+      ...initialState,
       token: someToken,
-      username: someUsername,
+      username: mockedUserData.name,
+      userImage: mockedUserData.image,
+      userId: mockedUserData.id,
       requestStatus: RequestStatus.SUCCESS,
     };
 
@@ -60,11 +66,15 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
   });
 
   it('handles loginFailure action', () => {
-    const someUsername: string = 'some-username';
+    const someEmail: string = 'some-email';
+    const someUserId: string = 'some-user-id';
+    const someUserImage: string = 'some-user-image-url';
 
     const previousState = {
       token: null,
-      username: someUsername,
+      username: someEmail,
+      userId: someUserId,
+      userImage: someUserImage,
       requestStatus: RequestStatus.LOADING,
     };
 
@@ -77,7 +87,9 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
 
     const expectedState: AuthState = {
       token: null,
-      username: someUsername,
+      username: someEmail,
+      userId: someUserId,
+      userImage: someUserImage,
       requestStatus: RequestStatus.FAILURE,
     };
 
@@ -87,7 +99,9 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
   it('handles logout action', () => {
     const previousState = {
       token: 'some-token',
-      username: 'some-username',
+      username: 'some-email',
+      userId: 'some-user-id',
+      userImage: 'url',
       requestStatus: RequestStatus.SUCCESS,
     };
 
@@ -100,6 +114,8 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
     const expectedState: AuthState = {
       token: null,
       username: null,
+      userId: null,
+      userImage: null,
       requestStatus: RequestStatus.UNAUTHENTICATED,
     };
 

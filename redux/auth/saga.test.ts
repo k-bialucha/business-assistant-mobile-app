@@ -1,40 +1,196 @@
-import { delay, put } from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 
-import { loginSaga } from './saga';
-import { DOMAIN_NAME, LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS } from './types';
+import { loginFailure, loginSuccess } from './actions';
+import { loginSaga, loginWithFacebookSaga, signupSaga } from './saga';
+import {
+  DOMAIN_NAME,
+  LOGIN,
+  LOGIN_FAILURE,
+  LOGIN_SUCCESS,
+  SIGNUP,
+  SIGNUP_FAILURE,
+  SIGNUP_SUCCESS,
+} from './types';
 
-describe(`${DOMAIN_NAME}/reducer`, () => {
-  it('handles successful login', () => {
-    const generator = loginSaga({
-      type: LOGIN,
-      payload: { username: 'some-username', password: 'strong-password' },
+jest.mock('../../env');
+
+describe(`${DOMAIN_NAME}/saga`, () => {
+  describe('loginSaga', () => {
+    it('handles successful login', () => {
+      const someApiResponse = {
+        idToken: 'token-123',
+        localId: '12345',
+      };
+      const mockedEmail = 'some-email';
+
+      const generator = loginSaga({
+        type: LOGIN,
+        payload: { email: mockedEmail, password: 'strong-password' },
+      });
+
+      const delayDescriptor = generator.next().value;
+      const apiCallDescriptor = generator.next().value;
+      const putDescriptor = generator.next(someApiResponse).value;
+
+      expect(delayDescriptor).toMatchSnapshot();
+      expect(apiCallDescriptor).toMatchSnapshot();
+      expect(putDescriptor).toEqual(
+        put({
+          type: LOGIN_SUCCESS,
+          payload: {
+            token: someApiResponse.idToken,
+            userData: {
+              id: someApiResponse.localId,
+              image: undefined,
+              name: mockedEmail,
+            },
+          },
+        })
+      );
+      expect(generator.next().done).toBe(true);
     });
 
-    const delayDescriptor = generator.next().value;
+    it('handles unsuccessful login', () => {
+      const someError = new Error('Bad Credentials');
+      const generator = loginSaga({
+        type: LOGIN,
+        payload: { email: 'some-email', password: 'badpass' },
+      });
 
-    expect(delayDescriptor).toEqual(delay(1000));
+      const delayDescriptor = generator.next().value;
+      const apiCallDescriptor = generator.next().value;
+      const putDescriptor = generator.throw(someError).value;
 
-    const putDescriptor = generator.next().value;
-
-    expect(putDescriptor).toEqual(
-      put({ type: LOGIN_SUCCESS, payload: expect.any(String) })
-    );
+      expect(delayDescriptor).toMatchSnapshot();
+      expect(apiCallDescriptor).toMatchSnapshot();
+      expect(putDescriptor).toEqual(
+        put({ type: LOGIN_FAILURE, payload: someError.message })
+      );
+      expect(generator.next().done).toBe(true);
+    });
   });
 
-  it('handles unsuccessful login', () => {
-    const generator = loginSaga({
-      type: LOGIN,
-      payload: { username: 'some-username', password: 'pass' },
+  describe('signupSaga', () => {
+    it('handles successful signup', () => {
+      const someApiResponse = {
+        idToken: 'token-123',
+        localId: '12345',
+      };
+      const mockedEmail = 'some-email@example.com';
+      const generator = signupSaga({
+        type: SIGNUP,
+        payload: {
+          email: mockedEmail,
+          password: 'strong-password',
+        },
+      });
+
+      const delayDescriptor = generator.next().value;
+      const apiCallDescriptor = generator.next().value;
+      const putDescriptor = generator.next(someApiResponse).value;
+
+      expect(delayDescriptor).toMatchSnapshot();
+      expect(apiCallDescriptor).toMatchSnapshot();
+      expect(putDescriptor).toEqual(
+        put({
+          type: SIGNUP_SUCCESS,
+          payload: {
+            token: someApiResponse.idToken,
+            userData: {
+              id: someApiResponse.localId,
+              image: undefined,
+              name: mockedEmail,
+            },
+          },
+        })
+      );
+      expect(generator.next().done).toBe(true);
     });
 
-    const delayDescriptor = generator.next().value;
+    it('handles unsuccessful signup', () => {
+      const someError = new Error('Bad Credentials');
+      const generator = signupSaga({
+        type: SIGNUP,
+        payload: { email: 'some-email@example.com', password: 'badpass' },
+      });
 
-    expect(delayDescriptor).toEqual(delay(1000));
+      const delayDescriptor = generator.next().value;
+      const apiCallDescriptor = generator.next().value;
+      const putDescriptor = generator.throw(someError).value;
 
-    const putDescriptor = generator.next().value;
+      expect(delayDescriptor).toMatchSnapshot();
+      expect(apiCallDescriptor).toMatchSnapshot();
+      expect(putDescriptor).toEqual(
+        put({ type: SIGNUP_FAILURE, payload: someError.message })
+      );
+      expect(generator.next().done).toBe(true);
+    });
+  });
 
-    expect(putDescriptor).toEqual(
-      put({ type: LOGIN_FAILURE, payload: expect.any(String) })
-    );
+  describe('loginWithFacebookSaga', () => {
+    it('handles successful signup through facebook', () => {
+      const generator = loginWithFacebookSaga();
+
+      const facebookLoginResponse = {
+        token: 'mocked-token',
+        type: 'success',
+        user: 'user',
+      };
+
+      const initializeFacebookApp = generator.next().value;
+
+      expect(initializeFacebookApp).toMatchSnapshot();
+
+      const loginWithFacebook = generator.next().value;
+
+      expect(loginWithFacebook).toMatchSnapshot();
+
+      // get credential to firebase auth with fb token
+      const getCredentials = generator.next(facebookLoginResponse).value;
+
+      expect(getCredentials).toMatchSnapshot();
+
+      // sign in to firebase with received credentials
+      const signToFirebaseWithCredentials = generator.next({
+        token: '',
+        type: '',
+        user: 'user-object',
+      }).value;
+
+      expect(signToFirebaseWithCredentials).toMatchSnapshot();
+
+      // get jwt token of created user in firebase
+      const token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
+      const putDescriptor = generator.next({
+        user: {
+          getIdToken: jest.fn(() => token),
+        },
+      }).value;
+
+      expect(putDescriptor).toEqual(
+        put(
+          loginSuccess('mocked-token', {
+            name: expect.any(String),
+          })
+        )
+      );
+
+      expect(generator.next().done).toBe(true);
+    });
+
+    it('handles canceled signup through facebook', () => {
+      const generator = loginWithFacebookSaga();
+
+      generator.next();
+      generator.next();
+
+      expect(generator.next({ type: 'cancel' }).value).toEqual(
+        put(loginFailure('Login to facebook canceled'))
+      );
+
+      expect(generator.next().done).toBe(true);
+    });
   });
 });

@@ -1,97 +1,85 @@
-import React, { useState } from 'react';
-import { Button } from 'react-native';
+import React from 'react';
+import { TouchableWithoutFeedback, View } from 'react-native';
 
+import { FontAwesome } from '@expo/vector-icons';
 import { StackNavigationOptions } from '@react-navigation/stack';
-import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'react-native-elements';
+import { useDispatch } from 'react-redux';
 
 import { NavigationData } from '../navigation/AuthNavigator';
-import { login, LoginRequestStatus, logout } from '../redux/auth';
-import { RootState } from '../redux/rootReducer';
+import { loginWithFacebook } from '../redux/auth/actions';
+import Colors from '../theme/Colors';
 
 import {
   StyledButtonsContainer,
-  StyledInput,
-  StyledInputContainer,
+  StyledContainer,
+  StyledLarge,
+  StyledLink,
+  StyledLoginTextContainer,
   StyledText,
-  StyledView,
+  StyledWideContainer,
 } from './AuthScreen.styled';
 
 type Props = NavigationData<'Authorization'>;
 
-const AuthScreen: React.FC<Props> = () => {
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
-  const token: string = useSelector((state: RootState) => state.auth.token);
-  const requestedUsername: string = useSelector(
-    (state: RootState) => state.auth.username
-  );
-  const requestStatus: LoginRequestStatus = useSelector(
-    (state: RootState) => state.auth.requestStatus
-  );
-
-  const isAuthenticated: boolean = !!token;
-
+const AuthScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
 
   return (
-    <StyledView>
-      <StyledText testID="status-message" success={isAuthenticated}>
-        {'State: '}
-        {requestStatus === LoginRequestStatus.UNAUTHENTICATED &&
-          'unauthenticated'}
-        {requestStatus === LoginRequestStatus.LOADING && '...'}
-        {requestStatus === LoginRequestStatus.SUCCESS && 'SUCCESS!'}
-        {requestStatus === LoginRequestStatus.FAILURE && 'FAILURE!'}
-      </StyledText>
-      {isAuthenticated && (
-        <StyledText>Username: {requestedUsername || '?'}</StyledText>
-      )}
-      {!isAuthenticated && (
-        <>
-          <StyledInputContainer>
-            <StyledInput
-              testID="username-input"
-              value={username}
-              placeholder="username"
-              onChangeText={setUsername}
-            />
-          </StyledInputContainer>
-          <StyledInputContainer>
-            <StyledInput
-              testID="password-input"
-              value={password}
-              placeholder="password"
-              onChangeText={setPassword}
-              secureTextEntry
-            />
-          </StyledInputContainer>
-        </>
-      )}
+    <StyledContainer>
+      <View>
+        <StyledLarge>Make your business easier.</StyledLarge>
+      </View>
       <StyledButtonsContainer>
-        {isAuthenticated ? (
+        <StyledWideContainer>
           <Button
-            testID="logout-button"
-            title="Logout"
-            disabled={!isAuthenticated}
+            title="Create an account"
+            buttonStyle={{ backgroundColor: Colors.gray }}
+            onPress={() => navigation.navigate('Signup')}
+          />
+        </StyledWideContainer>
+        <View
+          style={{
+            marginVertical: 15,
+            backgroundColor: '#ffffff',
+            height: 1,
+            width: 50,
+          }}
+        />
+        <StyledWideContainer>
+          <Button
+            title="Continue with Facebook"
+            type="outline"
+            buttonStyle={{ borderColor: Colors.silver }}
+            titleStyle={{ color: Colors.silver, marginLeft: 10 }}
+            icon={<FontAwesome name="facebook-f" size={18} color="white" />}
             onPress={() => {
-              setUsername('');
-              setPassword('');
-              dispatch(logout());
+              dispatch(loginWithFacebook());
             }}
           />
-        ) : (
+        </StyledWideContainer>
+        <StyledWideContainer>
           <Button
-            testID="login-button"
-            title="Login"
-            disabled={isAuthenticated}
-            onPress={() => {
-              dispatch(login(username, password));
-            }}
+            title="Continue with Google"
+            type="outline"
+            buttonStyle={{ borderColor: Colors.silver }}
+            titleStyle={{ color: Colors.silver, marginLeft: 10 }}
+            icon={<FontAwesome name="google" size={18} color="white" />}
+            onPress={() => alert('navigate to google login')}
           />
-        )}
+        </StyledWideContainer>
       </StyledButtonsContainer>
-    </StyledView>
+      <StyledLoginTextContainer>
+        <StyledText>
+          Already have an account?{' '}
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate('Login')}
+          >
+            <StyledLink>Log in</StyledLink>
+          </TouchableWithoutFeedback>
+        </StyledText>
+      </StyledLoginTextContainer>
+    </StyledContainer>
   );
 };
 

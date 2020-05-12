@@ -5,17 +5,24 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   RequestStatus,
+  SIGNUP,
+  SIGNUP_FAILURE,
+  SIGNUP_SUCCESS,
 } from './types';
 
 export interface AuthState {
   token: string;
   username: string;
+  userId: string;
+  userImage: string;
   requestStatus: RequestStatus;
 }
 
 export const initialState: AuthState = {
   token: null,
   username: null,
+  userId: null,
+  userImage: null,
   requestStatus: RequestStatus.UNAUTHENTICATED,
 };
 
@@ -26,17 +33,25 @@ function reducer(
   switch (action.type) {
     case LOGIN:
       return {
-        token: null,
-        username: action.payload.username,
+        ...state,
         requestStatus: RequestStatus.LOADING,
       };
 
-    case LOGIN_SUCCESS:
+    case LOGIN_SUCCESS: {
+      const {
+        token,
+        userData: { name, id, image },
+      } = action.payload;
+
       return {
         ...state,
-        token: action.payload,
+        token,
+        username: name,
+        userId: id,
+        userImage: image,
         requestStatus: RequestStatus.SUCCESS,
       };
+    }
 
     case LOGIN_FAILURE:
       return {
@@ -47,6 +62,35 @@ function reducer(
 
     case LOGOUT:
       return initialState;
+
+    case SIGNUP:
+      return {
+        ...state,
+        requestStatus: RequestStatus.LOADING,
+      };
+
+    case SIGNUP_SUCCESS: {
+      const {
+        token,
+        userData: { name, id, image },
+      } = action.payload;
+
+      return {
+        ...state,
+        token,
+        username: name,
+        userId: id,
+        userImage: image,
+        requestStatus: RequestStatus.SUCCESS,
+      };
+    }
+
+    case SIGNUP_FAILURE:
+      return {
+        ...state,
+        token: null,
+        requestStatus: RequestStatus.FAILURE,
+      };
 
     default:
       return state;
