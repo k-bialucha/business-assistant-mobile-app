@@ -64,6 +64,7 @@ export function* loginWithFacebookSaga() {
     FACEBOOK_APP_ID,
     'Personal Business Assistant'
   );
+
   try {
     const { type, token } = yield call(Facebook.logInWithReadPermissionsAsync, {
       permissions: ['public_profile', 'email'],
@@ -82,7 +83,6 @@ export function* loginWithFacebookSaga() {
       //   [firebase.auth(), firebase.auth().setPersistence],
       //   firebase.auth.Auth.Persistence.LOCAL
       // );
-
       const credential = yield call(
         firebase.auth.FacebookAuthProvider.credential,
         token
@@ -93,13 +93,12 @@ export function* loginWithFacebookSaga() {
       //   [firebase.auth(), firebase.auth().signInWithCredential],
       //   credential
       // );
-
       const { user } = yield call(
         myFirebaseApp.auth.signInWithCredential,
         credential
       );
 
-      const jwtToken = user.getIdToken();
+      const jwtToken = yield user.getIdToken();
 
       const { user_id: userId, name, picture } = decode(jwtToken);
 
