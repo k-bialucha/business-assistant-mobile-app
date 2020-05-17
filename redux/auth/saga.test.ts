@@ -163,13 +163,15 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       const token =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 
-      const putDescriptor = generator.next({
-        user: {
-          getIdToken: jest.fn(() => token),
-        },
-      }).value;
+      expect(
+        generator.next({
+          user: {
+            getIdToken: jest.fn(() => token),
+          },
+        }).value
+      ).toEqual(token);
 
-      expect(putDescriptor).toEqual(
+      expect(generator.next(token).value).toEqual(
         put(
           loginSuccess('mocked-token', {
             name: expect.any(String),
