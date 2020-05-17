@@ -1,7 +1,12 @@
 import { put } from 'redux-saga/effects';
 
 import { loginFailure, loginSuccess } from './actions';
-import { loginSaga, loginWithFacebookSaga, signupSaga } from './saga';
+import {
+  loginSaga,
+  loginWithFacebookSaga,
+  loginWithGoogleSaga,
+  signupSaga,
+} from './saga';
 import {
   DOMAIN_NAME,
   LOGIN,
@@ -193,6 +198,72 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       );
 
       expect(generator.next().done).toBe(true);
+    });
+
+    describe('loginWithGoogleSaga', () => {
+      it('handles successful signup through google', () => {
+        const generator = loginWithGoogleSaga();
+
+        const googleLoginResponse = {
+          accessToken: 'mocked-token',
+          idToken: 'mocked-id-token',
+          type: 'success',
+          user: 'user',
+        };
+
+        const loginWithGoogle = generator.next().value;
+
+        expect(loginWithGoogle).toMatchSnapshot();
+
+        // get credential to firebase auth with fb token
+        const getCredentials = generator.next(googleLoginResponse).value;
+
+        expect(getCredentials).toMatchSnapshot();
+
+        // sign in to firebase with received credentials
+        const signToFirebaseWithCredentials = generator.next({
+          accessToken: 'mocked-token',
+          idToken: 'mocked-id-token',
+          type: '',
+          user: 'user-object',
+        }).value;
+
+        expect(signToFirebaseWithCredentials).toMatchSnapshot();
+
+        // get jwt token of created user in firebase
+        const token =
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
+        expect(
+          generator.next({
+            user: {
+              getIdToken: jest.fn(() => token),
+            },
+          }).value
+        ).toEqual(token);
+
+        expect(generator.next(token).value).toEqual(
+          put(
+            loginSuccess(token, {
+              name: expect.any(String),
+            })
+          )
+        );
+
+        expect(generator.next().done).toBe(true);
+      });
+
+      it('handles canceled signup through google', () => {
+        const generator = loginWithGoogleSaga();
+
+        generator.next();
+
+        expect(generator.next({ type: 'cancel' }).value).toEqual(
+          put(loginFailure('Login to google canceled'))
+        );
+
+        expect(generator.next().done).toBe(true);
+      });
     });
   });
 });
