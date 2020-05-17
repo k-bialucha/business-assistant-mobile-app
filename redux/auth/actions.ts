@@ -3,10 +3,12 @@ import {
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_WITH_FACEBOOK,
+  LOGIN_WITH_GOOGLE,
   LoginAction,
   LoginFailureAction,
   LoginSuccessAction,
   LoginWithFacebookAction,
+  LoginWithGoogleAction,
   LOGOUT,
   LogoutAction,
   SIGNUP,
@@ -86,5 +88,11 @@ export function signupFailure(message: string): SignupFailureAction {
 export function loginWithFacebook(): LoginWithFacebookAction {
   return {
     type: LOGIN_WITH_FACEBOOK,
+  };
+}
+
+export function loginWithGoogle(): LoginWithGoogleAction {
+  return {
+    type: LOGIN_WITH_GOOGLE,
   };
 }
