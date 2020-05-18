@@ -5,7 +5,9 @@ import Colors from '../../theme/Colors';
 
 import { StyledView } from './Loader.styled';
 
-const Loader = () => {
+const Loader = ({ isLoading }) => {
+  if (!isLoading) return null;
+
   return (
     <StyledView>
       <ActivityIndicator color={Colors.gray} size="large" />
