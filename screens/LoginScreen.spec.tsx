@@ -2,7 +2,7 @@ import '@testing-library/jest-native/extend-expect';
 
 import React from 'react';
 
-import { fireEvent } from 'react-native-testing-library';
+import { act, fireEvent } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 
 import { NavigationData } from '../navigation/AuthNavigator';
@@ -50,9 +50,12 @@ describe('<LoginScreen />', () => {
     const someEmail = 'kamil.bialucha@gmail.com';
 
     fireEvent.changeText(emailInput, someEmail);
+
     fireEvent.changeText(passwordInput, 'mypass123');
 
-    fireEvent.press(loginButton);
+    await act(async () => {
+      fireEvent.press(loginButton);
+    });
 
     process.nextTick(() => {
       expect(store.getState().auth.username).toBe(someEmail);
