@@ -11,7 +11,11 @@ const StyledTextField = styled.TextInput`
   padding-bottom: 6px;
   color: #ffffff;
   border-bottom-width: 1px;
-  border-bottom-color: #ffffff;
+  border-bottom-color: ${props => (props.valid ? '#fff' : '#f00')};
 `;
 
-export { StyledTextField, StyledContainer };
+const ErrorMessage = styled.Text`
+  color: #f00;
+`;
+
+export { StyledTextField, StyledContainer, ErrorMessage };
