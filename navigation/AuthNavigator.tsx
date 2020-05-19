@@ -8,6 +8,7 @@ import {
 
 import AuthScreen from '../screens/AuthScreen';
 import LoginScreen from '../screens/LoginScreen';
+import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import SignupScreen from '../screens/SignupScreen';
 import Colors from '../theme/Colors';
 
@@ -15,6 +16,7 @@ export type ParamList = {
   Authorization: undefined;
   Login: undefined;
   Signup: undefined;
+  ResetPassword: { email: String };
 };
 
 const defaultAuthScreenNavOptions = {
@@ -39,6 +41,11 @@ const AuthNavigator = () => {
       <StackNavigator.Screen
         name="Login"
         component={LoginScreen}
+        options={defaultAuthScreenNavOptions}
+      />
+      <StackNavigator.Screen
+        name="ResetPassword"
+        component={ResetPasswordScreen}
         options={defaultAuthScreenNavOptions}
       />
       <StackNavigator.Screen
