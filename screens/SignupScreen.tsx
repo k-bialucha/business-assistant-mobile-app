@@ -78,6 +78,7 @@ const SignupScreen: React.FC<Props> = () => {
               secureTextEntry
             />
             <Button
+              testID="signup-button"
               title="Sign Up"
               buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
               titleStyle={{ color: Colors.gray }}
