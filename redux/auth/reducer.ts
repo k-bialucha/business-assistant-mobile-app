@@ -70,6 +70,8 @@ function reducer(
       return initialState;
 
     case SIGNUP:
+      Keyboard.dismiss();
+
       return {
         ...state,
         requestStatus: RequestStatus.LOADING,
@@ -92,6 +94,8 @@ function reducer(
     }
 
     case SIGNUP_FAILURE:
+      Alert.alert('Something went wrong', action.payload);
+
       return {
         ...state,
         token: null,
