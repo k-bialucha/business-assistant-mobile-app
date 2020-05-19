@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
+import { Formik } from 'formik';
 import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
+import * as Yup from 'yup';
 
 import TextField from '../components/form/TextField';
 import { NavigationData } from '../navigation/AuthNavigator';
@@ -10,39 +12,82 @@ import Colors from '../theme/Colors';
 
 import { StyledContainer, StyledWideContainer } from './SignupScreen.styled';
 
+const SignupSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  phone: Yup.string()
+    .min(9, 'Too Short!')
+    .min(12, 'Too Short!'),
+  password: Yup.string()
+    .min(6, 'Too Short!')
+    .required('Required'),
+});
+
 type Props = NavigationData<'Signup'>;
 
 const SignupScreen: React.FC<Props> = () => {
-  const [email, setEmail] = useState<string>('');
-  const [phone, setPhone] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
   const dispatch = useDispatch();
 
   return (
     <StyledContainer>
-      <StyledWideContainer>
-        <TextField value={email} placeholder="E-mail" onChangeText={setEmail} />
-        <TextField
-          value={phone}
-          placeholder="Phone (Optional)"
-          onChangeText={setPhone}
-        />
-        <TextField
-          value={password}
-          placeholder="Password"
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-        <Button
-          title="Sign Up"
-          buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
-          titleStyle={{ color: Colors.gray }}
-          onPress={() => {
-            dispatch(signup(email, password, phone));
-          }}
-        />
-      </StyledWideContainer>
+      <Formik
+        initialValues={{ email: '', password: '', phone: '' }}
+        validationSchema={SignupSchema}
+        onSubmit={({ email, password, phone }) => {
+          dispatch(signup(email, password, phone));
+        }}
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <StyledWideContainer>
+            <TextField
+              testID="email-input"
+              value={values.email}
+              placeholder="E-mail"
+              onChangeText={handleChange('email')}
+              onBlur={handleBlur('email')}
+              error={errors.email}
+              touched={touched.email}
+              keyboardType="email-address"
+            />
+            <TextField
+              testID="phone-input"
+              value={values.phone}
+              placeholder="Phone (Optional)"
+              onChangeText={handleChange('phone')}
+              onBlur={handleBlur('phone')}
+              error={errors.phone}
+              touched={touched.phone}
+              keyboardType="phone-pad"
+            />
+            <TextField
+              testID="password-input"
+              value={values.password}
+              placeholder="Password"
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              error={errors.password}
+              touched={touched.password}
+              secureTextEntry
+            />
+            <Button
+              title="Sign Up"
+              buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
+              titleStyle={{ color: Colors.gray }}
+              onPress={() => {
+                handleSubmit();
+              }}
+            />
+          </StyledWideContainer>
+        )}
+      </Formik>
     </StyledContainer>
   );
 };
