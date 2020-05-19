@@ -46,7 +46,10 @@ const AuthNavigator = () => {
       <StackNavigator.Screen
         name="ResetPassword"
         component={ResetPasswordScreen}
-        options={defaultAuthScreenNavOptions}
+        options={{
+          ...defaultAuthScreenNavOptions,
+          title: 'Reset Password',
+        }}
       />
       <StackNavigator.Screen
         name="Signup"
