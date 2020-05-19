@@ -1,3 +1,5 @@
+import { Alert } from 'react-native';
+
 import * as Facebook from 'expo-facebook';
 import decode from 'jwt-decode';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
@@ -16,6 +18,8 @@ import {
   LOGIN,
   LOGIN_WITH_FACEBOOK,
   LoginAction,
+  RESET_PASSWORD,
+  ResetPasswordAction,
   SIGNUP,
   SignupAction,
 } from './types';
@@ -115,8 +119,37 @@ export function* loginWithFacebookSaga() {
   }
 }
 
+export function* resetPasswordSaga({
+  payload: { email },
+}: ResetPasswordAction) {
+  try {
+    const actionCodeSettings = {
+      // to control if back to app after password change in browser
+      // url: `https://www.example.com/?email=${email}`,
+    };
+
+    yield call(
+      myFirebaseApp.auth.sendPasswordResetEmail,
+      email,
+      actionCodeSettings
+    );
+
+    Alert.alert(
+      'Reset Password',
+      'Link to reset password has been sent to the email'
+    );
+  } catch (error) {
+    if (error instanceof Error) {
+      Alert.alert('Reset Password', error.message);
+    } else {
+      Alert.alert('Reset Password', 'Something went wrong');
+    }
+  }
+}
+
 export default function* watchSaga() {
   yield takeLatest(LOGIN, loginSaga);
   yield takeLatest(SIGNUP, signupSaga);
   yield takeLatest(LOGIN_WITH_FACEBOOK, loginWithFacebookSaga);
+  yield takeLatest(RESET_PASSWORD, resetPasswordSaga);
 }
