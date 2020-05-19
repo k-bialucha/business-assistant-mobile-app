@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text, TouchableWithoutFeedback } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { Formik } from 'formik';
@@ -25,7 +25,7 @@ const LoginSchema = Yup.object().shape({
 
 type Props = NavigationData<'Login'>;
 
-const LoginScreen: React.FC<Props> = () => {
+const LoginScreen: React.FC<Props> = props => {
   const dispatch = useDispatch();
 
   return (
@@ -70,6 +70,17 @@ const LoginScreen: React.FC<Props> = () => {
                 touched={touched.password}
                 secureTextEntry
               />
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  props.navigation.navigate('ResetPassword', {
+                    email: values.email,
+                  });
+                }}
+              >
+                <Text style={{ color: Colors.gray, alignSelf: 'flex-end' }}>
+                  Forgot Password?
+                </Text>
+              </TouchableWithoutFeedback>
               <Button
                 testID="login-button"
                 title="Login"
