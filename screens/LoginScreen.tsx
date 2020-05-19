@@ -53,6 +53,7 @@ const LoginScreen: React.FC<Props> = () => {
               onBlur={handleBlur('email')}
               error={errors.email}
               touched={touched.email}
+              keyboardType="email-address"
             />
             <TextField
               testID="password-input"
