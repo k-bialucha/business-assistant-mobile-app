@@ -1,12 +1,8 @@
 import styled from 'styled-components/native';
 
-import Colors from '../theme/Colors';
-
 const StyledContainer = styled.View`
-  flex: 1;
-  align-items: center;
+  flex-grow: 1;
   padding: 20px;
-  background-color: ${Colors.navyBlue};
 `;
 
 const StyledWideContainer = styled.View`
