@@ -9,6 +9,8 @@ import {
   LoginWithFacebookAction,
   LOGOUT,
   LogoutAction,
+  RESET_PASSWORD,
+  ResetPasswordAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -86,5 +88,12 @@ export function signupFailure(message: string): SignupFailureAction {
 export function loginWithFacebook(): LoginWithFacebookAction {
   return {
     type: LOGIN_WITH_FACEBOOK,
+  };
+}
+
+export function resetPassword(email): ResetPasswordAction {
+  return {
+    type: RESET_PASSWORD,
+    payload: { email },
   };
 }
