@@ -1,4 +1,5 @@
 import React from 'react';
+import { ScrollView } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { Formik } from 'formik';
@@ -28,56 +29,61 @@ const LoginScreen: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   return (
-    <StyledView>
-      <Formik
-        initialValues={{ email: '', password: '' }}
-        validationSchema={LoginSchema}
-        onSubmit={({ email, password }) => {
-          dispatch(login(email, password));
-        }}
-      >
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          errors,
-          touched,
-        }) => (
-          <StyledWideContainer>
-            <TextField
-              testID="email-input"
-              value={values.email}
-              placeholder="E-mail"
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              error={errors.email}
-              touched={touched.email}
-              keyboardType="email-address"
-            />
-            <TextField
-              testID="password-input"
-              value={values.password}
-              placeholder="Password"
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              error={errors.password}
-              touched={touched.password}
-              secureTextEntry
-            />
-            <Button
-              testID="login-button"
-              title="Login"
-              buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
-              titleStyle={{ color: Colors.gray }}
-              onPress={() => {
-                handleSubmit();
-              }}
-            />
-          </StyledWideContainer>
-        )}
-      </Formik>
-    </StyledView>
+    <ScrollView
+      keyboardShouldPersistTaps="handled"
+      style={{ backgroundColor: Colors.navyBlue }}
+    >
+      <StyledView>
+        <Formik
+          initialValues={{ email: '', password: '' }}
+          validationSchema={LoginSchema}
+          onSubmit={({ email, password }) => {
+            dispatch(login(email, password));
+          }}
+        >
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+          }) => (
+            <StyledWideContainer>
+              <TextField
+                testID="email-input"
+                value={values.email}
+                placeholder="E-mail"
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                error={errors.email}
+                touched={touched.email}
+                keyboardType="email-address"
+              />
+              <TextField
+                testID="password-input"
+                value={values.password}
+                placeholder="Password"
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                error={errors.password}
+                touched={touched.password}
+                secureTextEntry
+              />
+              <Button
+                testID="login-button"
+                title="Login"
+                buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
+                titleStyle={{ color: Colors.gray }}
+                onPress={() => {
+                  handleSubmit();
+                }}
+              />
+            </StyledWideContainer>
+          )}
+        </Formik>
+      </StyledView>
+    </ScrollView>
   );
 };
 
