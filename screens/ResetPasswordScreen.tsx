@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 
 import TextField from '../components/form/TextField';
 import { NavigationData } from '../navigation/AuthNavigator';
+import { resetPassword } from '../redux/auth/actions';
 import Colors from '../theme/Colors';
 
 import { StyledView, StyledWideContainer } from './ResetPasswordScreen.styled';
@@ -19,9 +20,9 @@ const ResetPasswordSchema = Yup.object().shape({
     .required('Required'),
 });
 
-type Props = NavigationData<'Login'>;
+type Props = NavigationData<'ResetPassword'>;
 
-const ResetPasswordScreen: React.FC<Props> = props => {
+const ResetPasswordScreen: React.FC<Props> = ({ route }) => {
   const dispatch = useDispatch();
 
   return (
@@ -31,10 +32,10 @@ const ResetPasswordScreen: React.FC<Props> = props => {
     >
       <StyledView>
         <Formik
-          initialValues={{ email: props.route.params.email }}
+          initialValues={{ email: route.params.email }}
           validationSchema={ResetPasswordSchema}
           onSubmit={({ email }) => {
-            alert('call action');
+            dispatch(resetPassword(email));
           }}
         >
           {({
@@ -57,7 +58,7 @@ const ResetPasswordScreen: React.FC<Props> = props => {
                 keyboardType="email-address"
               />
               <Button
-                testID="reset-pass-button"
+                testID="reset-password-button"
                 title="Reset password"
                 buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
                 titleStyle={{ color: Colors.gray }}
