@@ -4,9 +4,12 @@ import {
   loginSuccess,
   loginWithFacebook,
   logout,
+  resetPasswordFailure,
+  resetPasswordSuccess,
   signup,
   signupFailure,
   signupSuccess,
+  resetPassword,
 } from './actions';
 import {
   DOMAIN_NAME,
@@ -16,12 +19,18 @@ import {
   LOGIN_WITH_FACEBOOK,
   LoginWithFacebookAction,
   LOGOUT,
+  RESET_PASSWORD_FAILURE,
+  RESET_PASSWORD_SUCCESS,
+  ResetPasswordFailureAction,
+  ResetPasswordSuccessAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
   SignupAction,
   SignupFailureAction,
   SignupSuccessAction,
+  ResetPasswordAction,
+  RESET_PASSWORD,
 } from './types';
 
 describe(`${DOMAIN_NAME}/actions`, () => {
@@ -120,12 +129,12 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
     const result = signupFailure(mockedMessage);
 
-    const extected: SignupFailureAction = {
+    const expected: SignupFailureAction = {
       type: SIGNUP_FAILURE,
       payload: mockedMessage,
     };
 
-    expect(result).toEqual(extected);
+    expect(result).toEqual(expected);
   });
 
   test('loginWithFacebook action creator returns correct object', () => {
@@ -133,6 +142,19 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
     const expected: LoginWithFacebookAction = {
       type: LOGIN_WITH_FACEBOOK,
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('resetPassword action creator returns correct object', () => {
+    const mockedEmail: string = 'mocked-email@email.com';
+
+    const result = resetPassword(mockedEmail);
+
+    const expected: ResetPasswordAction = {
+      type: RESET_PASSWORD,
+      payload: { email: mockedEmail },
     };
 
     expect(result).toEqual(expected);
