@@ -8,6 +8,7 @@ export const SIGNUP = 'SIGNUP';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK';
+export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE';
 
 export interface LoginAction {
   type: typeof LOGIN;
@@ -68,6 +69,10 @@ export interface LoginWithFacebookAction {
   type: typeof LOGIN_WITH_FACEBOOK;
 }
 
+export interface LoginWithGoogleAction {
+  type: typeof LOGIN_WITH_GOOGLE;
+}
+
 export type AuthActions =
   | LoginAction
   | LoginSuccessAction
@@ -76,7 +81,8 @@ export type AuthActions =
   | SignupAction
   | SignupSuccessAction
   | SignupFailureAction
-  | LoginWithFacebookAction;
+  | LoginWithFacebookAction
+  | LoginWithGoogleAction;
 
 export enum RequestStatus {
   UNAUTHENTICATED,
