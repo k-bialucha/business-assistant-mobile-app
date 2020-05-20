@@ -132,6 +132,64 @@ Object {
 }
 `;
 
+exports[`auth/saga loginWithGoogleSaga handles successful signup through google 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      Object {
+        "androidClientId": undefined,
+        "iosClientId": undefined,
+        "scopes": Array [
+          "profile",
+          "email",
+        ],
+      },
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga loginWithGoogleSaga handles successful signup through google 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "mocked-id-token",
+      "mocked-token",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga loginWithGoogleSaga handles successful signup through google 3`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      Object {
+        "accessToken": "mocked-token",
+        "idToken": "mocked-id-token",
+        "type": "",
+        "user": "user-object",
+      },
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
 exports[`auth/saga resetPasswordSaga handles successful sending reset password form 1`] = `
 Object {
   "@@redux-saga/IO": true,

@@ -3,6 +3,7 @@ import {
   loginFailure,
   loginSuccess,
   loginWithFacebook,
+  loginWithGoogle,
   logout,
   resetPasswordFailure,
   resetPasswordSuccess,
@@ -17,7 +18,9 @@ import {
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_WITH_FACEBOOK,
+  LOGIN_WITH_GOOGLE,
   LoginWithFacebookAction,
+  LoginWithGoogleAction,
   LOGOUT,
   RESET_PASSWORD_FAILURE,
   RESET_PASSWORD_SUCCESS,
@@ -142,6 +145,16 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
     const expected: LoginWithFacebookAction = {
       type: LOGIN_WITH_FACEBOOK,
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('loginWithGoogle action creator returns correct object', () => {
+    const result = loginWithGoogle();
+
+    const expected: LoginWithGoogleAction = {
+      type: LOGIN_WITH_GOOGLE,
     };
 
     expect(result).toEqual(expected);

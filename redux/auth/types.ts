@@ -8,6 +8,7 @@ export const SIGNUP = 'SIGNUP';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK';
+export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 
 export interface LoginAction {
@@ -69,6 +70,10 @@ export interface LoginWithFacebookAction {
   type: typeof LOGIN_WITH_FACEBOOK;
 }
 
+export interface LoginWithGoogleAction {
+  type: typeof LOGIN_WITH_GOOGLE;
+}
+
 export interface ResetPasswordAction {
   type: typeof RESET_PASSWORD;
   payload: { email: string };
@@ -83,6 +88,7 @@ export type AuthActions =
   | SignupSuccessAction
   | SignupFailureAction
   | LoginWithFacebookAction
+  | LoginWithGoogleAction
   | ResetPasswordAction;
 
 export enum RequestStatus {

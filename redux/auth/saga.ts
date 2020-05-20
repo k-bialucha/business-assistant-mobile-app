@@ -1,10 +1,11 @@
 import { Alert } from 'react-native';
 
 import * as Facebook from 'expo-facebook';
+import * as Google from 'expo-google-app-auth';
 import decode from 'jwt-decode';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
-import { FACEBOOK_APP_ID } from '../../env';
+import { ANDROID_CLIENT_ID, FACEBOOK_APP_ID, IOS_CLIENT_ID } from '../../env';
 import { loginUser, signupUser } from '../../utils/apiCalls/authorization';
 import firebase, { myFirebaseApp } from '../../utils/firebase';
 
@@ -17,6 +18,7 @@ import {
 import {
   LOGIN,
   LOGIN_WITH_FACEBOOK,
+  LOGIN_WITH_GOOGLE,
   LoginAction,
   RESET_PASSWORD,
   ResetPasswordAction,
@@ -119,6 +121,43 @@ export function* loginWithFacebookSaga() {
   }
 }
 
+export function* loginWithGoogleSaga() {
+  try {
+    const { type, idToken, accessToken } = yield call(Google.logInAsync, {
+      iosClientId: IOS_CLIENT_ID,
+      androidClientId: ANDROID_CLIENT_ID,
+      scopes: ['profile', 'email'],
+    });
+
+    if (type === 'success') {
+      const credential = yield call(
+        firebase.auth.GoogleAuthProvider.credential,
+        idToken,
+        accessToken
+      );
+
+      const { user } = yield call(
+        myFirebaseApp.auth.signInWithCredential,
+        credential
+      );
+
+      const jwtToken = yield user.getIdToken();
+
+      const { user_id: userId, name, picture } = decode(jwtToken);
+
+      yield put(loginSuccess(jwtToken, { name, id: userId, image: picture }));
+    } else if (type === 'cancel') {
+      throw new Error('Login to google canceled');
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      yield put(loginFailure(error.message));
+    } else {
+      yield put(loginFailure('Login Error'));
+    }
+  }
+}
+
 export function* resetPasswordSaga({
   payload: { email },
 }: ResetPasswordAction) {
@@ -151,5 +190,6 @@ export default function* watchSaga() {
   yield takeLatest(LOGIN, loginSaga);
   yield takeLatest(SIGNUP, signupSaga);
   yield takeLatest(LOGIN_WITH_FACEBOOK, loginWithFacebookSaga);
+  yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
   yield takeLatest(RESET_PASSWORD, resetPasswordSaga);
 }

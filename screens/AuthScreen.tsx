@@ -7,7 +7,7 @@ import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 
 import { NavigationData } from '../navigation/AuthNavigator';
-import { loginWithFacebook } from '../redux/auth/actions';
+import { loginWithFacebook, loginWithGoogle } from '../redux/auth/actions';
 import Colors from '../theme/Colors';
 
 import {
@@ -65,7 +65,9 @@ const AuthScreen: React.FC<Props> = ({ navigation }) => {
             buttonStyle={{ borderColor: Colors.silver }}
             titleStyle={{ color: Colors.silver, marginLeft: 10 }}
             icon={<FontAwesome name="google" size={18} color="white" />}
-            onPress={() => alert('navigate to google login')}
+            onPress={() => {
+              dispatch(loginWithGoogle());
+            }}
           />
         </StyledWideContainer>
       </StyledButtonsContainer>
