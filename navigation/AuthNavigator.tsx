@@ -16,7 +16,7 @@ export type ParamList = {
   Authorization: undefined;
   Login: undefined;
   Signup: undefined;
-  ResetPassword: { email: String };
+  ResetPassword: { email: string };
 };
 
 const defaultAuthScreenNavOptions = {
