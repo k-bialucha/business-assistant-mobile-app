@@ -132,7 +132,7 @@ Object {
 }
 `;
 
-exports[`auth/saga loginWithFacebookSaga loginWithGoogleSaga handles successful signup through google 1`] = `
+exports[`auth/saga loginWithGoogleSaga handles successful signup through google 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
@@ -154,7 +154,7 @@ Object {
 }
 `;
 
-exports[`auth/saga loginWithFacebookSaga loginWithGoogleSaga handles successful signup through google 2`] = `
+exports[`auth/saga loginWithGoogleSaga handles successful signup through google 2`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
@@ -170,7 +170,7 @@ Object {
 }
 `;
 
-exports[`auth/saga loginWithFacebookSaga loginWithGoogleSaga handles successful signup through google 3`] = `
+exports[`auth/saga loginWithGoogleSaga handles successful signup through google 3`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
