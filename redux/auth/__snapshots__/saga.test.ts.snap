@@ -148,22 +148,6 @@ Object {
 }
 `;
 
-exports[`auth/saga resetPasswordSaga handles unsuccessful sending reset password form 1`] = `
-Object {
-  "@@redux-saga/IO": true,
-  "combinator": false,
-  "payload": Object {
-    "args": Array [
-      null,
-      Object {},
-    ],
-    "context": null,
-    "fn": [Function],
-  },
-  "type": "CALL",
-}
-`;
-
 exports[`auth/saga signupSaga handles successful signup 1`] = `
 Object {
   "@@redux-saga/IO": true,
