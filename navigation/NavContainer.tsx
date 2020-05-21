@@ -24,17 +24,14 @@ const NavContainer = () => {
   );
 
   return (
-    <NavigationContainer>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          {isAuthenticated && <AppNavigator />}
-          {!isAuthenticated && didTryAutoLogin && <AuthNavigator />}
-          {!isAuthenticated && !didTryAutoLogin && <StartupScreen />}
-        </>
-      )}
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        {isAuthenticated && <AppNavigator />}
+        {!isAuthenticated && didTryAutoLogin && <AuthNavigator />}
+        {!isAuthenticated && !didTryAutoLogin && <StartupScreen />}
+      </NavigationContainer>
+      <Loader isLoading={isLoading} />
+    </>
   );
 };
 

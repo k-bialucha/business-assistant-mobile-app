@@ -6,15 +6,15 @@ import { act, fireEvent } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 
 import { NavigationData } from '../navigation/AuthNavigator';
-import { loginUser } from '../utils/apiCalls/authorization';
+import { signupUser } from '../utils/apiCalls/authorization';
 import renderWithRedux from '../utils/testing/renderWithRedux';
 
-import LoginScreen from './LoginScreen';
+import SignupScreen from './SignupScreen';
 
-type Props = NavigationData<'Login'>;
+type Props = NavigationData<'Signup'>;
 
 const fakeProps: Props = {
-  route: { key: '1234', name: 'Login' },
+  route: { key: '1234', name: 'Signup' },
   // @ts-ignore
   navigation: {},
 };
@@ -33,28 +33,31 @@ jest.mock('redux-saga/effects', () => {
 
 const someApiResponse = { idToken: 'highly-secure-token', localId: '999abcd' };
 
-describe('<LoginScreen />', () => {
+describe('<SignupScreen />', () => {
   beforeEach(() => {
-    (loginUser as jest.Mock).mockResolvedValue(someApiResponse);
+    (signupUser as jest.Mock).mockResolvedValue(someApiResponse);
   });
 
   const { queryByTestId, store } = renderWithRedux(
-    <LoginScreen {...fakeProps} />
+    <SignupScreen {...fakeProps} />
   );
 
   const emailInput: ReactTestInstance = queryByTestId('email-input');
+  //   const phoneInput: ReactTestInstance = queryByTestId('phone-input');
   const passwordInput: ReactTestInstance = queryByTestId('password-input');
-  const loginButton: ReactTestInstance = queryByTestId('login-button');
+  const signupButton: ReactTestInstance = queryByTestId('signup-button');
 
-  it('allows to login', async () => {
-    const someEmail = 'kamil.bialucha@gmail.com';
+  it('allows to sign up', async () => {
+    const someEmail = 'siatkasebastian@gmail.com';
 
     fireEvent.changeText(emailInput, someEmail);
+
+    // fireEvent.changeText(phoneInput, '');
 
     fireEvent.changeText(passwordInput, 'mypass123');
 
     await act(async () => {
-      fireEvent.press(loginButton);
+      fireEvent.press(signupButton);
     });
 
     process.nextTick(() => {
