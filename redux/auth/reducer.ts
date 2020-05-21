@@ -66,8 +66,6 @@ function reducer(
       };
 
     case LOGOUT:
-      AsyncStorage.removeItem('userData');
-
       return initialState;
 
     case SIGNUP:

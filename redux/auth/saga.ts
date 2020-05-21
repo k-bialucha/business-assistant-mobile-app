@@ -21,6 +21,7 @@ import {
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_GOOGLE,
   LoginAction,
+  LOGOUT,
   SIGNUP,
   SignupAction,
   TRY_AUTO_LOGIN,
@@ -198,10 +199,15 @@ export function* tryAutoLoginSaga() {
   }
 }
 
+export function* logoutSaga() {
+  yield AsyncStorage.removeItem('userData');
+}
+
 export default function* watchSaga() {
   yield takeLatest(LOGIN, loginSaga);
   yield takeLatest(SIGNUP, signupSaga);
   yield takeLatest(LOGIN_WITH_FACEBOOK, loginWithFacebookSaga);
   yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
   yield takeLatest(TRY_AUTO_LOGIN, tryAutoLoginSaga);
+  yield takeLatest(LOGOUT, logoutSaga);
 }
