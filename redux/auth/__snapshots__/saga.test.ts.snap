@@ -31,6 +31,15 @@ Object {
 }
 `;
 
+exports[`auth/saga loginSaga handles successful login 3`] = `
+Promise {
+  "_40": 0,
+  "_55": null,
+  "_65": 0,
+  "_72": null,
+}
+`;
+
 exports[`auth/saga loginSaga handles unsuccessful login 1`] = `
 Object {
   "@@redux-saga/IO": true,
@@ -132,6 +141,15 @@ Object {
 }
 `;
 
+exports[`auth/saga loginWithFacebookSaga handles successful signup through facebook 5`] = `
+Promise {
+  "_40": 0,
+  "_55": null,
+  "_65": 0,
+  "_72": null,
+}
+`;
+
 exports[`auth/saga loginWithGoogleSaga handles successful signup through google 1`] = `
 Object {
   "@@redux-saga/IO": true,
@@ -190,6 +208,15 @@ Object {
 }
 `;
 
+exports[`auth/saga loginWithGoogleSaga handles successful signup through google 4`] = `
+Promise {
+  "_40": 0,
+  "_55": null,
+  "_65": 0,
+  "_72": null,
+}
+`;
+
 exports[`auth/saga signupSaga handles successful signup 1`] = `
 Object {
   "@@redux-saga/IO": true,
@@ -219,6 +246,15 @@ Object {
     "fn": [Function],
   },
   "type": "CALL",
+}
+`;
+
+exports[`auth/saga signupSaga handles successful signup 3`] = `
+Promise {
+  "_40": 0,
+  "_55": null,
+  "_65": 0,
+  "_72": null,
 }
 `;
 

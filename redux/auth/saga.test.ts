@@ -36,6 +36,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       const delayDescriptor = generator.next().value;
       const apiCallDescriptor = generator.next().value;
       const putDescriptor = generator.next(someApiResponse).value;
+      const saveToAsyncStorage = generator.next().value;
 
       expect(delayDescriptor).toMatchSnapshot();
       expect(apiCallDescriptor).toMatchSnapshot();
@@ -52,6 +53,8 @@ describe(`${DOMAIN_NAME}/saga`, () => {
           },
         })
       );
+      //
+      expect(saveToAsyncStorage).toMatchSnapshot();
       expect(generator.next().done).toBe(true);
     });
 
@@ -93,6 +96,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       const delayDescriptor = generator.next().value;
       const apiCallDescriptor = generator.next().value;
       const putDescriptor = generator.next(someApiResponse).value;
+      const saveToAsyncStorage = generator.next().value;
 
       expect(delayDescriptor).toMatchSnapshot();
       expect(apiCallDescriptor).toMatchSnapshot();
@@ -109,6 +113,8 @@ describe(`${DOMAIN_NAME}/saga`, () => {
           },
         })
       );
+      // TODO
+      expect(saveToAsyncStorage).toMatchSnapshot();
       expect(generator.next().done).toBe(true);
     });
 
@@ -184,6 +190,8 @@ describe(`${DOMAIN_NAME}/saga`, () => {
         )
       );
 
+      expect(generator.next().value).toMatchSnapshot();
+
       expect(generator.next().done).toBe(true);
     });
 
@@ -250,6 +258,8 @@ describe(`${DOMAIN_NAME}/saga`, () => {
           })
         )
       );
+
+      expect(generator.next().value).toMatchSnapshot();
 
       expect(generator.next().done).toBe(true);
     });

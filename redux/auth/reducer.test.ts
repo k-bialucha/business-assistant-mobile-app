@@ -70,12 +70,13 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
     const someUserId: string = 'some-user-id';
     const someUserImage: string = 'some-user-image-url';
 
-    const previousState = {
+    const previousState: AuthState = {
       token: null,
       username: someEmail,
       userId: someUserId,
       userImage: someUserImage,
       requestStatus: RequestStatus.LOADING,
+      didTryAutoLogin: false,
     };
 
     const action: LoginFailureAction = {
@@ -91,6 +92,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userId: someUserId,
       userImage: someUserImage,
       requestStatus: RequestStatus.FAILURE,
+      didTryAutoLogin: false,
     };
 
     expect(nextState).toEqual(expectedState);
@@ -103,6 +105,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userId: 'some-user-id',
       userImage: 'url',
       requestStatus: RequestStatus.SUCCESS,
+      didTryAutoLogin: false,
     };
 
     const action: LogoutAction = {
@@ -117,6 +120,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userId: null,
       userImage: null,
       requestStatus: RequestStatus.UNAUTHENTICATED,
+      didTryAutoLogin: false,
     };
 
     expect(nextState).toEqual(expectedState);
