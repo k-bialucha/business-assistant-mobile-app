@@ -19,7 +19,7 @@ const SignupSchema = Yup.object().shape({
     .required('Required'),
   phone: Yup.string()
     .min(9, 'Too Short!')
-    .min(12, 'Too Short!'),
+    .max(12, 'Too Long!'),
   password: Yup.string()
     .min(6, 'Too Short!')
     .required('Required'),
