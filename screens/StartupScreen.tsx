@@ -21,7 +21,7 @@ const StartupScreen = () => {
 
   return (
     <StyledView>
-      <ActivityIndicator size="large" color="black" />
+      <ActivityIndicator size="large" color="white" />
     </StyledView>
   );
 };
