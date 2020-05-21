@@ -11,12 +11,16 @@ import {
   LoginWithGoogleAction,
   LOGOUT,
   LogoutAction,
+  SET_DID_TRY_AUTO_LOGIN,
+  SetDidTryAutoLoginAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
   SignupAction,
   SignupFailureAction,
   SignupSuccessAction,
+  TRY_AUTO_LOGIN,
+  TryAutoLoginAction,
 } from './types';
 
 export function login(email: string, password: string): LoginAction {
@@ -94,5 +98,17 @@ export function loginWithFacebook(): LoginWithFacebookAction {
 export function loginWithGoogle(): LoginWithGoogleAction {
   return {
     type: LOGIN_WITH_GOOGLE,
+  };
+}
+
+export function setDidTryAutoLogin(): SetDidTryAutoLoginAction {
+  return {
+    type: SET_DID_TRY_AUTO_LOGIN,
+  };
+}
+
+export function tryAutoLogin(): TryAutoLoginAction {
+  return {
+    type: TRY_AUTO_LOGIN,
   };
 }
