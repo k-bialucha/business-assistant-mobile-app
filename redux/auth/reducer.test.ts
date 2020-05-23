@@ -10,6 +10,8 @@ import {
   LOGOUT,
   LogoutAction,
   RequestStatus,
+  SET_DID_TRY_AUTO_LOGIN,
+  SetDidTryAutoLoginAction,
 } from './types';
 
 describe(`${DOMAIN_NAME}/reducer`, () => {
@@ -121,6 +123,26 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userImage: null,
       requestStatus: RequestStatus.UNAUTHENTICATED,
       didTryAutoLogin: false,
+    };
+
+    expect(nextState).toEqual(expectedState);
+  });
+
+  it('handles setDidTryAutoLogin action', () => {
+    const previousState = {
+      ...initialState,
+      didTryAutoLogin: false,
+    };
+
+    const action: SetDidTryAutoLoginAction = {
+      type: SET_DID_TRY_AUTO_LOGIN,
+    };
+
+    const nextState: AuthState = reducer(previousState, action);
+
+    const expectedState: AuthState = {
+      ...initialState,
+      didTryAutoLogin: true,
     };
 
     expect(nextState).toEqual(expectedState);
