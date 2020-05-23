@@ -5,9 +5,11 @@ import {
   loginWithFacebook,
   loginWithGoogle,
   logout,
+  setDidTryAutoLogin,
   signup,
   signupFailure,
   signupSuccess,
+  tryAutoLogin,
 } from './actions';
 import {
   DOMAIN_NAME,
@@ -19,12 +21,16 @@ import {
   LoginWithFacebookAction,
   LoginWithGoogleAction,
   LOGOUT,
+  SET_DID_TRY_AUTO_LOGIN,
+  SetDidTryAutoLoginAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
   SignupAction,
   SignupFailureAction,
   SignupSuccessAction,
+  TRY_AUTO_LOGIN,
+  TryAutoLoginAction,
 } from './types';
 
 describe(`${DOMAIN_NAME}/actions`, () => {
@@ -146,6 +152,26 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
     const expected: LoginWithGoogleAction = {
       type: LOGIN_WITH_GOOGLE,
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('setDidTryAutoLogin action creator returns correct object', () => {
+    const result = setDidTryAutoLogin();
+
+    const expected: SetDidTryAutoLoginAction = {
+      type: SET_DID_TRY_AUTO_LOGIN,
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('tryAutoLogin action creator returns correct object', () => {
+    const result = tryAutoLogin();
+
+    const expected: TryAutoLoginAction = {
+      type: TRY_AUTO_LOGIN,
     };
 
     expect(result).toEqual(expected);
