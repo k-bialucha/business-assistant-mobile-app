@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import { Alert, Keyboard } from 'react-native';
 
 import {
   AuthActions,
@@ -37,6 +37,8 @@ function reducer(
 ): AuthState {
   switch (action.type) {
     case LOGIN:
+      Keyboard.dismiss();
+
       return {
         ...state,
         requestStatus: RequestStatus.LOADING,
@@ -59,6 +61,8 @@ function reducer(
     }
 
     case LOGIN_FAILURE:
+      Alert.alert('Something went wrong', action.payload);
+
       return {
         ...state,
         token: null,
@@ -69,6 +73,8 @@ function reducer(
       return initialState;
 
     case SIGNUP:
+      Keyboard.dismiss();
+
       return {
         ...state,
         requestStatus: RequestStatus.LOADING,
@@ -91,6 +97,8 @@ function reducer(
     }
 
     case SIGNUP_FAILURE:
+      Alert.alert('Something went wrong', action.payload);
+
       return {
         ...state,
         token: null,
