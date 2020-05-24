@@ -76,7 +76,7 @@ const AuthScreen: React.FC<Props> = ({ navigation }) => {
           <TouchableWithoutFeedback
             onPress={() => navigation.navigate('Login')}
           >
-            <PlainText light bold>
+            <PlainText theme="light" bold>
               Log in
             </PlainText>
           </TouchableWithoutFeedback>

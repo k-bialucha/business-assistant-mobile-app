@@ -93,7 +93,7 @@ exports[`<AuthScreen /> matches the snaphot 1`] = `
       >
         <PlainText
           bold={true}
-          light={true}
+          theme="light"
         >
           Log in
         </PlainText>
