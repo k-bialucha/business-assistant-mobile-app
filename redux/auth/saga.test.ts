@@ -53,7 +53,6 @@ describe(`${DOMAIN_NAME}/saga`, () => {
           },
         })
       );
-      //
       expect(saveToAsyncStorage).toMatchSnapshot();
       expect(generator.next().done).toBe(true);
     });
@@ -113,7 +112,6 @@ describe(`${DOMAIN_NAME}/saga`, () => {
           },
         })
       );
-      // TODO
       expect(saveToAsyncStorage).toMatchSnapshot();
       expect(generator.next().done).toBe(true);
     });
