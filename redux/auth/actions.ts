@@ -13,12 +13,16 @@ import {
   LogoutAction,
   RESET_PASSWORD,
   ResetPasswordAction,
+  SET_DID_TRY_AUTO_LOGIN,
+  SetDidTryAutoLoginAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
   SignupAction,
   SignupFailureAction,
   SignupSuccessAction,
+  TRY_AUTO_LOGIN,
+  TryAutoLoginAction,
 } from './types';
 
 export function login(email: string, password: string): LoginAction {
@@ -103,5 +107,17 @@ export function resetPassword(email): ResetPasswordAction {
   return {
     type: RESET_PASSWORD,
     payload: { email },
+  };
+}
+
+export function setDidTryAutoLogin(): SetDidTryAutoLoginAction {
+  return {
+    type: SET_DID_TRY_AUTO_LOGIN,
+  };
+}
+
+export function tryAutoLogin(): TryAutoLoginAction {
+  return {
+    type: TRY_AUTO_LOGIN,
   };
 }

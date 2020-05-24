@@ -5,12 +5,12 @@ import {
   loginWithFacebook,
   loginWithGoogle,
   logout,
-  resetPasswordFailure,
-  resetPasswordSuccess,
+  resetPassword,
+  setDidTryAutoLogin,
   signup,
   signupFailure,
   signupSuccess,
-  resetPassword,
+  tryAutoLogin,
 } from './actions';
 import {
   DOMAIN_NAME,
@@ -22,18 +22,18 @@ import {
   LoginWithFacebookAction,
   LoginWithGoogleAction,
   LOGOUT,
-  RESET_PASSWORD_FAILURE,
-  RESET_PASSWORD_SUCCESS,
-  ResetPasswordFailureAction,
-  ResetPasswordSuccessAction,
+  RESET_PASSWORD,
+  ResetPasswordAction,
+  SET_DID_TRY_AUTO_LOGIN,
+  SetDidTryAutoLoginAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
   SignupAction,
   SignupFailureAction,
   SignupSuccessAction,
-  ResetPasswordAction,
-  RESET_PASSWORD,
+  TRY_AUTO_LOGIN,
+  TryAutoLoginAction,
 } from './types';
 
 describe(`${DOMAIN_NAME}/actions`, () => {
@@ -168,6 +168,26 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     const expected: ResetPasswordAction = {
       type: RESET_PASSWORD,
       payload: { email: mockedEmail },
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('setDidTryAutoLogin action creator returns correct object', () => {
+    const result = setDidTryAutoLogin();
+
+    const expected: SetDidTryAutoLoginAction = {
+      type: SET_DID_TRY_AUTO_LOGIN,
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('tryAutoLogin action creator returns correct object', () => {
+    const result = tryAutoLogin();
+
+    const expected: TryAutoLoginAction = {
+      type: TRY_AUTO_LOGIN,
     };
 
     expect(result).toEqual(expected);

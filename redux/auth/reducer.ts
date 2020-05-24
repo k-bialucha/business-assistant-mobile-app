@@ -7,6 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   RequestStatus,
+  SET_DID_TRY_AUTO_LOGIN,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -18,6 +19,7 @@ export interface AuthState {
   userId: string;
   userImage: string;
   requestStatus: RequestStatus;
+  didTryAutoLogin: boolean;
 }
 
 export const initialState: AuthState = {
@@ -26,6 +28,7 @@ export const initialState: AuthState = {
   userId: null,
   userImage: null,
   requestStatus: RequestStatus.UNAUTHENTICATED,
+  didTryAutoLogin: false,
 };
 
 function reducer(
@@ -100,6 +103,12 @@ function reducer(
         ...state,
         token: null,
         requestStatus: RequestStatus.FAILURE,
+      };
+
+    case SET_DID_TRY_AUTO_LOGIN:
+      return {
+        ...state,
+        didTryAutoLogin: true,
       };
 
     default:

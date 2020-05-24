@@ -31,6 +31,22 @@ Object {
 }
 `;
 
+exports[`auth/saga loginSaga handles successful login 3`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "userData",
+      "{\\"token\\":\\"token-123\\",\\"username\\":\\"some-email\\",\\"id\\":\\"12345\\"}",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
 exports[`auth/saga loginSaga handles unsuccessful login 1`] = `
 Object {
   "@@redux-saga/IO": true,
@@ -132,6 +148,22 @@ Object {
 }
 `;
 
+exports[`auth/saga loginWithFacebookSaga handles successful signup through facebook 5`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "userData",
+      "{\\"token\\":\\"mocked-token\\",\\"username\\":\\"John Doe\\"}",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
 exports[`auth/saga loginWithGoogleSaga handles successful signup through google 1`] = `
 Object {
   "@@redux-saga/IO": true,
@@ -190,6 +222,22 @@ Object {
 }
 `;
 
+exports[`auth/saga loginWithGoogleSaga handles successful signup through google 4`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "userData",
+      "{\\"jwtToken\\":\\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\\",\\"username\\":\\"John Doe\\"}",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
 exports[`auth/saga resetPasswordSaga handles successful sending reset password form 1`] = `
 Object {
   "@@redux-saga/IO": true,
@@ -230,6 +278,22 @@ Object {
       "some-email@example.com",
       "strong-password",
       undefined,
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+  "type": "CALL",
+}
+`;
+
+exports[`auth/saga signupSaga handles successful signup 3`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "args": Array [
+      "userData",
+      "{\\"token\\":\\"token-123\\",\\"username\\":\\"some-email@example.com\\",\\"id\\":\\"12345\\"}",
     ],
     "context": null,
     "fn": [Function],

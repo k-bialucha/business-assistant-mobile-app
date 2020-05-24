@@ -4,7 +4,7 @@ exports[`<StartupScreen /> matches the snapshot 1`] = `
 <Styled(View)>
   <ActivityIndicator
     animating={true}
-    color="black"
+    color="white"
     hidesWhenStopped={true}
     size="large"
   />

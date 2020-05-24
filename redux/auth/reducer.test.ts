@@ -10,6 +10,8 @@ import {
   LOGOUT,
   LogoutAction,
   RequestStatus,
+  SET_DID_TRY_AUTO_LOGIN,
+  SetDidTryAutoLoginAction,
 } from './types';
 
 describe(`${DOMAIN_NAME}/reducer`, () => {
@@ -70,12 +72,13 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
     const someUserId: string = 'some-user-id';
     const someUserImage: string = 'some-user-image-url';
 
-    const previousState = {
+    const previousState: AuthState = {
       token: null,
       username: someEmail,
       userId: someUserId,
       userImage: someUserImage,
       requestStatus: RequestStatus.LOADING,
+      didTryAutoLogin: false,
     };
 
     const action: LoginFailureAction = {
@@ -91,6 +94,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userId: someUserId,
       userImage: someUserImage,
       requestStatus: RequestStatus.FAILURE,
+      didTryAutoLogin: false,
     };
 
     expect(nextState).toEqual(expectedState);
@@ -103,6 +107,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userId: 'some-user-id',
       userImage: 'url',
       requestStatus: RequestStatus.SUCCESS,
+      didTryAutoLogin: false,
     };
 
     const action: LogoutAction = {
@@ -117,6 +122,27 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userId: null,
       userImage: null,
       requestStatus: RequestStatus.UNAUTHENTICATED,
+      didTryAutoLogin: false,
+    };
+
+    expect(nextState).toEqual(expectedState);
+  });
+
+  it('handles setDidTryAutoLogin action', () => {
+    const previousState = {
+      ...initialState,
+      didTryAutoLogin: false,
+    };
+
+    const action: SetDidTryAutoLoginAction = {
+      type: SET_DID_TRY_AUTO_LOGIN,
+    };
+
+    const nextState: AuthState = reducer(previousState, action);
+
+    const expectedState: AuthState = {
+      ...initialState,
+      didTryAutoLogin: true,
     };
 
     expect(nextState).toEqual(expectedState);
