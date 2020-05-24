@@ -83,17 +83,22 @@ exports[`<AuthScreen /> matches the snaphot 1`] = `
     </Styled(View)>
   </Styled(View)>
   <Styled(View)>
-    <Styled(Text)>
+    <PlainText
+      color="#ffffff"
+    >
       Already have an account?
        
       <TouchableWithoutFeedback
         onPress={[Function]}
       >
-        <Styled(Text)>
+        <PlainText
+          bold={true}
+          theme="light"
+        >
           Log in
-        </Styled(Text)>
+        </PlainText>
       </TouchableWithoutFeedback>
-    </Styled(Text)>
+    </PlainText>
   </Styled(View)>
 </Styled(View)>
 `;
