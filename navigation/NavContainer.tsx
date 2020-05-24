@@ -12,8 +12,9 @@ import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
 
 const NavContainer = () => {
-  // temporary mocked const
-  const didTryAutoLogin = true;
+  const didTryAutoLogin: boolean = useSelector(
+    (state: RootState) => !!state.auth.didTryAutoLogin
+  );
 
   const isAuthenticated: boolean = useSelector(
     (state: RootState) => !!state.auth.token

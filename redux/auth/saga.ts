@@ -1,3 +1,5 @@
+import { AsyncStorage } from 'react-native';
+
 import * as Facebook from 'expo-facebook';
 import * as Google from 'expo-google-app-auth';
 import decode from 'jwt-decode';
@@ -10,6 +12,7 @@ import firebase, { myFirebaseApp } from '../../utils/firebase';
 import {
   loginFailure,
   loginSuccess,
+  setDidTryAutoLogin,
   signupFailure,
   signupSuccess,
 } from './actions';
@@ -18,8 +21,10 @@ import {
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_GOOGLE,
   LoginAction,
+  LOGOUT,
   SIGNUP,
   SignupAction,
+  TRY_AUTO_LOGIN,
 } from './types';
 
 export function* loginSaga({ payload: { email, password } }: LoginAction) {
@@ -31,6 +36,11 @@ export function* loginSaga({ payload: { email, password } }: LoginAction) {
     const { idToken: token, localId: userId } = response;
 
     yield put(loginSuccess(token, { name: email, id: userId }));
+    yield call(
+      AsyncStorage.setItem,
+      'userData',
+      JSON.stringify({ token, username: email, id: userId })
+    );
   } catch (error) {
     if (error instanceof Error) {
       yield put(loginFailure(error.message));
@@ -51,6 +61,11 @@ export function* signupSaga({
     const { idToken: token, localId: userId } = response;
 
     yield put(signupSuccess(token, { name: email, id: userId }));
+    yield call(
+      AsyncStorage.setItem,
+      'userData',
+      JSON.stringify({ token, username: email, id: userId })
+    );
   } catch (error) {
     if (error instanceof Error) {
       yield put(signupFailure(error.message));
@@ -105,6 +120,11 @@ export function* loginWithFacebookSaga() {
       const { user_id: userId, name, picture } = decode(jwtToken);
 
       yield put(loginSuccess(token, { name, id: userId, image: picture }));
+      yield call(
+        AsyncStorage.setItem,
+        'userData',
+        JSON.stringify({ token, username: name, id: userId, image: picture })
+      );
     } else if (type === 'cancel') {
       throw new Error('Login to facebook canceled');
     }
@@ -142,6 +162,11 @@ export function* loginWithGoogleSaga() {
       const { user_id: userId, name, picture } = decode(jwtToken);
 
       yield put(loginSuccess(jwtToken, { name, id: userId, image: picture }));
+      yield call(
+        AsyncStorage.setItem,
+        'userData',
+        JSON.stringify({ jwtToken, username: name, id: userId, image: picture })
+      );
     } else if (type === 'cancel') {
       throw new Error('Login to google canceled');
     }
@@ -154,9 +179,39 @@ export function* loginWithGoogleSaga() {
   }
 }
 
+export function* tryAutoLoginSaga() {
+  try {
+    const jsonUserData = yield call(AsyncStorage.getItem, 'userData');
+
+    if (!jsonUserData) {
+      yield put(setDidTryAutoLogin());
+
+      throw new Error('No user data in storage');
+    }
+
+    const { token, id, name, image } = JSON.parse(jsonUserData);
+
+    // TODO: check token expiry
+
+    yield put(loginSuccess(token, { name, id, image }));
+  } catch (error) {
+    if (error instanceof Error) {
+      yield put(loginFailure(error.message));
+    } else {
+      yield put(loginFailure('Auto Login Failed'));
+    }
+  }
+}
+
+export function* logoutSaga() {
+  yield AsyncStorage.removeItem('userData');
+}
+
 export default function* watchSaga() {
   yield takeLatest(LOGIN, loginSaga);
   yield takeLatest(SIGNUP, signupSaga);
   yield takeLatest(LOGIN_WITH_FACEBOOK, loginWithFacebookSaga);
   yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
+  yield takeLatest(TRY_AUTO_LOGIN, tryAutoLoginSaga);
+  yield takeLatest(LOGOUT, logoutSaga);
 }
