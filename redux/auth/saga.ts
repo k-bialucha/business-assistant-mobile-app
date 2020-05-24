@@ -181,7 +181,7 @@ export function* loginWithGoogleSaga() {
 
 export function* tryAutoLoginSaga() {
   try {
-    const jsonUserData = yield AsyncStorage.getItem('userData');
+    const jsonUserData = yield call(AsyncStorage.getItem, 'userData');
 
     if (!jsonUserData) {
       yield put(setDidTryAutoLogin());
