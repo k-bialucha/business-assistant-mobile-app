@@ -11,8 +11,7 @@ import StyledText from './index.styled';
 
 interface PlainTextProps extends TextProps {
   bold?: boolean;
-  light?: boolean;
-  dark?: boolean;
+  theme?: 'light' | 'dark';
   color?: string;
 }
 
