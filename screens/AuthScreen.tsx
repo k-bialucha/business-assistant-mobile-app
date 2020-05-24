@@ -6,6 +6,7 @@ import { StackNavigationOptions } from '@react-navigation/stack';
 import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 
+import PlainText from '../components/UI/PlainText';
 import { NavigationData } from '../navigation/AuthNavigator';
 import { loginWithFacebook, loginWithGoogle } from '../redux/auth/actions';
 import Colors from '../theme/Colors';
@@ -13,10 +14,8 @@ import Colors from '../theme/Colors';
 import {
   StyledButtonsContainer,
   StyledContainer,
-  StyledLarge,
-  StyledLink,
+  StyledLargeText,
   StyledLoginTextContainer,
-  StyledText,
   StyledWideContainer,
 } from './AuthScreen.styled';
 
@@ -28,7 +27,7 @@ const AuthScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <StyledContainer>
       <View>
-        <StyledLarge>Make your business easier.</StyledLarge>
+        <StyledLargeText>Make your business easier.</StyledLargeText>
       </View>
       <StyledButtonsContainer>
         <StyledWideContainer>
@@ -72,14 +71,16 @@ const AuthScreen: React.FC<Props> = ({ navigation }) => {
         </StyledWideContainer>
       </StyledButtonsContainer>
       <StyledLoginTextContainer>
-        <StyledText>
+        <PlainText color="#ffffff">
           Already have an account?{' '}
           <TouchableWithoutFeedback
             onPress={() => navigation.navigate('Login')}
           >
-            <StyledLink>Log in</StyledLink>
+            <PlainText light bold>
+              Log in
+            </PlainText>
           </TouchableWithoutFeedback>
-        </StyledText>
+        </PlainText>
       </StyledLoginTextContainer>
     </StyledContainer>
   );

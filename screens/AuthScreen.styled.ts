@@ -10,7 +10,7 @@ const StyledContainer = styled.View`
   background-color: ${Colors.navyBlue};
 `;
 
-const StyledLarge = styled.Text`
+const StyledLargeText = styled.Text`
   padding-vertical: 20px;
   font-size: 42px;
   font-weight: bold;
@@ -18,7 +18,6 @@ const StyledLarge = styled.Text`
 `;
 
 const StyledButtonsContainer = styled.View`
-  flex-direction: column;
   align-items: center;
   width: 100%;
 `;
@@ -28,25 +27,14 @@ const StyledWideContainer = styled.View`
   margin-vertical: 5px;
 `;
 
-const StyledLink = styled.Text`
-  color: ${Colors.silver};
-  font-weight: bold;
-`;
-
-const StyledText = styled.Text`
-  color: #ffffff;
-`;
-
 const StyledLoginTextContainer = styled.View`
   padding-vertical: 20px;
 `;
 
 export {
-  StyledLarge,
+  StyledLargeText,
   StyledContainer,
   StyledButtonsContainer,
   StyledWideContainer,
-  StyledLink,
-  StyledText,
   StyledLoginTextContainer,
 };
