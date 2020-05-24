@@ -36,7 +36,8 @@ export function* loginSaga({ payload: { email, password } }: LoginAction) {
     const { idToken: token, localId: userId } = response;
 
     yield put(loginSuccess(token, { name: email, id: userId }));
-    yield AsyncStorage.setItem(
+    yield call(
+      AsyncStorage.setItem,
       'userData',
       JSON.stringify({ token, username: email, id: userId })
     );
@@ -60,7 +61,8 @@ export function* signupSaga({
     const { idToken: token, localId: userId } = response;
 
     yield put(signupSuccess(token, { name: email, id: userId }));
-    yield AsyncStorage.setItem(
+    yield call(
+      AsyncStorage.setItem,
       'userData',
       JSON.stringify({ token, username: email, id: userId })
     );
@@ -118,7 +120,8 @@ export function* loginWithFacebookSaga() {
       const { user_id: userId, name, picture } = decode(jwtToken);
 
       yield put(loginSuccess(token, { name, id: userId, image: picture }));
-      yield AsyncStorage.setItem(
+      yield call(
+        AsyncStorage.setItem,
         'userData',
         JSON.stringify({ token, username: name, id: userId, image: picture })
       );
@@ -159,7 +162,8 @@ export function* loginWithGoogleSaga() {
       const { user_id: userId, name, picture } = decode(jwtToken);
 
       yield put(loginSuccess(jwtToken, { name, id: userId, image: picture }));
-      yield AsyncStorage.setItem(
+      yield call(
+        AsyncStorage.setItem,
         'userData',
         JSON.stringify({ jwtToken, username: name, id: userId, image: picture })
       );
