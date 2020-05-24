@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PlainText /> matches the snapshot 1`] = `
+<Styled(Text)>
+  Some Text
+</Styled(Text)>
+`;
