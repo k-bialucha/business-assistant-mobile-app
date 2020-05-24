@@ -117,6 +117,7 @@ exports[`<SignupScreen /> matches the snapshot 1`] = `
               "_conditions": Array [],
               "_deps": Array [],
               "_exclusive": Object {
+                "max": true,
                 "min": true,
               },
               "_mutate": undefined,
@@ -131,6 +132,7 @@ exports[`<SignupScreen /> matches the snapshot 1`] = `
                 "refs": Map {},
               },
               "tests": Array [
+                [Function],
                 [Function],
               ],
               "transforms": Array [
