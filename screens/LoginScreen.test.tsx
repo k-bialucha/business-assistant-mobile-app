@@ -1,10 +1,8 @@
 import React from 'react';
 
 import { shallow } from 'enzyme';
-import { useSelector } from 'react-redux';
 
 import { NavigationData } from '../navigation/AuthNavigator';
-import { LoginRequestStatus } from '../redux/auth';
 
 import LoginScreen from './LoginScreen';
 
@@ -25,6 +23,10 @@ jest.mock('react-redux', () => {
     useDispatch: jest.fn().mockImplementation(() => jest.fn()),
   };
 });
+
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: key => key }),
+}));
 
 describe('<LoginScreen />', () => {
   beforeEach(() => {
