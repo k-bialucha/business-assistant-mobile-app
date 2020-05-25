@@ -3,6 +3,7 @@ import { TouchableWithoutFeedback, View } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
 import { StackNavigationOptions } from '@react-navigation/stack';
+import { useTranslation } from 'react-i18next';
 import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 
@@ -23,16 +24,17 @@ type Props = NavigationData<'Authorization'>;
 
 const AuthScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   return (
     <StyledContainer>
       <View>
-        <StyledLargeText>Make your business easier.</StyledLargeText>
+        <StyledLargeText>{t('Make your business easier.')}</StyledLargeText>
       </View>
       <StyledButtonsContainer>
         <StyledWideContainer>
           <Button
-            title="Create an account"
+            title={t('Create an account')}
             buttonStyle={{ backgroundColor: Colors.gray }}
             onPress={() => navigation.navigate('Signup')}
           />
@@ -47,7 +49,7 @@ const AuthScreen: React.FC<Props> = ({ navigation }) => {
         />
         <StyledWideContainer>
           <Button
-            title="Continue with Facebook"
+            title={t('Continue with Facebook')}
             type="outline"
             buttonStyle={{ borderColor: Colors.silver }}
             titleStyle={{ color: Colors.silver, marginLeft: 10 }}
@@ -59,7 +61,7 @@ const AuthScreen: React.FC<Props> = ({ navigation }) => {
         </StyledWideContainer>
         <StyledWideContainer>
           <Button
-            title="Continue with Google"
+            title={t('Continue with Google')}
             type="outline"
             buttonStyle={{ borderColor: Colors.silver }}
             titleStyle={{ color: Colors.silver, marginLeft: 10 }}
@@ -72,12 +74,12 @@ const AuthScreen: React.FC<Props> = ({ navigation }) => {
       </StyledButtonsContainer>
       <StyledLoginTextContainer>
         <PlainText color="#ffffff">
-          Already have an account?{' '}
+          {t('Already have an account?')}{' '}
           <TouchableWithoutFeedback
             onPress={() => navigation.navigate('Login')}
           >
             <PlainText theme="light" bold>
-              Log in
+              {t('Log in')}
             </PlainText>
           </TouchableWithoutFeedback>
         </PlainText>
