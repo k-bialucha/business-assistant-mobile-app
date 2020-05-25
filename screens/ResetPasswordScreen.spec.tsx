@@ -23,7 +23,7 @@ const fakeProps: Props = {
 };
 
 describe('<ResetPasswordScreen />', () => {
-  const { queryByTestId, queryByDisplayValue } = renderWithRedux(
+  const { queryByTestId, queryByDisplayValue, queryByText } = renderWithRedux(
     <ResetPasswordScreen {...fakeProps} />
   );
 
@@ -48,6 +48,28 @@ describe('<ResetPasswordScreen />', () => {
     });
 
     expect(resetPasswordButton.props.disabled).toBe(true);
+  });
+
+  it('shows the validation message in case of invalid email', async () => {
+    // validation message shows only after pressing outside the text input
+    // trigger showing validation by pressing a button
+    await act(async () => {
+      fireEvent.press(resetPasswordButton);
+    });
+
+    const validationText: ReactTestInstance = queryByText('Invalid email');
+
+    expect(validationText).not.toBeNull();
+  });
+
+  it('shows the validation message in case of empty email', async () => {
+    await act(async () => {
+      fireEvent.changeText(emailInput, '');
+    });
+
+    const validationText: ReactTestInstance = queryByText('Required');
+
+    expect(validationText).not.toBeNull();
   });
 
   it('allows to send form with valid email', async () => {
