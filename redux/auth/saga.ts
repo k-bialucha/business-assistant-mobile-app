@@ -186,7 +186,7 @@ export function* tryAutoLoginSaga() {
     if (!jsonUserData) {
       yield put(setDidTryAutoLogin());
 
-      throw new Error('No user data in storage');
+      throw new Error();
     }
 
     const { token, id, name, image } = JSON.parse(jsonUserData);
@@ -195,11 +195,7 @@ export function* tryAutoLoginSaga() {
 
     yield put(loginSuccess(token, { name, id, image }));
   } catch (error) {
-    if (error instanceof Error) {
-      yield put(loginFailure(error.message));
-    } else {
-      yield put(loginFailure('Auto Login Failed'));
-    }
+    yield put(loginFailure());
   }
 }
 

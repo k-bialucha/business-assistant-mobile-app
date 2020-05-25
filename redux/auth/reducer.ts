@@ -11,6 +11,7 @@ import {
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
+  TRY_AUTO_LOGIN,
 } from './types';
 
 export interface AuthState {
@@ -61,7 +62,7 @@ function reducer(
     }
 
     case LOGIN_FAILURE:
-      Alert.alert('Something went wrong', action.payload);
+      if (action.payload) Alert.alert('Something went wrong', action.payload);
 
       return {
         ...state,
@@ -97,7 +98,7 @@ function reducer(
     }
 
     case SIGNUP_FAILURE:
-      Alert.alert('Something went wrong', action.payload);
+      if (action.payload) Alert.alert('Something went wrong', action.payload);
 
       return {
         ...state,
@@ -109,6 +110,12 @@ function reducer(
       return {
         ...state,
         didTryAutoLogin: true,
+      };
+
+    case TRY_AUTO_LOGIN:
+      return {
+        ...state,
+        requestStatus: RequestStatus.LOADING,
       };
 
     default:

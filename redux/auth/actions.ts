@@ -44,7 +44,7 @@ export function loginSuccess(token: string, userData): LoginSuccessAction {
   };
 }
 
-export function loginFailure(message: string): LoginFailureAction {
+export function loginFailure(message?: string): LoginFailureAction {
   return {
     type: LOGIN_FAILURE,
     payload: message,

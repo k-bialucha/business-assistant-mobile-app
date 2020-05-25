@@ -34,7 +34,7 @@ export interface LoginSuccessAction {
 
 export interface LoginFailureAction {
   type: typeof LOGIN_FAILURE;
-  payload: string;
+  payload?: string;
 }
 
 export interface LogoutAction {
@@ -93,7 +93,8 @@ export type AuthActions =
   | SignupFailureAction
   | LoginWithFacebookAction
   | LoginWithGoogleAction
-  | SetDidTryAutoLoginAction;
+  | SetDidTryAutoLoginAction
+  | TryAutoLoginAction;
 
 export enum RequestStatus {
   UNAUTHENTICATED,
