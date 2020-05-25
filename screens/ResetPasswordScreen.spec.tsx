@@ -23,7 +23,7 @@ const fakeProps: Props = {
 };
 
 describe('<ResetPasswordScreen />', () => {
-  const { queryByTestId } = renderWithRedux(
+  const { queryByTestId, queryByDisplayValue } = renderWithRedux(
     <ResetPasswordScreen {...fakeProps} />
   );
 
@@ -31,6 +31,14 @@ describe('<ResetPasswordScreen />', () => {
   const resetPasswordButton: ReactTestInstance = queryByTestId(
     'reset-password-button'
   );
+
+  it('sets route `email` parameter as initial input value', () => {
+    const maybeInputValue: ReactTestInstance = queryByDisplayValue(
+      fakeProps.route.params.email
+    );
+
+    expect(maybeInputValue).not.toBeNull();
+  });
 
   it('does not allow to send form with invalid email', async () => {
     const someInvalidEmail = 'some-invalid@email';
