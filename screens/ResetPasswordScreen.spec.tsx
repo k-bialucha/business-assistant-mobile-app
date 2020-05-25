@@ -23,7 +23,7 @@ const fakeProps: Props = {
 };
 
 describe('<ResetPasswordScreen />', () => {
-  const { queryByTestId, store } = renderWithRedux(
+  const { queryByTestId } = renderWithRedux(
     <ResetPasswordScreen {...fakeProps} />
   );
 
@@ -32,18 +32,15 @@ describe('<ResetPasswordScreen />', () => {
     'reset-password-button'
   );
 
-  it('allows to sent reset password form', async () => {
-    const someEmail = 'siatkasebastian@gmail.com';
+  it('does not allow to send form with invalid email', async () => {
+    const someInvalidEmail = 'some-invalid@email';
 
-    fireEvent.changeText(emailInput, someEmail);
+    fireEvent.changeText(emailInput, someInvalidEmail);
 
     await act(async () => {
       fireEvent.press(resetPasswordButton);
     });
 
-    process.nextTick(() => {
-      // TODO: what can we check here? Redux state won't be changed after this action
-      // expect(store.getState().auth.username).toBe(someEmail);
-    });
+    expect(resetPasswordButton).toHaveProp('disabled', true);
   });
 });
