@@ -3,14 +3,11 @@
  * set in redux didTryLogin to true
  */
 
-import React, { useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 
 import { tryAutoLogin } from '../redux/auth/actions';
-
-import { StyledView } from './StartupScreen.style';
 
 const StartupScreen = () => {
   const dispatch = useDispatch();
@@ -19,11 +16,7 @@ const StartupScreen = () => {
     dispatch(tryAutoLogin());
   }, [dispatch]);
 
-  return (
-    <StyledView>
-      <ActivityIndicator size="large" color="white" />
-    </StyledView>
-  );
+  return null;
 };
 
 export default StartupScreen;

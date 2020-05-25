@@ -5,6 +5,8 @@ import {
   LOGIN,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
+  LOGIN_WITH_FACEBOOK,
+  LOGIN_WITH_GOOGLE,
   LOGOUT,
   RequestStatus,
   SET_DID_TRY_AUTO_LOGIN,
@@ -40,6 +42,18 @@ function reducer(
     case LOGIN:
       Keyboard.dismiss();
 
+      return {
+        ...state,
+        requestStatus: RequestStatus.LOADING,
+      };
+
+    case LOGIN_WITH_FACEBOOK:
+      return {
+        ...state,
+        requestStatus: RequestStatus.LOADING,
+      };
+
+    case LOGIN_WITH_GOOGLE:
       return {
         ...state,
         requestStatus: RequestStatus.LOADING,
