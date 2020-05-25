@@ -43,12 +43,20 @@ describe('<ResetPasswordScreen />', () => {
   it('does not allow to send form with invalid email', async () => {
     const someInvalidEmail = 'some-invalid@email';
 
-    fireEvent.changeText(emailInput, someInvalidEmail);
-
     await act(async () => {
-      fireEvent.press(resetPasswordButton);
+      fireEvent.changeText(emailInput, someInvalidEmail);
     });
 
-    expect(resetPasswordButton).toHaveProp('disabled', true);
+    expect(resetPasswordButton.props.disabled).toBe(true);
+  });
+
+  it('allows to send form with valid email', async () => {
+    const someInvalidEmail = 'some-valid@email.com';
+
+    await act(async () => {
+      fireEvent.changeText(emailInput, someInvalidEmail);
+    });
+
+    expect(resetPasswordButton.props.disabled).toBe(false);
   });
 });
