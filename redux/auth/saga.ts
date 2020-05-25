@@ -165,7 +165,12 @@ export function* loginWithGoogleSaga() {
       yield call(
         AsyncStorage.setItem,
         'userData',
-        JSON.stringify({ jwtToken, username: name, id: userId, image: picture })
+        JSON.stringify({
+          token: jwtToken,
+          username: name,
+          id: userId,
+          image: picture,
+        })
       );
     } else if (type === 'cancel') {
       throw new Error('Login to google canceled');
