@@ -11,6 +11,8 @@ import {
   LoginWithGoogleAction,
   LOGOUT,
   LogoutAction,
+  RESET_PASSWORD,
+  ResetPasswordAction,
   SET_DID_TRY_AUTO_LOGIN,
   SetDidTryAutoLoginAction,
   SIGNUP,
@@ -98,6 +100,13 @@ export function loginWithFacebook(): LoginWithFacebookAction {
 export function loginWithGoogle(): LoginWithGoogleAction {
   return {
     type: LOGIN_WITH_GOOGLE,
+  };
+}
+
+export function resetPassword(email): ResetPasswordAction {
+  return {
+    type: RESET_PASSWORD,
+    payload: { email },
   };
 }
 
