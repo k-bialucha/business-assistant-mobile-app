@@ -43,6 +43,7 @@ const ResetPasswordScreen: React.FC<Props> = ({ route }) => {
             handleBlur,
             handleSubmit,
             values,
+            isValid,
             errors,
             touched,
           }) => (
@@ -61,6 +62,7 @@ const ResetPasswordScreen: React.FC<Props> = ({ route }) => {
                 testID="reset-password-button"
                 title="Reset password"
                 buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
+                disabled={!isValid}
                 titleStyle={{ color: Colors.gray }}
                 onPress={() => {
                   handleSubmit();
