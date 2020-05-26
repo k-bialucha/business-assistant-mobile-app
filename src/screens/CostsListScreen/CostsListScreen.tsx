@@ -4,12 +4,12 @@ import { Platform, Text, View } from 'react-native';
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import HeaderButton from '../components/HeaderButton';
-import { NavigationData } from '../navigation/AppNavigator/CostsNavigator';
+import HeaderButton from '../../components/HeaderButton';
+import { NavigationData } from '../../navigation/AppNavigator/CostsNavigator';
 
 type Props = NavigationData<'CostsList'>;
 
-const CostsScreen: React.FC<Props> = () => {
+const CostsListScreen: React.FC<Props> = () => {
   return (
     <View>
       <Text>Costs</Text>
@@ -17,7 +17,7 @@ const CostsScreen: React.FC<Props> = () => {
   );
 };
 
-export const CostsScreenNavOptions = (
+export const CostsListScreenNavOptions = (
   navData: NavigationData<'CostsList'>
 ): StackNavigationOptions => {
   return {
@@ -34,4 +34,4 @@ export const CostsScreenNavOptions = (
   };
 };
 
-export default CostsScreen;
+export default CostsListScreen;

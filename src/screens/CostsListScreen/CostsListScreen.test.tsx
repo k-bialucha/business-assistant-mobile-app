@@ -2,9 +2,9 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import { NavigationData } from '../navigation/AppNavigator/CostsNavigator';
+import { NavigationData } from '../../navigation/AppNavigator/CostsNavigator';
 
-import CostsScreen from './CostsScreen';
+import CostsListScreen from './CostsListScreen';
 
 type Props = NavigationData<'CostsList'>;
 
@@ -14,9 +14,9 @@ const fakeProps: Props = {
   navigation: {},
 };
 
-describe('<CostsScreen />', () => {
+describe('<CostsListScreen />', () => {
   it('matches the snapshot', () => {
-    const tree = shallow(<CostsScreen {...fakeProps} />);
+    const tree = shallow(<CostsListScreen {...fakeProps} />);
 
     expect(tree).toMatchSnapshot();
   });

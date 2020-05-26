@@ -6,8 +6,10 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 
-import CostsEntryScreen from '../../screens/CostsEntryScreen';
-import CostsScreen, { CostsScreenNavOptions } from '../../screens/CostsScreen';
+import CostsEntryScreen from '../../screens/CostsEntryScreen/CostsEntryScreen';
+import CostsListScreen, {
+  CostsListScreenNavOptions,
+} from '../../screens/CostsListScreen';
 
 import defaultScreenOptions from './defaultScreenOptions';
 import {
@@ -29,8 +31,8 @@ const CostsNavigator: React.FC<Props> = () => {
     <CostsStackNavigator.Navigator screenOptions={defaultScreenOptions}>
       <CostsStackNavigator.Screen
         name="CostsList"
-        component={CostsScreen}
-        options={CostsScreenNavOptions}
+        component={CostsListScreen}
+        options={CostsListScreenNavOptions}
       />
       <CostsStackNavigator.Screen
         name="CostsEntry"
