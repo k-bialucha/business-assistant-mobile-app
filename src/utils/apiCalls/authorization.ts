@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { FIREBASE_API_KEY } from '../../env';
+import { FIREBASE_API_KEY } from '../../../env';
 
 const firebaseAuth = axios.create({
   baseURL: 'https://identitytoolkit.googleapis.com/v1/',
