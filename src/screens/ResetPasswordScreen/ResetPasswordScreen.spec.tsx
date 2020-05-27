@@ -5,8 +5,8 @@ import React from 'react';
 import { act, fireEvent } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 
-import { NavigationData } from '../navigation/AuthNavigator';
-import renderWithRedux from '../utils/testing/renderWithRedux';
+import { NavigationData } from '../../navigation/AuthNavigator';
+import renderWithRedux from '../../utils/testing/renderWithRedux';
 
 import ResetPasswordScreen from './ResetPasswordScreen';
 
