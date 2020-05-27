@@ -2,7 +2,7 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import { NavigationData } from '../navigation/AppNavigator/DashboardNavigator';
+import { NavigationData } from '../../navigation/AppNavigator/DashboardNavigator';
 
 import DashboardScreen from './DashboardScreen';
 
