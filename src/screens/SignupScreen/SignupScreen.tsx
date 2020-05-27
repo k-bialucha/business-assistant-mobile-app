@@ -6,10 +6,10 @@ import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
-import TextField from '../components/form/TextField';
-import { NavigationData } from '../navigation/AuthNavigator';
-import { signup } from '../redux/auth/actions';
-import Colors from '../theme/Colors';
+import TextField from '../../components/form/TextField';
+import { NavigationData } from '../../navigation/AuthNavigator';
+import { signup } from '../../redux/auth/actions';
+import Colors from '../../theme/Colors';
 
 import { StyledContainer, StyledWideContainer } from './SignupScreen.styled';
 
