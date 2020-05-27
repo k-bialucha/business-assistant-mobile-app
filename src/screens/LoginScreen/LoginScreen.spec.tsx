@@ -5,9 +5,9 @@ import React from 'react';
 import { act, fireEvent } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 
-import { NavigationData } from '../navigation/AuthNavigator';
-import { loginUser } from '../utils/apiCalls/authorization';
-import renderWithRedux from '../utils/testing/renderWithRedux';
+import { NavigationData } from '../../navigation/AuthNavigator';
+import { loginUser } from '../../utils/apiCalls/authorization';
+import renderWithRedux from '../../utils/testing/renderWithRedux';
 
 import LoginScreen from './LoginScreen';
 
@@ -19,7 +19,7 @@ const fakeProps: Props = {
   navigation: {},
 };
 
-jest.mock('../utils/apiCalls/authorization');
+jest.mock('../../utils/apiCalls/authorization');
 jest.mock('redux-saga/effects', () => {
   const actualModule = jest.requireActual('redux-saga/effects');
 
