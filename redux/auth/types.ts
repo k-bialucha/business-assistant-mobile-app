@@ -9,6 +9,7 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK';
 export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE';
+export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const SET_DID_TRY_AUTO_LOGIN = 'SET_DID_TRY_AUTO_LOGIN';
 export const TRY_AUTO_LOGIN = 'TRY_AUTO_LOGIN';
 
@@ -75,6 +76,11 @@ export interface LoginWithGoogleAction {
   type: typeof LOGIN_WITH_GOOGLE;
 }
 
+export interface ResetPasswordAction {
+  type: typeof RESET_PASSWORD;
+  payload: { email: string };
+}
+
 export interface SetDidTryAutoLoginAction {
   type: typeof SET_DID_TRY_AUTO_LOGIN;
 }
@@ -94,7 +100,8 @@ export type AuthActions =
   | LoginWithFacebookAction
   | LoginWithGoogleAction
   | SetDidTryAutoLoginAction
-  | TryAutoLoginAction;
+  | TryAutoLoginAction
+  | ResetPasswordAction;
 
 export enum RequestStatus {
   UNAUTHENTICATED,

@@ -5,6 +5,7 @@ import {
   loginWithFacebook,
   loginWithGoogle,
   logout,
+  resetPassword,
   setDidTryAutoLogin,
   signup,
   signupFailure,
@@ -21,6 +22,8 @@ import {
   LoginWithFacebookAction,
   LoginWithGoogleAction,
   LOGOUT,
+  RESET_PASSWORD,
+  ResetPasswordAction,
   SET_DID_TRY_AUTO_LOGIN,
   SetDidTryAutoLoginAction,
   SIGNUP,
@@ -129,12 +132,12 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
     const result = signupFailure(mockedMessage);
 
-    const extected: SignupFailureAction = {
+    const expected: SignupFailureAction = {
       type: SIGNUP_FAILURE,
       payload: mockedMessage,
     };
 
-    expect(result).toEqual(extected);
+    expect(result).toEqual(expected);
   });
 
   test('loginWithFacebook action creator returns correct object', () => {
@@ -152,6 +155,19 @@ describe(`${DOMAIN_NAME}/actions`, () => {
 
     const expected: LoginWithGoogleAction = {
       type: LOGIN_WITH_GOOGLE,
+    };
+
+    expect(result).toEqual(expected);
+  });
+
+  test('resetPassword action creator returns correct object', () => {
+    const mockedEmail: string = 'mocked-email@email.com';
+
+    const result = resetPassword(mockedEmail);
+
+    const expected: ResetPasswordAction = {
+      type: RESET_PASSWORD,
+      payload: { email: mockedEmail },
     };
 
     expect(result).toEqual(expected);

@@ -5,6 +5,7 @@ import {
   loginSaga,
   loginWithFacebookSaga,
   loginWithGoogleSaga,
+  resetPasswordSaga,
   signupSaga,
 } from './saga';
 import {
@@ -12,6 +13,7 @@ import {
   LOGIN,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
+  RESET_PASSWORD,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -271,6 +273,22 @@ describe(`${DOMAIN_NAME}/saga`, () => {
         put(loginFailure('Login to google canceled'))
       );
 
+      expect(generator.next().done).toBe(true);
+    });
+  });
+
+  describe('resetPasswordSaga', () => {
+    it('handles successful sending reset password form', () => {
+      const mockedEmail = 'some@email.com';
+
+      const generator = resetPasswordSaga({
+        type: RESET_PASSWORD,
+        payload: { email: mockedEmail },
+      });
+
+      const resetPasswordCall = generator.next().value;
+
+      expect(resetPasswordCall).toMatchSnapshot();
       expect(generator.next().done).toBe(true);
     });
   });

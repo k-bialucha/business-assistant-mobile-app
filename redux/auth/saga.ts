@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import { Alert, AsyncStorage } from 'react-native';
 
 import * as Facebook from 'expo-facebook';
 import * as Google from 'expo-google-app-auth';
@@ -22,6 +22,8 @@ import {
   LOGIN_WITH_GOOGLE,
   LoginAction,
   LOGOUT,
+  RESET_PASSWORD,
+  ResetPasswordAction,
   SIGNUP,
   SignupAction,
   TRY_AUTO_LOGIN,
@@ -184,6 +186,33 @@ export function* loginWithGoogleSaga() {
   }
 }
 
+export function* resetPasswordSaga({
+  payload: { email },
+}: ResetPasswordAction) {
+  try {
+    const actionCodeSettings = {
+      // to control if back to app after password change in browser
+      // url: `https://www.example.com/?email=${email}`,
+    };
+
+    yield call(
+      myFirebaseApp.auth.sendPasswordResetEmail,
+      email,
+      actionCodeSettings
+    );
+
+    Alert.alert(
+      'Reset Password',
+      'Link to reset password has been sent to the email'
+    );
+  } catch (error) {
+    if (error instanceof Error) {
+      Alert.alert('Reset Password', error.message);
+    } else {
+      Alert.alert('Reset Password', 'Something went wrong');
+    }
+  }
+}
 export function* tryAutoLoginSaga() {
   try {
     const jsonUserData = yield call(AsyncStorage.getItem, 'userData');
@@ -213,6 +242,7 @@ export default function* watchSaga() {
   yield takeLatest(SIGNUP, signupSaga);
   yield takeLatest(LOGIN_WITH_FACEBOOK, loginWithFacebookSaga);
   yield takeLatest(LOGIN_WITH_GOOGLE, loginWithGoogleSaga);
+  yield takeLatest(RESET_PASSWORD, resetPasswordSaga);
   yield takeLatest(TRY_AUTO_LOGIN, tryAutoLoginSaga);
   yield takeLatest(LOGOUT, logoutSaga);
 }

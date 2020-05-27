@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, TouchableWithoutFeedback } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { Formik } from 'formik';
@@ -9,23 +9,20 @@ import * as Yup from 'yup';
 
 import TextField from '../components/form/TextField';
 import { NavigationData } from '../navigation/AuthNavigator';
-import { login } from '../redux/auth';
+import { resetPassword } from '../redux/auth/actions';
 import Colors from '../theme/Colors';
 
-import { StyledView, StyledWideContainer } from './LoginScreen.styled';
+import { StyledView, StyledWideContainer } from './ResetPasswordScreen.styled';
 
-const LoginSchema = Yup.object().shape({
+const ResetPasswordSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
     .required('Required'),
-  password: Yup.string()
-    .min(6, 'Too Short!')
-    .required('Required'),
 });
 
-type Props = NavigationData<'Login'>;
+type Props = NavigationData<'ResetPassword'>;
 
-const LoginScreen: React.FC<Props> = props => {
+const ResetPasswordScreen: React.FC<Props> = ({ route }) => {
   const dispatch = useDispatch();
 
   return (
@@ -35,10 +32,10 @@ const LoginScreen: React.FC<Props> = props => {
     >
       <StyledView>
         <Formik
-          initialValues={{ email: '', password: '' }}
-          validationSchema={LoginSchema}
-          onSubmit={({ email, password }) => {
-            dispatch(login(email, password));
+          initialValues={{ email: route.params.email }}
+          validationSchema={ResetPasswordSchema}
+          onSubmit={({ email }) => {
+            dispatch(resetPassword(email));
           }}
         >
           {({
@@ -46,6 +43,7 @@ const LoginScreen: React.FC<Props> = props => {
             handleBlur,
             handleSubmit,
             values,
+            isValid,
             errors,
             touched,
           }) => (
@@ -60,31 +58,11 @@ const LoginScreen: React.FC<Props> = props => {
                 touched={touched.email}
                 keyboardType="email-address"
               />
-              <TextField
-                testID="password-input"
-                value={values.password}
-                placeholder="Password"
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                error={errors.password}
-                touched={touched.password}
-                secureTextEntry
-              />
-              <TouchableWithoutFeedback
-                onPress={() => {
-                  props.navigation.navigate('ResetPassword', {
-                    email: values.email,
-                  });
-                }}
-              >
-                <Text style={{ color: Colors.gray, alignSelf: 'flex-end' }}>
-                  Forgot Password?
-                </Text>
-              </TouchableWithoutFeedback>
               <Button
-                testID="login-button"
-                title="Login"
+                testID="reset-password-button"
+                title="Reset password"
                 buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
+                disabled={!isValid}
                 titleStyle={{ color: Colors.gray }}
                 onPress={() => {
                   handleSubmit();
@@ -98,6 +76,6 @@ const LoginScreen: React.FC<Props> = props => {
   );
 };
 
-export const LoginScreenNavOptions: StackNavigationOptions = {};
+export const ResetPasswordScreenNavOptions: StackNavigationOptions = {};
 
-export default LoginScreen;
+export default ResetPasswordScreen;
