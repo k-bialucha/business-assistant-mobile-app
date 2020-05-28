@@ -3,7 +3,6 @@ import { initReactI18next } from 'react-i18next';
 
 import plTranslation from './translations/pl';
 
-// (tip move them in a JSON file and import them)
 const resources = {
   pl: {
     translation: plTranslation,
