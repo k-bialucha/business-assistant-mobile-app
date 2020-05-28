@@ -29,6 +29,13 @@ module.exports = {
   ],
   settings: {
     'import/resolver': {
+      alias: {
+        map: [
+          ['~~env', './env.ts'],
+          ['src', './src'],
+        ],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      },
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
