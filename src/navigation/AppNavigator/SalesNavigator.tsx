@@ -6,8 +6,8 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 
-import SalesEntryScreen from '../../screens/SalesEntryScreen';
-import SalesScreen, { SalesScreenNavOptions } from '../../screens/SalesScreen';
+import SalesEntryScreen from '~/screens/SalesEntryScreen';
+import SalesScreen, { SalesScreenNavOptions } from '~/screens/SalesScreen';
 
 import defaultScreenOptions from './defaultScreenOptions';
 import {

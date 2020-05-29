@@ -6,11 +6,11 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 
-import AuthScreen from '../screens/AuthScreen';
-import LoginScreen from '../screens/LoginScreen';
-import ResetPasswordScreen from '../screens/ResetPasswordScreen';
-import SignupScreen from '../screens/SignupScreen';
-import Colors from '../theme/Colors';
+import AuthScreen from '~/screens/AuthScreen';
+import LoginScreen from '~/screens/LoginScreen';
+import ResetPasswordScreen from '~/screens/ResetPasswordScreen';
+import SignupScreen from '~/screens/SignupScreen';
+import Colors from '~/theme/Colors';
 
 export type ParamList = {
   Authorization: undefined;

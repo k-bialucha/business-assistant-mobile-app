@@ -6,7 +6,7 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 
-import SettingsScreen from '../../screens/SettingsScreen';
+import SettingsScreen from '~/screens/SettingsScreen';
 
 import defaultScreenOptions from './defaultScreenOptions';
 import {

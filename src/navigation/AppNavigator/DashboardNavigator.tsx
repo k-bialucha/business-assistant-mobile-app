@@ -6,7 +6,7 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 
-import DashboardScreen from '../../screens/DashboardScreen';
+import DashboardScreen from '~/screens/DashboardScreen';
 
 import defaultScreenOptions from './defaultScreenOptions';
 import {
