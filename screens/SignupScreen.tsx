@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 
 import { Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
@@ -13,22 +14,23 @@ import Colors from '../theme/Colors';
 
 import { StyledContainer, StyledWideContainer } from './SignupScreen.styled';
 
-const SignupSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Invalid email')
-    .required('Required'),
-  phone: Yup.string()
-    .min(9, 'Too Short!')
-    .max(12, 'Too Long!'),
-  password: Yup.string()
-    .min(6, 'Too Short!')
-    .required('Required'),
-});
-
 type Props = NavigationData<'Signup'>;
 
 const SignupScreen: React.FC<Props> = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
+  const SignupSchema = Yup.object().shape({
+    email: Yup.string()
+      .email(t('Invalid email'))
+      .required(t('Required')),
+    phone: Yup.string()
+      .min(9, t('Too Short!'))
+      .max(12, t('Too Long!')),
+    password: Yup.string()
+      .min(6, t('Too Short!'))
+      .required(t('Required')),
+  });
 
   return (
     <ScrollView
@@ -55,7 +57,7 @@ const SignupScreen: React.FC<Props> = () => {
               <TextField
                 testID="email-input"
                 value={values.email}
-                placeholder="E-mail"
+                placeholder={t('E-mail')}
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 error={errors.email}
@@ -65,7 +67,7 @@ const SignupScreen: React.FC<Props> = () => {
               <TextField
                 testID="phone-input"
                 value={values.phone}
-                placeholder="Phone (Optional)"
+                placeholder={t('Phone (Optional)')}
                 onChangeText={handleChange('phone')}
                 onBlur={handleBlur('phone')}
                 error={errors.phone}
@@ -75,7 +77,7 @@ const SignupScreen: React.FC<Props> = () => {
               <TextField
                 testID="password-input"
                 value={values.password}
-                placeholder="Password"
+                placeholder={t('Password')}
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 error={errors.password}
@@ -84,7 +86,7 @@ const SignupScreen: React.FC<Props> = () => {
               />
               <Button
                 testID="signup-button"
-                title="Sign Up"
+                title={t('Sign Up')}
                 buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
                 titleStyle={{ color: Colors.gray }}
                 onPress={() => {

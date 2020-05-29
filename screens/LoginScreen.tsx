@@ -3,6 +3,7 @@ import { ScrollView, Text, TouchableWithoutFeedback } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
@@ -14,19 +15,20 @@ import Colors from '../theme/Colors';
 
 import { StyledView, StyledWideContainer } from './LoginScreen.styled';
 
-const LoginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Invalid email')
-    .required('Required'),
-  password: Yup.string()
-    .min(6, 'Too Short!')
-    .required('Required'),
-});
-
 type Props = NavigationData<'Login'>;
 
 const LoginScreen: React.FC<Props> = props => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string()
+      .email(t('Invalid email'))
+      .required(t('Required')),
+    password: Yup.string()
+      .min(6, t('Too Short!'))
+      .required(t('Required')),
+  });
 
   return (
     <ScrollView
@@ -53,7 +55,7 @@ const LoginScreen: React.FC<Props> = props => {
               <TextField
                 testID="email-input"
                 value={values.email}
-                placeholder="E-mail"
+                placeholder={t('E-mail')}
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 error={errors.email}
@@ -63,7 +65,7 @@ const LoginScreen: React.FC<Props> = props => {
               <TextField
                 testID="password-input"
                 value={values.password}
-                placeholder="Password"
+                placeholder={t('Password')}
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 error={errors.password}
@@ -83,7 +85,7 @@ const LoginScreen: React.FC<Props> = props => {
               </TouchableWithoutFeedback>
               <Button
                 testID="login-button"
-                title="Login"
+                title={t('Login')}
                 buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
                 titleStyle={{ color: Colors.gray }}
                 onPress={() => {

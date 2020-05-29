@@ -24,6 +24,10 @@ jest.mock('react-redux', () => {
   };
 });
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: key => key }),
+}));
+
 describe('<LoginScreen />', () => {
   beforeEach(() => {
     jest.resetAllMocks();
