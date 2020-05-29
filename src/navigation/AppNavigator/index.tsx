@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import Colors from '../../theme/Colors';
+import Colors from '~/theme/Colors';
 
 import CostsNavigator from './CostsNavigator';
 import DashboardNavigator from './DashboardNavigator';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
 
-import Colors from '../../theme/Colors';
+import Colors from '~/theme/Colors';
 
 import { StyledView } from './Loader.styled';
 

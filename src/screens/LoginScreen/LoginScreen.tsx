@@ -8,10 +8,11 @@ import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
+import Colors from '~/theme/Colors';
+
 import TextField from '../../components/form/TextField';
 import { NavigationData } from '../../navigation/AuthNavigator';
 import { login } from '../../redux/auth';
-import Colors from '../../theme/Colors';
 
 import { StyledView, StyledWideContainer } from './LoginScreen.styled';
 

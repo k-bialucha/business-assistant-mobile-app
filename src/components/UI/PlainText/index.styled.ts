@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native';
 
-import Colors from '../../../theme/Colors';
+import Colors from '~/theme/Colors';
 
 export default styled.Text`
   ${({ color, theme }) => {

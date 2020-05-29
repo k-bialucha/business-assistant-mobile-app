@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
 
-import Colors from '../../theme/Colors';
+import Colors from '~/theme/Colors';
 
 const defaultScreenOptions: StackNavigationOptions = {
   headerStyle: {

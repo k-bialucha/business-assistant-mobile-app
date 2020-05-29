@@ -6,10 +6,10 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 
-import CostsEntryScreen from '../../screens/CostsEntryScreen/CostsEntryScreen';
+import CostsEntryScreen from '~/screens/CostsEntryScreen';
 import CostsListScreen, {
   CostsListScreenNavOptions,
-} from '../../screens/CostsListScreen';
+} from '~/screens/CostsListScreen';
 
 import defaultScreenOptions from './defaultScreenOptions';
 import {
