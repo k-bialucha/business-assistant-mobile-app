@@ -211,10 +211,8 @@ export function* resetPasswordSaga({
 }
 export function* tryAutoLoginSaga() {
   try {
-    // yield AsyncStorage.clear();
     const jsonUserData = yield call(AsyncStorage.getItem, 'userData');
 
-    // console.warn('JSON user data', jsonUserData);
     if (!jsonUserData) {
       yield put(setDidTryAutoLogin());
 
@@ -224,8 +222,6 @@ export function* tryAutoLoginSaga() {
     const { token, id, name, image } = JSON.parse(jsonUserData);
 
     // TODO: check token expiry
-
-    console.warn('TOEKN IS:', token);
 
     yield put(loginSuccess(token, { name, id, image }));
   } catch (error) {
