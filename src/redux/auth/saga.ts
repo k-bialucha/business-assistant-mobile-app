@@ -5,11 +5,8 @@ import * as Google from 'expo-google-app-auth';
 import decode from 'jwt-decode';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
-import {
-  ANDROID_CLIENT_ID,
-  FACEBOOK_APP_ID,
-  IOS_CLIENT_ID,
-} from '../../../env';
+import { ANDROID_CLIENT_ID, FACEBOOK_APP_ID, IOS_CLIENT_ID } from '~~env';
+
 import { loginUser, signupUser } from '../../utils/apiCalls/authorization';
 import firebase, { myFirebaseApp } from '../../utils/firebase';
 
@@ -214,8 +211,10 @@ export function* resetPasswordSaga({
 }
 export function* tryAutoLoginSaga() {
   try {
+    // yield AsyncStorage.clear();
     const jsonUserData = yield call(AsyncStorage.getItem, 'userData');
 
+    // console.warn('JSON user data', jsonUserData);
     if (!jsonUserData) {
       yield put(setDidTryAutoLogin());
 
@@ -225,6 +224,8 @@ export function* tryAutoLoginSaga() {
     const { token, id, name, image } = JSON.parse(jsonUserData);
 
     // TODO: check token expiry
+
+    console.warn('TOEKN IS:', token);
 
     yield put(loginSuccess(token, { name, id, image }));
   } catch (error) {
