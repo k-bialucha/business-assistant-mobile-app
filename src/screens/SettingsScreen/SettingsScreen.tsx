@@ -3,8 +3,8 @@ import { Button } from 'react-native';
 
 import { useDispatch } from 'react-redux';
 
-import { NavigationData } from '../../navigation/AppNavigator/SettingsNavigator';
-import { logout } from '../../redux/auth';
+import { NavigationData } from '~/navigation/AppNavigator/SettingsNavigator';
+import { logout } from '~/redux/auth';
 
 import { StyledView } from './SettingsScreen.styled';
 

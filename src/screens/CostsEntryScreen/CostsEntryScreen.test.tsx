@@ -2,7 +2,7 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import { NavigationData } from '../../navigation/AppNavigator/CostsNavigator';
+import { NavigationData } from '~/navigation/AppNavigator/CostsNavigator';
 
 import CostsEntryScreen from './CostsEntryScreen';
 

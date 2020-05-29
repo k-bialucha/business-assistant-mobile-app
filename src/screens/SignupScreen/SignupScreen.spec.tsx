@@ -5,9 +5,9 @@ import React from 'react';
 import { act, fireEvent } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 
-import { NavigationData } from '../../navigation/AuthNavigator';
-import { signupUser } from '../../utils/apiCalls/authorization';
-import renderWithRedux from '../../utils/testing/renderWithRedux';
+import { NavigationData } from '~/navigation/AuthNavigator';
+import { signupUser } from '~/utils/apiCalls/authorization';
+import renderWithRedux from '~/utils/testing/renderWithRedux';
 
 import SignupScreen from './SignupScreen';
 

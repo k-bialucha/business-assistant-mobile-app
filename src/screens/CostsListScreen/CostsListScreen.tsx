@@ -5,8 +5,7 @@ import { StackNavigationOptions } from '@react-navigation/stack';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import HeaderButton from '~/components/HeaderButton';
-
-import { NavigationData } from '../../navigation/AppNavigator/CostsNavigator';
+import { NavigationData } from '~/navigation/AppNavigator/CostsNavigator';
 
 type Props = NavigationData<'CostsList'>;
 

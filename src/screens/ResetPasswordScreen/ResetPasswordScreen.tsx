@@ -8,10 +8,9 @@ import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 import TextField from '~/components/form/TextField';
+import { NavigationData } from '~/navigation/AuthNavigator';
+import { resetPassword } from '~/redux/auth/actions';
 import Colors from '~/theme/Colors';
-
-import { NavigationData } from '../../navigation/AuthNavigator';
-import { resetPassword } from '../../redux/auth/actions';
 
 import { StyledView, StyledWideContainer } from './ResetPasswordScreen.styled';
 

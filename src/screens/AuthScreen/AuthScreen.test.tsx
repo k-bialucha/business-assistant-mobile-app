@@ -2,7 +2,7 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import { NavigationData } from '../../navigation/AuthNavigator';
+import { NavigationData } from '~/navigation/AuthNavigator';
 
 import AuthScreen from './AuthScreen';
 

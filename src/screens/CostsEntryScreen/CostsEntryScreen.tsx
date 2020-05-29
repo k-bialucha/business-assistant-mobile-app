@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import { NavigationData } from '../../navigation/AppNavigator/CostsNavigator';
+import { NavigationData } from '~/navigation/AppNavigator/CostsNavigator';
 
 type Props = NavigationData<'CostsEntry'>;
 
