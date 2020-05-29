@@ -9,9 +9,8 @@ import { useDispatch } from 'react-redux';
 
 import PlainText from '~/components/UI/PlainText';
 import { NavigationData } from '~/navigation/AuthNavigator';
+import { loginWithFacebook, loginWithGoogle } from '~/redux/auth/actions';
 import Colors from '~/theme/Colors';
-
-import { loginWithFacebook, loginWithGoogle } from '../../redux/auth/actions';
 
 import {
   StyledButtonsContainer,

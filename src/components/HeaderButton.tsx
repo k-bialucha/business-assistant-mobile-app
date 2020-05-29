@@ -7,7 +7,7 @@ import {
   HeaderButtonProps,
 } from 'react-navigation-header-buttons';
 
-import Colors from '../theme/Colors';
+import Colors from '~/theme/Colors';
 
 const CustomHeaderButton: React.FC<HeaderButtonProps> = props => {
   return (

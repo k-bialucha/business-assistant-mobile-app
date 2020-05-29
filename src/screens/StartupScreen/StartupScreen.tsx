@@ -8,7 +8,7 @@ import { ActivityIndicator } from 'react-native';
 
 import { useDispatch } from 'react-redux';
 
-import { tryAutoLogin } from '../../redux/auth/actions';
+import { tryAutoLogin } from '~/redux/auth/actions';
 
 import { StyledView } from './StartupScreen.style';
 

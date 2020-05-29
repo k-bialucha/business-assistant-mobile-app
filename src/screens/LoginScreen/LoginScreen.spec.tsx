@@ -19,7 +19,7 @@ const fakeProps: Props = {
   navigation: {},
 };
 
-jest.mock('../../utils/apiCalls/authorization');
+jest.mock('~/utils/apiCalls/authorization');
 jest.mock('redux-saga/effects', () => {
   const actualModule = jest.requireActual('redux-saga/effects');
 
