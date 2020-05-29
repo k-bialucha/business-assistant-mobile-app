@@ -3,9 +3,9 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 
+import Loader from '~/components/UI/Loader';
 import StartupScreen from '~/screens/StartupScreen';
 
-import Loader from '../components/UI/Loader';
 import { RequestStatus } from '../redux/auth/types';
 import { RootState } from '../redux/rootReducer';
 

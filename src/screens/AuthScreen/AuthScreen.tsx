@@ -7,9 +7,9 @@ import { useTranslation } from 'react-i18next';
 import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 
+import PlainText from '~/components/UI/PlainText';
 import Colors from '~/theme/Colors';
 
-import PlainText from '../../components/UI/PlainText';
 import { NavigationData } from '../../navigation/AuthNavigator';
 import { loginWithFacebook, loginWithGoogle } from '../../redux/auth/actions';
 
