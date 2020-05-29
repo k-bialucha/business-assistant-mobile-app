@@ -32,7 +32,7 @@ module.exports = {
       alias: {
         map: [
           ['~~env', './env.ts'],
-          ['src', './src'],
+          ['~', './src'],
         ],
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },

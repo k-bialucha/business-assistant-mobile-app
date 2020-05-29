@@ -14,7 +14,7 @@ module.exports = api => {
           root: ['./'],
           alias: {
             '~~env': './env.ts',
-            src: './src/',
+            '~': './src/',
           },
         },
       ],
