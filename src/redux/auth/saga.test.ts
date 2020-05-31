@@ -140,7 +140,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
   describe('loginWithFacebookSaga', () => {
     it('handles successful signup through facebook', () => {
-      const generator = loginWithFacebookSaga();
+      const generator: Generator = loginWithFacebookSaga();
 
       const facebookLoginResponse = {
         token: 'mocked-token',
@@ -196,7 +196,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
     });
 
     it('handles canceled signup through facebook', () => {
-      const generator = loginWithFacebookSaga();
+      const generator: Generator = loginWithFacebookSaga();
 
       generator.next();
       generator.next();
@@ -211,7 +211,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
   describe('loginWithGoogleSaga', () => {
     it('handles successful signup through google', () => {
-      const generator = loginWithGoogleSaga();
+      const generator: Generator = loginWithGoogleSaga();
 
       const googleLoginResponse = {
         accessToken: 'mocked-token',
@@ -265,7 +265,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
     });
 
     it('handles canceled signup through google', () => {
-      const generator = loginWithGoogleSaga();
+      const generator: Generator = loginWithGoogleSaga();
 
       generator.next();
 

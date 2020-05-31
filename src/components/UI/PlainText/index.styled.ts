@@ -2,7 +2,13 @@ import styled, { css } from 'styled-components/native';
 
 import Colors from '~/theme/Colors';
 
-export default styled.Text`
+interface Props {
+  bold?: boolean;
+  color?: string;
+  valid?: boolean;
+}
+
+export default styled.Text<Props>`
   ${({ color, theme }) => {
     if (color || theme) {
       let value;
