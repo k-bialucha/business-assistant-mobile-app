@@ -13,7 +13,7 @@ const config: AxiosRequestConfig = {
   },
 };
 
-export const loginUser = (email, password) => {
+export const loginUser = (email: string, password: string) => {
   const data = {
     email,
     password,

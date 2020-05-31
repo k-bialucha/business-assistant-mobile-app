@@ -25,6 +25,12 @@ import {
   TryAutoLoginAction,
 } from './types';
 
+interface UserData {
+  name: string;
+  id: string;
+  image?: string;
+}
+
 export function login(email: string, password: string): LoginAction {
   return {
     type: LOGIN,
@@ -32,7 +38,10 @@ export function login(email: string, password: string): LoginAction {
   };
 }
 
-export function loginSuccess(token: string, userData): LoginSuccessAction {
+export function loginSuccess(
+  token: string,
+  userData: UserData
+): LoginSuccessAction {
   return {
     type: LOGIN_SUCCESS,
     payload: {
@@ -70,7 +79,10 @@ export function signup(
   };
 }
 
-export function signupSuccess(token: string, userData): SignupSuccessAction {
+export function signupSuccess(
+  token: string,
+  userData: UserData
+): SignupSuccessAction {
   return {
     type: SIGNUP_SUCCESS,
     payload: {
@@ -103,7 +115,7 @@ export function loginWithGoogle(): LoginWithGoogleAction {
   };
 }
 
-export function resetPassword(email): ResetPasswordAction {
+export function resetPassword(email: string): ResetPasswordAction {
   return {
     type: RESET_PASSWORD,
     payload: { email },

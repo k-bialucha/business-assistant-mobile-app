@@ -5,7 +5,11 @@ import Colors from '~/theme/Colors';
 
 import { StyledView } from './Loader.styled';
 
-const Loader = ({ isLoading }) => {
+interface Props {
+  isLoading: boolean;
+}
+
+const Loader: React.FC<Props> = ({ isLoading }) => {
   if (!isLoading) return null;
 
   return (
