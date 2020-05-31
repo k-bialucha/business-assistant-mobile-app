@@ -8,7 +8,7 @@ A mobile app that _will_ allow to summarize monthly sales and expenses of a comp
 
 ## Running the app
 
-Before first launch - create `.env` file according to the instructions in [.env.example](.env.example) file and install dependencies:
+Before first launch - create `env.ts` file according to the instructions in [env.example.ts](env.example.ts) file and install dependencies:
 
 ```sh
 > npm install
