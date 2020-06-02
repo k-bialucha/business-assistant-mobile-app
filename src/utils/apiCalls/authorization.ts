@@ -13,19 +13,27 @@ const config: AxiosRequestConfig = {
   },
 };
 
-export const loginUser = (email: string, password: string) => {
+export const loginUser = async (email: string, password: string) => {
   const data = {
     email,
     password,
     returnSecureToken: true,
   };
 
-  return firebaseAuth
-    .post(`/accounts:signInWithPassword`, data, config)
-    .then(response => response.data);
+  const response = await firebaseAuth.post(
+    `/accounts:signInWithPassword`,
+    data,
+    config
+  );
+
+  return response.data;
 };
 
-export const signupUser = (email: string, password: string, phone?: string) => {
+export const signupUser = async (
+  email: string,
+  password: string,
+  phone?: string
+) => {
   const data = {
     email,
     password,
@@ -33,7 +41,7 @@ export const signupUser = (email: string, password: string, phone?: string) => {
     returnSecureToken: true,
   };
 
-  return firebaseAuth
-    .post(`/accounts:signUp`, data, config)
-    .then(response => response.data);
+  const response = await firebaseAuth.post(`/accounts:signUp`, data, config);
+
+  return response.data;
 };

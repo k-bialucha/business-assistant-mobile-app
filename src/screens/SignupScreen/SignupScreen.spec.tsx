@@ -46,7 +46,6 @@ describe('<SignupScreen />', () => {
   );
 
   const emailInput: ReactTestInstance = getByTestId('email-input');
-  //   const phoneInput: ReactTestInstance = queryByTestId('phone-input');
   const passwordInput: ReactTestInstance = getByTestId('password-input');
   const signupButton: ReactTestInstance = getByTestId('signup-button');
 
@@ -54,8 +53,6 @@ describe('<SignupScreen />', () => {
     const someEmail = 'siatkasebastian@gmail.com';
 
     fireEvent.changeText(emailInput, someEmail);
-
-    // fireEvent.changeText(phoneInput, '');
 
     fireEvent.changeText(passwordInput, 'mypass123');
 
