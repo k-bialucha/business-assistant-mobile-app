@@ -3,7 +3,7 @@ import { Keyboard } from 'react-native';
 import {
   AuthActions,
   CLEAR_ERROR_STATE,
-  errorType,
+  ErrorObject,
   LOGIN,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
@@ -25,7 +25,7 @@ export interface AuthState {
   userImage: string;
   requestStatus: RequestStatus;
   didTryAutoLogin: boolean;
-  error: errorType;
+  error: ErrorObject;
 }
 
 export const initialState: AuthState = {

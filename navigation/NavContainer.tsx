@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Loader from '../components/UI/Loader';
 import { clearErrorState } from '../redux/auth/actions';
-import { errorType, RequestStatus } from '../redux/auth/types';
+import { ErrorObject, RequestStatus } from '../redux/auth/types';
 import { RootState } from '../redux/rootReducer';
 import StartupScreen from '../screens/StartupScreen';
 
@@ -25,7 +25,9 @@ const NavContainer = () => {
   const isLoading: boolean = useSelector(
     (state: RootState) => state.auth.requestStatus === RequestStatus.LOADING
   );
-  const error: errorType = useSelector((state: RootState) => state.auth.error);
+  const error: ErrorObject = useSelector(
+    (state: RootState) => state.auth.error
+  );
 
   useEffect(() => {
     if (error) {

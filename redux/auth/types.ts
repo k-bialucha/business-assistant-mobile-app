@@ -94,7 +94,7 @@ export interface ClearErrorStateAction {
   type: typeof CLEAR_ERROR_STATE;
 }
 
-export type errorType = { title: string; message: string };
+export type ErrorObject = { title: string; message: string };
 
 export type AuthActions =
   | LoginAction
