@@ -9,7 +9,7 @@ import { NavigationData } from '~/navigation/AppNavigator/SalesNavigator';
 
 type Props = NavigationData<'SalesList'>;
 
-const SalesScreen: React.FC<Props> = () => {
+const SalesListScreen: React.FC<Props> = () => {
   return (
     <View>
       <Text>Sales</Text>
@@ -17,7 +17,7 @@ const SalesScreen: React.FC<Props> = () => {
   );
 };
 
-export const SalesScreenNavOptions = (
+export const SalesListScreenNavOptions = (
   navData: NavigationData<'SalesList'>
 ): StackNavigationOptions => {
   return {
@@ -34,4 +34,4 @@ export const SalesScreenNavOptions = (
   };
 };
 
-export default SalesScreen;
+export default SalesListScreen;

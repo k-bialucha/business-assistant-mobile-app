@@ -7,7 +7,9 @@ import {
 } from '@react-navigation/stack';
 
 import SalesEntryScreen from '~/screens/SalesEntryScreen';
-import SalesScreen, { SalesScreenNavOptions } from '~/screens/SalesScreen';
+import SalesListScreen, {
+  SalesListScreenNavOptions,
+} from '~/screens/SalesListScreen';
 
 import defaultScreenOptions from './defaultScreenOptions';
 import {
@@ -29,8 +31,8 @@ const SalesNavigator: React.FC<Props> = () => {
     <SalesStackNavigator.Navigator screenOptions={defaultScreenOptions}>
       <SalesStackNavigator.Screen
         name="SalesList"
-        component={SalesScreen}
-        options={SalesScreenNavOptions}
+        component={SalesListScreen}
+        options={SalesListScreenNavOptions}
       />
       <SalesStackNavigator.Screen
         name="SalesEntry"
