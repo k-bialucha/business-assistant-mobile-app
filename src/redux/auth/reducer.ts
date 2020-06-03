@@ -25,7 +25,7 @@ export interface AuthState {
   userImage: string | null;
   requestStatus: RequestStatus;
   didTryAutoLogin: boolean;
-  error: ErrorObject;
+  error: ErrorObject | null;
 }
 
 export const initialState: AuthState = {
