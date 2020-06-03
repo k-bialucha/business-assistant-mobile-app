@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Alert } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Loader from '../components/UI/Loader';
-import { RequestStatus } from '../redux/auth/types';
+import { clearErrorState } from '../redux/auth/actions';
+import { ErrorObject, RequestStatus } from '../redux/auth/types';
 import { RootState } from '../redux/rootReducer';
 import StartupScreen from '../screens/StartupScreen';
 
@@ -12,17 +14,27 @@ import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
 
 const NavContainer = () => {
+  const dispatch = useDispatch();
+
   const didTryAutoLogin: boolean = useSelector(
     (state: RootState) => !!state.auth.didTryAutoLogin
   );
-
   const isAuthenticated: boolean = useSelector(
     (state: RootState) => !!state.auth.token
   );
-
   const isLoading: boolean = useSelector(
     (state: RootState) => state.auth.requestStatus === RequestStatus.LOADING
   );
+  const error: ErrorObject = useSelector(
+    (state: RootState) => state.auth.error
+  );
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert(error.title, error.message);
+      dispatch(clearErrorState());
+    }
+  }, [error, dispatch]);
 
   return (
     <>

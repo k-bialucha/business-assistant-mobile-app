@@ -12,6 +12,7 @@ export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const SET_DID_TRY_AUTO_LOGIN = 'SET_DID_TRY_AUTO_LOGIN';
 export const TRY_AUTO_LOGIN = 'TRY_AUTO_LOGIN';
+export const CLEAR_ERROR_STATE = 'CLEAR_ERROR_STATE';
 
 export interface LoginAction {
   type: typeof LOGIN;
@@ -35,7 +36,7 @@ export interface LoginSuccessAction {
 
 export interface LoginFailureAction {
   type: typeof LOGIN_FAILURE;
-  payload: string;
+  payload?: string;
 }
 
 export interface LogoutAction {
@@ -89,6 +90,12 @@ export interface TryAutoLoginAction {
   type: typeof TRY_AUTO_LOGIN;
 }
 
+export interface ClearErrorStateAction {
+  type: typeof CLEAR_ERROR_STATE;
+}
+
+export type ErrorObject = { title: string; message: string };
+
 export type AuthActions =
   | LoginAction
   | LoginSuccessAction
@@ -99,8 +106,10 @@ export type AuthActions =
   | SignupFailureAction
   | LoginWithFacebookAction
   | LoginWithGoogleAction
+  | SetDidTryAutoLoginAction
+  | TryAutoLoginAction
   | ResetPasswordAction
-  | SetDidTryAutoLoginAction;
+  | ClearErrorStateAction;
 
 export enum RequestStatus {
   UNAUTHENTICATED,
