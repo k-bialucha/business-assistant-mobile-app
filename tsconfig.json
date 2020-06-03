@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "~~env": ["./env.ts"],
+      "~env": ["./env.ts"],
       "~/*": ["./src/*"]
     }
   }

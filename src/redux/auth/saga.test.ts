@@ -19,7 +19,7 @@ import {
   SIGNUP_SUCCESS,
 } from './types';
 
-jest.mock('~~env');
+jest.mock('~env');
 
 describe(`${DOMAIN_NAME}/saga`, () => {
   describe('loginSaga', () => {
