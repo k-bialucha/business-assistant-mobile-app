@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import { NavigationData } from '~/navigation/AppNavigator/SalesNavigator';
 
-import SalesScreen from './SalesScreen';
+import SalesListScreen from './SalesListScreen';
 
 type Props = NavigationData<'SalesList'>;
 
@@ -14,9 +14,9 @@ const fakeProps: Props = {
   navigation: {},
 };
 
-describe('<SalesScreen />', () => {
+describe('<SalesListScreen />', () => {
   it('matches the snapshot', () => {
-    const tree = shallow(<SalesScreen {...fakeProps} />);
+    const tree = shallow(<SalesListScreen {...fakeProps} />);
 
     expect(tree).toMatchSnapshot();
   });

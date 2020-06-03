@@ -19,7 +19,7 @@ import {
   SIGNUP_SUCCESS,
 } from './types';
 
-jest.mock('~~env');
+jest.mock('~env');
 
 // mock firebase JWT token
 const someToken =

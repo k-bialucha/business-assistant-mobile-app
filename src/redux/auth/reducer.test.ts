@@ -74,6 +74,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
 
     const previousState: AuthState = {
       token: null,
+      error: null,
       username: someEmail,
       userId: someUserId,
       userImage: someUserImage,
@@ -90,6 +91,10 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
 
     const expectedState: AuthState = {
       token: null,
+      error: {
+        title: expect.any(String),
+        message: expect.any(String),
+      },
       username: someEmail,
       userId: someUserId,
       userImage: someUserImage,
@@ -108,6 +113,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userImage: 'url',
       requestStatus: RequestStatus.SUCCESS,
       didTryAutoLogin: false,
+      error: null,
     };
 
     const action: LogoutAction = {
@@ -123,6 +129,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
       userImage: null,
       requestStatus: RequestStatus.UNAUTHENTICATED,
       didTryAutoLogin: false,
+      error: null,
     };
 
     expect(nextState).toEqual(expectedState);

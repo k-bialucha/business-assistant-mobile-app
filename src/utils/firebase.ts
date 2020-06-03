@@ -8,7 +8,7 @@ import {
   MESSAGING_SENDER_ID,
   PROJECT_ID,
   STORAGE_BUCKET,
-} from '~~env';
+} from '~env';
 
 const options = {
   apiKey: FIREBASE_API_KEY,

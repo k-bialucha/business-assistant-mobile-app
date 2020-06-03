@@ -1,4 +1,6 @@
 import {
+  CLEAR_ERROR_STATE,
+  ClearErrorStateAction,
   LOGIN,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
@@ -55,7 +57,7 @@ export function loginSuccess(
   };
 }
 
-export function loginFailure(message: string): LoginFailureAction {
+export function loginFailure(message?: string): LoginFailureAction {
   return {
     type: LOGIN_FAILURE,
     payload: message,
@@ -131,5 +133,11 @@ export function setDidTryAutoLogin(): SetDidTryAutoLoginAction {
 export function tryAutoLogin(): TryAutoLoginAction {
   return {
     type: TRY_AUTO_LOGIN,
+  };
+}
+
+export function clearErrorState(): ClearErrorStateAction {
+  return {
+    type: CLEAR_ERROR_STATE,
   };
 }
