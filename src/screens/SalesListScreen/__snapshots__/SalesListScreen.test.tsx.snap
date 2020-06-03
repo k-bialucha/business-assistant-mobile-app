@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SalesScreen /> matches the snapshot 1`] = `
+exports[`<SalesListScreen /> matches the snapshot 1`] = `
 <View>
   <Text>
     Sales

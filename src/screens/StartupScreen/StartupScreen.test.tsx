@@ -15,9 +15,7 @@ jest.mock('react-redux', () => {
 });
 
 describe('<StartupScreen />', () => {
-  it('matches the snapshot', () => {
-    const tree = shallow(<StartupScreen />);
-
-    expect(tree).toMatchSnapshot();
+  it('renders without crashing', () => {
+    shallow(<StartupScreen />);
   });
 });
