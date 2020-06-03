@@ -1,16 +1,21 @@
-import { Alert, Keyboard } from 'react-native';
+import { Keyboard } from 'react-native';
 
 import {
   AuthActions,
+  CLEAR_ERROR_STATE,
+  ErrorObject,
   LOGIN,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
+  LOGIN_WITH_FACEBOOK,
+  LOGIN_WITH_GOOGLE,
   LOGOUT,
   RequestStatus,
   SET_DID_TRY_AUTO_LOGIN,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
+  TRY_AUTO_LOGIN,
 } from './types';
 
 export interface AuthState {
@@ -20,6 +25,7 @@ export interface AuthState {
   userImage: string;
   requestStatus: RequestStatus;
   didTryAutoLogin: boolean;
+  error: ErrorObject;
 }
 
 export const initialState: AuthState = {
@@ -29,6 +35,7 @@ export const initialState: AuthState = {
   userImage: null,
   requestStatus: RequestStatus.UNAUTHENTICATED,
   didTryAutoLogin: false,
+  error: null,
 };
 
 function reducer(
@@ -39,6 +46,18 @@ function reducer(
     case LOGIN:
       Keyboard.dismiss();
 
+      return {
+        ...state,
+        requestStatus: RequestStatus.LOADING,
+      };
+
+    case LOGIN_WITH_FACEBOOK:
+      return {
+        ...state,
+        requestStatus: RequestStatus.LOADING,
+      };
+
+    case LOGIN_WITH_GOOGLE:
       return {
         ...state,
         requestStatus: RequestStatus.LOADING,
@@ -60,14 +79,23 @@ function reducer(
       };
     }
 
-    case LOGIN_FAILURE:
-      Alert.alert('Something went wrong', action.payload);
+    case LOGIN_FAILURE: {
+      let { error } = state;
+
+      if (action.payload) {
+        error = {
+          title: 'Something went wrong',
+          message: action.payload,
+        };
+      }
 
       return {
         ...state,
         token: null,
         requestStatus: RequestStatus.FAILURE,
+        error,
       };
+    }
 
     case LOGOUT:
       return initialState;
@@ -96,20 +124,42 @@ function reducer(
       };
     }
 
-    case SIGNUP_FAILURE:
-      Alert.alert('Something went wrong', action.payload);
+    case SIGNUP_FAILURE: {
+      let { error } = state;
+
+      if (action.payload) {
+        error = {
+          title: 'Something went wrong',
+          message: action.payload,
+        };
+      }
 
       return {
         ...state,
         token: null,
         requestStatus: RequestStatus.FAILURE,
+        error,
       };
+    }
 
     case SET_DID_TRY_AUTO_LOGIN:
       return {
         ...state,
         didTryAutoLogin: true,
       };
+
+    case TRY_AUTO_LOGIN:
+      return {
+        ...state,
+        requestStatus: RequestStatus.LOADING,
+      };
+
+    case CLEAR_ERROR_STATE: {
+      return {
+        ...state,
+        error: null,
+      };
+    }
 
     default:
       return state;

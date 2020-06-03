@@ -168,7 +168,12 @@ export function* loginWithGoogleSaga() {
       yield call(
         AsyncStorage.setItem,
         'userData',
-        JSON.stringify({ jwtToken, username: name, id: userId, image: picture })
+        JSON.stringify({
+          token: jwtToken,
+          username: name,
+          id: userId,
+          image: picture,
+        })
       );
     } else if (type === 'cancel') {
       throw new Error('Login to google canceled');
@@ -216,7 +221,7 @@ export function* tryAutoLoginSaga() {
     if (!jsonUserData) {
       yield put(setDidTryAutoLogin());
 
-      throw new Error('No user data in storage');
+      throw new Error();
     }
 
     const { token, id, name, image } = JSON.parse(jsonUserData);
@@ -225,11 +230,7 @@ export function* tryAutoLoginSaga() {
 
     yield put(loginSuccess(token, { name, id, image }));
   } catch (error) {
-    if (error instanceof Error) {
-      yield put(loginFailure(error.message));
-    } else {
-      yield put(loginFailure('Auto Login Failed'));
-    }
+    yield put(loginFailure());
   }
 }
 
