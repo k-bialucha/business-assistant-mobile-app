@@ -196,7 +196,7 @@ export function* resetPasswordSaga({
 }: ResetPasswordAction) {
   try {
     const actionCodeSettings = {
-      // TODO: check if it's required
+      // to control if back to app after password change in browser
       url: '',
     };
 
