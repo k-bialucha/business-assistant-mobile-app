@@ -14,6 +14,12 @@ export const SET_DID_TRY_AUTO_LOGIN = 'SET_DID_TRY_AUTO_LOGIN';
 export const TRY_AUTO_LOGIN = 'TRY_AUTO_LOGIN';
 export const CLEAR_ERROR_STATE = 'CLEAR_ERROR_STATE';
 
+export interface UserData {
+  name: string;
+  id: string;
+  image?: string;
+}
+
 export interface LoginAction {
   type: typeof LOGIN;
   payload: {
@@ -26,11 +32,7 @@ export interface LoginSuccessAction {
   type: typeof LOGIN_SUCCESS;
   payload: {
     token: string;
-    userData: {
-      name: string;
-      id: string;
-      image?: string;
-    };
+    userData: UserData;
   };
 }
 
@@ -56,11 +58,7 @@ export interface SignupSuccessAction {
   type: typeof SIGNUP_SUCCESS;
   payload: {
     token: string;
-    userData: {
-      name: string;
-      id: string;
-      image?: string;
-    };
+    userData: UserData;
   };
 }
 

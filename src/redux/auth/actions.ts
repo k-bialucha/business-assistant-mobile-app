@@ -25,13 +25,8 @@ import {
   SignupSuccessAction,
   TRY_AUTO_LOGIN,
   TryAutoLoginAction,
+  UserData,
 } from './types';
-
-interface UserData {
-  name: string;
-  id: string;
-  image?: string;
-}
 
 export function login(email: string, password: string): LoginAction {
   return {
@@ -48,11 +43,7 @@ export function loginSuccess(
     type: LOGIN_SUCCESS,
     payload: {
       token,
-      userData: {
-        name: userData.name,
-        id: userData.id,
-        image: userData.image,
-      },
+      userData,
     },
   };
 }
@@ -89,11 +80,7 @@ export function signupSuccess(
     type: SIGNUP_SUCCESS,
     payload: {
       token,
-      userData: {
-        name: userData.name,
-        id: userData.id,
-        image: userData.image,
-      },
+      userData,
     },
   };
 }
