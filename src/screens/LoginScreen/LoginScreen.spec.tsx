@@ -31,7 +31,7 @@ jest.mock('redux-saga/effects', () => {
   };
 });
 jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: key => key }),
+  useTranslation: () => ({ t: (key: string) => key }),
 }));
 
 const someApiResponse = { idToken: 'highly-secure-token', localId: '999abcd' };
@@ -41,13 +41,13 @@ describe('<LoginScreen />', () => {
     (loginUser as jest.Mock).mockResolvedValue(someApiResponse);
   });
 
-  const { queryByTestId, store } = renderWithRedux(
+  const { getByTestId, store } = renderWithRedux(
     <LoginScreen {...fakeProps} />
   );
 
-  const emailInput: ReactTestInstance = queryByTestId('email-input');
-  const passwordInput: ReactTestInstance = queryByTestId('password-input');
-  const loginButton: ReactTestInstance = queryByTestId('login-button');
+  const emailInput: ReactTestInstance = getByTestId('email-input');
+  const passwordInput: ReactTestInstance = getByTestId('password-input');
+  const loginButton: ReactTestInstance = getByTestId('login-button');
 
   it('allows to login', async () => {
     const someEmail = 'kamil.bialucha@gmail.com';

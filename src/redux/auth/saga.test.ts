@@ -21,6 +21,10 @@ import {
 
 jest.mock('~env');
 
+// mock firebase JWT token
+const someToken =
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLYW1pbCBCaWFsdWNoYSIsImlhdCI6MTU5MDk2MzkzNCwiZXhwIjoxNjIyNDk5OTM0LCJhdWQiOiJidXNzaW5lc3MtYXNzaXN0YW50LW1vYmlsZS1hcHAiLCJzdWIiOiJqZG9lQGV4YW1wbGUuY29tIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqZG9lQGV4YW1wbGUuY29tIiwidXNlcl9pZCI6IjVkNGIwY2JiNmY4MiJ9.qVrXVmcIqBeR4E6W0_8D4pq17w5NUl6s5su2U41tFIY';
+
 describe(`${DOMAIN_NAME}/saga`, () => {
   describe('loginSaga', () => {
     it('handles successful login', () => {
@@ -140,7 +144,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
   describe('loginWithFacebookSaga', () => {
     it('handles successful signup through facebook', () => {
-      const generator = loginWithFacebookSaga();
+      const generator: Generator = loginWithFacebookSaga();
 
       const facebookLoginResponse = {
         token: 'mocked-token',
@@ -170,22 +174,19 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
       expect(signToFirebaseWithCredentials).toMatchSnapshot();
 
-      // get jwt token of created user in firebase
-      const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
-
       expect(
         generator.next({
           user: {
-            getIdToken: jest.fn(() => token),
+            getIdToken: jest.fn(() => someToken),
           },
         }).value
-      ).toEqual(token);
+      ).toEqual(someToken);
 
-      expect(generator.next(token).value).toEqual(
+      expect(generator.next(someToken).value).toEqual(
         put(
           loginSuccess('mocked-token', {
             name: expect.any(String),
+            id: expect.any(String),
           })
         )
       );
@@ -196,7 +197,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
     });
 
     it('handles canceled signup through facebook', () => {
-      const generator = loginWithFacebookSaga();
+      const generator: Generator = loginWithFacebookSaga();
 
       generator.next();
       generator.next();
@@ -211,7 +212,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
   describe('loginWithGoogleSaga', () => {
     it('handles successful signup through google', () => {
-      const generator = loginWithGoogleSaga();
+      const generator: Generator = loginWithGoogleSaga();
 
       const googleLoginResponse = {
         accessToken: 'mocked-token',
@@ -239,22 +240,19 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
       expect(signToFirebaseWithCredentials).toMatchSnapshot();
 
-      // get jwt token of created user in firebase
-      const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
-
       expect(
         generator.next({
           user: {
-            getIdToken: jest.fn(() => token),
+            getIdToken: jest.fn(() => someToken),
           },
         }).value
-      ).toEqual(token);
+      ).toEqual(someToken);
 
-      expect(generator.next(token).value).toEqual(
+      expect(generator.next(someToken).value).toEqual(
         put(
-          loginSuccess(token, {
+          loginSuccess(someToken, {
             name: expect.any(String),
+            id: expect.any(String),
           })
         )
       );
@@ -265,7 +263,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
     });
 
     it('handles canceled signup through google', () => {
-      const generator = loginWithGoogleSaga();
+      const generator: Generator = loginWithGoogleSaga();
 
       generator.next();
 

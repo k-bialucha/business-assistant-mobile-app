@@ -86,11 +86,15 @@ export function* loginWithFacebookSaga() {
   );
 
   try {
-    const { type, token } = yield call(Facebook.logInWithReadPermissionsAsync, {
-      permissions: ['public_profile', 'email'],
-    });
+    const response: Facebook.FacebookLoginResult = yield call(
+      Facebook.logInWithReadPermissionsAsync,
+      {
+        permissions: ['public_profile', 'email'],
+      }
+    );
 
-    if (type === 'success') {
+    if (response.type === 'success') {
+      const { token } = response;
       // https://stackoverflow.com/questions/53678410/jest-test-the-current-environment-does-not-support-the-specified-persistence-t
       // look like without it login works the same, to delete?
 
@@ -128,7 +132,7 @@ export function* loginWithFacebookSaga() {
         'userData',
         JSON.stringify({ token, username: name, id: userId, image: picture })
       );
-    } else if (type === 'cancel') {
+    } else if (response.type === 'cancel') {
       throw new Error('Login to facebook canceled');
     }
   } catch (error) {
@@ -193,7 +197,7 @@ export function* resetPasswordSaga({
   try {
     const actionCodeSettings = {
       // to control if back to app after password change in browser
-      // url: `https://www.example.com/?email=${email}`,
+      url: '',
     };
 
     yield call(

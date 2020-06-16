@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Loader from '~/components/UI/Loader';
 import { clearErrorState } from '~/redux/auth/actions';
-import { ErrorObject, RequestStatus } from '~/redux/auth/types';
+import { RequestStatus } from '~/redux/auth/types';
 import { RootState } from '~/redux/rootReducer';
 import StartupScreen from '~/screens/StartupScreen';
 
@@ -16,18 +16,12 @@ import AuthNavigator from './AuthNavigator';
 const NavContainer = () => {
   const dispatch = useDispatch();
 
-  const didTryAutoLogin: boolean = useSelector(
-    (state: RootState) => !!state.auth.didTryAutoLogin
+  const { didTryAutoLogin, token, requestStatus, error } = useSelector(
+    (state: RootState) => state.auth
   );
-  const isAuthenticated: boolean = useSelector(
-    (state: RootState) => !!state.auth.token
-  );
-  const isLoading: boolean = useSelector(
-    (state: RootState) => state.auth.requestStatus === RequestStatus.LOADING
-  );
-  const error: ErrorObject = useSelector(
-    (state: RootState) => state.auth.error
-  );
+
+  const isAuthenticated: boolean = !!token;
+  const isLoading: boolean = requestStatus === RequestStatus.LOADING;
 
   useEffect(() => {
     if (error) {

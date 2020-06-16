@@ -155,7 +155,7 @@ Object {
   "payload": Object {
     "args": Array [
       "userData",
-      "{\\"token\\":\\"mocked-token\\",\\"username\\":\\"John Doe\\"}",
+      "{\\"token\\":\\"mocked-token\\",\\"username\\":\\"John Doe\\",\\"id\\":\\"5d4b0cbb6f82\\"}",
     ],
     "context": null,
     "fn": [Function],
@@ -229,7 +229,7 @@ Object {
   "payload": Object {
     "args": Array [
       "userData",
-      "{\\"token\\":\\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\\",\\"username\\":\\"John Doe\\"}",
+      "{\\"token\\":\\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLYW1pbCBCaWFsdWNoYSIsImlhdCI6MTU5MDk2MzkzNCwiZXhwIjoxNjIyNDk5OTM0LCJhdWQiOiJidXNzaW5lc3MtYXNzaXN0YW50LW1vYmlsZS1hcHAiLCJzdWIiOiJqZG9lQGV4YW1wbGUuY29tIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqZG9lQGV4YW1wbGUuY29tIiwidXNlcl9pZCI6IjVkNGIwY2JiNmY4MiJ9.qVrXVmcIqBeR4E6W0_8D4pq17w5NUl6s5su2U41tFIY\\",\\"username\\":\\"John Doe\\",\\"id\\":\\"5d4b0cbb6f82\\"}",
     ],
     "context": null,
     "fn": [Function],
@@ -245,7 +245,9 @@ Object {
   "payload": Object {
     "args": Array [
       "some@email.com",
-      Object {},
+      Object {
+        "url": "",
+      },
     ],
     "context": null,
     "fn": [Function],

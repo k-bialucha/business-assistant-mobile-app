@@ -19,13 +19,13 @@ import {
 } from './types';
 
 export interface AuthState {
-  token: string;
-  username: string;
-  userId: string;
-  userImage: string;
+  token: string | null;
+  username: string | null;
+  userId: string | null;
+  userImage: string | null;
   requestStatus: RequestStatus;
   didTryAutoLogin: boolean;
-  error: ErrorObject;
+  error: ErrorObject | null;
 }
 
 export const initialState: AuthState = {
@@ -74,7 +74,7 @@ function reducer(
         token,
         username: name,
         userId: id,
-        userImage: image,
+        userImage: image || null,
         requestStatus: RequestStatus.SUCCESS,
       };
     }
@@ -119,7 +119,7 @@ function reducer(
         token,
         username: name,
         userId: id,
-        userImage: image,
+        userImage: image || null,
         requestStatus: RequestStatus.SUCCESS,
       };
     }

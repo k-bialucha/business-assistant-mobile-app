@@ -6,7 +6,11 @@ const StyledContainer = styled.View`
   padding-vertical: 10px;
 `;
 
-const StyledTextField = styled.TextInput`
+interface Props {
+  valid?: boolean;
+}
+
+const StyledTextField = styled.TextInput<Props>`
   font-size: 18px;
   letter-spacing: 0.6px;
   padding-left: 12px;

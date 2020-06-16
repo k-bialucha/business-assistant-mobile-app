@@ -23,17 +23,17 @@ const fakeProps: Props = {
 };
 
 describe('<ResetPasswordScreen />', () => {
-  const { queryByTestId, queryByDisplayValue, queryByText } = renderWithRedux(
+  const { getByTestId, queryByDisplayValue, queryByText } = renderWithRedux(
     <ResetPasswordScreen {...fakeProps} />
   );
 
-  const emailInput: ReactTestInstance = queryByTestId('email-input');
-  const resetPasswordButton: ReactTestInstance = queryByTestId(
+  const emailInput: ReactTestInstance = getByTestId('email-input');
+  const resetPasswordButton: ReactTestInstance = getByTestId(
     'reset-password-button'
   );
 
   it('sets route `email` parameter as initial input value', () => {
-    const maybeInputValue: ReactTestInstance = queryByDisplayValue(
+    const maybeInputValue: ReactTestInstance | null = queryByDisplayValue(
       fakeProps.route.params.email
     );
 
@@ -57,7 +57,9 @@ describe('<ResetPasswordScreen />', () => {
       fireEvent.press(resetPasswordButton);
     });
 
-    const validationText: ReactTestInstance = queryByText('Invalid email');
+    const validationText: ReactTestInstance | null = queryByText(
+      'Invalid email'
+    );
 
     expect(validationText).not.toBeNull();
   });
@@ -67,7 +69,7 @@ describe('<ResetPasswordScreen />', () => {
       fireEvent.changeText(emailInput, '');
     });
 
-    const validationText: ReactTestInstance = queryByText('Required');
+    const validationText: ReactTestInstance | null = queryByText('Required');
 
     expect(validationText).not.toBeNull();
   });
