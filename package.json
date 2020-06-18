@@ -88,5 +88,21 @@
     "react-native-testing-library": "^1.14.0",
     "react-test-renderer": "^16.13.0",
     "typescript": "^3.9.3"
+  },
+  "lint-staged": {
+    "*.(js|jsx|ts|tsx)": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.(md|json)": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run typecheck && npm run test"
+    }
   }
 }
