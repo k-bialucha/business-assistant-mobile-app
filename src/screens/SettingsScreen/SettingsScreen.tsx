@@ -2,6 +2,7 @@ import React from 'react';
 import { Alert, TouchableWithoutFeedback } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import { ListItem } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,6 +19,7 @@ const SettingsScreen: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const { username, userImage } = useSelector((state: RootState) => state.auth);
   const { navigate } = useNavigation();
+  const { t } = useTranslation();
 
   return (
     <StyledView>
@@ -67,7 +69,7 @@ const SettingsScreen: React.FC<Props> = () => {
         }}
       >
         <ListItem
-          title="Log out"
+          title={t('Log out')}
           titleStyle={{
             color: Colors.errorRed,
           }}
