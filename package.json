@@ -81,10 +81,22 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.5.0",
     "eslint-plugin-simple-import-sort": "^5.0.2",
+    "husky": "^4.2.5",
     "jest-expo": "^36.0.1",
+    "lint-staged": "^10.2.11",
     "prettier": "^1.19.1",
     "react-native-testing-library": "^1.14.0",
     "react-test-renderer": "^16.13.0",
     "typescript": "^3.9.3"
+  },
+  "lint-staged": {
+    "*.(js|jsx|ts|tsx)": "eslint --fix",
+    "*.(md|json)": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run typecheck && npm run test"
+    }
   }
 }
