@@ -1,10 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SettingsScreen /> matches the snapshot 1`] = `
-<Styled(View)>
-  <Button
-    onPress={[Function]}
-    title="Log out"
-  />
-</Styled(View)>
+<SettingsScreen
+  navigation={Object {}}
+  route={
+    Object {
+      "key": "1234",
+      "name": "Settings",
+    }
+  }
+/>
 `;

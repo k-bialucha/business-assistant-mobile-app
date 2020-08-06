@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { NavigationContext } from '@react-navigation/native';
 import { shallow } from 'enzyme';
 
 import { NavigationData } from '~/navigation/AppNavigator/SettingsNavigator';
@@ -10,6 +11,14 @@ jest.mock('react-redux', () => {
   return {
     __esModule: true,
     useDispatch: jest.fn().mockImplementation(() => jest.fn()),
+    useSelector: jest.fn().mockReturnValue({
+      username: 'dummy-username',
+      userImage: 'dummy-image-url',
+    }),
+    useNavigation: () =>
+      jest.fn().mockReturnValue({
+        navigate: jest.fn(),
+      }),
   };
 });
 
@@ -21,9 +30,14 @@ const fakeProps: Props = {
   navigation: {},
 };
 
+// TO CHECK: bad snapshot ??
 describe('<SettingsScreen />', () => {
   it('matches the snapshot', () => {
-    const tree = shallow(<SettingsScreen {...fakeProps} />);
+    const tree = shallow(
+      <NavigationContext.Provider>
+        <SettingsScreen {...fakeProps} />
+      </NavigationContext.Provider>
+    );
 
     expect(tree).toMatchSnapshot();
   });
