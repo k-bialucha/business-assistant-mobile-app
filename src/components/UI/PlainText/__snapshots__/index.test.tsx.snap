@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PlainText /> matches the snapshot 1`] = `
-<Styled(Text)>
+<Styled(Text)
+  color="#000000"
+>
   Some Text
 </Styled(Text)>
 `;

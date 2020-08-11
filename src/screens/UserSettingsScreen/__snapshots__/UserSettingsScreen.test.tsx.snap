@@ -3,6 +3,7 @@
 exports[`<UserSettingsScreen /> matches the snapshot 1`] = `
 <Styled(View)>
   <PlainText
+    color="#000000"
     theme="dark"
   >
     User Settings Screen
