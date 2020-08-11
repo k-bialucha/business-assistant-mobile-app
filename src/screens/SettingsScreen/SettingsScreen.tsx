@@ -15,15 +15,16 @@ import { StyledView } from './SettingsScreen.styled';
 
 type Props = NavigationData<'Settings'>;
 
-const SettingsScreen: React.FC<Props> = () => {
+const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
   const { username, userImage } = useSelector((state: RootState) => state.auth);
-  const { navigate } = useNavigation();
   const { t } = useTranslation();
 
   return (
     <StyledView>
-      <TouchableWithoutFeedback onPress={() => navigate('UserSettings')}>
+      <TouchableWithoutFeedback
+        onPress={() => navigation.navigate('UserSettings')}
+      >
         <ListItem
           // dummy strings temporary until load data into redux store during auto-login is not done
           leftAvatar={{
