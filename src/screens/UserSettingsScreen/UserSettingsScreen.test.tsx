@@ -6,13 +6,6 @@ import { NavigationData } from '~/navigation/AppNavigator/SettingsNavigator';
 
 import UserSettingsScreen from './UserSettingsScreen';
 
-jest.mock('react-redux', () => {
-  return {
-    __esModule: true,
-    useDispatch: jest.fn().mockImplementation(() => jest.fn()),
-  };
-});
-
 type Props = NavigationData<'UserSettings'>;
 
 const fakeProps: Props = {
