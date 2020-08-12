@@ -66,13 +66,13 @@ function reducer(
     case LOGIN_SUCCESS: {
       const {
         token,
-        userData: { name, id, image },
+        userData: { username, id, image },
       } = action.payload;
 
       return {
         ...state,
         token,
-        username: name,
+        username,
         userId: id,
         userImage: image || null,
         requestStatus: RequestStatus.SUCCESS,
@@ -111,13 +111,13 @@ function reducer(
     case SIGNUP_SUCCESS: {
       const {
         token,
-        userData: { name, id, image },
+        userData: { username, id, image },
       } = action.payload;
 
       return {
         ...state,
         token,
-        username: name,
+        username,
         userId: id,
         userImage: image || null,
         requestStatus: RequestStatus.SUCCESS,

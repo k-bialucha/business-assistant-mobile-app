@@ -15,7 +15,7 @@ export const TRY_AUTO_LOGIN = 'TRY_AUTO_LOGIN';
 export const CLEAR_ERROR_STATE = 'CLEAR_ERROR_STATE';
 
 export interface UserData {
-  name: string;
+  username: string;
   id: string;
   image?: string;
 }

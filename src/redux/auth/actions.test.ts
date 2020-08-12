@@ -54,7 +54,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
   test('loginSuccess action creator returns correct object', () => {
     const someToken: string = 'some-secure-token';
     const mockedUserData = {
-      name: 'user-name',
+      username: 'user-name',
       id: 'user-id',
       image: 'user-image-url',
     };
@@ -112,7 +112,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
   test('signupSuccess action creator returns correct object', () => {
     const mockedToken: string = 'mocked-secure-token';
     const mockedUserData = {
-      name: 'user-name',
+      username: 'user-name',
       id: 'user-id',
       image: 'user-image-url',
     };

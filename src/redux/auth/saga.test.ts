@@ -54,7 +54,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
             userData: {
               id: someApiResponse.localId,
               image: undefined,
-              name: mockedEmail,
+              username: mockedEmail,
             },
           },
         })
@@ -113,7 +113,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
             userData: {
               id: someApiResponse.localId,
               image: undefined,
-              name: mockedEmail,
+              username: mockedEmail,
             },
           },
         })
@@ -185,7 +185,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       expect(generator.next(someToken).value).toEqual(
         put(
           loginSuccess('mocked-token', {
-            name: expect.any(String),
+            username: expect.any(String),
             id: expect.any(String),
           })
         )
@@ -251,7 +251,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       expect(generator.next(someToken).value).toEqual(
         put(
           loginSuccess(someToken, {
-            name: expect.any(String),
+            username: expect.any(String),
             id: expect.any(String),
           })
         )

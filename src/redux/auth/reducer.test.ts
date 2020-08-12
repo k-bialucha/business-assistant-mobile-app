@@ -37,7 +37,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
   it('handles loginSuccess action', () => {
     const someToken: string = 'some-token';
     const mockedUserData = {
-      name: 'user-name',
+      username: 'user-name',
       id: 'user-id',
       image: 'user-image-url',
     };
@@ -58,7 +58,7 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
     const expectedState: AuthState = {
       ...initialState,
       token: someToken,
-      username: mockedUserData.name,
+      username: mockedUserData.username,
       userImage: mockedUserData.image,
       userId: mockedUserData.id,
       requestStatus: RequestStatus.SUCCESS,

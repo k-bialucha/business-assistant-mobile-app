@@ -1,7 +1,6 @@
 import React from 'react';
 import { Alert, TouchableWithoutFeedback } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { ListItem } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,18 +19,19 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { username, userImage } = useSelector((state: RootState) => state.auth);
   const { t } = useTranslation();
 
+  if (!username || !userImage) return null;
+
   return (
     <StyledView>
       <TouchableWithoutFeedback
         onPress={() => navigation.navigate('UserSettings')}
       >
         <ListItem
-          // dummy strings temporary until load data into redux store during auto-login is not done
           leftAvatar={{
             rounded: true,
-            source: { uri: userImage || 'dummyUrl' },
+            source: { uri: userImage },
           }}
-          title={username || 'dummy name'}
+          title={username}
           titleStyle={{
             color: Colors.navyBlue,
             fontSize: 20,
