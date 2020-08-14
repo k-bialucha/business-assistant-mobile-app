@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Button } from 'react-native';
 
-import { StackNavigationOptions } from '@react-navigation/stack';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import PlainText from '~/components/UI/PlainText';
 import { NavigationData } from '~/navigation/AppNavigator/SettingsNavigator';
@@ -13,24 +13,26 @@ type Props = NavigationData<'UserSettings'>;
 const UserSettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { t } = useTranslation();
 
+  const [counter, setCounter] = useState(1);
+
+  // TODO: extract to a separate hook?
   useEffect(() => {
     // passing already translated title it could be common way to set nav options in entire app
-    navigation.setParams({ headerTitle: t('Account Settings') });
-  }, [t, navigation]);
+    const newTitle = `Account Settings no. ${counter}`;
+
+    console.warn(`setting a new title: "${newTitle}"`);
+
+    navigation.setOptions({
+      headerTitle: t(newTitle),
+    });
+  }, [t, navigation, counter]);
 
   return (
     <StyledView>
       <PlainText theme="dark">User Settings Screen</PlainText>
+      <Button title="change!!" onPress={() => setCounter(counter * 2)} />
     </StyledView>
   );
-};
-
-export const UserSettingsScreenNavOptions: StackNavigationOptions = navData => {
-  // 1 - to avoid passing prop from component, but problem with headerTitle type, it expects string
-  // headerTitle: <Trans i18nKey="Account Settings" />,
-
-  // 2 set passed title, navData need type
-  return { title: navData.route.params?.headerTitle };
 };
 
 export default UserSettingsScreen;
