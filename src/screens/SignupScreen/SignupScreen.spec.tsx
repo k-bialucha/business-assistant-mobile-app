@@ -30,9 +30,6 @@ jest.mock('redux-saga/effects', () => {
     delay: () => () => true,
   };
 });
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: (key: string) => key }),
-}));
 
 const someApiResponse = { idToken: 'highly-secure-token', localId: '999abcd' };
 

@@ -24,10 +24,6 @@ jest.mock('react-redux', () => {
   };
 });
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: (key: string) => key }),
-}));
-
 describe('<AuthScreen />', () => {
   it('matches the snaphot', () => {
     const mockedComp = shallow(<AuthScreen {...mockedProps} />);

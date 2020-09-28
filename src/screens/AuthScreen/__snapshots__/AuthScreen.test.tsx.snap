@@ -4,7 +4,7 @@ exports[`<AuthScreen /> matches the snaphot 1`] = `
 <Styled(View)>
   <View>
     <Styled(Text)>
-      Make your business easier.
+      [Translation: &lt;Make your business easier.&gt;]
     </Styled(Text)>
   </View>
   <Styled(View)>
@@ -16,7 +16,7 @@ exports[`<AuthScreen /> matches the snaphot 1`] = `
           }
         }
         onPress={[Function]}
-        title="Create an account"
+        title="[Translation: <Create an account>]"
       />
     </Styled(View)>
     <View
@@ -45,7 +45,7 @@ exports[`<AuthScreen /> matches the snaphot 1`] = `
           />
         }
         onPress={[Function]}
-        title="Continue with Facebook"
+        title="[Translation: <Continue with Facebook>]"
         titleStyle={
           Object {
             "color": "#D5DCF2",
@@ -71,7 +71,7 @@ exports[`<AuthScreen /> matches the snaphot 1`] = `
           />
         }
         onPress={[Function]}
-        title="Continue with Google"
+        title="[Translation: <Continue with Google>]"
         titleStyle={
           Object {
             "color": "#D5DCF2",
@@ -86,7 +86,7 @@ exports[`<AuthScreen /> matches the snaphot 1`] = `
     <PlainText
       color="#ffffff"
     >
-      Already have an account?
+      [Translation: &lt;Already have an account?&gt;]
        
       <TouchableWithoutFeedback
         onPress={[Function]}
@@ -96,7 +96,7 @@ exports[`<AuthScreen /> matches the snaphot 1`] = `
           color="#000000"
           theme="light"
         >
-          Log in
+          [Translation: &lt;Log in&gt;]
         </PlainText>
       </TouchableWithoutFeedback>
     </PlainText>
