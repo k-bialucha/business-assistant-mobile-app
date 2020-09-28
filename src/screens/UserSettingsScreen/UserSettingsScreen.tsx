@@ -13,24 +13,15 @@ type Props = NavigationData<'UserSettings'>;
 const UserSettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { t } = useTranslation();
 
-  const [counter, setCounter] = useState(1);
-
-  // TODO: extract to a separate hook?
   useEffect(() => {
-    // passing already translated title it could be common way to set nav options in entire app
-    const newTitle = `Account Settings no. ${counter}`;
-
-    console.warn(`setting a new title: "${newTitle}"`);
-
     navigation.setOptions({
-      headerTitle: t(newTitle),
+      headerTitle: t('Account Settings'),
     });
-  }, [t, navigation, counter]);
+  }, [t, navigation]);
 
   return (
     <StyledView>
       <PlainText theme="dark">User Settings Screen</PlainText>
-      <Button title="change!!" onPress={() => setCounter(counter * 2)} />
     </StyledView>
   );
 };
