@@ -38,7 +38,7 @@ export function* loginSaga({ payload: { email, password } }: LoginAction) {
 
     const { idToken: token, localId: userId } = response;
 
-    yield put(loginSuccess(token, { name: email, id: userId }));
+    yield put(loginSuccess(token, { username: email, id: userId }));
     yield call(
       AsyncStorage.setItem,
       'userData',
@@ -63,7 +63,7 @@ export function* signupSaga({
 
     const { idToken: token, localId: userId } = response;
 
-    yield put(signupSuccess(token, { name: email, id: userId }));
+    yield put(signupSuccess(token, { username: email, id: userId }));
     yield call(
       AsyncStorage.setItem,
       'userData',
@@ -126,7 +126,9 @@ export function* loginWithFacebookSaga() {
 
       const { user_id: userId, name, picture } = decode(jwtToken);
 
-      yield put(loginSuccess(token, { name, id: userId, image: picture }));
+      yield put(
+        loginSuccess(token, { username: name, id: userId, image: picture })
+      );
       yield call(
         AsyncStorage.setItem,
         'userData',
@@ -168,7 +170,9 @@ export function* loginWithGoogleSaga() {
 
       const { user_id: userId, name, picture } = decode(jwtToken);
 
-      yield put(loginSuccess(jwtToken, { name, id: userId, image: picture }));
+      yield put(
+        loginSuccess(jwtToken, { username: name, id: userId, image: picture })
+      );
       yield call(
         AsyncStorage.setItem,
         'userData',
@@ -228,11 +232,11 @@ export function* tryAutoLoginSaga() {
       throw new Error();
     }
 
-    const { token, id, name, image } = JSON.parse(jsonUserData);
+    const { token, id, username, image } = JSON.parse(jsonUserData);
 
     // TODO: check token expiry
 
-    yield put(loginSuccess(token, { name, id, image }));
+    yield put(loginSuccess(token, { username, id, image }));
   } catch (error) {
     yield put(loginFailure());
   }

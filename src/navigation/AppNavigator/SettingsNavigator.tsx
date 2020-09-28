@@ -7,6 +7,7 @@ import {
 } from '@react-navigation/stack';
 
 import SettingsScreen from '~/screens/SettingsScreen';
+import UserSettingsScreen from '~/screens/UserSettingsScreen';
 
 import defaultScreenOptions from './defaultScreenOptions';
 import {
@@ -16,6 +17,7 @@ import {
 
 type ParamList = {
   Settings: undefined;
+  UserSettings: undefined;
 };
 
 const SettingsStackNavigator = createStackNavigator<ParamList>();
@@ -28,6 +30,10 @@ const SettingsNavigator: React.FC<Props> = () => {
       <SettingsStackNavigator.Screen
         name="Settings"
         component={SettingsScreen}
+      />
+      <SettingsStackNavigator.Screen
+        name="UserSettings"
+        component={UserSettingsScreen}
       />
     </SettingsStackNavigator.Navigator>
   );

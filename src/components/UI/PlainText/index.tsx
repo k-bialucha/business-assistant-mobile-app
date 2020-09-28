@@ -19,4 +19,8 @@ const PlainText: React.FC<PlainTextProps> = ({ children, ...props }) => (
   <StyledText {...props}>{children}</StyledText>
 );
 
+PlainText.defaultProps = {
+  color: '#000000',
+};
+
 export default PlainText;

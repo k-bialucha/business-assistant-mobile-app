@@ -2,9 +2,91 @@
 
 exports[`<SettingsScreen /> matches the snapshot 1`] = `
 <Styled(View)>
-  <Button
+  <TouchableWithoutFeedback
     onPress={[Function]}
-    title="Log out"
-  />
+  >
+    <Themed.ListItem
+      chevron={true}
+      leftAvatar={
+        Object {
+          "rounded": true,
+          "source": Object {
+            "uri": "dummy-image-url",
+          },
+        }
+      }
+      style={
+        Object {
+          "marginBottom": 35,
+          "marginTop": 35,
+        }
+      }
+      title="dummy-username"
+      titleStyle={
+        Object {
+          "color": "#1A2A40",
+          "fontSize": 20,
+        }
+      }
+    />
+  </TouchableWithoutFeedback>
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <Themed.ListItem
+      chevron={true}
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }
+      title="Test Option 1"
+      titleStyle={
+        Object {
+          "color": "#1A2A40",
+        }
+      }
+    />
+  </TouchableWithoutFeedback>
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <Themed.ListItem
+      chevron={true}
+      style={
+        Object {
+          "marginBottom": 5,
+        }
+      }
+      title="Test Option 2"
+      titleStyle={
+        Object {
+          "color": "#1A2A40",
+        }
+      }
+    />
+  </TouchableWithoutFeedback>
+  <TouchableWithoutFeedback
+    onPress={[Function]}
+  >
+    <Themed.ListItem
+      contentContainerStyle={
+        Object {
+          "alignItems": "center",
+        }
+      }
+      style={
+        Object {
+          "marginTop": 30,
+        }
+      }
+      title="Log out"
+      titleStyle={
+        Object {
+          "color": "#ff0000",
+        }
+      }
+    />
+  </TouchableWithoutFeedback>
 </Styled(View)>
 `;

@@ -10,6 +10,10 @@ jest.mock('react-redux', () => {
   return {
     __esModule: true,
     useDispatch: jest.fn().mockImplementation(() => jest.fn()),
+    useSelector: jest.fn().mockReturnValue({
+      username: 'dummy-username',
+      userImage: 'dummy-image-url',
+    }),
   };
 });
 
