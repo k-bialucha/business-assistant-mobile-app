@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Button } from 'react-native';
 
-import { StackNavigationOptions } from '@react-navigation/stack';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import PlainText from '~/components/UI/PlainText';
 import { NavigationData } from '~/navigation/AppNavigator/SettingsNavigator';
@@ -14,8 +14,9 @@ const UserSettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    // passing already translated title it could be common way to set nav options in entire app
-    navigation.setParams({ headerTitle: t('Account Settings') });
+    navigation.setOptions({
+      headerTitle: t('Account Settings'),
+    });
   }, [t, navigation]);
 
   return (
@@ -23,14 +24,6 @@ const UserSettingsScreen: React.FC<Props> = ({ navigation }) => {
       <PlainText theme="dark">User Settings Screen</PlainText>
     </StyledView>
   );
-};
-
-export const UserSettingsScreenNavOptions: StackNavigationOptions = navData => {
-  // 1 - to avoid passing prop from component, but problem with headerTitle type, it expects string
-  // headerTitle: <Trans i18nKey="Account Settings" />,
-
-  // 2 set passed title, navData need type
-  return { title: navData.route.params?.headerTitle };
 };
 
 export default UserSettingsScreen;

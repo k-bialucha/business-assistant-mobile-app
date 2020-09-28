@@ -8,7 +8,6 @@ import {
 
 import SettingsScreen from '~/screens/SettingsScreen';
 import UserSettingsScreen from '~/screens/UserSettingsScreen';
-import { UserSettingsScreenNavOptions } from '~/screens/UserSettingsScreen/UserSettingsScreen';
 
 import defaultScreenOptions from './defaultScreenOptions';
 import {
@@ -35,7 +34,6 @@ const SettingsNavigator: React.FC<Props> = () => {
       <SettingsStackNavigator.Screen
         name="UserSettings"
         component={UserSettingsScreen}
-        options={UserSettingsScreenNavOptions}
       />
     </SettingsStackNavigator.Navigator>
   );
