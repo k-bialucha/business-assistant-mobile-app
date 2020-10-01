@@ -14,16 +14,6 @@ const fakeProps: Props = {
   navigation: {},
 };
 
-jest.mock('react-redux', () => {
-  return {
-    __esModule: true,
-    Provider: jest
-      .fn()
-      .mockImplementation(props => <div>{props.children}</div>),
-    useDispatch: jest.fn().mockImplementation(() => jest.fn()),
-  };
-});
-
 describe('<LoginScreen />', () => {
   beforeEach(() => {
     jest.resetAllMocks();

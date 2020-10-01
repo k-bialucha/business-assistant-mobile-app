@@ -11,6 +11,8 @@ import renderWithRedux from '~/utils/testing/renderWithRedux';
 
 import SignupScreen from './SignupScreen';
 
+jest.unmock('react-redux');
+
 type Props = NavigationData<'Signup'>;
 
 const fakeProps: Props = {

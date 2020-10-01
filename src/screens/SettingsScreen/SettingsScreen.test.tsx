@@ -1,20 +1,15 @@
 import React from 'react';
 
 import { shallow } from 'enzyme';
+import { useSelector } from 'react-redux';
 
 import { NavigationData } from '~/navigation/AppNavigator/SettingsNavigator';
 
 import SettingsScreen from './SettingsScreen';
 
-jest.mock('react-redux', () => {
-  return {
-    __esModule: true,
-    useDispatch: jest.fn().mockImplementation(() => jest.fn()),
-    useSelector: jest.fn().mockReturnValue({
-      username: 'dummy-username',
-      userImage: 'dummy-image-url',
-    }),
-  };
+(useSelector as jest.Mock).mockReturnValue({
+  username: 'dummy-username',
+  userImage: 'dummy-image-url',
 });
 
 type Props = NavigationData<'Settings'>;
