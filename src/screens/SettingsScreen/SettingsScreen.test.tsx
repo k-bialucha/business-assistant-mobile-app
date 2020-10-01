@@ -7,11 +7,6 @@ import { NavigationData } from '~/navigation/AppNavigator/SettingsNavigator';
 
 import SettingsScreen from './SettingsScreen';
 
-(useSelector as jest.Mock).mockReturnValue({
-  username: 'dummy-username',
-  userImage: 'dummy-image-url',
-});
-
 type Props = NavigationData<'Settings'>;
 
 const fakeProps: Props = {
@@ -21,7 +16,19 @@ const fakeProps: Props = {
 };
 
 describe('<SettingsScreen />', () => {
+  it('renders nothing when no user data is set', () => {
+    (useSelector as jest.Mock).mockReturnValueOnce('dudek2');
+
+    const tree = shallow(<SettingsScreen {...fakeProps} />);
+
+    expect(tree.isEmptyRender()).toBe(true);
+  });
+
   it('matches the snapshot', () => {
+    (useSelector as jest.Mock).mockReturnValueOnce({
+      username: 'dummy-username',
+      userImage: 'dummy-image-url',
+    });
     const tree = shallow(<SettingsScreen {...fakeProps} />);
 
     expect(tree).toMatchSnapshot();
