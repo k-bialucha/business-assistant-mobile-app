@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { shallow } from 'enzyme';
-import { render } from 'react-native-testing-library';
+import { act, render } from 'react-native-testing-library';
 
 import App from './App';
 import NavContainer from './navigation/NavContainer';
@@ -13,11 +13,13 @@ describe('<App />', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('contains NavContainer', () => {
+  it('contains NavContainer', async () => {
     const { queryByType } = render(<App />);
 
-    const element = queryByType(NavContainer);
+    await act(async () => {
+      const element = queryByType(NavContainer);
 
-    expect(element).toBeTruthy();
+      expect(element).toBeTruthy();
+    });
   });
 });

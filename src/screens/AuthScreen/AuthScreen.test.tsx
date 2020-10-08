@@ -14,20 +14,6 @@ const mockedProps: Props = {
   navigation: {},
 };
 
-jest.mock('react-redux', () => {
-  return {
-    __esModule: true,
-    Provider: jest
-      .fn()
-      .mockImplementation(props => <div>{props.children}</div>),
-    useDispatch: jest.fn().mockImplementation(() => jest.fn()),
-  };
-});
-
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: (key: string) => key }),
-}));
-
 describe('<AuthScreen />', () => {
   it('matches the snaphot', () => {
     const mockedComp = shallow(<AuthScreen {...mockedProps} />);

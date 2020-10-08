@@ -10,6 +10,8 @@ import renderWithRedux from '~/utils/testing/renderWithRedux';
 
 import ResetPasswordScreen from './ResetPasswordScreen';
 
+jest.unmock('react-redux');
+
 type Props = NavigationData<'ResetPassword'>;
 
 const fakeProps: Props = {
