@@ -228,7 +228,7 @@ export function* resetPasswordSaga({
   try {
     const actionCodeSettings = {
       // to control if back to app after password change in browser
-      // url: '',
+      url: '',
     };
 
     yield call(
