@@ -37,13 +37,32 @@ export function* loginSaga({ payload: { email, password } }: LoginAction) {
 
     const response = yield call(loginUser, email, password);
 
-    const { idToken: token, localId: userId } = response;
+    const {
+      idToken: token,
+      localId: userId,
+      profilePicture,
+      expiresIn,
+    } = response;
 
-    yield put(loginSuccess(token, { username: email, id: userId }));
+    const tokenExpiryTimestamp = Date.now() / 1000 + expiresIn;
+
+    yield put(
+      loginSuccess(token, {
+        username: email,
+        id: userId,
+        image: profilePicture,
+      })
+    );
     yield call(
       AsyncStorage.setItem,
       'userData',
-      JSON.stringify({ token, username: email, id: userId })
+      JSON.stringify({
+        token,
+        username: email,
+        id: userId,
+        image: profilePicture,
+        tokenExpiryTimestamp,
+      })
     );
   } catch (error) {
     if (error instanceof Error) {
@@ -125,7 +144,7 @@ export function* loginWithFacebookSaga() {
 
       const jwtToken = yield user.getIdToken();
 
-      const { user_id: userId, name, picture } = decode(jwtToken);
+      const { user_id: userId, name, picture, exp } = decode(jwtToken);
 
       yield put(
         loginSuccess(token, { username: name, id: userId, image: picture })
@@ -133,7 +152,13 @@ export function* loginWithFacebookSaga() {
       yield call(
         AsyncStorage.setItem,
         'userData',
-        JSON.stringify({ token, username: name, id: userId, image: picture })
+        JSON.stringify({
+          token,
+          username: name,
+          id: userId,
+          image: picture,
+          tokenExpiryTimestamp: exp,
+        })
       );
     } else if (response.type === 'cancel') {
       throw new Error('Login to facebook canceled');
@@ -169,7 +194,7 @@ export function* loginWithGoogleSaga() {
 
       const jwtToken = yield user.getIdToken();
 
-      const { user_id: userId, name, picture } = decode(jwtToken);
+      const { user_id: userId, name, picture, exp } = decode(jwtToken);
 
       yield put(
         loginSuccess(jwtToken, { username: name, id: userId, image: picture })
@@ -182,6 +207,7 @@ export function* loginWithGoogleSaga() {
           username: name,
           id: userId,
           image: picture,
+          tokenExpiryTimestamp: exp,
         })
       );
     } else if (type === 'cancel') {
@@ -202,7 +228,7 @@ export function* resetPasswordSaga({
   try {
     const actionCodeSettings = {
       // to control if back to app after password change in browser
-      url: '',
+      // url: '',
     };
 
     yield call(
@@ -227,19 +253,33 @@ export function* tryAutoLoginSaga() {
   try {
     const jsonUserData = yield call(AsyncStorage.getItem, 'userData');
 
-    if (!jsonUserData) {
-      yield put(setDidTryAutoLogin());
+    if (!jsonUserData) throw new Error();
 
-      throw new Error();
+    const { token, id, username, image, tokenExpiryTimestamp } = JSON.parse(
+      jsonUserData
+    );
+
+    if (!tokenExpiryTimestamp) throw new Error();
+
+    const currentTimestamp = Date.now() / 1000;
+    const tokenExpired = currentTimestamp > tokenExpiryTimestamp;
+
+    if (tokenExpired) {
+      // TODO: check if refresh token is valid
+
+      // TODO: if true get new token and login
+
+      // if false throw error and clear Storage User data
+      yield call(AsyncStorage.removeItem, 'userData');
+      throw new Error('Session expired. Please log in again.');
+    } else {
+      // TODO: refresh this token before pass into function below
+
+      yield put(loginSuccess(token, { username, id, image }));
     }
-
-    const { token, id, username, image } = JSON.parse(jsonUserData);
-
-    // TODO: check token expiry
-
-    yield put(loginSuccess(token, { username, id, image }));
   } catch (error) {
-    yield put(loginFailure());
+    yield put(setDidTryAutoLogin());
+    yield put(loginFailure(error.message));
   }
 }
 

@@ -23,7 +23,7 @@ export interface AuthState {
   username: string | null;
   userId: string | null;
   userImage: string | null;
-  requestStatus: RequestStatus;
+  requestStatus: RequestStatus | null;
   didTryAutoLogin: boolean;
   error: ErrorObject | null;
 }
@@ -158,6 +158,7 @@ function reducer(
       return {
         ...state,
         error: null,
+        requestStatus: null,
       };
     }
 
