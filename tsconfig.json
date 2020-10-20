@@ -6,6 +6,12 @@
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "strict": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "~env": ["./env.ts"],
+      "~/*": ["./src/*"]
+    }
   }
 }

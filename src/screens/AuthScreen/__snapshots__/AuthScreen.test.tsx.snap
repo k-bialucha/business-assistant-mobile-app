@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthScreen /> matches the snaphot 1`] = `
+<Styled(View)>
+  <View>
+    <Styled(Text)>
+      [Translation: &lt;Make your business easier.&gt;]
+    </Styled(Text)>
+  </View>
+  <Styled(View)>
+    <Styled(View)>
+      <ForwardRef(Themed.Button)
+        buttonStyle={
+          Object {
+            "backgroundColor": "#5E6D8C",
+          }
+        }
+        onPress={[Function]}
+        title="[Translation: <Create an account>]"
+      />
+    </Styled(View)>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#ffffff",
+          "height": 1,
+          "marginVertical": 15,
+          "width": 50,
+        }
+      }
+    />
+    <Styled(View)>
+      <ForwardRef(Themed.Button)
+        buttonStyle={
+          Object {
+            "borderColor": "#D5DCF2",
+          }
+        }
+        icon={
+          <Icon
+            allowFontScaling={false}
+            color="white"
+            name="facebook-f"
+            size={18}
+          />
+        }
+        onPress={[Function]}
+        title="[Translation: <Continue with Facebook>]"
+        titleStyle={
+          Object {
+            "color": "#D5DCF2",
+            "marginLeft": 10,
+          }
+        }
+        type="outline"
+      />
+    </Styled(View)>
+    <Styled(View)>
+      <ForwardRef(Themed.Button)
+        buttonStyle={
+          Object {
+            "borderColor": "#D5DCF2",
+          }
+        }
+        icon={
+          <Icon
+            allowFontScaling={false}
+            color="white"
+            name="google"
+            size={18}
+          />
+        }
+        onPress={[Function]}
+        title="[Translation: <Continue with Google>]"
+        titleStyle={
+          Object {
+            "color": "#D5DCF2",
+            "marginLeft": 10,
+          }
+        }
+        type="outline"
+      />
+    </Styled(View)>
+  </Styled(View)>
+  <Styled(View)>
+    <PlainText
+      color="#ffffff"
+    >
+      [Translation: &lt;Already have an account?&gt;]
+       
+      <TouchableWithoutFeedback
+        onPress={[Function]}
+      >
+        <PlainText
+          bold={true}
+          color="#000000"
+          theme="light"
+        >
+          [Translation: &lt;Log in&gt;]
+        </PlainText>
+      </TouchableWithoutFeedback>
+    </PlainText>
+  </Styled(View)>
+</Styled(View)>
+`;

@@ -29,6 +29,13 @@ module.exports = {
   ],
   settings: {
     'import/resolver': {
+      alias: {
+        map: [
+          ['~env', './env.ts'],
+          ['~', './src'],
+        ],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      },
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
@@ -72,6 +79,7 @@ module.exports = {
           ['^\\u0000'],
           ['^react$', '^react-native$'],
           ['^@?\\w'],
+          ['^~env$'],
           ['^[^.]'],
           ['^\\../'],
           ['^\\.'],
