@@ -1,8 +1,11 @@
+import { Currency } from './Currency';
+import { VatRate } from './VatRate';
+
 export interface Sale {
   code?: string;
-  currency: 'PLN';
+  currency: Currency;
   grossPrice: number;
   name: string;
   netPrice: number;
-  VAT: 0 | 5 | 8 | 23;
+  vatRate: VatRate;
 }
