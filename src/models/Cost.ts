@@ -7,4 +7,5 @@ export interface Cost {
   name: string;
   netPrice: number;
   vatRate: VatRate;
+  vatSum: number;
 }
