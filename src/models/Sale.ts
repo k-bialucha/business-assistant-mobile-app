@@ -8,4 +8,5 @@ export interface Sale {
   name: string;
   netPrice: number;
   vatRate: VatRate;
+  vatSum: number;
 }
