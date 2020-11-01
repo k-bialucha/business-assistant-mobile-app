@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from 'react-native';
+import React, { useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';
 

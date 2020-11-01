@@ -38,8 +38,8 @@ import {
 
 describe(`${DOMAIN_NAME}/actions`, () => {
   test('login action creator returns correct object', () => {
-    const someEmail: string = 'some-email';
-    const somePassword: string = 'some-password';
+    const someEmail = 'some-email';
+    const somePassword = 'some-password';
 
     const result = login(someEmail, somePassword);
 
@@ -52,7 +52,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
   });
 
   test('loginSuccess action creator returns correct object', () => {
-    const someToken: string = 'some-secure-token';
+    const someToken = 'some-secure-token';
     const mockedUserData = {
       username: 'user-name',
       id: 'user-id',
@@ -73,7 +73,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
   });
 
   test('loginFailure action creator returns correct object', () => {
-    const someMessage: string = 'something bad happened';
+    const someMessage = 'something bad happened';
 
     const result = loginFailure(someMessage);
 
@@ -96,8 +96,8 @@ describe(`${DOMAIN_NAME}/actions`, () => {
   });
 
   test('signup action creator returns correct object', () => {
-    const mockedEmail: string = 'mocked-email@email.com';
-    const mockedPassword: string = 'mocked-password';
+    const mockedEmail = 'mocked-email@email.com';
+    const mockedPassword = 'mocked-password';
 
     const result = signup(mockedEmail, mockedPassword);
 
@@ -110,7 +110,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
   });
 
   test('signupSuccess action creator returns correct object', () => {
-    const mockedToken: string = 'mocked-secure-token';
+    const mockedToken = 'mocked-secure-token';
     const mockedUserData = {
       username: 'user-name',
       id: 'user-id',
@@ -161,7 +161,7 @@ describe(`${DOMAIN_NAME}/actions`, () => {
   });
 
   test('resetPassword action creator returns correct object', () => {
-    const mockedEmail: string = 'mocked-email@email.com';
+    const mockedEmail = 'mocked-email@email.com';
 
     const result = resetPassword(mockedEmail);
 

@@ -13,14 +13,14 @@ import StartupScreen from '~/screens/StartupScreen';
 import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
 
-const NavContainer = () => {
+const NavContainer: React.FC = () => {
   const dispatch = useDispatch();
 
   const { didTryAutoLogin, token, requestStatus, error } = useSelector(
     (state: RootState) => state.auth
   );
 
-  const isAuthenticated: boolean = !!token;
+  const isAuthenticated = !!token;
   const isLoading: boolean = requestStatus === RequestStatus.LOADING;
 
   useEffect(() => {
