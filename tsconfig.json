@@ -9,6 +9,7 @@
     "strict": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
+    "target": "ES6",
     "paths": {
       "~env": ["./env.ts"],
       "~/*": ["./src/*"]
