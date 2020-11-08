@@ -11,7 +11,7 @@ const addResults = (
   return {
     incomeTaxSum: result1.incomeTaxSum + result2.incomeTaxSum,
     revenue: result1.revenue + result2.revenue,
-    vatSum: result1.revenue + result2.vatSum,
+    vatSum: result1.vatSum + result2.vatSum,
   };
 };
 
@@ -23,7 +23,7 @@ const subtractResults = (
   return {
     incomeTaxSum: result1.incomeTaxSum - result2.incomeTaxSum,
     revenue: result1.revenue - result2.revenue,
-    vatSum: result1.revenue - result2.vatSum,
+    vatSum: result1.vatSum - result2.vatSum,
   };
 };
 
@@ -49,9 +49,9 @@ export const calculate = (
       const { netPrice, vatSum } = cost;
 
       const incomeTaxSum = 0.19 * netPrice;
-      const revenue = netPrice - incomeTaxSum;
+      const revenueReduction = netPrice - incomeTaxSum;
 
-      const nextResult = new Result(revenue, incomeTaxSum, vatSum);
+      const nextResult = new Result(incomeTaxSum, vatSum, revenueReduction);
 
       return addResults(currentCostsSum, nextResult);
     },
