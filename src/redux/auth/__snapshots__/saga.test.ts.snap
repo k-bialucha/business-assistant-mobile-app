@@ -21,26 +21,15 @@ Object {
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "some-email",
+      "some@email.com",
       "strong-password",
     ],
-    "context": null,
-    "fn": [Function],
-  },
-  "type": "CALL",
-}
-`;
-
-exports[`auth/saga loginSaga handles successful login 3`] = `
-Object {
-  "@@redux-saga/IO": true,
-  "combinator": false,
-  "payload": Object {
-    "args": Array [
-      "userData",
-      "{\\"token\\":\\"token-123\\",\\"username\\":\\"some-email\\",\\"id\\":\\"12345\\",\\"tokenExpiryTimestamp\\":null}",
-    ],
-    "context": null,
+    "context": Object {
+      "createUserWithEmailAndPassword": [MockFunction],
+      "sendPasswordResetEmail": [MockFunction],
+      "signInWithCredential": [MockFunction],
+      "signInWithEmailAndPassword": [MockFunction],
+    },
     "fn": [MockFunction],
   },
   "type": "CALL",
@@ -68,11 +57,16 @@ Object {
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "some-email",
+      "some@email.com",
       "badpass",
     ],
-    "context": null,
-    "fn": [Function],
+    "context": Object {
+      "createUserWithEmailAndPassword": [MockFunction],
+      "sendPasswordResetEmail": [MockFunction],
+      "signInWithCredential": [MockFunction],
+      "signInWithEmailAndPassword": [MockFunction],
+    },
+    "fn": [MockFunction],
   },
   "type": "CALL",
 }
@@ -123,7 +117,7 @@ Object {
       "mocked-token",
     ],
     "context": null,
-    "fn": [Function],
+    "fn": [MockFunction],
   },
   "type": "CALL",
 }
@@ -136,28 +130,17 @@ Object {
   "payload": Object {
     "args": Array [
       Object {
-        "token": "",
-        "type": "",
-        "user": "user-object",
+        "idToken": "mocked-id-token",
+        "providerId": "mocked-provider-id",
+        "signInMethod": "signin-method",
       },
     ],
-    "context": null,
-    "fn": [Function],
-  },
-  "type": "CALL",
-}
-`;
-
-exports[`auth/saga loginWithFacebookSaga handles successful signup through facebook 5`] = `
-Object {
-  "@@redux-saga/IO": true,
-  "combinator": false,
-  "payload": Object {
-    "args": Array [
-      "userData",
-      "{\\"token\\":\\"mocked-token\\",\\"username\\":\\"John Doe\\",\\"id\\":\\"5d4b0cbb6f82\\",\\"tokenExpiryTimestamp\\":1622499934}",
-    ],
-    "context": null,
+    "context": Object {
+      "createUserWithEmailAndPassword": [MockFunction],
+      "sendPasswordResetEmail": [MockFunction],
+      "signInWithCredential": [MockFunction],
+      "signInWithEmailAndPassword": [MockFunction],
+    },
     "fn": [MockFunction],
   },
   "type": "CALL",
@@ -196,7 +179,7 @@ Object {
       "mocked-token",
     ],
     "context": null,
-    "fn": [Function],
+    "fn": [MockFunction],
   },
   "type": "CALL",
 }
@@ -212,26 +195,14 @@ Object {
         "accessToken": "mocked-token",
         "idToken": "mocked-id-token",
         "type": "",
-        "user": "user-object",
       },
     ],
-    "context": null,
-    "fn": [Function],
-  },
-  "type": "CALL",
-}
-`;
-
-exports[`auth/saga loginWithGoogleSaga handles successful signup through google 4`] = `
-Object {
-  "@@redux-saga/IO": true,
-  "combinator": false,
-  "payload": Object {
-    "args": Array [
-      "userData",
-      "{\\"token\\":\\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLYW1pbCBCaWFsdWNoYSIsImlhdCI6MTU5MDk2MzkzNCwiZXhwIjoxNjIyNDk5OTM0LCJhdWQiOiJidXNzaW5lc3MtYXNzaXN0YW50LW1vYmlsZS1hcHAiLCJzdWIiOiJqZG9lQGV4YW1wbGUuY29tIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqZG9lQGV4YW1wbGUuY29tIiwidXNlcl9pZCI6IjVkNGIwY2JiNmY4MiJ9.qVrXVmcIqBeR4E6W0_8D4pq17w5NUl6s5su2U41tFIY\\",\\"username\\":\\"John Doe\\",\\"id\\":\\"5d4b0cbb6f82\\",\\"tokenExpiryTimestamp\\":1622499934}",
-    ],
-    "context": null,
+    "context": Object {
+      "createUserWithEmailAndPassword": [MockFunction],
+      "sendPasswordResetEmail": [MockFunction],
+      "signInWithCredential": [MockFunction],
+      "signInWithEmailAndPassword": [MockFunction],
+    },
     "fn": [MockFunction],
   },
   "type": "CALL",
@@ -245,12 +216,14 @@ Object {
   "payload": Object {
     "args": Array [
       "some@email.com",
-      Object {
-        "url": "",
-      },
     ],
-    "context": null,
-    "fn": [Function],
+    "context": Object {
+      "createUserWithEmailAndPassword": [MockFunction],
+      "sendPasswordResetEmail": [MockFunction],
+      "signInWithCredential": [MockFunction],
+      "signInWithEmailAndPassword": [MockFunction],
+    },
+    "fn": [MockFunction],
   },
   "type": "CALL",
 }
@@ -277,27 +250,15 @@ Object {
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "some-email@example.com",
+      "some@email.com",
       "strong-password",
-      undefined,
     ],
-    "context": null,
-    "fn": [Function],
-  },
-  "type": "CALL",
-}
-`;
-
-exports[`auth/saga signupSaga handles successful signup 3`] = `
-Object {
-  "@@redux-saga/IO": true,
-  "combinator": false,
-  "payload": Object {
-    "args": Array [
-      "userData",
-      "{\\"token\\":\\"token-123\\",\\"username\\":\\"some-email@example.com\\",\\"id\\":\\"12345\\"}",
-    ],
-    "context": null,
+    "context": Object {
+      "createUserWithEmailAndPassword": [MockFunction],
+      "sendPasswordResetEmail": [MockFunction],
+      "signInWithCredential": [MockFunction],
+      "signInWithEmailAndPassword": [MockFunction],
+    },
     "fn": [MockFunction],
   },
   "type": "CALL",
@@ -325,12 +286,16 @@ Object {
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "some-email@example.com",
+      "some@email.com",
       "badpass",
-      undefined,
     ],
-    "context": null,
-    "fn": [Function],
+    "context": Object {
+      "createUserWithEmailAndPassword": [MockFunction],
+      "sendPasswordResetEmail": [MockFunction],
+      "signInWithCredential": [MockFunction],
+      "signInWithEmailAndPassword": [MockFunction],
+    },
+    "fn": [MockFunction],
   },
   "type": "CALL",
 }

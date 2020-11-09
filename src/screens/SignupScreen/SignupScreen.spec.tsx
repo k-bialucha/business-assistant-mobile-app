@@ -6,7 +6,6 @@ import { act, fireEvent } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 
 import { NavigationData } from '~/navigation/AuthNavigator';
-import { signupUser } from '~/utils/apiCalls/authorization';
 import renderWithRedux from '~/utils/testing/renderWithRedux';
 
 import SignupScreen from './SignupScreen';
@@ -21,7 +20,6 @@ const fakeProps: Props = {
   navigation: {},
 };
 
-jest.mock('~/utils/apiCalls/authorization');
 jest.mock('redux-saga/effects', () => {
   const actualModule = jest.requireActual('redux-saga/effects');
 
@@ -32,13 +30,10 @@ jest.mock('redux-saga/effects', () => {
     delay: () => () => true,
   };
 });
-
-const someApiResponse = { idToken: 'highly-secure-token', localId: '999abcd' };
+jest.mock('~/utils/firebase');
 
 describe('<SignupScreen />', () => {
-  beforeEach(() => {
-    (signupUser as jest.Mock).mockResolvedValue(someApiResponse);
-  });
+  // TODO: ? should we still use beforeEach with .mockResolvedValue(someApiResponse) here ?
 
   const { getByTestId, store } = renderWithRedux(
     <SignupScreen {...fakeProps} />
@@ -49,11 +44,13 @@ describe('<SignupScreen />', () => {
   const signupButton: ReactTestInstance = getByTestId('signup-button');
 
   it('allows to sign up', async () => {
-    const someEmail = 'siatkasebastian@gmail.com';
+    const someEmail = 'some@email.com';
+    const somePassword = 'mypass123';
+    const someUid = 'mocked-user-uid';
 
     fireEvent.changeText(emailInput, someEmail);
 
-    fireEvent.changeText(passwordInput, 'mypass123');
+    fireEvent.changeText(passwordInput, somePassword);
 
     await act(async () => {
       fireEvent.press(signupButton);
@@ -61,8 +58,8 @@ describe('<SignupScreen />', () => {
 
     process.nextTick(() => {
       expect(store.getState().auth.username).toBe(someEmail);
-      expect(store.getState().auth.token).toEqual(someApiResponse.idToken);
-      expect(store.getState().auth.userId).toBe(someApiResponse.localId);
+      expect(store.getState().auth.isAuthenticated).toBe(true);
+      expect(store.getState().auth.userId).toBe(someUid);
     });
   });
 });
