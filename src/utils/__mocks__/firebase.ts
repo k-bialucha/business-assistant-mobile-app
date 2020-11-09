@@ -13,7 +13,7 @@ export const someSignupApiResponse = {
   },
 };
 
-const firebaseMock = {
+const firebaseMock: { auth: any; initializeApp: Function } = {
   auth: jest.fn(() => ({
     createUserWithEmailAndPassword: jest
       .fn()
@@ -27,13 +27,9 @@ const firebaseMock = {
   initializeApp: jest.fn(),
 };
 
-firebaseMock.auth.FacebookAuthProvider = {
-  credential: jest.fn(),
-};
+firebaseMock.auth.FacebookAuthProvider = { credential: jest.fn() };
 
-firebaseMock.auth.GoogleAuthProvider = {
-  credential: jest.fn(),
-};
+firebaseMock.auth.GoogleAuthProvider = { credential: jest.fn() };
 
 export const initializeApp = jest.fn();
 
