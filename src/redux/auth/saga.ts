@@ -1,20 +1,16 @@
 import { Alert } from 'react-native';
 
-import AsyncStorage from '@react-native-community/async-storage';
 import * as Facebook from 'expo-facebook';
 import * as Google from 'expo-google-app-auth';
-import decode from 'jwt-decode';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
 import { ANDROID_CLIENT_ID, FACEBOOK_APP_ID, IOS_CLIENT_ID } from '~env';
 
-import { loginUser, signupUser } from '~/utils/apiCalls/authorization';
-import firebase, { myFirebaseApp } from '~/utils/firebase';
+import firebase, { getCurrentUser } from '~/utils/firebase';
 
 import {
   loginFailure,
   loginSuccess,
-  setDidTryAutoLogin,
   signupFailure,
   signupSuccess,
 } from './actions';
@@ -29,39 +25,24 @@ import {
   SIGNUP,
   SignupAction,
   TRY_AUTO_LOGIN,
+  UserData,
 } from './types';
 
 export function* loginSaga({ payload: { email, password } }: LoginAction) {
   try {
     yield delay(1000);
 
-    const response = yield call(loginUser, email, password);
-
-    const {
-      idToken: token,
-      localId: userId,
-      profilePicture,
-      expiresIn,
-    } = response;
-
-    const tokenExpiryTimestamp = Date.now() / 1000 + expiresIn;
+    const { user } = yield call(
+      [firebase.auth(), firebase.auth().signInWithEmailAndPassword],
+      email,
+      password
+    );
 
     yield put(
-      loginSuccess(token, {
-        username: email,
-        id: userId,
-        image: profilePicture,
-      })
-    );
-    yield call(
-      AsyncStorage.setItem,
-      'userData',
-      JSON.stringify({
-        token,
-        username: email,
-        id: userId,
-        image: profilePicture,
-        tokenExpiryTimestamp,
+      loginSuccess({
+        username: user.displayName || email,
+        id: user.uid,
+        image: user.photoURL,
       })
     );
   } catch (error) {
@@ -74,21 +55,20 @@ export function* loginSaga({ payload: { email, password } }: LoginAction) {
 }
 
 export function* signupSaga({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   payload: { email, password, phone },
 }: SignupAction) {
   try {
     yield delay(1000);
 
-    const response = yield call(signupUser, email, password, phone);
-
-    const { idToken: token, localId: userId } = response;
-
-    yield put(signupSuccess(token, { username: email, id: userId }));
-    yield call(
-      AsyncStorage.setItem,
-      'userData',
-      JSON.stringify({ token, username: email, id: userId })
+    const { user } = yield call(
+      [firebase.auth(), firebase.auth().createUserWithEmailAndPassword],
+      email,
+      password
     );
+    // TODO: save phone number for registered user
+
+    yield put(signupSuccess({ username: user.email, id: user.uid }));
   } catch (error) {
     if (error instanceof Error) {
       yield put(signupFailure(error.message));
@@ -98,6 +78,7 @@ export function* signupSaga({
   }
 }
 
+// TO FIX: still log in with  Fb in iOS by Facebook App doesn't work (not redirecting back to app)
 export function* loginWithFacebookSaga() {
   yield call(
     Facebook.initializeAsync,
@@ -115,49 +96,22 @@ export function* loginWithFacebookSaga() {
 
     if (response.type === 'success') {
       const { token } = response;
-      // https://stackoverflow.com/questions/53678410/jest-test-the-current-environment-does-not-support-the-specified-persistence-t
-      // look like without it login works the same, to delete?
 
-      // const persistence =
-      //   process.env.NODE_ENV === 'test'
-      //     ? firebase.auth.Auth.Persistence.NONE
-      //     : firebase.auth.Auth.Persistence.LOCAL;
-
-      // yield call(
-      //   [firebase.auth(), firebase.auth().setPersistence],
-      //   firebase.auth.Auth.Persistence.LOCAL
-      // );
       const credential = yield call(
         firebase.auth.FacebookAuthProvider.credential,
         token
       );
 
-      // way to call without redux-saga-firebase
-      // const { user } = yield call(
-      //   [firebase.auth(), firebase.auth().signInWithCredential],
-      //   credential
-      // );
       const { user } = yield call(
-        myFirebaseApp.auth.signInWithCredential,
+        [firebase.auth(), firebase.auth().signInWithCredential],
         credential
       );
 
-      const jwtToken = yield user.getIdToken();
-
-      const { user_id: userId, name, picture, exp } = decode(jwtToken);
-
       yield put(
-        loginSuccess(token, { username: name, id: userId, image: picture })
-      );
-      yield call(
-        AsyncStorage.setItem,
-        'userData',
-        JSON.stringify({
-          token,
-          username: name,
-          id: userId,
-          image: picture,
-          tokenExpiryTimestamp: exp,
+        loginSuccess({
+          username: user.displayName,
+          id: user.uid,
+          image: user.photoURL,
         })
       );
     } else if (response.type === 'cancel') {
@@ -188,26 +142,15 @@ export function* loginWithGoogleSaga() {
       );
 
       const { user } = yield call(
-        myFirebaseApp.auth.signInWithCredential,
+        [firebase.auth(), firebase.auth().signInWithCredential],
         credential
       );
 
-      const jwtToken = yield user.getIdToken();
-
-      const { user_id: userId, name, picture, exp } = decode(jwtToken);
-
       yield put(
-        loginSuccess(jwtToken, { username: name, id: userId, image: picture })
-      );
-      yield call(
-        AsyncStorage.setItem,
-        'userData',
-        JSON.stringify({
-          token: jwtToken,
-          username: name,
-          id: userId,
-          image: picture,
-          tokenExpiryTimestamp: exp,
+        loginSuccess({
+          username: user.displayName,
+          id: user.uid,
+          image: user.photoURL,
         })
       );
     } else if (type === 'cancel') {
@@ -226,15 +169,15 @@ export function* resetPasswordSaga({
   payload: { email },
 }: ResetPasswordAction) {
   try {
-    const actionCodeSettings = {
-      // to control if back to app after password change in browser
-      url: '',
-    };
+    // const actionCodeSettings = {
+    //   // to control if back to app after password change in browser
+    //   url: '',
+    // };
 
     yield call(
-      myFirebaseApp.auth.sendPasswordResetEmail,
-      email,
-      actionCodeSettings
+      [firebase.auth(), firebase.auth().sendPasswordResetEmail],
+      email
+      // actionCodeSettings
     );
 
     Alert.alert(
@@ -249,42 +192,33 @@ export function* resetPasswordSaga({
     }
   }
 }
+
 export function* tryAutoLoginSaga() {
   try {
-    const jsonUserData = yield call(AsyncStorage.getItem, 'userData');
+    const user = yield call(getCurrentUser);
 
-    if (!jsonUserData) throw new Error();
+    if (user) {
+      // we can access the token by calling method below
+      // const token = yield user.getIdToken();
 
-    const { token, id, username, image, tokenExpiryTimestamp } = JSON.parse(
-      jsonUserData
-    );
+      const userData: UserData = {
+        id: user.uid,
+        username: user.displayName || user.email || `User ID ${user.uid}`,
+      };
 
-    if (!tokenExpiryTimestamp) throw new Error();
+      if (user.photoURL) userData.image = user.photoURL;
 
-    const currentTimestamp = Date.now() / 1000;
-    const tokenExpired = currentTimestamp > tokenExpiryTimestamp;
-
-    if (tokenExpired) {
-      // TODO: check if refresh token is valid
-
-      // TODO: if true get new token and login
-
-      // if false throw error and clear Storage User data
-      yield call(AsyncStorage.removeItem, 'userData');
-      throw new Error('Session expired. Please log in again.');
+      yield put(loginSuccess(userData));
     } else {
-      // TODO: refresh this token before pass into function below
-
-      yield put(loginSuccess(token, { username, id, image }));
+      throw new Error();
     }
   } catch (error) {
-    yield put(setDidTryAutoLogin());
-    yield put(loginFailure(error.message));
+    yield put(loginFailure());
   }
 }
 
 export function* logoutSaga() {
-  yield AsyncStorage.removeItem('userData');
+  yield call([firebase.auth(), firebase.auth().signOut]);
 }
 
 export default function* watchSaga() {
