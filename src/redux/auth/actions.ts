@@ -15,8 +15,6 @@ import {
   LogoutAction,
   RESET_PASSWORD,
   ResetPasswordAction,
-  SET_DID_TRY_AUTO_LOGIN,
-  SetDidTryAutoLoginAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -35,14 +33,10 @@ export function login(email: string, password: string): LoginAction {
   };
 }
 
-export function loginSuccess(
-  token: string,
-  userData: UserData
-): LoginSuccessAction {
+export function loginSuccess(userData: UserData): LoginSuccessAction {
   return {
     type: LOGIN_SUCCESS,
     payload: {
-      token,
       userData,
     },
   };
@@ -72,14 +66,10 @@ export function signup(
   };
 }
 
-export function signupSuccess(
-  token: string,
-  userData: UserData
-): SignupSuccessAction {
+export function signupSuccess(userData: UserData): SignupSuccessAction {
   return {
     type: SIGNUP_SUCCESS,
     payload: {
-      token,
       userData,
     },
   };
@@ -108,12 +98,6 @@ export function resetPassword(email: string): ResetPasswordAction {
   return {
     type: RESET_PASSWORD,
     payload: { email },
-  };
-}
-
-export function setDidTryAutoLogin(): SetDidTryAutoLoginAction {
-  return {
-    type: SET_DID_TRY_AUTO_LOGIN,
   };
 }
 
