@@ -15,7 +15,6 @@ const addResults = (
   };
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const subtractResults = (
   result1: CalculationResult,
   result2: CalculationResult
@@ -39,10 +38,25 @@ export const calculate = (
   sales: Sale[],
   costs: Cost[],
   taxPayer: TaxPayer
-): number | null => {
+): CalculationResult | null => {
   if (taxPayer.incomeTaxType === IncomeTaxType.progressive) {
     throw new Error('not implemented');
   }
+
+  const salesSumResult = sales.reduce<CalculationResult>(
+    (currentSalesSum, sale) => {
+      const { netPrice, vatSum } = sale;
+
+      const incomeTaxSum = 0.19 * netPrice;
+      const revenue = netPrice - incomeTaxSum;
+
+      return addResults(
+        currentSalesSum,
+        new Result(incomeTaxSum, vatSum, revenue)
+      );
+    },
+    new Result(0, 0, 0)
+  );
 
   const costsSumResult = costs.reduce<CalculationResult>(
     (currentCostsSum, cost) => {
@@ -58,5 +72,5 @@ export const calculate = (
     new Result(0, 0, 0)
   );
 
-  return costsSumResult.vatSum;
+  return subtractResults(salesSumResult, costsSumResult);
 };
