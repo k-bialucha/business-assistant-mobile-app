@@ -4,14 +4,16 @@ import { IncomeTaxType } from '~/models/IncomeTaxType';
 import { Sale } from '~/models/Sale';
 import { TaxPayer } from '~/models/TaxPayer';
 
+import { roundSum } from './roundSum';
+
 const addResults = (
   result1: CalculationResult,
   result2: CalculationResult
 ): CalculationResult => {
   return {
-    incomeTaxSum: result1.incomeTaxSum + result2.incomeTaxSum,
-    revenue: result1.revenue + result2.revenue,
-    vatSum: result1.vatSum + result2.vatSum,
+    incomeTaxSum: roundSum(result1.incomeTaxSum + result2.incomeTaxSum),
+    revenue: roundSum(result1.revenue + result2.revenue),
+    vatSum: roundSum(result1.vatSum + result2.vatSum),
   };
 };
 
@@ -20,9 +22,9 @@ const subtractResults = (
   result2: CalculationResult
 ): CalculationResult => {
   return {
-    incomeTaxSum: result1.incomeTaxSum - result2.incomeTaxSum,
-    revenue: result1.revenue - result2.revenue,
-    vatSum: result1.vatSum - result2.vatSum,
+    incomeTaxSum: roundSum(result1.incomeTaxSum - result2.incomeTaxSum),
+    revenue: roundSum(result1.revenue - result2.revenue),
+    vatSum: roundSum(result1.vatSum - result2.vatSum),
   };
 };
 
