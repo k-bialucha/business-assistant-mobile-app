@@ -6,28 +6,6 @@ import { TaxPayer } from '~/models/TaxPayer';
 
 import { roundSum } from './roundSum';
 
-const addResults = (
-  result1: CalculationResult,
-  result2: CalculationResult
-): CalculationResult => {
-  return {
-    incomeTaxSum: roundSum(result1.incomeTaxSum + result2.incomeTaxSum),
-    revenue: roundSum(result1.revenue + result2.revenue),
-    vatSum: roundSum(result1.vatSum + result2.vatSum),
-  };
-};
-
-const subtractResults = (
-  result1: CalculationResult,
-  result2: CalculationResult
-): CalculationResult => {
-  return {
-    incomeTaxSum: roundSum(result1.incomeTaxSum - result2.incomeTaxSum),
-    revenue: roundSum(result1.revenue - result2.revenue),
-    vatSum: roundSum(result1.vatSum - result2.vatSum),
-  };
-};
-
 class Result implements CalculationResult {
   constructor(
     public readonly incomeTaxSum: number,
@@ -35,6 +13,8 @@ class Result implements CalculationResult {
     public readonly revenue: number
   ) {}
 }
+
+const sumReducer = (acc: number, nextPrice: number): number => acc + nextPrice;
 
 export const calculate = (
   sales: Sale[],
@@ -45,34 +25,17 @@ export const calculate = (
     throw new Error('not implemented');
   }
 
-  const salesSumResult = sales.reduce<CalculationResult>(
-    (currentSalesSum, sale) => {
-      const { netPrice, vatSum } = sale;
+  const salesNetPrices = sales.map(sale => sale.netPrice);
+  const salesVatSums = sales.map(sale => sale.vatSum);
 
-      const incomeTaxSum = 0.19 * netPrice;
-      const revenue = netPrice - incomeTaxSum;
+  const costsNetPrices = costs.map(cost => -1 * cost.netPrice);
+  const costsVatSums = costs.map(cost => -1 * cost.vatSum);
 
-      return addResults(
-        currentSalesSum,
-        new Result(incomeTaxSum, vatSum, revenue)
-      );
-    },
-    new Result(0, 0, 0)
-  );
+  const totalIncome = [...salesNetPrices, ...costsNetPrices].reduce(sumReducer);
+  const totalVatSum = [...salesVatSums, ...costsVatSums].reduce(sumReducer);
 
-  const costsSumResult = costs.reduce<CalculationResult>(
-    (currentCostsSum, cost) => {
-      const { netPrice, vatSum } = cost;
+  const totalTax = roundSum(0.19 * totalIncome);
+  const totalRevenue = roundSum(0.81 * totalIncome);
 
-      const incomeTaxSum = 0.19 * netPrice;
-      const revenueReduction = netPrice - incomeTaxSum;
-
-      const nextResult = new Result(incomeTaxSum, vatSum, revenueReduction);
-
-      return addResults(currentCostsSum, nextResult);
-    },
-    new Result(0, 0, 0)
-  );
-
-  return subtractResults(salesSumResult, costsSumResult);
+  return new Result(totalTax, totalVatSum, totalRevenue);
 };
