@@ -34,27 +34,3 @@ firebaseMock.auth.GoogleAuthProvider = { credential: jest.fn() };
 export const initializeApp = jest.fn();
 
 export default firebaseMock;
-
-/*
-SECOND CASE TO MOCK
-
-import * as firebase from 'firebase';
-
-jest.spyOn(firebase, 'auth').mockImplementation(() => {
-  return {
-    createUserWithEmailAndPassword: jest
-      .fn()
-      .mockResolvedValue(someSignupApiResponse),
-    signInWithEmailAndPassword: jest
-      .fn()
-      .mockResolvedValue(someLoginApiResponse),
-    signInWithCredential: jest.fn().mockResolvedValue(someFbLoginApiResponse),
-  };
-});
-
-firebase.auth.FacebookAuthProvider = {
-  credential: jest.fn(),
-};
-
-export default firebase;
-*/

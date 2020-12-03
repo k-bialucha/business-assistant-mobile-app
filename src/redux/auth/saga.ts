@@ -54,10 +54,7 @@ export function* loginSaga({ payload: { email, password } }: LoginAction) {
   }
 }
 
-export function* signupSaga({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  payload: { email, password, phone },
-}: SignupAction) {
+export function* signupSaga({ payload: { email, password } }: SignupAction) {
   try {
     yield delay(1000);
 
@@ -78,7 +75,7 @@ export function* signupSaga({
   }
 }
 
-// TO FIX: still log in with  Fb in iOS by Facebook App doesn't work (not redirecting back to app)
+// FIXME: still log in with  Fb in iOS by Facebook App doesn't work (not redirecting back to app)
 export function* loginWithFacebookSaga() {
   yield call(
     Facebook.initializeAsync,
@@ -169,15 +166,9 @@ export function* resetPasswordSaga({
   payload: { email },
 }: ResetPasswordAction) {
   try {
-    // const actionCodeSettings = {
-    //   // to control if back to app after password change in browser
-    //   url: '',
-    // };
-
     yield call(
       [firebase.auth(), firebase.auth().sendPasswordResetEmail],
       email
-      // actionCodeSettings
     );
 
     Alert.alert(

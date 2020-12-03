@@ -34,10 +34,6 @@ jest.mock('redux-saga/effects', () => {
 jest.mock('~/utils/firebase');
 
 describe('<LoginScreen />', () => {
-  // beforeEach(() => {
-  //   (login as jest.Mock).mockResolvedValue(someApiResponse);
-  // });
-
   const { getByTestId, store } = renderWithRedux(
     <LoginScreen {...fakeProps} />
   );

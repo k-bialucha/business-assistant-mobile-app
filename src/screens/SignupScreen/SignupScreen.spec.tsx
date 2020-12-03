@@ -33,8 +33,6 @@ jest.mock('redux-saga/effects', () => {
 jest.mock('~/utils/firebase');
 
 describe('<SignupScreen />', () => {
-  // TODO: ? should we still use beforeEach with .mockResolvedValue(someApiResponse) here ?
-
   const { getByTestId, store } = renderWithRedux(
     <SignupScreen {...fakeProps} />
   );
