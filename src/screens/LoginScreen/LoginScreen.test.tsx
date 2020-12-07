@@ -14,6 +14,8 @@ const fakeProps: Props = {
   navigation: {},
 };
 
+jest.mock('~/utils/firebase');
+
 describe('<LoginScreen />', () => {
   beforeEach(() => {
     jest.resetAllMocks();

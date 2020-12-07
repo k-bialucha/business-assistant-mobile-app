@@ -6,7 +6,6 @@ import {
   loginWithGoogle,
   logout,
   resetPassword,
-  setDidTryAutoLogin,
   signup,
   signupFailure,
   signupSuccess,
@@ -24,8 +23,6 @@ import {
   LOGOUT,
   RESET_PASSWORD,
   ResetPasswordAction,
-  SET_DID_TRY_AUTO_LOGIN,
-  SetDidTryAutoLoginAction,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -52,19 +49,17 @@ describe(`${DOMAIN_NAME}/actions`, () => {
   });
 
   test('loginSuccess action creator returns correct object', () => {
-    const someToken: string = 'some-secure-token';
     const mockedUserData = {
       username: 'user-name',
       id: 'user-id',
       image: 'user-image-url',
     };
 
-    const result = loginSuccess(someToken, mockedUserData);
+    const result = loginSuccess(mockedUserData);
 
     const expected = {
       type: LOGIN_SUCCESS,
       payload: {
-        token: someToken,
         userData: mockedUserData,
       },
     };
@@ -110,18 +105,17 @@ describe(`${DOMAIN_NAME}/actions`, () => {
   });
 
   test('signupSuccess action creator returns correct object', () => {
-    const mockedToken: string = 'mocked-secure-token';
     const mockedUserData = {
       username: 'user-name',
       id: 'user-id',
       image: 'user-image-url',
     };
 
-    const result = signupSuccess(mockedToken, mockedUserData);
+    const result = signupSuccess(mockedUserData);
 
     const expected: SignupSuccessAction = {
       type: SIGNUP_SUCCESS,
-      payload: { token: mockedToken, userData: mockedUserData },
+      payload: { userData: mockedUserData },
     };
 
     expect(result).toEqual(expected);
@@ -168,16 +162,6 @@ describe(`${DOMAIN_NAME}/actions`, () => {
     const expected: ResetPasswordAction = {
       type: RESET_PASSWORD,
       payload: { email: mockedEmail },
-    };
-
-    expect(result).toEqual(expected);
-  });
-
-  test('setDidTryAutoLogin action creator returns correct object', () => {
-    const result = setDidTryAutoLogin();
-
-    const expected: SetDidTryAutoLoginAction = {
-      type: SET_DID_TRY_AUTO_LOGIN,
     };
 
     expect(result).toEqual(expected);

@@ -11,7 +11,6 @@ import {
   LOGIN_WITH_GOOGLE,
   LOGOUT,
   RequestStatus,
-  SET_DID_TRY_AUTO_LOGIN,
   SIGNUP,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
@@ -19,22 +18,20 @@ import {
 } from './types';
 
 export interface AuthState {
-  token: string | null;
+  isAuthenticated: boolean | null;
   username: string | null;
   userId: string | null;
   userImage: string | null;
-  requestStatus: RequestStatus;
-  didTryAutoLogin: boolean;
+  requestStatus: RequestStatus | null;
   error: ErrorObject | null;
 }
 
 export const initialState: AuthState = {
-  token: null,
+  isAuthenticated: null,
   username: null,
   userId: null,
   userImage: null,
   requestStatus: RequestStatus.UNAUTHENTICATED,
-  didTryAutoLogin: false,
   error: null,
 };
 
@@ -65,13 +62,12 @@ function reducer(
 
     case LOGIN_SUCCESS: {
       const {
-        token,
         userData: { username, id, image },
       } = action.payload;
 
       return {
         ...state,
-        token,
+        isAuthenticated: true,
         username,
         userId: id,
         userImage: image || null,
@@ -91,14 +87,15 @@ function reducer(
 
       return {
         ...state,
-        token: null,
+        isAuthenticated: false,
         requestStatus: RequestStatus.FAILURE,
         error,
       };
     }
 
-    case LOGOUT:
+    case LOGOUT: {
       return initialState;
+    }
 
     case SIGNUP:
       Keyboard.dismiss();
@@ -110,16 +107,14 @@ function reducer(
 
     case SIGNUP_SUCCESS: {
       const {
-        token,
-        userData: { username, id, image },
+        userData: { username, id },
       } = action.payload;
 
       return {
         ...state,
-        token,
+        isAuthenticated: true,
         username,
         userId: id,
-        userImage: image || null,
         requestStatus: RequestStatus.SUCCESS,
       };
     }
@@ -136,17 +131,11 @@ function reducer(
 
       return {
         ...state,
-        token: null,
+        isAuthenticated: false,
         requestStatus: RequestStatus.FAILURE,
         error,
       };
     }
-
-    case SET_DID_TRY_AUTO_LOGIN:
-      return {
-        ...state,
-        didTryAutoLogin: true,
-      };
 
     case TRY_AUTO_LOGIN:
       return {
@@ -158,6 +147,7 @@ function reducer(
       return {
         ...state,
         error: null,
+        requestStatus: null,
       };
     }
 

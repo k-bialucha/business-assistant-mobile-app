@@ -6,7 +6,7 @@ import { act, fireEvent } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
 
 import { NavigationData } from '~/navigation/AuthNavigator';
-import { loginUser } from '~/utils/apiCalls/authorization';
+import { someLoginApiResponse } from '~/utils/__mocks__/firebase';
 import renderWithRedux from '~/utils/testing/renderWithRedux';
 
 import LoginScreen from './LoginScreen';
@@ -21,7 +21,6 @@ const fakeProps: Props = {
   navigation: {},
 };
 
-jest.mock('~/utils/apiCalls/authorization');
 jest.mock('redux-saga/effects', () => {
   const actualModule = jest.requireActual('redux-saga/effects');
 
@@ -32,14 +31,9 @@ jest.mock('redux-saga/effects', () => {
     delay: () => () => true,
   };
 });
-
-const someApiResponse = { idToken: 'highly-secure-token', localId: '999abcd' };
+jest.mock('~/utils/firebase');
 
 describe('<LoginScreen />', () => {
-  beforeEach(() => {
-    (loginUser as jest.Mock).mockResolvedValue(someApiResponse);
-  });
-
   const { getByTestId, store } = renderWithRedux(
     <LoginScreen {...fakeProps} />
   );
@@ -49,20 +43,23 @@ describe('<LoginScreen />', () => {
   const loginButton: ReactTestInstance = getByTestId('login-button');
 
   it('allows to login', async () => {
-    const someEmail = 'kamil.bialucha@gmail.com';
+    const someEmail = 'some@email.com';
+    const somePassword = 'mypass123';
 
     fireEvent.changeText(emailInput, someEmail);
 
-    fireEvent.changeText(passwordInput, 'mypass123');
+    fireEvent.changeText(passwordInput, somePassword);
 
     await act(async () => {
       fireEvent.press(loginButton);
     });
 
     process.nextTick(() => {
-      expect(store.getState().auth.username).toBe(someEmail);
-      expect(store.getState().auth.token).toEqual(someApiResponse.idToken);
-      expect(store.getState().auth.userId).toBe(someApiResponse.localId);
+      expect(store.getState().auth.username).toBe(
+        someLoginApiResponse.user.displayName
+      );
+      expect(store.getState().auth.isAuthenticated).toBe(true);
+      expect(store.getState().auth.userId).toBe(someLoginApiResponse.user.uid);
     });
   });
 });

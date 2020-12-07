@@ -1,5 +1,10 @@
 import { put } from 'redux-saga/effects';
 
+import {
+  someLoginApiResponse,
+  someSignupApiResponse,
+} from '~/utils/__mocks__/firebase';
+
 import { loginFailure, loginSuccess } from './actions';
 import {
   loginSaga,
@@ -20,19 +25,12 @@ import {
 } from './types';
 
 jest.mock('~env');
-
-// mock firebase JWT token
-const someToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJLYW1pbCBCaWFsdWNoYSIsImlhdCI6MTU5MDk2MzkzNCwiZXhwIjoxNjIyNDk5OTM0LCJhdWQiOiJidXNzaW5lc3MtYXNzaXN0YW50LW1vYmlsZS1hcHAiLCJzdWIiOiJqZG9lQGV4YW1wbGUuY29tIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqZG9lQGV4YW1wbGUuY29tIiwidXNlcl9pZCI6IjVkNGIwY2JiNmY4MiJ9.qVrXVmcIqBeR4E6W0_8D4pq17w5NUl6s5su2U41tFIY';
+jest.mock('~/utils/firebase');
 
 describe(`${DOMAIN_NAME}/saga`, () => {
   describe('loginSaga', () => {
     it('handles successful login', () => {
-      const someApiResponse = {
-        idToken: 'token-123',
-        localId: '12345',
-      };
-      const mockedEmail = 'some-email';
+      const mockedEmail = 'some@email.com';
 
       const generator = loginSaga({
         type: LOGIN,
@@ -41,8 +39,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
       const delayDescriptor = generator.next().value;
       const apiCallDescriptor = generator.next().value;
-      const putDescriptor = generator.next(someApiResponse).value;
-      const saveToAsyncStorage = generator.next().value;
+      const putDescriptor = generator.next(someLoginApiResponse).value;
 
       expect(delayDescriptor).toMatchSnapshot();
       expect(apiCallDescriptor).toMatchSnapshot();
@@ -50,16 +47,14 @@ describe(`${DOMAIN_NAME}/saga`, () => {
         put({
           type: LOGIN_SUCCESS,
           payload: {
-            token: someApiResponse.idToken,
             userData: {
-              id: someApiResponse.localId,
-              image: undefined,
-              username: mockedEmail,
+              id: someLoginApiResponse.user.uid,
+              image: someLoginApiResponse.user.photoURL,
+              username: someLoginApiResponse.user.displayName,
             },
           },
         })
       );
-      expect(saveToAsyncStorage).toMatchSnapshot();
       expect(generator.next().done).toBe(true);
     });
 
@@ -67,7 +62,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       const someError = new Error('Bad Credentials');
       const generator = loginSaga({
         type: LOGIN,
-        payload: { email: 'some-email', password: 'badpass' },
+        payload: { email: 'some@email.com', password: 'badpass' },
       });
 
       const delayDescriptor = generator.next().value;
@@ -85,11 +80,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
   describe('signupSaga', () => {
     it('handles successful signup', () => {
-      const someApiResponse = {
-        idToken: 'token-123',
-        localId: '12345',
-      };
-      const mockedEmail = 'some-email@example.com';
+      const mockedEmail = 'some@email.com';
       const generator = signupSaga({
         type: SIGNUP,
         payload: {
@@ -100,8 +91,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
 
       const delayDescriptor = generator.next().value;
       const apiCallDescriptor = generator.next().value;
-      const putDescriptor = generator.next(someApiResponse).value;
-      const saveToAsyncStorage = generator.next().value;
+      const putDescriptor = generator.next(someSignupApiResponse).value;
 
       expect(delayDescriptor).toMatchSnapshot();
       expect(apiCallDescriptor).toMatchSnapshot();
@@ -109,16 +99,14 @@ describe(`${DOMAIN_NAME}/saga`, () => {
         put({
           type: SIGNUP_SUCCESS,
           payload: {
-            token: someApiResponse.idToken,
             userData: {
-              id: someApiResponse.localId,
+              id: someSignupApiResponse.user.uid,
               image: undefined,
-              username: mockedEmail,
+              username: someSignupApiResponse.user.email,
             },
           },
         })
       );
-      expect(saveToAsyncStorage).toMatchSnapshot();
       expect(generator.next().done).toBe(true);
     });
 
@@ -126,7 +114,7 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       const someError = new Error('Bad Credentials');
       const generator = signupSaga({
         type: SIGNUP,
-        payload: { email: 'some-email@example.com', password: 'badpass' },
+        payload: { email: 'some@email.com', password: 'badpass' },
       });
 
       const delayDescriptor = generator.next().value;
@@ -149,7 +137,11 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       const facebookLoginResponse = {
         token: 'mocked-token',
         type: 'success',
-        user: 'user',
+      };
+      const someCredentials = {
+        providerId: 'mocked-provider-id',
+        signInMethod: 'signin-method',
+        idToken: 'mocked-id-token',
       };
 
       const initializeFacebookApp = generator.next().value;
@@ -166,32 +158,20 @@ describe(`${DOMAIN_NAME}/saga`, () => {
       expect(getCredentials).toMatchSnapshot();
 
       // sign in to firebase with received credentials
-      const signToFirebaseWithCredentials = generator.next({
-        token: '',
-        type: '',
-        user: 'user-object',
-      }).value;
+      const signToFirebaseWithCredentials = generator.next(someCredentials)
+        .value;
 
       expect(signToFirebaseWithCredentials).toMatchSnapshot();
 
-      expect(
-        generator.next({
-          user: {
-            getIdToken: jest.fn(() => someToken),
-          },
-        }).value
-      ).toEqual(someToken);
-
-      expect(generator.next(someToken).value).toEqual(
+      expect(generator.next(someLoginApiResponse).value).toEqual(
         put(
-          loginSuccess('mocked-token', {
-            username: expect.any(String),
-            id: expect.any(String),
+          loginSuccess({
+            username: someLoginApiResponse.user.displayName,
+            id: someLoginApiResponse.user.uid,
+            image: someLoginApiResponse.user.photoURL,
           })
         )
       );
-
-      expect(generator.next().value).toMatchSnapshot();
 
       expect(generator.next().done).toBe(true);
     });
@@ -218,46 +198,33 @@ describe(`${DOMAIN_NAME}/saga`, () => {
         accessToken: 'mocked-token',
         idToken: 'mocked-id-token',
         type: 'success',
-        user: 'user',
       };
 
       const loginWithGoogle = generator.next().value;
 
       expect(loginWithGoogle).toMatchSnapshot();
 
-      // get credential to firebase auth with fb token
       const getCredentials = generator.next(googleLoginResponse).value;
 
       expect(getCredentials).toMatchSnapshot();
 
-      // sign in to firebase with received credentials
       const signToFirebaseWithCredentials = generator.next({
         accessToken: 'mocked-token',
         idToken: 'mocked-id-token',
         type: '',
-        user: 'user-object',
       }).value;
 
       expect(signToFirebaseWithCredentials).toMatchSnapshot();
 
-      expect(
-        generator.next({
-          user: {
-            getIdToken: jest.fn(() => someToken),
-          },
-        }).value
-      ).toEqual(someToken);
-
-      expect(generator.next(someToken).value).toEqual(
+      expect(generator.next(someLoginApiResponse).value).toEqual(
         put(
-          loginSuccess(someToken, {
-            username: expect.any(String),
-            id: expect.any(String),
+          loginSuccess({
+            username: someLoginApiResponse.user.displayName,
+            id: someLoginApiResponse.user.uid,
+            image: someLoginApiResponse.user.photoURL,
           })
         )
       );
-
-      expect(generator.next().value).toMatchSnapshot();
 
       expect(generator.next().done).toBe(true);
     });

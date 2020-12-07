@@ -10,7 +10,6 @@ export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK';
 export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
-export const SET_DID_TRY_AUTO_LOGIN = 'SET_DID_TRY_AUTO_LOGIN';
 export const TRY_AUTO_LOGIN = 'TRY_AUTO_LOGIN';
 export const CLEAR_ERROR_STATE = 'CLEAR_ERROR_STATE';
 
@@ -31,7 +30,6 @@ export interface LoginAction {
 export interface LoginSuccessAction {
   type: typeof LOGIN_SUCCESS;
   payload: {
-    token: string;
     userData: UserData;
   };
 }
@@ -57,7 +55,6 @@ export interface SignupAction {
 export interface SignupSuccessAction {
   type: typeof SIGNUP_SUCCESS;
   payload: {
-    token: string;
     userData: UserData;
   };
 }
@@ -80,10 +77,6 @@ export interface ResetPasswordAction {
   payload: { email: string };
 }
 
-export interface SetDidTryAutoLoginAction {
-  type: typeof SET_DID_TRY_AUTO_LOGIN;
-}
-
 export interface TryAutoLoginAction {
   type: typeof TRY_AUTO_LOGIN;
 }
@@ -104,7 +97,6 @@ export type AuthActions =
   | SignupFailureAction
   | LoginWithFacebookAction
   | LoginWithGoogleAction
-  | SetDidTryAutoLoginAction
   | TryAutoLoginAction
   | ResetPasswordAction
   | ClearErrorStateAction;

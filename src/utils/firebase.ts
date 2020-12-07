@@ -1,5 +1,4 @@
 import * as firebase from 'firebase';
-import ReduxSagaFirebase from 'redux-saga-firebase';
 
 import {
   AUTH_DOMAIN,
@@ -19,8 +18,18 @@ const options = {
   messagingSenderId: MESSAGING_SENDER_ID,
 };
 
-const app = firebase.initializeApp(options);
+firebase.initializeApp(options);
 
-export const myFirebaseApp = new ReduxSagaFirebase(app);
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        resolve(user);
+      } else {
+        reject();
+      }
+    });
+  });
+};
 
 export default firebase;

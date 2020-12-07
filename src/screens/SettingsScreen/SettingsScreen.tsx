@@ -19,7 +19,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { username, userImage } = useSelector((state: RootState) => state.auth);
   const { t } = useTranslation();
 
-  if (!username || !userImage) return null;
+  if (!username) return null;
 
   return (
     <StyledView>
@@ -29,7 +29,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
         <ListItem
           leftAvatar={{
             rounded: true,
-            source: { uri: userImage },
+            ...(userImage ? { source: { uri: userImage } } : {}),
           }}
           title={username}
           titleStyle={{
