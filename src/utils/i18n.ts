@@ -1,13 +1,17 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import plTranslation from './translations/pl';
+import { translationEN } from './translations/en';
+import { translationPL } from './translations/pl';
 
 const resources = {
-  pl: {
-    translation: plTranslation,
+  en: {
+    translation: translationEN,
   },
-};
+  pl: {
+    translation: translationPL,
+  },
+} as const;
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
