@@ -70,7 +70,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
         }}
       >
         <ListItem
-          title={t('Log out')}
+          title={t('Logout')}
           titleStyle={{
             color: Colors.errorRed,
           }}

@@ -22,13 +22,13 @@ const SignupScreen: React.FC<Props> = () => {
 
   const SignupSchema = Yup.object().shape({
     email: Yup.string()
-      .email(t('Invalid email'))
+      .email(t('Invalid Email'))
       .required(t('Required')),
     phone: Yup.string()
-      .min(9, t('Too Short!'))
-      .max(12, t('Too Long!')),
+      .min(9, t('Too short'))
+      .max(12, t('Too long')),
     password: Yup.string()
-      .min(6, t('Too Short!'))
+      .min(6, t('Too short'))
       .required(t('Required')),
   });
 
