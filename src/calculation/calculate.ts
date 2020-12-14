@@ -4,8 +4,8 @@ import { IncomeTaxType } from '~/models/IncomeTaxType';
 import { Sale } from '~/models/Sale';
 import { TaxPayer } from '~/models/TaxPayer';
 
+import { TAX_RATE_LINEAR } from './constants';
 import { roundSum } from './roundSum';
-
 class Result implements CalculationResult {
   constructor(
     public readonly incomeTaxSum: number,
@@ -34,8 +34,8 @@ export const calculate = (
   const totalIncome = [...salesNetPrices, ...costsNetPrices].reduce(sumReducer);
   const totalVatSum = [...salesVatSums, ...costsVatSums].reduce(sumReducer);
 
-  const totalTax = roundSum(0.19 * totalIncome);
-  const totalRevenue = roundSum(0.81 * totalIncome);
+  const totalTax = roundSum((TAX_RATE_LINEAR / 100) * totalIncome);
+  const totalRevenue = roundSum((1 - TAX_RATE_LINEAR / 100) * totalIncome);
 
   return new Result(totalTax, totalVatSum, totalRevenue);
 };
