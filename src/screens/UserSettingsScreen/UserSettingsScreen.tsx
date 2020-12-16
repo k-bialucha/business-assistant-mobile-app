@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 
-import { useTranslation } from 'react-i18next';
-
 import PlainText from '~/components/UI/PlainText';
+import { useAppTranslation } from '~/hooks/useAppTranslation';
 import { NavigationData } from '~/navigation/AppNavigator/SettingsNavigator';
 
 import { StyledView } from './UserSettingsScreen.styled';
@@ -10,7 +9,7 @@ import { StyledView } from './UserSettingsScreen.styled';
 type Props = NavigationData<'UserSettings'>;
 
 const UserSettingsScreen: React.FC<Props> = ({ navigation }) => {
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
 
   useEffect(() => {
     navigation.setOptions({

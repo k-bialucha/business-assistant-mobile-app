@@ -3,12 +3,12 @@ import { ScrollView } from 'react-native';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { Formik } from 'formik';
-import { useTranslation } from 'react-i18next';
 import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 import TextField from '~/components/form/TextField';
+import { useAppTranslation } from '~/hooks/useAppTranslation';
 import { NavigationData } from '~/navigation/AuthNavigator';
 import { resetPassword } from '~/redux/auth/actions';
 import Colors from '~/theme/Colors';
@@ -19,7 +19,7 @@ type Props = NavigationData<'ResetPassword'>;
 
 const ResetPasswordScreen: React.FC<Props> = ({ route }) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
 
   const ResetPasswordSchema = Yup.object().shape({
     email: Yup.string()

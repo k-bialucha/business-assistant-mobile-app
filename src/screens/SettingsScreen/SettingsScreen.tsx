@@ -1,10 +1,10 @@
 import React from 'react';
 import { Alert, TouchableWithoutFeedback } from 'react-native';
 
-import { useTranslation } from 'react-i18next';
 import { ListItem } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useAppTranslation } from '~/hooks/useAppTranslation';
 import { NavigationData } from '~/navigation/AppNavigator/SettingsNavigator';
 import { logout } from '~/redux/auth';
 import { RootState } from '~/redux/rootReducer';
@@ -17,7 +17,7 @@ type Props = NavigationData<'Settings'>;
 const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
   const { username, userImage } = useSelector((state: RootState) => state.auth);
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
 
   if (!username) return null;
 
