@@ -80,7 +80,7 @@ exports[`<SettingsScreen /> matches the snapshot 1`] = `
           "marginTop": 30,
         }
       }
-      title="[Translation: <Log out>]"
+      title="[Translation: <Logout>]"
       titleStyle={
         Object {
           "color": "#ff0000",
