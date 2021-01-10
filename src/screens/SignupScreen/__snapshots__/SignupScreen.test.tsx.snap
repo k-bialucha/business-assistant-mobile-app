@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SignupScreen /> matches the snapshot 1`] = `
-<ScrollViewMock
+<ScrollView
   keyboardShouldPersistTaps="handled"
   style={
     Object {
@@ -152,5 +152,5 @@ exports[`<SignupScreen /> matches the snapshot 1`] = `
       <Component />
     </Formik>
   </Styled(View)>
-</ScrollViewMock>
+</ScrollView>
 `;

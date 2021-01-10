@@ -78,8 +78,10 @@ Object {
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "facebook-app-id",
-      "Personal Business Assistant",
+      Object {
+        "appId": "facebook-app-id",
+        "appName": "Personal Business Assistant",
+      },
     ],
     "context": null,
     "fn": [Function],
