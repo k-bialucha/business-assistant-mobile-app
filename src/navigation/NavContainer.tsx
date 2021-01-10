@@ -9,7 +9,7 @@ import { clearErrorState, tryAutoLogin } from '~/redux/auth/actions';
 import { RequestStatus } from '~/redux/auth/types';
 import { RootState } from '~/redux/rootReducer';
 
-import AppNavigator from './AppNavigator';
+import { AppNavigator } from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
 
 const NavContainer = () => {

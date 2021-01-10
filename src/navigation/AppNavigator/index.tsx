@@ -29,16 +29,12 @@ const AppNavigator: React.FC<{}> = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           const icons = {
-            Dashboard: Platform.OS === 'android' ? 'md-stats' : 'ios-stats',
-            Sales:
-              Platform.OS === 'android' ? 'md-trending-up' : 'ios-trending-up',
-            Costs:
-              Platform.OS === 'android'
-                ? 'md-trending-down'
-                : 'ios-trending-down',
+            Dashboard: Platform.OS === 'android' ? 'md-reader' : 'md-reader',
+            Sales: Platform.OS === 'android' ? 'md-pricetags' : 'ios-pricetags',
+            Costs: Platform.OS === 'android' ? 'md-basket' : 'ios-basket',
             Settings:
               Platform.OS === 'android' ? 'md-settings' : 'ios-settings',
-          };
+          } as const;
 
           return (
             <Ionicons name={icons[route.name]} size={size} color={color} />
@@ -51,15 +47,15 @@ const AppNavigator: React.FC<{}> = () => {
         inactiveTintColor: Colors.silver,
       }}
     >
-      <AppTabNavigator.Screen name="Sales" component={SalesNavigator} />
       <AppTabNavigator.Screen name="Dashboard" component={DashboardNavigator} />
+      <AppTabNavigator.Screen name="Sales" component={SalesNavigator} />
       <AppTabNavigator.Screen name="Costs" component={CostsNavigator} />
       <AppTabNavigator.Screen name="Settings" component={SettingsNavigator} />
     </AppTabNavigator.Navigator>
   );
 };
 
-export default AppNavigator;
+export { AppNavigator };
 
 // export types so that nested components
 // can get navigation data
