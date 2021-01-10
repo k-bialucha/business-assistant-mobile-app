@@ -5,10 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Loader from '~/components/UI/Loader';
-import { clearErrorState } from '~/redux/auth/actions';
+import { clearErrorState, tryAutoLogin } from '~/redux/auth/actions';
 import { RequestStatus } from '~/redux/auth/types';
 import { RootState } from '~/redux/rootReducer';
-import StartupScreen from '~/screens/StartupScreen';
 
 import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
@@ -16,11 +15,10 @@ import AuthNavigator from './AuthNavigator';
 const NavContainer: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { didTryAutoLogin, token, requestStatus, error } = useSelector(
+  const { requestStatus, error, isAuthenticated } = useSelector(
     (state: RootState) => state.auth
   );
 
-  const isAuthenticated = !!token;
   const isLoading: boolean = requestStatus === RequestStatus.LOADING;
 
   useEffect(() => {
@@ -30,12 +28,14 @@ const NavContainer: React.FC = () => {
     }
   }, [error, dispatch]);
 
+  useEffect(() => {
+    dispatch(tryAutoLogin());
+  }, [dispatch]);
+
   return (
     <>
       <NavigationContainer>
-        {isAuthenticated && <AppNavigator />}
-        {!isAuthenticated && didTryAutoLogin && <AuthNavigator />}
-        {!isAuthenticated && !didTryAutoLogin && <StartupScreen />}
+        {isAuthenticated ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
       <Loader isLoading={isLoading} />
     </>
