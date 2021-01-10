@@ -6,6 +6,7 @@ import { TaxPayer } from '~/models/TaxPayer';
 
 import { TAX_RATE_LINEAR } from './constants';
 import { roundSum } from './roundSum';
+
 class Result implements CalculationResult {
   constructor(
     public readonly incomeTaxSum: number,
