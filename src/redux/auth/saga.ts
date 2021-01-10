@@ -77,11 +77,10 @@ export function* signupSaga({ payload: { email, password } }: SignupAction) {
 
 // FIXME: still log in with  Fb in iOS by Facebook App doesn't work (not redirecting back to app)
 export function* loginWithFacebookSaga() {
-  yield call(
-    Facebook.initializeAsync,
-    FACEBOOK_APP_ID,
-    'Personal Business Assistant'
-  );
+  yield call(Facebook.initializeAsync, {
+    appId: FACEBOOK_APP_ID,
+    appName: 'Personal Business Assistant',
+  });
 
   try {
     const response: Facebook.FacebookLoginResult = yield call(
