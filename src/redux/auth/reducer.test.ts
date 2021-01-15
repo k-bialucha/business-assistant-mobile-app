@@ -14,8 +14,8 @@ import {
 
 describe(`${DOMAIN_NAME}/reducer`, () => {
   it('handles login action', () => {
-    const someEmail: string = 'some-email';
-    const somePassword: string = 'hard-pass';
+    const someEmail = 'some-email';
+    const somePassword = 'hard-pass';
 
     const action: LoginAction = {
       type: LOGIN,
@@ -65,9 +65,9 @@ describe(`${DOMAIN_NAME}/reducer`, () => {
   });
 
   it('handles loginFailure action', () => {
-    const someEmail: string = 'some-email';
-    const someUserId: string = 'some-user-id';
-    const someUserImage: string = 'some-user-image-url';
+    const someEmail = 'some-email';
+    const someUserId = 'some-user-id';
+    const someUserImage = 'some-user-image-url';
 
     const previousState: AuthState = {
       isAuthenticated: null,

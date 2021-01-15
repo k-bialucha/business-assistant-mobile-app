@@ -11,7 +11,13 @@ module.exports = {
     es6: true,
     jest: true,
   },
-  extends: ['airbnb', 'prettier', 'prettier/react'],
+  extends: [
+    'plugin:react/recommended',
+    'plugin:import/typescript',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'prettier/react',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -25,6 +31,7 @@ module.exports = {
     'react-hooks',
     'prettier',
     '@typescript-eslint',
+    'import',
     'simple-import-sort',
   ],
   settings: {
@@ -43,9 +50,12 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': ['error', prettierOptions],
-    'no-use-before-define': 0,
-    'no-unused-vars': 0,
+    'no-console': 2,
     '@typescript-eslint/no-unused-vars': 2,
+    '@typescript-eslint/explicit-function-return-type': [
+      1,
+      { allowExpressions: true },
+    ],
     'arrow-body-style': 0,
     'comma-dangle': [2, 'only-multiline'],
     'padding-line-between-statements': [
@@ -64,10 +74,11 @@ module.exports = {
     'import/order': 0,
     'import/no-default-export': 1,
     'import/prefer-default-export': 0,
+    'react/display-name': 0,
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
     'react/jsx-first-prop-new-line': [2, 'multiline'],
+    'react/jsx-props-no-spreading': 0,
     'react/jsx-uses-vars': 2,
-    'react/jsx-props-no-spreading': 1,
     'react/prefer-stateless-function': [2, { ignorePureComponents: true }],
     'react/prop-types': 0,
     'react/state-in-constructor': [2, 'never'],
@@ -89,4 +100,12 @@ module.exports = {
     ],
     'sort-imports': 0,
   },
+  overrides: [
+    {
+      files: ['*.test.tsx', '*.spec.tsx'],
+      rules: {
+        '@typescript-eslint/ban-ts-ignore': 0,
+      },
+    },
+  ],
 };

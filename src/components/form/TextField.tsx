@@ -8,8 +8,8 @@ import {
 } from './TextField.styled';
 
 interface TextFieldProps extends TextInputProps {
-  error?: String | Boolean;
-  touched?: Boolean;
+  error?: string | boolean;
+  touched?: boolean;
 }
 
 const TextField: React.FC<TextFieldProps> = ({ error, touched, ...props }) => {
