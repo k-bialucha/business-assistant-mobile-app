@@ -8,15 +8,11 @@ export class CostElement implements Cost {
   readonly currency: Currency = Currency.PLN;
 
   get grossPrice(): number {
-    const { netPrice, vatSum } = this;
-
-    return netPrice + vatSum;
+    return this.netPrice + this.vatSum;
   }
 
   get vatSum(): number {
-    const { netPrice, vatRate } = this;
-
-    return roundSum((vatRate / 100) * netPrice);
+    return roundSum((this.vatRate / 100) * this.netPrice);
   }
 
   constructor(

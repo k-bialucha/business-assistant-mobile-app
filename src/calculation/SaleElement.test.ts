@@ -16,13 +16,13 @@ describe('calculation/SaleElement', () => {
   });
 
   it('allows to set code', () => {
-    expect(someSaleElement.code).toBeNull();
+    expect(someSaleElement.classificationCode).toBeNull();
 
     const someCode = '62.01.11';
 
-    someSaleElement.code = someCode;
+    someSaleElement.classificationCode = someCode;
 
-    expect(someSaleElement.code).toBe(someCode);
+    expect(someSaleElement.classificationCode).toBe(someCode);
   });
 
   const expectedGrossPrice = 840.18;
