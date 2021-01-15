@@ -12,7 +12,7 @@ import { RootState } from '~/redux/rootReducer';
 import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
 
-const NavContainer = () => {
+const NavContainer: React.FC = () => {
   const dispatch = useDispatch();
 
   const { requestStatus, error, isAuthenticated } = useSelector(
