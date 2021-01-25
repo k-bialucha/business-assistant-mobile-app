@@ -40,9 +40,12 @@ const fakeProps: Props = {
 };
 
 describe('<ResetPasswordScreen />', () => {
-  const { getByTestId, queryByDisplayValue, queryByText } = renderWithRedux(
-    <ResetPasswordScreen {...fakeProps} />
-  );
+  const {
+    getByTestId,
+    queryByText,
+    queryByTestId,
+    queryByDisplayValue,
+  } = renderWithRedux(<ResetPasswordScreen {...fakeProps} />);
 
   const emailInput: ReactTestInstance = getByTestId('email-input');
   const resetPasswordButton: ReactTestInstance = getByTestId(
@@ -57,23 +60,23 @@ describe('<ResetPasswordScreen />', () => {
     expect(maybeInputValue).not.toBeNull();
   });
 
-  // FIXME
-  // it('shows the validation message in case of empty email', async () => {
-  // const { findByText } = renderWithRedux(
-  //   <ResetPasswordScreen {...fakeProps} />
-  // );
-  // // await act(async () => {
-  // //   fireEvent.changeText(emailInput, '');
-  // // });
-  // await act(async () => {
-  //   fireEvent.press(resetPasswordButton);
-  // });
-  // const validationText: ReactTestInstance = await findByText('TEST');
-  // expect(validationText).toBeTruthy();
-  // });
+  it('shows the validation message in case of empty email', async () => {
+    await act(async () => {
+      fireEvent.changeText(emailInput, '');
+    });
+
+    await act(async () => {
+      fireEvent.press(resetPasswordButton);
+    });
+
+    const validationText: ReactTestInstance | null = queryByTestId(
+      'errorMessage'
+    );
+
+    expect(validationText).toBeTruthy();
+  });
 
   it('allows to send form with valid email', async () => {
-    // TO FIX
     const someEmail = 'some-valid@email.com';
 
     await act(async () => {
