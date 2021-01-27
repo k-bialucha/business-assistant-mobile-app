@@ -9,10 +9,10 @@ import { translationPL } from './translations/pl';
 const languageDetector: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
   async: true,
-  detect: (callback: Function) => {
-    return Localization.getLocalizationAsync().then(({ locale }) => {
-      callback(locale.split('-')[0]);
-    });
+  detect: async (callback: Function) => {
+    const { locale } = await Localization.getLocalizationAsync();
+
+    callback(locale.split('-')[0]);
   },
   init: () => ({}),
   cacheUserLanguage: () => ({}),
