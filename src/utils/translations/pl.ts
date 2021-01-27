@@ -2,7 +2,7 @@ import { Translation } from './types';
 
 export const translationPL: Translation = {
   // auth screen
-  'Log in': 'Logowanie',
+  'Log in': 'Zaloguj',
   'Logout': 'Wyloguj',
   'Sign Up': 'Rejestracja',
   'Already have an account?': 'Masz już konto?',
