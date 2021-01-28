@@ -12,20 +12,7 @@ import renderWithRedux from '~/utils/testing/renderWithRedux';
 import ResetPasswordScreen from './ResetPasswordScreen';
 
 jest.unmock('react-redux');
-// should it be moved into separated module?
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native');
-
-  return Object.setPrototypeOf(
-    {
-      Alert: {
-        ...RN.Alert,
-        alert: jest.fn(),
-      },
-    },
-    RN
-  );
-});
+jest.spyOn(Alert, 'alert');
 
 type Props = NavigationData<'ResetPassword'>;
 
