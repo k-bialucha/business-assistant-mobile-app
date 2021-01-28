@@ -20,7 +20,9 @@ const TextField: React.FC<TextFieldProps> = ({ error, touched, ...props }) => {
         valid={!(error && touched)}
         placeholderTextColor="rgba(255,255,255, 0.6)"
       />
-      {error && touched ? <ErrorMessage>{error}</ErrorMessage> : null}
+      {error && touched ? (
+        <ErrorMessage testID="errorMessage">{error}</ErrorMessage>
+      ) : null}
     </StyledContainer>
   );
 };
