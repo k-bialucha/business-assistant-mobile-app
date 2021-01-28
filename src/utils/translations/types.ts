@@ -1,0 +1,25 @@
+export type Translation = { [k in TranslationKeys]: string };
+
+export type TranslationKeys =
+  | 'Log in'
+  | 'Logout'
+  | 'Sign Up'
+  | 'Already have an account?'
+  | 'Continue with Google'
+  | 'Continue with Facebook'
+  | 'Create an account'
+  | 'Make your business easier.'
+  | 'Account Settings'
+  | 'E-mail'
+  | 'Phone (Optional)'
+  | 'Password'
+  | 'Forgot Password'
+  | 'Invalid Email'
+  | 'Too short'
+  | 'Too long'
+  | 'Required'
+  | 'Costs'
+  | 'Add cost'
+  | 'Reset Password'
+  | 'Revenues'
+  | 'Add revenue';

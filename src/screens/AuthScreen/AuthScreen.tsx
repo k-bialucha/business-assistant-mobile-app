@@ -3,11 +3,11 @@ import { TouchableWithoutFeedback, View } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
 import { StackNavigationOptions } from '@react-navigation/stack';
-import { useTranslation } from 'react-i18next';
 import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 
 import PlainText from '~/components/UI/PlainText';
+import { useAppTranslation } from '~/hooks/useAppTranslation';
 import { NavigationData } from '~/navigation/AuthNavigator';
 import { loginWithFacebook, loginWithGoogle } from '~/redux/auth/actions';
 import Colors from '~/theme/Colors';
@@ -24,7 +24,7 @@ type Props = NavigationData<'Authorization'>;
 
 const AuthScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
 
   return (
     <StyledContainer>

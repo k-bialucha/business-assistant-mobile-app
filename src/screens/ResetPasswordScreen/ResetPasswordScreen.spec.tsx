@@ -1,6 +1,7 @@
 import '@testing-library/jest-native/extend-expect';
 
 import React from 'react';
+import { Alert } from 'react-native';
 
 import { act, fireEvent } from 'react-native-testing-library';
 import { ReactTestInstance } from 'react-test-renderer';
@@ -11,6 +12,7 @@ import renderWithRedux from '~/utils/testing/renderWithRedux';
 import ResetPasswordScreen from './ResetPasswordScreen';
 
 jest.unmock('react-redux');
+jest.spyOn(Alert, 'alert');
 
 type Props = NavigationData<'ResetPassword'>;
 
@@ -25,9 +27,12 @@ const fakeProps: Props = {
 };
 
 describe('<ResetPasswordScreen />', () => {
-  const { getByTestId, queryByDisplayValue, queryByText } = renderWithRedux(
-    <ResetPasswordScreen {...fakeProps} />
-  );
+  const {
+    getByTestId,
+    queryByText,
+    queryByTestId,
+    queryByDisplayValue,
+  } = renderWithRedux(<ResetPasswordScreen {...fakeProps} />);
 
   const emailInput: ReactTestInstance = getByTestId('email-input');
   const resetPasswordButton: ReactTestInstance = getByTestId(
@@ -42,47 +47,49 @@ describe('<ResetPasswordScreen />', () => {
     expect(maybeInputValue).not.toBeNull();
   });
 
-  it('does not allow to send form with invalid email', async () => {
-    const someInvalidEmail = 'some-invalid@email';
-
-    await act(async () => {
-      fireEvent.changeText(emailInput, someInvalidEmail);
-    });
-
-    expect(resetPasswordButton.props.disabled).toBe(true);
-  });
-
-  it('shows the validation message in case of invalid email', async () => {
-    // validation message shows only after pressing outside the text input
-    // trigger showing validation by pressing a button
-    await act(async () => {
-      fireEvent.press(resetPasswordButton);
-    });
-
-    const validationText: ReactTestInstance | null = queryByText(
-      'Invalid email'
-    );
-
-    expect(validationText).not.toBeNull();
-  });
-
   it('shows the validation message in case of empty email', async () => {
     await act(async () => {
       fireEvent.changeText(emailInput, '');
     });
 
-    const validationText: ReactTestInstance | null = queryByText('Required');
+    await act(async () => {
+      fireEvent.press(resetPasswordButton);
+    });
 
-    expect(validationText).not.toBeNull();
+    const validationText: ReactTestInstance | null = queryByTestId(
+      'errorMessage'
+    );
+
+    expect(validationText).toBeTruthy();
   });
 
   it('allows to send form with valid email', async () => {
+    const someEmail = 'some-valid@email.com';
+
+    await act(async () => {
+      fireEvent.changeText(emailInput, someEmail);
+    });
+    await act(async () => {
+      fireEvent.press(resetPasswordButton);
+    });
+
+    const validationText: ReactTestInstance | null = queryByText(
+      'Invalid Email'
+    );
+
+    expect(validationText).toBeNull();
+  });
+
+  it('shows the alert with a message if form has submitted successfully', async () => {
     const someInvalidEmail = 'some-valid@email.com';
 
     await act(async () => {
       fireEvent.changeText(emailInput, someInvalidEmail);
     });
+    await act(async () => {
+      fireEvent.press(resetPasswordButton);
+    });
 
-    expect(resetPasswordButton.props.disabled).toBe(false);
+    expect(Alert.alert).toHaveBeenCalled();
   });
 });

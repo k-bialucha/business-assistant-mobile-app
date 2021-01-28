@@ -8,22 +8,24 @@ import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 import TextField from '~/components/form/TextField';
+import { useAppTranslation } from '~/hooks/useAppTranslation';
 import { NavigationData } from '~/navigation/AuthNavigator';
 import { resetPassword } from '~/redux/auth/actions';
 import Colors from '~/theme/Colors';
 
 import { StyledView, StyledWideContainer } from './ResetPasswordScreen.styled';
 
-const ResetPasswordSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Invalid email')
-    .required('Required'),
-});
-
 type Props = NavigationData<'ResetPassword'>;
 
 const ResetPasswordScreen: React.FC<Props> = ({ route }) => {
   const dispatch = useDispatch();
+  const { t } = useAppTranslation();
+
+  const ResetPasswordSchema = Yup.object().shape({
+    email: Yup.string()
+      .email(t('Invalid Email'))
+      .required(t('Required')),
+  });
 
   return (
     <ScrollView
@@ -51,7 +53,7 @@ const ResetPasswordScreen: React.FC<Props> = ({ route }) => {
               <TextField
                 testID="email-input"
                 value={values.email}
-                placeholder="E-mail"
+                placeholder={t('E-mail')}
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 error={errors.email}
@@ -60,7 +62,7 @@ const ResetPasswordScreen: React.FC<Props> = ({ route }) => {
               />
               <Button
                 testID="reset-password-button"
-                title="Reset password"
+                title={t('Reset Password')}
                 buttonStyle={{ backgroundColor: '#ffffff', marginTop: 15 }}
                 disabled={!isValid}
                 titleStyle={{ color: Colors.gray }}

@@ -2,12 +2,12 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 
 import { Formik } from 'formik';
-import { useTranslation } from 'react-i18next';
 import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 import TextField from '~/components/form/TextField';
+import { useAppTranslation } from '~/hooks/useAppTranslation';
 import { NavigationData } from '~/navigation/AuthNavigator';
 import { signup } from '~/redux/auth/actions';
 import Colors from '~/theme/Colors';
@@ -18,17 +18,17 @@ type Props = NavigationData<'Signup'>;
 
 const SignupScreen: React.FC<Props> = () => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t } = useAppTranslation();
 
   const SignupSchema = Yup.object().shape({
     email: Yup.string()
-      .email(t('Invalid email'))
+      .email(t('Invalid Email'))
       .required(t('Required')),
     phone: Yup.string()
-      .min(9, t('Too Short!'))
-      .max(12, t('Too Long!')),
+      .min(9, t('Too short'))
+      .max(12, t('Too long')),
     password: Yup.string()
-      .min(6, t('Too Short!'))
+      .min(6, t('Too short'))
       .required(t('Required')),
   });
 
