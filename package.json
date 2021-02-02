@@ -27,7 +27,7 @@
     "expo-facebook": "~8.2.1",
     "expo-google-app-auth": "^8.1.0",
     "expo-localization": "~8.2.1",
-    "firebase": "7.9.0",
+    "firebase": "^8.2.5",
     "formik": "^2.1.4",
     "i18next": "^19.4.5",
     "jwt-decode": "^2.2.0",
