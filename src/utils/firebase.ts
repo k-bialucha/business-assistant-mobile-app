@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 
 import {
   AUTH_DOMAIN,
@@ -32,4 +32,4 @@ export const getCurrentUser = () => {
   });
 };
 
-export default firebase;
+export { firebase };

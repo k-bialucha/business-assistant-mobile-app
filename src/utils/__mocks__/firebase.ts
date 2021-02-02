@@ -33,4 +33,4 @@ firebaseMock.auth.GoogleAuthProvider = { credential: jest.fn() };
 
 export const initializeApp = jest.fn();
 
-export default firebaseMock;
+export { firebaseMock as firebase };

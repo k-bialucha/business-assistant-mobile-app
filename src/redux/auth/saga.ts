@@ -6,7 +6,7 @@ import { call, delay, put, takeLatest } from 'redux-saga/effects';
 
 import { ANDROID_CLIENT_ID, FACEBOOK_APP_ID, IOS_CLIENT_ID } from '~env';
 
-import firebase, { getCurrentUser } from '~/utils/firebase';
+import { firebase, getCurrentUser } from '~/utils/firebase';
 
 import {
   loginFailure,
