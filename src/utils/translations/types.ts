@@ -22,4 +22,5 @@ export type TranslationKeys =
   | 'Add cost'
   | 'Reset Password'
   | 'Revenues'
-  | 'Add revenue';
+  | 'Add revenue'
+  | 'Save';

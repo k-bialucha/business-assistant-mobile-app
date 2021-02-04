@@ -32,4 +32,7 @@ export const translationPL: Translation = {
   // revenues
   'Add revenue': 'Nowy przychód',
   'Revenues': 'Przychody',
+
+  // common
+  'Save': 'Zapisz',
 };
