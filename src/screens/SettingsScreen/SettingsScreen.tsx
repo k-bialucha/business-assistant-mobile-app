@@ -4,6 +4,7 @@ import { Alert, TouchableWithoutFeedback } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { LanguageSwitcher } from '~/components/LanguageSwitcher';
 import { useAppTranslation } from '~/hooks/useAppTranslation';
 import { NavigationData } from '~/navigation/AppNavigator/SettingsNavigator';
 import { logout } from '~/redux/auth';
@@ -78,6 +79,7 @@ const SettingsScreen: React.FC<Props> = ({ navigation }) => {
           contentContainerStyle={{ alignItems: 'center' }}
         />
       </TouchableWithoutFeedback>
+      <LanguageSwitcher />
     </StyledView>
   );
 };
