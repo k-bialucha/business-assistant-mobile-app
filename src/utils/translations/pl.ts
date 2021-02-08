@@ -35,4 +35,5 @@ export const translationPL: Translation = {
 
   // common
   'Save': 'Zapisz',
+  'Amount': 'Kwota',
 };
