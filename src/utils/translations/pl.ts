@@ -36,4 +36,10 @@ export const translationPL: Translation = {
   // common
   'Save': 'Zapisz',
   'Amount': 'Kwota',
+  'Currency': 'Waluta',
+  'Vat Rate': 'Oprocentowanie VAT',
+  'Purchase Date': 'Data zakupu',
+  'Amount Kind': 'Rodzaj kwoty',
+  'Gross': 'Brutto',
+  'Net': 'Netto',
 };

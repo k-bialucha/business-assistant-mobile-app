@@ -24,4 +24,10 @@ export type TranslationKeys =
   | 'Revenues'
   | 'Add revenue'
   | 'Save'
-  | 'Amount';
+  | 'Amount'
+  | 'Amount Kind'
+  | 'Currency'
+  | 'Vat Rate'
+  | 'Purchase Date'
+  | 'Net'
+  | 'Gross';
