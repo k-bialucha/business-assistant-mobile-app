@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 
+import { AppTheme } from '~/models/AppTheme ';
 import Colors from '~/theme/Colors';
 
 const StyledContainer = styled.View`
@@ -15,9 +16,17 @@ const StyledTextField = styled.TextInput<Props>`
   letter-spacing: 0.6px;
   padding-left: 12px;
   padding-bottom: 6px;
-  color: #ffffff;
-  border-bottom-width: 1px;
-  border-bottom-color: ${props => (props.valid ? '#ffffff' : Colors.errorRed)};
+  color: ${({ theme }) => {
+    if (theme === AppTheme.DARK) return '#ffffff';
+    else if (theme === AppTheme.LIGHT) return Colors.navyBlue;
+  }};
+  border-bottom-width: ${({ theme }) =>
+    theme === AppTheme.LIGHT ? '2px' : '1px'};
+  border-bottom-color: ${({ theme, valid }) => {
+    if (!valid) return Colors.errorRed;
+    else if (theme === AppTheme.DARK) return '#ffffff';
+    else if (theme === AppTheme.LIGHT) return Colors.navyBlue;
+  }};
 `;
 
 const ErrorMessage = styled.Text`
