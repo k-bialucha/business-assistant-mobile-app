@@ -4,7 +4,7 @@ import { Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Loader from '~/components/UI/Loader';
+import Loader from '~/components/UI/Loader/Loader';
 import { clearErrorState, tryAutoLogin } from '~/redux/auth/actions';
 import { RequestStatus } from '~/redux/auth/types';
 import { RootState } from '~/redux/rootReducer';
