@@ -5,4 +5,9 @@ const StyledWideContainer = styled.View`
   margin-vertical: 5px;
 `;
 
-export { StyledWideContainer };
+const ScreenMainStyledView = styled.View`
+  flex-grow: 1;
+  padding: 20px;
+`;
+
+export { StyledWideContainer, ScreenMainStyledView };
