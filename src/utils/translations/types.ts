@@ -30,4 +30,6 @@ export type TranslationKeys =
   | 'Vat Rate'
   | 'Purchase Date'
   | 'Net'
-  | 'Gross';
+  | 'Gross'
+  | 'Select a currency'
+  | 'Select a Vat Rate';
