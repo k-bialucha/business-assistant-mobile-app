@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import { Button } from 'react-native-elements';
 import * as Yup from 'yup';
 
+import { DatePickerField } from '~/components/form/DatePickerField/DatePickerField';
 import { SegmentRadioField } from '~/components/form/SegmentRadioField/SegmentRadioField';
 import { SelectField } from '~/components/form/SelectField/SelectField';
 import TextField from '~/components/form/TextField/TextField';
@@ -27,7 +28,7 @@ export interface CostFormValues {
   amountKind: AmountKind;
   currency: Currency | '';
   vatRate: VatRate | '';
-  purchaseDate: string;
+  purchaseDate: Date;
 }
 
 const CostsEntryScreen: React.FC<Props> = () => {
@@ -35,18 +36,18 @@ const CostsEntryScreen: React.FC<Props> = () => {
 
   const CostEntrySchema = Yup.object<Partial<CostFormValues>>({
     amount: Yup.string().required(t('Required')),
-    amountKind: Yup.number<AmountKind>().required(t('Required')),
+    amountKind: Yup.string<AmountKind>().required(t('Required')),
     currency: Yup.string<Currency>().required(t('Required')),
     vatRate: Yup.string<VatRate>().required(t('Required')),
-    purchaseDate: Yup.string().required(t('Required')),
+    purchaseDate: Yup.date().required(t('Required')),
   });
   const initialValues: CostFormValues = {
     amount: '',
-    amountKind: AmountKind.NET, // ratio or switch
-    // TODO: fill currency with base company currency in app?
-    currency: '', // select field
-    vatRate: '', // select field
-    purchaseDate: '', // date field
+    amountKind: AmountKind.NET,
+    // TODO: fill currency with base account currency in app?
+    currency: '',
+    vatRate: '',
+    purchaseDate: new Date(),
   };
 
   return (
@@ -84,17 +85,6 @@ const CostsEntryScreen: React.FC<Props> = () => {
                 touched={touched.amount}
                 keyboardType="decimal-pad"
               />
-              <SegmentRadioField
-                value={values.amountKind}
-                onPress={value => setFieldValue('amountKind', value)}
-                setTouched={() => setFieldTouched('amountKind')}
-                touched={touched.amountKind}
-                radioOptions={[
-                  { label: 'Net', value: AmountKind.NET },
-                  { label: 'Gross', value: AmountKind.GROSS },
-                ]}
-                color={Colors.primary}
-              />
               <SelectField
                 value={values.currency}
                 placeholder={t('Currency')}
@@ -108,33 +98,39 @@ const CostsEntryScreen: React.FC<Props> = () => {
                   value: item,
                 }))}
               />
-              <SelectField
-                value={values.vatRate ? `${values.vatRate}%` : values.vatRate}
-                placeholder={t('Vat Rate')}
-                error={errors.vatRate}
+              <SegmentRadioField
+                value={values.amountKind}
+                onPress={value => setFieldValue('amountKind', value)}
+                setTouched={() => setFieldTouched('amountKind')}
+                touched={touched.amountKind}
+                radioOptions={[
+                  { label: 'Net', value: AmountKind.NET },
+                  { label: 'Gross', value: AmountKind.GROSS },
+                ]}
+                color={Colors.primary}
+              />
+              <SegmentRadioField
+                value={values.vatRate}
+                onPress={value => setFieldValue('vatRate', value)}
+                setTouched={() => setFieldTouched('vatRate')}
                 touched={touched.vatRate}
-                onValueChange={handleChange('vatRate')}
-                onClose={() => setFieldTouched('vatRate')}
-                selectorPlaceholder={t('Select a Vat Rate')}
-                items={vatRates.map(item => ({
+                radioOptions={vatRates.map(item => ({
                   label: `${item}%`,
                   value: item,
                 }))}
+                color={Colors.primary}
               />
-              {/* 
-              TODO: Date field 
-              <TextField
+              <DatePickerField
                 value={values.purchaseDate}
                 placeholder={t('Purchase Date')}
-                onChangeText={handleChange('purchaseDate')}
-                onBlur={handleBlur('purchaseDate')}
-                error={errors.purchaseDate}
-                touched={touched.purchaseDate}
-              /> */}
+                onChange={date => setFieldValue('purchaseDate', date)}
+                setTouched={() => setFieldTouched('purchaseDate')}
+              />
               <Button
                 title={t('Save')}
                 disabled={!Object.keys(touched).length || !isValid}
                 titleStyle={{ color: Colors.silver }}
+                style={{ marginTop: 20 }}
                 onPress={() => {
                   handleSubmit();
                 }}
