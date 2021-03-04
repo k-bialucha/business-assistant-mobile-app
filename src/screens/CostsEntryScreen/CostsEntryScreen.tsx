@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import { Button } from 'react-native-elements';
 import * as Yup from 'yup';
 
+import { CostElement } from '~/calculation/CostElement';
 import { DatePickerField } from '~/components/form/DatePickerField/DatePickerField';
 import { SegmentRadioField } from '~/components/form/SegmentRadioField/SegmentRadioField';
 import { SelectField } from '~/components/form/SelectField/SelectField';
@@ -20,7 +21,6 @@ import {
   StyledWideContainer,
 } from '~/theme/StyledComponents.styled';
 
-// TODO: 2 add to CostElement priceKind and use it as type in form
 type Props = NavigationData<'CostsEntry'>;
 
 export interface CostFormValues {
@@ -38,7 +38,7 @@ const CostsEntryScreen: React.FC<Props> = () => {
     amount: Yup.string().required(t('Required')),
     amountKind: Yup.string<AmountKind>().required(t('Required')),
     currency: Yup.string<Currency>().required(t('Required')),
-    vatRate: Yup.string<VatRate>().required(t('Required')),
+    vatRate: Yup.number<VatRate>().required(t('Required')),
     purchaseDate: Yup.date().required(t('Required')),
   });
   const initialValues: CostFormValues = {
@@ -59,9 +59,26 @@ const CostsEntryScreen: React.FC<Props> = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={CostEntrySchema}
-          onSubmit={(cost: CostFormValues) => {
+          onSubmit={({
+            amount,
+            amountKind,
+            currency,
+            vatRate,
+            purchaseDate,
+          }: CostFormValues) => {
+            if (!currency || !vatRate) return;
+
+            const item = new CostElement(
+              +amount,
+              amountKind,
+              currency,
+              vatRate,
+              purchaseDate
+            );
+
             // eslint-disable-next-line no-console
-            console.log('Form sent! ', cost);
+            console.log(item);
+            // TODO: send cost item to firebase/SQLite store
           }}
         >
           {({
