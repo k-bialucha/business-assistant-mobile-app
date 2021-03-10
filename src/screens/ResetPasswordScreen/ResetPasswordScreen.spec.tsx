@@ -3,7 +3,7 @@ import '@testing-library/jest-native/extend-expect';
 import React from 'react';
 import { Alert } from 'react-native';
 
-import { act, fireEvent } from 'react-native-testing-library';
+import { act, fireEvent } from '@testing-library/react-native';
 import { ReactTestInstance } from 'react-test-renderer';
 
 import { NavigationData } from '~/navigation/AuthNavigator';

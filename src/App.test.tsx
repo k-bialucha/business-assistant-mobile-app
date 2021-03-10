@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { act, render } from '@testing-library/react-native';
 import { shallow } from 'enzyme';
-import { act, render } from 'react-native-testing-library';
 
 import App from './App';
 import NavContainer from './navigation/NavContainer';
