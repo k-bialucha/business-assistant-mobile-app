@@ -13,8 +13,8 @@ export interface SegmentRadioFieldProps {
   touched?: boolean;
   theme?: AppTheme;
   value: any;
-  onPress: (value: any) => void;
-  setTouched: () => void;
+  onPress(value: any): void;
+  setTouched(): void;
   radioOptions: { label: string; value: React.ReactText }[];
   color: string;
 }

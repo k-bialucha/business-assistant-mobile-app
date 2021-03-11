@@ -19,8 +19,8 @@ interface DatePickerFieldProps extends DatePickerOptions {
   placeholder: string;
   error?: string | boolean;
   touched?: boolean;
-  onChange: (date: any) => void;
-  setTouched: () => void;
+  onChange(date: any): void;
+  setTouched(): void;
 }
 
 export const DatePickerField: React.FC<DatePickerFieldProps> = ({
