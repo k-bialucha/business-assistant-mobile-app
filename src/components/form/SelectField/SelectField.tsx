@@ -9,7 +9,7 @@ import { AppTheme } from '~/models/AppTheme ';
 
 import TextField from '../TextField/TextField';
 
-interface SelectFieldProps extends PickerSelectProps {
+export interface SelectFieldProps extends PickerSelectProps {
   error?: string | boolean;
   touched?: boolean;
   theme?: AppTheme;
