@@ -1,23 +1,23 @@
 import React from 'react';
-import { Button } from 'react-native';
+import { Button, Text } from 'react-native';
 
 import { useTranslation } from 'react-i18next';
 
 const LanguageSwitcher: React.FC<{}> = () => {
-  const {
-    i18n: { language, languages, changeLanguage },
-  } = useTranslation();
+  const { i18n } = useTranslation();
 
   return (
     <>
-      {languages.map(lang => (
+      {/* TODO: remove */}
+      <Text>{JSON.stringify(i18n.languages)}</Text>
+      {i18n.languages.map(lang => (
         <Button
           key={lang}
           onPress={() => {
-            changeLanguage('en');
+            i18n.changeLanguage(lang);
           }}
           title={`LANG: ${lang}`}
-          disabled={lang === language}
+          // disabled={lang === i18n.language}
         />
       ))}
     </>
