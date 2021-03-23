@@ -88,5 +88,6 @@ exports[`<SettingsScreen /> matches the snapshot 1`] = `
       }
     />
   </TouchableWithoutFeedback>
+  <LanguageSwitcher />
 </Styled(View)>
 `;
