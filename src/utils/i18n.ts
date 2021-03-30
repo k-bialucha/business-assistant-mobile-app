@@ -18,7 +18,7 @@ const languageDetector: LanguageDetectorAsyncModule = {
   cacheUserLanguage: () => ({}),
 } as const;
 
-const resources = {
+export const resources = {
   en: {
     translation: translationEN,
   },
@@ -42,4 +42,4 @@ i18n
     },
   });
 
-export default i18n;
+export { i18n };
