@@ -16,7 +16,7 @@ exports[`<CostsEntryScreen /> matches the snapshot 1`] = `
           "amount": "",
           "amountKind": "Net",
           "currency": "",
-          "purchaseDate": 2021-03-30T13:51:16.673Z,
+          "purchaseDate": 2021-01-01T00:00:00.000Z,
           "vatRate": "",
         }
       }
