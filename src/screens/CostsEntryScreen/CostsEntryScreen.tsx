@@ -47,7 +47,7 @@ const CostsEntryScreen: React.FC<Props> = () => {
     // TODO: fill currency with base account currency in app?
     currency: '',
     vatRate: '',
-    purchaseDate: new Date(),
+    purchaseDate: new Date('2021-01-01'),
   };
 
   return (
