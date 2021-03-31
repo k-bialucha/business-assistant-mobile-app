@@ -27,19 +27,11 @@ const fakeProps: Props = {
 };
 
 describe('<ResetPasswordScreen />', () => {
-  const {
-    getByTestId,
-    queryByText,
-    queryByTestId,
-    queryByDisplayValue,
-  } = renderWithRedux(<ResetPasswordScreen {...fakeProps} />);
-
-  const emailInput: ReactTestInstance = getByTestId('email-input');
-  const resetPasswordButton: ReactTestInstance = getByTestId(
-    'reset-password-button'
-  );
-
   it('sets route `email` parameter as initial input value', () => {
+    const { queryByDisplayValue } = renderWithRedux(
+      <ResetPasswordScreen {...fakeProps} />
+    );
+
     const maybeInputValue: ReactTestInstance | null = queryByDisplayValue(
       fakeProps.route.params.email
     );
@@ -48,9 +40,16 @@ describe('<ResetPasswordScreen />', () => {
   });
 
   it('shows the validation message in case of empty email', async () => {
-    await act(async () => {
-      fireEvent.changeText(emailInput, '');
-    });
+    const { getByTestId, queryByTestId } = renderWithRedux(
+      <ResetPasswordScreen {...fakeProps} />
+    );
+
+    const emailInput: ReactTestInstance = getByTestId('email-input');
+    const resetPasswordButton: ReactTestInstance = getByTestId(
+      'reset-password-button'
+    );
+
+    fireEvent.changeText(emailInput, '');
 
     await act(async () => {
       fireEvent.press(resetPasswordButton);
@@ -64,11 +63,19 @@ describe('<ResetPasswordScreen />', () => {
   });
 
   it('allows to send form with valid email', async () => {
+    const { getByTestId, queryByText } = renderWithRedux(
+      <ResetPasswordScreen {...fakeProps} />
+    );
+
+    const emailInput: ReactTestInstance = getByTestId('email-input');
+    const resetPasswordButton: ReactTestInstance = getByTestId(
+      'reset-password-button'
+    );
+
     const someEmail = 'some-valid@email.com';
 
-    await act(async () => {
-      fireEvent.changeText(emailInput, someEmail);
-    });
+    fireEvent.changeText(emailInput, someEmail);
+
     await act(async () => {
       fireEvent.press(resetPasswordButton);
     });
@@ -81,11 +88,19 @@ describe('<ResetPasswordScreen />', () => {
   });
 
   it('shows the alert with a message if form has submitted successfully', async () => {
+    const { getByTestId } = renderWithRedux(
+      <ResetPasswordScreen {...fakeProps} />
+    );
+
+    const emailInput: ReactTestInstance = getByTestId('email-input');
+    const resetPasswordButton: ReactTestInstance = getByTestId(
+      'reset-password-button'
+    );
+
     const someInvalidEmail = 'some-valid@email.com';
 
-    await act(async () => {
-      fireEvent.changeText(emailInput, someInvalidEmail);
-    });
+    fireEvent.changeText(emailInput, someInvalidEmail);
+
     await act(async () => {
       fireEvent.press(resetPasswordButton);
     });
