@@ -84,6 +84,7 @@ module.exports = {
     'react/state-in-constructor': [2, 'never'],
     'react-hooks/rules-of-hooks': 2,
     'react-hooks/exhaustive-deps': 1,
+    'no-else-return': 2,
     'simple-import-sort/sort': [
       2,
       {
