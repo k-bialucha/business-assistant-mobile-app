@@ -21,11 +21,11 @@ export class CostElement implements Cost {
   get vatSum(): number {
     if (this.amountKind === AmountKind.NET) {
       return roundSum((this.vatRate / 100) * this.amount);
-    } else {
-      return roundSum(
-        (this.amount * (this.vatRate / 100)) / (1 + this.vatRate / 100)
-      );
     }
+
+    return roundSum(
+      (this.amount * (this.vatRate / 100)) / (1 + this.vatRate / 100)
+    );
   }
 
   constructor(
