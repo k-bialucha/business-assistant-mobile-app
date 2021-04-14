@@ -14,10 +14,10 @@ describe('<App />', () => {
   });
 
   it('contains NavContainer', async () => {
-    const { UNSAFE_getByType } = render(<App />);
+    const { UNSAFE_queryByType } = render(<App />);
 
     await act(async () => {
-      const element = UNSAFE_getByType(NavContainer);
+      const element = UNSAFE_queryByType(NavContainer);
 
       expect(element).toBeTruthy();
     });
