@@ -1,6 +1,6 @@
 import React from 'react';
 
-import renderWithRedux from '~/utils/testing/renderWithRedux';
+import { render } from '@testing-library/react-native';
 
 import { SelectField, SelectFieldProps } from './SelectField';
 
@@ -20,7 +20,7 @@ describe('<SelectField />', () => {
   };
 
   it('should render SelectField with TextField inside', () => {
-    const root = renderWithRedux(<SelectField {...mockedProps} />);
+    const root = render(<SelectField {...mockedProps} />);
 
     expect(root.getByTestId('textField')).toBeDefined();
   });
