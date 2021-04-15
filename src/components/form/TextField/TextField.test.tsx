@@ -1,32 +1,33 @@
 import React from 'react';
 
+import { render } from '@testing-library/react-native';
+
 import { AppTheme } from '~/models/AppTheme ';
-import renderWithRedux from '~/utils/testing/renderWithRedux';
 
 import TextField from './TextField';
 
 describe('<TextField />', () => {
   it('should render error message if field touched and has invalid value ', async () => {
-    const errorText = 'Required';
-    const { getByTestId } = renderWithRedux(
-      <TextField error={errorText} touched />
+    const expectedErrorText = 'Required';
+    const { getByTestId } = render(
+      <TextField error={expectedErrorText} touched />
     );
 
-    const expectedErrorText = getByTestId('errorMessage').children[0];
+    const errorText = getByTestId('errorMessage').children[0];
 
-    expect(expectedErrorText).toBe(errorText);
+    expect(errorText).toBe(expectedErrorText);
   });
 
   it('should not render error message if field not touched', () => {
-    const { queryByTestId } = renderWithRedux(<TextField error="Required" />);
+    const { queryByTestId } = render(<TextField error="Required" />);
 
-    const expectedError = queryByTestId('errorMessage');
+    const error = queryByTestId('errorMessage');
 
-    expect(expectedError).toBeNull();
+    expect(error).toBeNull();
   });
 
   it('should render field with proper placeholder text color for light theme', () => {
-    const { queryByTestId } = renderWithRedux(<TextField testID="field" />);
+    const { queryByTestId } = render(<TextField testID="field" />);
     const fieldLightThemeColor = 'rgba(26, 42, 64, 0.4)';
 
     const field = queryByTestId('field');
@@ -35,7 +36,7 @@ describe('<TextField />', () => {
   });
 
   it('should render field with proper placeholder text color for dark theme', () => {
-    const { queryByTestId } = renderWithRedux(
+    const { queryByTestId } = render(
       <TextField testID="field" theme={AppTheme.DARK} />
     );
     const fieldDarkThemeColor = 'rgba(255, 255, 255, 0.6)';
