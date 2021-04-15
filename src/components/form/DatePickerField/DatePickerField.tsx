@@ -29,7 +29,7 @@ export const DatePickerField: React.FC<DatePickerFieldProps> = ({
   setTouched,
   touched,
   error,
-  ...props
+  ...restProps
 }) => {
   return (
     <View
@@ -56,7 +56,7 @@ export const DatePickerField: React.FC<DatePickerFieldProps> = ({
         </Text>
         <View style={{ flex: 1, alignItems: 'flex-end' }}>
           <DateTimePicker
-            {...props}
+            {...restProps}
             onChange={(_, date) => {
               onChange(date);
               if (!touched) setTouched();

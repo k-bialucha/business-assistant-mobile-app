@@ -19,12 +19,12 @@ const TextField: React.FC<TextFieldProps> = ({
   error,
   touched,
   theme = AppTheme.LIGHT,
-  ...props
+  ...restProps
 }) => {
   return (
     <StyledContainer testID="textField">
       <StyledTextField
-        {...props}
+        {...restProps}
         theme={theme}
         valid={!(error && touched)}
         placeholderTextColor={
