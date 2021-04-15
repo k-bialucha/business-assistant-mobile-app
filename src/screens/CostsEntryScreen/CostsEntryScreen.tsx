@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import { Button } from 'react-native-elements';
 import * as Yup from 'yup';
 
+import { vatRates } from '~/calculation/constants';
 import { CostElement } from '~/calculation/CostElement';
 import { DatePickerField } from '~/components/form/DatePickerField/DatePickerField';
 import { SegmentRadioField } from '~/components/form/SegmentRadioField/SegmentRadioField';
@@ -13,7 +14,7 @@ import TextField from '~/components/form/TextField/TextField';
 import { useAppTranslation } from '~/hooks/useAppTranslation';
 import { AmountKind } from '~/models/AmountKind';
 import { Currency } from '~/models/Currency';
-import { VatRate, vatRates } from '~/models/VatRate';
+import { VatRate } from '~/models/VatRate';
 import { NavigationData } from '~/navigation/AppNavigator/CostsNavigator';
 import Colors from '~/theme/Colors';
 import {
