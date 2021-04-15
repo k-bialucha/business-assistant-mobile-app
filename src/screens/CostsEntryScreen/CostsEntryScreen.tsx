@@ -11,16 +11,16 @@ import { DatePickerField } from '~/components/form/DatePickerField/DatePickerFie
 import { SegmentRadioField } from '~/components/form/SegmentRadioField/SegmentRadioField';
 import { SelectField } from '~/components/form/SelectField/SelectField';
 import TextField from '~/components/form/TextField/TextField';
+import {
+  ScreenMainStyledView,
+  StyledWideContainer,
+} from '~/components/SharedComponents.styled';
 import { useAppTranslation } from '~/hooks/useAppTranslation';
 import { AmountKind } from '~/models/AmountKind';
 import { Currency } from '~/models/Currency';
 import { VatRate } from '~/models/VatRate';
 import { NavigationData } from '~/navigation/AppNavigator/CostsNavigator';
 import Colors from '~/theme/Colors';
-import {
-  ScreenMainStyledView,
-  StyledWideContainer,
-} from '~/theme/StyledComponents.styled';
 
 type Props = NavigationData<'CostsEntry'>;
 
