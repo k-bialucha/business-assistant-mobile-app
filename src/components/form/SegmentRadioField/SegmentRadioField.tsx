@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { AppTheme } from '~/models/AppTheme ';
-import Colors from '~/theme/Colors';
 
 import {
   StyledText,
@@ -32,26 +31,19 @@ export const SegmentRadioField: React.FC<SegmentRadioFieldProps> = ({
     <StyledView>
       {radioOptions.map((option, i) => {
         const isSelected = value === option.value;
-        const activeBgColor =
-          theme === AppTheme.DARK ? Colors.navyBlue : '#ffffff';
 
         return (
           <StyledTouchableOpacity
             key={i}
-            style={{
-              borderColor: isSelected ? color : Colors.silver,
-              backgroundColor: isSelected ? activeBgColor : 'transparent',
-            }}
+            isSelected={isSelected}
+            color={color}
+            theme={theme}
             onPress={() => {
               if (value !== option.value) onPress(option.value);
               if (!touched) setTouched();
             }}
           >
-            <StyledText
-              style={{
-                color: isSelected ? color : Colors.gray,
-              }}
-            >
+            <StyledText isSelected={isSelected} color={color}>
               {option.label}
             </StyledText>
           </StyledTouchableOpacity>
