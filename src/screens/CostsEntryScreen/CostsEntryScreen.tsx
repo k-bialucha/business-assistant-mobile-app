@@ -28,7 +28,7 @@ export interface CostFormValues {
   amount: string;
   amountKind: AmountKind;
   currency: Currency | '';
-  vatRate: VatRate | '';
+  vatRate: VatRate;
   purchaseDate: Date;
 }
 
@@ -47,7 +47,7 @@ const CostsEntryScreen: React.FC<Props> = () => {
     amountKind: AmountKind.NET,
     // TODO: fill currency with base account currency in app?
     currency: '',
-    vatRate: '',
+    vatRate: 23,
     purchaseDate: new Date('2021-01-01'),
   };
 
@@ -116,7 +116,7 @@ const CostsEntryScreen: React.FC<Props> = () => {
                   value: item,
                 }))}
               />
-              <SegmentRadioField
+              <SegmentRadioField<AmountKind>
                 value={values.amountKind}
                 onPress={value => setFieldValue('amountKind', value)}
                 setTouched={() => setFieldTouched('amountKind')}
@@ -127,7 +127,7 @@ const CostsEntryScreen: React.FC<Props> = () => {
                 ]}
                 color={Colors.primary}
               />
-              <SegmentRadioField
+              <SegmentRadioField<VatRate>
                 value={values.vatRate}
                 onPress={value => setFieldValue('vatRate', value)}
                 setTouched={() => setFieldTouched('vatRate')}

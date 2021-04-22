@@ -8,17 +8,17 @@ import {
   StyledView,
 } from './SegmentRadioField.styled';
 
-export interface SegmentRadioFieldProps {
+export interface SegmentRadioFieldProps<T extends boolean | number | string> {
   touched?: boolean;
   theme?: AppTheme;
-  value: any;
-  onPress(value: any): void;
+  value: T;
+  onPress(value: T): void;
   setTouched(): void;
   radioOptions: { label: string; value: React.ReactText }[];
   color: string;
 }
 
-export const SegmentRadioField: React.FC<SegmentRadioFieldProps> = ({
+export const SegmentRadioField = <T extends boolean | number | string>({
   onPress,
   setTouched,
   touched,
@@ -26,7 +26,7 @@ export const SegmentRadioField: React.FC<SegmentRadioFieldProps> = ({
   value,
   radioOptions,
   color,
-}) => {
+}: SegmentRadioFieldProps<T>): JSX.Element => {
   return (
     <StyledView>
       {radioOptions.map((option, i) => {
