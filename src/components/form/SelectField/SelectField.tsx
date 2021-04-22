@@ -9,12 +9,13 @@ import { AppTheme } from '~/models/AppTheme ';
 
 import TextField from '../TextField/TextField';
 
-export interface SelectFieldProps extends PickerSelectProps {
+export interface SelectFieldProps extends Omit<PickerSelectProps, 'items'> {
   error?: string | boolean;
   touched?: boolean;
   theme?: AppTheme;
   selectorPlaceholder?: Item | {};
   placeholder?: string;
+  options: PickerSelectProps['items'];
 }
 
 export const SelectField: React.FC<SelectFieldProps> = ({
@@ -25,7 +26,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   selectorPlaceholder,
   onValueChange,
   onClose,
-  items,
+  options,
   theme,
 }) => {
   return (
@@ -37,7 +38,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
       }}
       onValueChange={onValueChange}
       onClose={onClose} // imitating onBlur
-      items={items}
+      items={options}
     >
       <TextField
         value={value}

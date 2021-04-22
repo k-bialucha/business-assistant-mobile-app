@@ -111,7 +111,7 @@ const CostsEntryScreen: React.FC<Props> = () => {
                 onValueChange={handleChange('currency')}
                 onClose={() => setFieldTouched('currency')}
                 selectorPlaceholder={t('Select a currency')}
-                items={Object.values(Currency).map(item => ({
+                options={Object.values(Currency).map(item => ({
                   label: item,
                   value: item,
                 }))}
