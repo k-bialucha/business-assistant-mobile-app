@@ -40,7 +40,7 @@ describe('<SegmentRadioField />', () => {
     const root = render(<SegmentRadioField {...mockedProps} />);
     const selectedOption = root.getByText(mockedProps.radioOptions[0].label);
 
-    expect(selectedOption.parent?.props.style.color).toBe(primaryColor);
+    expect(selectedOption.parent?.instance.props.color).toBe(primaryColor);
   });
 
   it('should call onPress function on the segment click', () => {

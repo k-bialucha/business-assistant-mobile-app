@@ -17,7 +17,7 @@ exports[`<CostsEntryScreen /> matches the snapshot 1`] = `
           "amountKind": "Net",
           "currency": "",
           "purchaseDate": 2021-01-01T00:00:00.000Z,
-          "vatRate": "",
+          "vatRate": 23,
         }
       }
       onSubmit={[Function]}
