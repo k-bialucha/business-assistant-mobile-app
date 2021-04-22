@@ -5,7 +5,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import { SegmentRadioField, SegmentRadioFieldProps } from './SegmentRadioField';
 
 const primaryColor = '#ff0000';
-const commonMockedProps: SegmentRadioFieldProps = {
+const commonMockedProps: SegmentRadioFieldProps<string> = {
   value: '',
   onPress: jest.fn(),
   setTouched: jest.fn(),
@@ -32,7 +32,7 @@ describe('<SegmentRadioField />', () => {
 
   it('should render with initially selected item', () => {
     const initialValue = '1';
-    const mockedProps: SegmentRadioFieldProps = {
+    const mockedProps: SegmentRadioFieldProps<string> = {
       ...commonMockedProps,
       value: initialValue,
     };
@@ -53,7 +53,7 @@ describe('<SegmentRadioField />', () => {
 
   it('should not call onPress action if already selected segment has clicked', () => {
     const initialValue = '1';
-    const mockedProps: SegmentRadioFieldProps = {
+    const mockedProps: SegmentRadioFieldProps<string> = {
       ...commonMockedProps,
       value: initialValue,
     };

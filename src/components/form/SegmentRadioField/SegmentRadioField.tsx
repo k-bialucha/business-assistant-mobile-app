@@ -14,7 +14,7 @@ export interface SegmentRadioFieldProps<T extends boolean | number | string> {
   value: T;
   onPress(value: T): void;
   setTouched(): void;
-  radioOptions: { label: string; value: React.ReactText }[];
+  radioOptions: { label: string; value: T }[];
   color: string;
 }
 

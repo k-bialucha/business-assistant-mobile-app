@@ -6,7 +6,7 @@ import { SelectField, SelectFieldProps } from './SelectField';
 
 describe('<SelectField />', () => {
   const mockedProps: SelectFieldProps = {
-    items: [
+    options: [
       {
         label: 'label',
         value: 'value',
