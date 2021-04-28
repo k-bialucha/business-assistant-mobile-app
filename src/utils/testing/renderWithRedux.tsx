@@ -7,7 +7,7 @@
  */
 import React from 'react';
 
-import { render } from 'react-native-testing-library';
+import { render } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 
 import configureStore from '~/redux/configureStore';
@@ -20,5 +20,7 @@ function renderWithRedux(ui: JSX.Element) {
     store,
   };
 }
+
+export * from '@testing-library/react-native';
 
 export default renderWithRedux;

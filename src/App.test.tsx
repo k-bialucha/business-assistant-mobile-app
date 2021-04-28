@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { act, render } from '@testing-library/react-native';
 import { shallow } from 'enzyme';
-import { act, render } from 'react-native-testing-library';
 
 import App from './App';
 import NavContainer from './navigation/NavContainer';
@@ -14,10 +14,10 @@ describe('<App />', () => {
   });
 
   it('contains NavContainer', async () => {
-    const { queryByType } = render(<App />);
+    const { UNSAFE_queryByType } = render(<App />);
 
     await act(async () => {
-      const element = queryByType(NavContainer);
+      const element = UNSAFE_queryByType(NavContainer);
 
       expect(element).toBeTruthy();
     });

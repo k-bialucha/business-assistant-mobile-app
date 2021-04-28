@@ -28,8 +28,20 @@ export const translationPL: Translation = {
   // costs
   'Add cost': 'Nowy koszt',
   'Costs': 'Koszty',
+  'Select a currency': 'Wybierz walutę',
+  'Select a Vat Rate': 'Wybierz stawkę VAT',
 
   // revenues
   'Add revenue': 'Nowy przychód',
   'Revenues': 'Przychody',
+
+  // common
+  'Save': 'Zapisz',
+  'Amount': 'Kwota',
+  'Currency': 'Waluta',
+  'Vat Rate': 'Stawka VAT',
+  'Purchase Date': 'Data zakupu',
+  'Amount Kind': 'Rodzaj kwoty',
+  'Gross': 'Brutto',
+  'Net': 'Netto',
 };

@@ -7,7 +7,7 @@ import { Button } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
-import TextField from '~/components/form/TextField';
+import TextField from '~/components/form/TextField/TextField';
 import { useAppTranslation } from '~/hooks/useAppTranslation';
 import { NavigationData } from '~/navigation/AuthNavigator';
 import { resetPassword } from '~/redux/auth/actions';

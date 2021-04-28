@@ -22,4 +22,14 @@ export type TranslationKeys =
   | 'Add cost'
   | 'Reset Password'
   | 'Revenues'
-  | 'Add revenue';
+  | 'Add revenue'
+  | 'Save'
+  | 'Amount'
+  | 'Amount Kind'
+  | 'Currency'
+  | 'Vat Rate'
+  | 'Purchase Date'
+  | 'Net'
+  | 'Gross'
+  | 'Select a currency'
+  | 'Select a Vat Rate';

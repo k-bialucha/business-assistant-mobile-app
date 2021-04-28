@@ -15,8 +15,8 @@ interface PlainTextProps extends TextProps {
   color?: string;
 }
 
-const PlainText: React.FC<PlainTextProps> = ({ children, ...props }) => (
-  <StyledText {...props}>{children}</StyledText>
+const PlainText: React.FC<PlainTextProps> = ({ children, ...restProps }) => (
+  <StyledText {...restProps}>{children}</StyledText>
 );
 
 PlainText.defaultProps = {
