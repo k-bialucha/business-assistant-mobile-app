@@ -116,7 +116,7 @@ const CostsEntryScreen: React.FC<Props> = () => {
                   value: item,
                 }))}
               />
-              <SegmentRadioField<AmountKind>
+              <SegmentRadioField
                 value={values.amountKind}
                 onPress={value => setFieldValue('amountKind', value)}
                 setTouched={() => setFieldTouched('amountKind')}
@@ -127,7 +127,7 @@ const CostsEntryScreen: React.FC<Props> = () => {
                 ]}
                 color={Colors.primary}
               />
-              <SegmentRadioField<VatRate>
+              <SegmentRadioField
                 value={values.vatRate}
                 onPress={value => setFieldValue('vatRate', value)}
                 setTouched={() => setFieldTouched('vatRate')}
